@@ -12,5 +12,18 @@ options {
 }
 
 // Deca lexer rules.
-DUMMY_TOKEN: .; // A FAIRE : Règle bidon qui reconnait tous les caractères.
-                // A FAIRE : Il faut la supprimer et la remplacer par les vraies règles.
+COMMENT : (('/*' .*? '*/') | ('//' .*? '\n')) { skip(); } ;
+fragment LETTRE : 'a'..'z' | 'A'..'Z' ;
+fragment DIGIT : '0'..'9';
+fragment SPECIALS : '!' | '?' | ',' | ';' ;
+STRING : '"' .*? '"';
+OBRACE : '{' ;
+CBRACE : '}' ; 
+OPARENT : '(' ;
+CPARENT : ')' ;
+PRINT : 'print' ;
+PRINTLN : 'println' ;
+SEMI : ';' ;
+COMMA : ',' ; 
+
+WS : (' ' | '\n' | '\t' | '\r') { skip(); };

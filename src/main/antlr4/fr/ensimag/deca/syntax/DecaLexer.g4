@@ -16,7 +16,8 @@ COMMENT : (('/*' .*? '*/') | ('//' .*? '\n')) { skip(); } ;
 fragment LETTRE : 'a'..'z' | 'A'..'Z' ;
 fragment DIGIT : '0'..'9';
 fragment SPECIALS : '!' | '?' | ',' | ';' ;
-STRING : '"' .*? '"';
+fragment STRING_CAR : ~('"' | '\\' | '\n' ) ;
+STRING : '"' (STRING_CAR | '\\' )*? '"';
 OBRACE : '{' ;
 CBRACE : '}' ; 
 OPARENT : '(' ;
@@ -25,5 +26,7 @@ PRINT : 'print' ;
 PRINTLN : 'println' ;
 SEMI : ';' ;
 COMMA : ',' ; 
+MULTI_LINE_STRING : '"' (STRING_CAR | '\n' | '\\' )*? '"'; 
+
 
 WS : (' ' | '\n' | '\t' | '\r') { skip(); };

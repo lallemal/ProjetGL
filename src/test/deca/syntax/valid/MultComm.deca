@@ -1,0 +1,11 @@
+// Test sur les commentaires sur plusieurs lignes 
+// Résultat attendu: toutes les lignes de commentaires sont skip, seul les string sont pris en comptes
+
+"bla"
+
+/* Première ligne de commentaire
+Deuxième ligne
+Troisème ligne 
+Dernière ligne */
+
+"bla"

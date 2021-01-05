@@ -1,0 +1,7 @@
+/* Ceci est un test où les commentaires sont mal faits */ En effet j'ai fermé le commentaire
+mais pas rouvert celui-ci */
+// Résultat attendu : Echec en ligne 1
+
+{
+    print("Test du commentaire pas ouvert");
+}

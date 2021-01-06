@@ -95,9 +95,10 @@ decl_var[AbstractIdentifier t] returns[AbstractDeclVar tree]
         }
       (EQUALS e=expr {
       	init = new Initialization($e.tree);
+      	setLocation(init, $e.start);
       	$tree = new DeclVar($t.tree, $i.tree, init);
       	setLocation($tree, $i.start);
-      	setLocation(init, $e.start);
+
         }
       )? {
       		
@@ -110,6 +111,7 @@ list_inst returns[ListInst tree]
 }
     : (inst {
     	$tree.add($inst.tree);
+
         }
       )*
     ;
@@ -117,21 +119,27 @@ list_inst returns[ListInst tree]
 inst returns[AbstractInst tree]
     : e1=expr SEMI {
             assert($e1.tree != null);
+            $tree = $e1.tree;
+            setLocation($tree, $e1.start);
         }
     | SEMI {
     	$tree = new NoOperation();
+    	setLocation($tree, $SEMI);
         }
     | PRINT OPARENT list_expr CPARENT SEMI {
             assert($list_expr.tree != null);
             $tree = new Print(false, $list_expr.tree);
+            setLocation($tree, $PRINT);
         }
     | PRINTLN OPARENT list_expr CPARENT SEMI {
             assert($list_expr.tree != null);
             $tree = new Println(false, $list_expr.tree);
+            setLocation($tree, $PRINTLN);
         }
     | PRINTX OPARENT list_expr CPARENT SEMI {
             assert($list_expr.tree != null);
             $tree = new Print(true, $list_expr.tree);
+
         }
     | PRINTLNX OPARENT list_expr CPARENT SEMI {
             assert($list_expr.tree != null);

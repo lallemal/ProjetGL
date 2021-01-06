@@ -3,7 +3,6 @@ package fr.ensimag.deca.tree;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
-import fr.ensimag.deca.context.VoidType;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import org.apache.commons.lang.Validate;
 import org.apache.log4j.Logger;
@@ -30,10 +29,11 @@ public class Main extends AbstractMain {
     @Override
     protected void verifyMain(DecacCompiler compiler) throws ContextualError {
         LOG.debug("verify Main: start");
-        // declVariables.verifyListDeclVariable(compiler, new EnvironmentExp(null), null);
-        // TODO Check VoidType bc it is certainly predefined on env_types
+        // Creation of empty EnvironmentExp for env_exp in Main
+        EnvironmentExp env_exp = new EnvironmentExp(null);
+        // declVariables.verifyListDeclVariable(compiler, env_exp, null);
         // TODO EnvExp has to be the inherited EnvExp from declVariables
-        insts.verifyListInst(compiler, new EnvironmentExp(null), null, new VoidType(compiler.getSymbols().create("void")));
+        insts.verifyListInst(compiler, env_exp, null, compiler.getBuiltInType("void"));
 
 
         LOG.debug("verify Main: end");

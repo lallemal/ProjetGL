@@ -399,7 +399,7 @@ ident returns[AbstractIdentifier tree]
 /****     Class related rules     ****/
 
 list_classes returns[ListDeclClass tree]
-    :
+    : {$tree = new ListDeclClass();}
       (c1=class_decl {
         }
       )*

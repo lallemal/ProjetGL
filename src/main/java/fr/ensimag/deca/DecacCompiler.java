@@ -48,6 +48,7 @@ public class DecacCompiler {
 
         this.symbols = new SymbolTable();
         this.env_types = new EnvironmentType(null);
+        createPredefTypes();
     }
 
     /**
@@ -181,9 +182,6 @@ public class DecacCompiler {
         }
         assert(prog.checkAllLocations());
 
-        if (createPredefTypes()) {
-            LOG.info("Creation of predefined failed");
-        }
 
         prog.verifyProgram(this);
         assert(prog.checkAllDecorations());

@@ -9,6 +9,8 @@ import java.util.List;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
+import com.sun.org.apache.bcel.internal.classfile.SourceFile;
+
 /**
  * User-specified options influencing the compilation.
  *
@@ -44,6 +46,47 @@ public class CompilerOptions {
     
     public void parseArgs(String[] args) throws CLIException {
         // A FAIRE : parcourir args pour positionner les options correctement.
+    	
+    	// pas d'arguments, affiche les commandes disponibles
+    	if (args.length == 0) {
+    		return;
+    	}
+    	// -b affiche numero d'equipe
+    	if(args.length == 1 && args[0].equals("-b") ) {
+    		printBanner = true;
+    		return;
+    	}
+    	
+    	// analyse les options et les fichiers doit comporter au moins un fichier
+    	for (int i = 0; i < args.length; i++) {
+    		switch(args[i]) {
+    			case "-p":
+    				throw new UnsupportedOperationException("parse is not yet implemented");
+    			case "-v":
+    				throw new UnsupportedOperationException("verification is not yet implemented");
+    			case "-n":
+    				throw new UnsupportedOperationException("no check is not yet implemented");
+    			case "-r":
+    				throw new UnsupportedOperationException("register is not yet implemented");
+    			case "-d":
+    				debug++;
+    				break;
+    			case "-P":
+    				parallel = true;
+    				break;
+    			case "-w":
+    				throw new UnsupportedOperationException("warning is not yet implemented");
+    		
+    			// est peut être un fichier
+    			default:
+    				traiteFichier(args[i]);
+    				break;
+    		}
+    	}
+    	
+    	if (sourceFiles.isEmpty()) {
+    		throw new CLIException("pas de fichier en entrée");
+    	}
         Logger logger = Logger.getRootLogger();
         // map command-line debug option to log4j's level.
         switch (getDebug()) {
@@ -66,11 +109,66 @@ public class CompilerOptions {
         } else {
             logger.info("Java assertions disabled");
         }
-
-        throw new UnsupportedOperationException("not yet implemented");
+        
+        //throw new UnsupportedOperationException("not yet implemented");
     }
 
     protected void displayUsage() {
-        throw new UnsupportedOperationException("not yet implemented");
+
+    	System.out.println("Syntaxe d'utilisation a respecter sinon ne passe pas les tests automatises");
+    	System.out.println("decac [[-p | -v] [-n] [-r X] [-d]* [-P] [-w] <fichier deca>...] | [-b]");
+    	System.out.println(".-b (banner)       : affiche une bannière indiquant le nom de l’équipe");
+    	System.out.println(".-p (parser)       : arrête decac après l’étape de construction de");
+    	System.out.println("                     l’arbre, et affiche la décompilation de ce dernier");
+    	System.out.println("                     (i.e. s’il n’y a qu’un fichier source à");
+    	System.out.println("                     compiler, la sortie doit être un programme");
+    	System.out.println("                     deca syntaxiquement correct)");
+    	System.out.println(".-v (verification) : arrête decac après l’étape de vérifications");
+    	System.out.println("                     (ne produit aucune sortie en l’absence d’erreur)");
+    	System.out.println(".-n (no check)     : supprime les tests de débordement à l’exécution");
+    	System.out.println("                     - débordement arithmétique");
+    	System.out.println("                     - débordement mémoire");
+    	System.out.println("                     - déréférencement de null");
+    	System.out.println(".-r X              : limite les registres banalisés disponibles à");
+    	System.out.println("                     -R0 ... R{X-1}, avec 4 <= X <= 16");
+    	System.out.println(".-d (debug)        : active les traces de debug. Répéter");
+    	System.out.println("                     l’option plusieurs fois pour avoir plus de traces.");
+    	System.out.println(".-P (parallel)     : s’il y a plusieurs fichiers sources,");
+    	System.out.println("                     lance la compilation des fichiers en");
+    	System.out.println("                     parallèle (pour accélérer la compilation)");
+    	
+        //throw new UnsupportedOperationException("not yet implemented");
     }
-}
+    
+   // test si nom de fichier valide ou pas
+    private void traiteFichier(String fichier)throws CLIException{
+    	int longueur = fichier.length();
+    	// longueur trop petit pour que ce soit un fichier
+    	if (longueur < 6) {
+    		throw new CLIException("mauvais nom de fichier");
+    	}
+    	//System.out.println("longueurOK");
+    	// mauvais nom de fichier (pas verifier avec caractere speciaux )
+    	String suffixe = fichier.substring(longueur-5, longueur);
+    	System.out.println(suffixe);
+    	if (!suffixe.equals(".deca")) {
+    		throw new CLIException("mauvais nom de fichier");
+    	}	
+    	//System.out.println("suffixeOK");
+    	File f = new File(fichier);
+    	if(!f.exists()) {
+    		throw new CLIException("Fichier introuvable");	
+    	}
+    	else {
+    		ajouteFichier(f);
+    	}
+    }
+    
+    private void ajouteFichier(File f) {
+    	if(!sourceFiles.contains(f)) {
+    		sourceFiles.add(f);
+    		System.out.println(getSourceFiles());
+    	}
+    }  
+    
+  }

@@ -3,10 +3,11 @@ package fr.ensimag.deca.tree;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.tools.IndentPrintStream;
-import fr.ensimag.ima.pseudocode.instructions.*;
-import java.io.PrintStream;
+import fr.ensimag.ima.pseudocode.instructions.HALT;
 import org.apache.commons.lang.Validate;
 import org.apache.log4j.Logger;
+
+import java.io.PrintStream;
 
 /**
  * Deca complete program (class definition plus main block)
@@ -35,7 +36,14 @@ public class Program extends AbstractProgram {
     @Override
     public void verifyProgram(DecacCompiler compiler) throws ContextualError {
         LOG.debug("verify program: start");
-        throw new UnsupportedOperationException("not yet implemented");
+        // Passe 1 et 2 : inutile pour sans-objet
+//        classes.verifyListClass(compiler);
+//        classes.verifyListClassMembers(compiler);
+        // Passe 3
+        // Descente vers classe inutile pour sans objet
+        // classes.verifyListClassBody(compiler);
+        // Pour Main
+        main.verifyMain(compiler);
         // LOG.debug("verify program: end");
     }
 

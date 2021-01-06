@@ -3,20 +3,18 @@ package fr.ensimag.deca;
 import fr.ensimag.deca.syntax.DecaLexer;
 import fr.ensimag.deca.syntax.DecaParser;
 import fr.ensimag.deca.tools.DecacInternalError;
+import fr.ensimag.deca.tools.SymbolTable;
 import fr.ensimag.deca.tree.AbstractProgram;
 import fr.ensimag.deca.tree.LocationException;
 import fr.ensimag.ima.pseudocode.AbstractLine;
 import fr.ensimag.ima.pseudocode.IMAProgram;
 import fr.ensimag.ima.pseudocode.Instruction;
 import fr.ensimag.ima.pseudocode.Label;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.PrintStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.apache.log4j.Logger;
+
+import java.io.*;
 
 /**
  * Decac compiler instance.
@@ -45,6 +43,8 @@ public class DecacCompiler {
         super();
         this.compilerOptions = compilerOptions;
         this.source = source;
+
+        this.symbols = new SymbolTable();
     }
 
     /**
@@ -229,5 +229,15 @@ public class DecacCompiler {
         parser.setDecacCompiler(this);
         return parser.parseProgramAndManageErrors(err);
     }
+
+
+
+    /* Necessary utilities for compilation */
+    private SymbolTable symbols;
+
+    public SymbolTable getSymbols() {
+        return symbols;
+    }
+
 
 }

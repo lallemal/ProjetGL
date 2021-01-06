@@ -1,11 +1,12 @@
 package fr.ensimag.deca;
 
-import fr.ensimag.deca.context.EnvironmentType;
+import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.syntax.DecaLexer;
 import fr.ensimag.deca.syntax.DecaParser;
 import fr.ensimag.deca.tools.DecacInternalError;
 import fr.ensimag.deca.tools.SymbolTable;
 import fr.ensimag.deca.tree.AbstractProgram;
+import fr.ensimag.deca.tree.Location;
 import fr.ensimag.deca.tree.LocationException;
 import fr.ensimag.ima.pseudocode.AbstractLine;
 import fr.ensimag.ima.pseudocode.IMAProgram;
@@ -180,6 +181,9 @@ public class DecacCompiler {
         }
         assert(prog.checkAllLocations());
 
+        if (createPredefTypes()) {
+            LOG.info("Creation of predefined failed");
+        }
 
         prog.verifyProgram(this);
         assert(prog.checkAllDecorations());
@@ -243,7 +247,7 @@ public class DecacCompiler {
 
     EnvironmentType env_types;
 
-    public void createPredefTypes() {
+    public boolean createPredefTypes() {
         // Create and check existence of symbols for predef Types
         SymbolTable.Symbol voidSymbol = symbols.create("void");
         SymbolTable.Symbol boolSymbol = symbols.create("boolean");
@@ -253,7 +257,46 @@ public class DecacCompiler {
         SymbolTable.Symbol nullSymbol =symbols.create("null");
 
         // Creation of predef types
+        try {
+            env_types.declare(voidSymbol, new TypeDefinition(new VoidType(voidSymbol), Location.BUILTIN));
+            env_types.declare(boolSymbol, new TypeDefinition(new BooleanType(boolSymbol), Location.BUILTIN));
+            env_types.declare(floatSymbol, new TypeDefinition(new FloatType(floatSymbol), Location.BUILTIN));
+            env_types.declare(intSymbol, new TypeDefinition(new IntType(intSymbol), Location.BUILTIN));
+            env_types.declare(stringSymbol, new TypeDefinition(new StringType(stringSymbol), Location.BUILTIN));
+            env_types.declare(nullSymbol, new TypeDefinition(new NullType(nullSymbol), Location.BUILTIN));
+        } catch (EnvironmentType.DoubleDefException e){
+            LOG.fatal("Creation of Predefined Type in" + source.getName() + " failed", e);
+            return true;
+        }
+        return false;
 
     }
 
+    public EnvironmentType getEnv_types() {
+        return env_types;
+    }
+
+    // TODO Check if not exist
+    public Type getBuiltInType(String name) {
+        return  env_types.get(symbols.create("void")).getType();
+    }
+
+    public Type getInt() {
+        return env_types.get(symbols.create("int")).getType();
+    }
+    public Type getFloat() {
+        return env_types.get(symbols.create("float")).getType();
+    }
+    public Type getVoid() {
+        return env_types.get(symbols.create("void")).getType();
+    }
+    public Type getBool() {
+        return env_types.get(symbols.create("boolean")).getType();
+    }
+    public Type getNull() {
+        return env_types.get(symbols.create("null")).getType();
+    }
+    public Type getString() {
+        return env_types.get(symbols.create("string")).getType();
+    }
 }

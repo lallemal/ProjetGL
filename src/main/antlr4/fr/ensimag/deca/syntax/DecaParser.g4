@@ -87,6 +87,7 @@ list_decl_var[ListDeclVar l, AbstractIdentifier t]
 
 decl_var[AbstractIdentifier t] returns[AbstractDeclVar tree]
 @init   {
+            Initialization init = new Initialization($e.tree);
         }
     : i=ident {
     	  $tree = new DeclVar($t, $i.tree, new NoInitialization());
@@ -94,9 +95,8 @@ decl_var[AbstractIdentifier t] returns[AbstractDeclVar tree]
     	  //pas de setLocation pour NoInitialization car cest une feuille
         }
       (EQUALS e=expr {
-      	init = new Initialization($e.tree);
       	setLocation(init, $e.start);
-      	$tree = new DeclVar($t.tree, $i.tree, init);
+      	$tree = new DeclVar($t, $i.tree, init);
       	setLocation($tree, $i.start);
 
         }

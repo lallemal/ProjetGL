@@ -17,7 +17,7 @@ public class DecacMain {
     public static void main(String[] args) {
     	
         // example log4j message.
-    	
+    
         LOG.info("Decac compiler started");
         boolean error = false;
         final CompilerOptions options = new CompilerOptions();
@@ -45,7 +45,7 @@ public class DecacMain {
         }
         if (options.getParallel()) {
         	for (File source: options.getSourceFiles()) {
-        		
+        		 DecacCompiler compiler = new DecacCompiler(options, source);
         	}
             // A FAIRE : instancier DecacCompiler pour chaque fichier à
             // compiler, et lancer l'exécution des méthodes compile() de chaque
@@ -61,6 +61,7 @@ public class DecacMain {
             }
         }
         System.exit(error ? 1 : 0);
-       
+   
     }
+    
 }

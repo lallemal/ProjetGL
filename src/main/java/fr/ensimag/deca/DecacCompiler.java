@@ -1,5 +1,6 @@
 package fr.ensimag.deca;
 
+import fr.ensimag.deca.context.EnvironmentType;
 import fr.ensimag.deca.syntax.DecaLexer;
 import fr.ensimag.deca.syntax.DecaParser;
 import fr.ensimag.deca.tools.DecacInternalError;
@@ -45,6 +46,7 @@ public class DecacCompiler {
         this.source = source;
 
         this.symbols = new SymbolTable();
+        this.env_types = new EnvironmentType(null);
     }
 
     /**
@@ -239,5 +241,19 @@ public class DecacCompiler {
         return symbols;
     }
 
+    EnvironmentType env_types;
+
+    public void createPredefTypes() {
+        // Create and check existence of symbols for predef Types
+        SymbolTable.Symbol voidSymbol = symbols.create("void");
+        SymbolTable.Symbol boolSymbol = symbols.create("boolean");
+        SymbolTable.Symbol floatSymbol =symbols.create("float");
+        SymbolTable.Symbol intSymbol =symbols.create("int");
+        SymbolTable.Symbol stringSymbol =symbols.create("string");
+        SymbolTable.Symbol nullSymbol =symbols.create("null");
+
+        // Creation of predef types
+
+    }
 
 }

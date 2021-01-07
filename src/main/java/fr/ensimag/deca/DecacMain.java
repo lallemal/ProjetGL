@@ -1,8 +1,10 @@
 package fr.ensimag.deca;
 
 import java.io.File;
-import org.apache.log4j.Logger;
+import java.io.IOException;
 
+import org.apache.log4j.Logger;
+import java.util.concurrent.*;
 /**
  * Main class for the command-line Deca compiler.
  *
@@ -13,25 +15,38 @@ public class DecacMain {
     private static Logger LOG = Logger.getLogger(DecacMain.class);
     
     public static void main(String[] args) {
+    	
         // example log4j message.
+    
         LOG.info("Decac compiler started");
         boolean error = false;
         final CompilerOptions options = new CompilerOptions();
+        
         try {
             options.parseArgs(args);
+            
         } catch (CLIException e) {
+        	
             System.err.println("Error during option parsing:\n"
                     + e.getMessage());
             options.displayUsage();
             System.exit(1);
         }
         if (options.getPrintBanner()) {
-            throw new UnsupportedOperationException("decac -b not yet implemented");
+        	System.out.println("groupe 8 gl40");
+            //throw new UnsupportedOperationException("decac -b not yet implemented");
+        	// sort après affichage de la banniere
+        	System.exit(1);
         }
+        
         if (options.getSourceFiles().isEmpty()) {
-            throw new UnsupportedOperationException("decac without argument not yet implemented");
+        	options.displayUsage();
+            //throw new UnsupportedOperationException("decac without argument not yet implemented");
         }
         if (options.getParallel()) {
+        	for (File source: options.getSourceFiles()) {
+        		 DecacCompiler compiler = new DecacCompiler(options, source);
+        	}
             // A FAIRE : instancier DecacCompiler pour chaque fichier à
             // compiler, et lancer l'exécution des méthodes compile() de chaque
             // instance en parallèle. Il est conseillé d'utiliser
@@ -46,5 +61,7 @@ public class DecacMain {
             }
         }
         System.exit(error ? 1 : 0);
+   
     }
+    
 }

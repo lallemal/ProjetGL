@@ -128,10 +128,13 @@ public class DecacCompiler {
      * @return true on error
      */
     public boolean compile() {
-        String sourceFile = source.getAbsolutePath();
-        String destFile = null;
         // A FAIRE: calculer le nom du fichier .ass à partir du nom du
         // A FAIRE: fichier .deca.
+        String sourceFile = source.getAbsolutePath();
+        int longueurSource = sourceFile.length();
+        // on enleve le suffixe et on ajoute le nouveau
+        // chemin absolu avec .ass a la place
+        String destFile =sourceFile.substring(0, longueurSource-4)  +"ass";
         PrintStream err = System.err;
         PrintStream out = System.out;
         LOG.debug("Compiling file " + sourceFile + " to assembly file " + destFile);

@@ -1,15 +1,12 @@
 package fr.ensimag.deca;
 
-import java.io.File;
-import java.io.PrintStream;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
-import com.sun.org.apache.bcel.internal.classfile.SourceFile;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * User-specified options influencing the compilation.
@@ -69,6 +66,9 @@ public class CompilerOptions {
     			case "-r":
     				throw new UnsupportedOperationException("register is not yet implemented");
     			case "-d":
+    				if (debug == TRACE) {
+    					throw new CLIException("Too much -d option : This level of debugging does not exist");
+					}
     				debug++;
     				break;
     			case "-P":
@@ -147,10 +147,8 @@ public class CompilerOptions {
     	if (longueur < 6) {
     		throw new CLIException("mauvais nom de fichier");
     	}
-    	//System.out.println("longueurOK");
     	// mauvais nom de fichier (pas verifier avec caractere speciaux )
     	String suffixe = fichier.substring(longueur-5, longueur);
-    	System.out.println(suffixe);
     	if (!suffixe.equals(".deca")) {
     		throw new CLIException("mauvais nom de fichier");
     	}	

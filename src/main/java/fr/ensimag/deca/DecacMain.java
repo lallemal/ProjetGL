@@ -17,8 +17,7 @@ public class DecacMain {
     public static void main(String[] args) {
     	
         // example log4j message.
-        
-        //Test pas ouf pour voir git 
+       
     
         LOG.info("Decac compiler started");
         boolean error = false;

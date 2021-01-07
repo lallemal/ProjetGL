@@ -7,6 +7,7 @@ import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.DecacInternalError;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.instructions.WSTR;
 import org.apache.commons.lang.Validate;
 
 import java.io.PrintStream;
@@ -119,7 +120,9 @@ public abstract class AbstractExpr extends AbstractInst {
     protected void codeGenPrint(DecacCompiler compiler) {
         Type t = getType();
         if (t.isString()) {
-        	compiler.addInstruction
+        	StringLiteral str = (StringLiteral) this;
+            String value = str.getValue();
+            compiler.addInstruction(new WSTR(value));
         }
     	//throw new UnsupportedOperationException("not yet implemented");
     }

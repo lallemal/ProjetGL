@@ -39,6 +39,7 @@ public class Program extends AbstractProgram {
         // Passe 1 et 2 : inutile pour sans-objet
 //        classes.verifyListClass(compiler);
 //        classes.verifyListClassMembers(compiler);
+
         // Passe 3
         // Descente vers classe inutile pour sans objet
         // classes.verifyListClassBody(compiler);

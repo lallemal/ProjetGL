@@ -30,9 +30,12 @@ public class Main extends AbstractMain {
     protected void verifyMain(DecacCompiler compiler) throws ContextualError {
         LOG.debug("verify Main: start");
         // Creation of empty EnvironmentExp for env_exp in Main
+        // For main env_exp_sup is empty and not needed : env_exp_r / env_exp_sum will become env_exp_r
         EnvironmentExp env_exp = new EnvironmentExp(null);
-        // declVariables.verifyListDeclVariable(compiler, env_exp, null);
-        // TODO EnvExp has to be the inherited EnvExp from declVariables
+        declVariables.verifyListDeclVariable(compiler, env_exp, null);
+
+        // This method receive the same env_exp than declVariable bc it will be muted through instead of returning
+        // a env_exp_r
         insts.verifyListInst(compiler, env_exp, null, compiler.getBuiltInType("void"));
 
 

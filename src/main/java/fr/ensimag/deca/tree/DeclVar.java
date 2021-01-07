@@ -1,13 +1,12 @@
 package fr.ensimag.deca.tree;
 
-import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.DecacCompiler;
-import fr.ensimag.deca.context.ClassDefinition;
-import fr.ensimag.deca.context.ContextualError;
-import fr.ensimag.deca.context.EnvironmentExp;
+import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.tools.IndentPrintStream;
-import java.io.PrintStream;
+import fr.ensimag.deca.tools.SymbolTable;
 import org.apache.commons.lang.Validate;
+
+import java.io.PrintStream;
 
 /**
  * @author gl40
@@ -33,6 +32,21 @@ public class DeclVar extends AbstractDeclVar {
     protected void verifyDeclVar(DecacCompiler compiler,
             EnvironmentExp localEnv, ClassDefinition currentClass)
             throws ContextualError {
+        // verify if the type is correct and return it
+        Type typeToCheck = this.type.verifyType(compiler);
+        // raise error in case of void type for the variable
+        if (typeToCheck.isVoid()) {
+            throw new ContextualError(ContextualError.DECL_VAR_VOID, getLocation());
+        }
+        SymbolTable.Symbol name = varName.getName();
+        // Check the possibility of the initialization : compatibility between the two members
+        initialization.verifyInitialization(compiler, typeToCheck, localEnv, currentClass);
+        // Do the union : reject and raise error if it already exists in this env
+        try {
+            localEnv.declare(name, new VariableDefinition(typeToCheck, getLocation()));
+        } catch (EnvironmentExp.DoubleDefException e) {
+            throw new ContextualError(ContextualError.DEFINITION_ALREADY_IN_ENV, getLocation());
+        }
     }
 
     

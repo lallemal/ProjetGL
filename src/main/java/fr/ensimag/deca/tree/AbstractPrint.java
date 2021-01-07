@@ -38,7 +38,7 @@ public abstract class AbstractPrint extends AbstractInst {
             ClassDefinition currentClass, Type returnType)
             throws ContextualError {
         for (AbstractExpr expr : arguments.getList()) {
-            expr.verifyInst(compiler, localEnv, currentClass, returnType);
+            expr.verifyPrint(compiler, localEnv, currentClass, returnType);
         }
     }
 

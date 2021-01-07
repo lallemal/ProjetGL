@@ -91,12 +91,17 @@ public abstract class AbstractExpr extends AbstractInst {
     protected void verifyInst(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass, Type returnType)
             throws ContextualError {
+        verifyExpr(compiler, localEnv, currentClass);
+    }
+
+    protected void verifyPrint(DecacCompiler compiler, EnvironmentExp localEnv,
+            ClassDefinition currentClass, Type returnType)
+            throws ContextualError {
         type = verifyExpr(compiler, localEnv, currentClass);
         if (type != compiler.getInt() && type != compiler.getFloat() && type != compiler.getString()) {
             throw new ContextualError(ContextualError.PRINT_EXPR_NOT_COMPATIBLE, this.getLocation());
         }
     }
-
     /**
      * Verify the expression as a condition, i.e. check that the type is
      * boolean.
@@ -109,7 +114,9 @@ public abstract class AbstractExpr extends AbstractInst {
      */
     void verifyCondition(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass) throws ContextualError {
-        throw new UnsupportedOperationException("not yet implemented");
+        if (!type.isBoolean()) {
+            throw new ContextualError(ContextualError.EXPR_CONDITION_NOT_BOOLEAN, getLocation());
+        }
     }
 
     /**

@@ -32,6 +32,7 @@ public class ContextualError extends LocationException {
     public static final String CLASS_NOT_SUBCLASS_PROTECTED = "The selected class is not a subclass of the class where the selection was made";
     public static final String FIELD_NOT_OVERCLASS_PROTECTED = "The class is not a subclass of the one which own this field";
     public static final String LVALUE_IDENT_TYPE = "The nature of the left member is not of type field, parameters of variables";
+    public static final String DEFINITION_ALREADY_IN_ENV = "The Definition of this Symbol is already in the environment";
 
 
     public ContextualError(String message, Location location) {

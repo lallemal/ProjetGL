@@ -1,0 +1,8 @@
+// Test avec plusieurs print et println entre les accolades
+
+{
+        print("Hello");
+        println("Are");
+        print("You");
+        println("Ok?");
+}

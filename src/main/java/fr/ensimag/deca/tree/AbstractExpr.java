@@ -1,15 +1,16 @@
 package fr.ensimag.deca.tree;
 
-import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
+import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.DecacInternalError;
 import fr.ensimag.deca.tools.IndentPrintStream;
-import fr.ensimag.ima.pseudocode.Label;
-import java.io.PrintStream;
+import fr.ensimag.ima.pseudocode.instructions.WSTR;
 import org.apache.commons.lang.Validate;
+
+import java.io.PrintStream;
 
 /**
  * Expression, i.e. anything that has a value.
@@ -90,7 +91,10 @@ public abstract class AbstractExpr extends AbstractInst {
     protected void verifyInst(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass, Type returnType)
             throws ContextualError {
-        throw new UnsupportedOperationException("not yet implemented");
+        type = verifyExpr(compiler, localEnv, currentClass);
+        if (type != compiler.getInt() && type != compiler.getFloat() && type != compiler.getString()) {
+            throw new ContextualError(ContextualError.PRINT_EXPR_NOT_COMPATIBLE, this.getLocation());
+        }
     }
 
     /**
@@ -114,7 +118,13 @@ public abstract class AbstractExpr extends AbstractInst {
      * @param compiler
      */
     protected void codeGenPrint(DecacCompiler compiler) {
-        throw new UnsupportedOperationException("not yet implemented");
+        Type t = getType();
+        if (t.isString()) {
+        	StringLiteral str = (StringLiteral) this;
+            String value = str.getValue();
+            compiler.addInstruction(new WSTR(value));
+        }
+    	//throw new UnsupportedOperationException("not yet implemented");
     }
 
     @Override

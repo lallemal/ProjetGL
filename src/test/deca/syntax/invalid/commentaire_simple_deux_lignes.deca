@@ -1,0 +1,7 @@
+// Résultat : Erreur en ligne 3
+// Je fais un commentaire sur une ligne et pourtant
+je continue ce commentaire après
+
+{
+    println("Encore un string");
+}

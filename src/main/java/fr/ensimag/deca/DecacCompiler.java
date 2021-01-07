@@ -1,22 +1,22 @@
 package fr.ensimag.deca;
 
+import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.syntax.DecaLexer;
 import fr.ensimag.deca.syntax.DecaParser;
 import fr.ensimag.deca.tools.DecacInternalError;
+import fr.ensimag.deca.tools.SymbolTable;
 import fr.ensimag.deca.tree.AbstractProgram;
+import fr.ensimag.deca.tree.Location;
 import fr.ensimag.deca.tree.LocationException;
 import fr.ensimag.ima.pseudocode.AbstractLine;
 import fr.ensimag.ima.pseudocode.IMAProgram;
 import fr.ensimag.ima.pseudocode.Instruction;
 import fr.ensimag.ima.pseudocode.Label;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.PrintStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.apache.log4j.Logger;
+
+import java.io.*;
 
 /**
  * Decac compiler instance.
@@ -45,6 +45,10 @@ public class DecacCompiler {
         super();
         this.compilerOptions = compilerOptions;
         this.source = source;
+
+        this.symbols = new SymbolTable();
+        this.env_types = new EnvironmentType(null);
+        createPredefTypes();
     }
 
     /**
@@ -124,10 +128,13 @@ public class DecacCompiler {
      * @return true on error
      */
     public boolean compile() {
-        String sourceFile = source.getAbsolutePath();
-        String destFile = null;
         // A FAIRE: calculer le nom du fichier .ass à partir du nom du
         // A FAIRE: fichier .deca.
+        String sourceFile = source.getAbsolutePath();
+        int longueurSource = sourceFile.length();
+        // on enleve le suffixe et on ajoute le nouveau
+        // chemin absolu avec .ass a la place
+        String destFile =sourceFile.substring(0, longueurSource-4)  +"ass";
         PrintStream err = System.err;
         PrintStream out = System.out;
         LOG.debug("Compiling file " + sourceFile + " to assembly file " + destFile);
@@ -230,4 +237,67 @@ public class DecacCompiler {
         return parser.parseProgramAndManageErrors(err);
     }
 
+
+
+    /* Necessary utilities for compilation */
+    private SymbolTable symbols;
+
+    public SymbolTable getSymbols() {
+        return symbols;
+    }
+
+    EnvironmentType env_types;
+
+    public boolean createPredefTypes() {
+        // Create and check existence of symbols for predef Types
+        SymbolTable.Symbol voidSymbol = symbols.create("void");
+        SymbolTable.Symbol boolSymbol = symbols.create("boolean");
+        SymbolTable.Symbol floatSymbol =symbols.create("float");
+        SymbolTable.Symbol intSymbol =symbols.create("int");
+        SymbolTable.Symbol stringSymbol =symbols.create("string");
+        SymbolTable.Symbol nullSymbol =symbols.create("null");
+
+        // Creation of predef types
+        try {
+            env_types.declare(voidSymbol, new TypeDefinition(new VoidType(voidSymbol), Location.BUILTIN));
+            env_types.declare(boolSymbol, new TypeDefinition(new BooleanType(boolSymbol), Location.BUILTIN));
+            env_types.declare(floatSymbol, new TypeDefinition(new FloatType(floatSymbol), Location.BUILTIN));
+            env_types.declare(intSymbol, new TypeDefinition(new IntType(intSymbol), Location.BUILTIN));
+            env_types.declare(stringSymbol, new TypeDefinition(new StringType(stringSymbol), Location.BUILTIN));
+            env_types.declare(nullSymbol, new TypeDefinition(new NullType(nullSymbol), Location.BUILTIN));
+        } catch (EnvironmentType.DoubleDefException e){
+            LOG.fatal("Creation of Predefined Type in" + source.getName() + " failed", e);
+            return true;
+        }
+        return false;
+
+    }
+
+    public EnvironmentType getEnv_types() {
+        return env_types;
+    }
+
+    // TODO Check if not exist
+    public Type getBuiltInType(String name) {
+        return  env_types.get(symbols.create("void")).getType();
+    }
+
+    public Type getInt() {
+        return env_types.get(symbols.create("int")).getType();
+    }
+    public Type getFloat() {
+        return env_types.get(symbols.create("float")).getType();
+    }
+    public Type getVoid() {
+        return env_types.get(symbols.create("void")).getType();
+    }
+    public Type getBool() {
+        return env_types.get(symbols.create("boolean")).getType();
+    }
+    public Type getNull() {
+        return env_types.get(symbols.create("null")).getType();
+    }
+    public Type getString() {
+        return env_types.get(symbols.create("string")).getType();
+    }
 }

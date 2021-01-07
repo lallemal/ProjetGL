@@ -15,3 +15,5 @@ nbactions.xml
 
 # Je crois que c'est des fichiers d'IDE ou de compilation
 *.tokens
+
+*.ass

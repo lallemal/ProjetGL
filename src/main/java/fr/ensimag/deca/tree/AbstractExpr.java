@@ -90,9 +90,9 @@ public abstract class AbstractExpr extends AbstractInst {
     protected void verifyInst(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass, Type returnType)
             throws ContextualError {
-        Type type = verifyExpr(compiler, localEnv, currentClass);
+        type = verifyExpr(compiler, localEnv, currentClass);
         if (type != compiler.getInt() && type != compiler.getFloat() && type != compiler.getString()) {
-            throw new ContextualError("Print Expression is not of right Type", this.getLocation());
+            throw new ContextualError(ContextualError.PRINT_EXPR_NOT_COMPATIBLE, this.getLocation());
         }
     }
 

@@ -117,7 +117,11 @@ public abstract class AbstractExpr extends AbstractInst {
      * @param compiler
      */
     protected void codeGenPrint(DecacCompiler compiler) {
-        throw new UnsupportedOperationException("not yet implemented");
+        Type t = getType();
+        if (t.isString()) {
+        	compiler.addInstruction
+        }
+    	//throw new UnsupportedOperationException("not yet implemented");
     }
 
     @Override

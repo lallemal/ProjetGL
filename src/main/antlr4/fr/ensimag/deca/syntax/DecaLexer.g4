@@ -11,10 +11,9 @@ options {
 @members {
 }
 
-// Deca lexer rules.
+// Deca lexer rules. print('hello World')
 COMMENT : (('/*' .*? '*/') | ('//' .*? '\n')) { skip(); } ;
 fragment LETTRE : 'a'..'z' | 'A'..'Z' ;
-fragment DIGIT : '0'..'9';
 fragment SPECIALS : '!' | '?' | ',' | ';' ;
 fragment STRING_CAR : ~('"' | '\\' | '\n' ) ;
 STRING : '"' (STRING_CAR | '\\' )*? '"';
@@ -30,3 +29,44 @@ MULTI_LINE_STRING : '"' (STRING_CAR | '\n' | '\\' )*? '"';
 
 
 WS : (' ' | '\n' | '\t' | '\r') { skip(); };
+// Deca lexer rules sans objets
+
+// identificateurs
+fragment DIGIT : '0'..'9';
+// mot reserve
+ASM : 'asm';
+EXTENDS : 'extends';
+IF : 'if';
+ELSE : 'else';
+FALSE : 'false';
+TRUE : 'true';
+READINT : 'readint';
+READFLOAT : 'readFloat';
+PRINTLNX : 'printlnx';
+PRINTX : 'printx';
+PROTECTED : 'protected';
+WHILE : 'while';
+
+// symbole speciaux
+fragment PLUS : '+';
+fragment MINUS : '-';
+INF : '<';
+SUP : '>';
+INFEQ : '<=';
+SUPEQ : '>=';
+EXCLAM : '!';
+INTERRO : '?';
+EQUALS : '=';
+EGALITE : '==';
+DIFF : '!=';
+MULT : '*';
+MODULO : '%';
+SLASH : '/';
+DOT : '.';
+AND : '&&';
+OR : '||';
+// litteraux entiers
+NUM : DIGIT+;
+
+
+

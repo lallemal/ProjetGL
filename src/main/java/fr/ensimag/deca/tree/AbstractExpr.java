@@ -8,6 +8,8 @@ import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.DecacInternalError;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.instructions.WSTR;
+import fr.ensimag.ima.pseudocode.instructions.WINT;
+import fr.ensimag.ima.pseudocode.instructions.WFLOAT;
 import org.apache.commons.lang.Validate;
 
 import java.io.PrintStream;
@@ -117,12 +119,25 @@ public abstract class AbstractExpr extends AbstractInst {
      *
      * @param compiler
      */
-    protected void codeGenPrint(DecacCompiler compiler) {
+    protected void codeGenPrint(DecacCompiler compiler, boolean printHex) {
         Type t = getType();
         if (t.isString()) {
-        	StringLiteral str = (StringLiteral) this;
-            String value = str.getValue();
+            String value = ((StringLiteral) this).getValue();
             compiler.addInstruction(new WSTR(value));
+        } else if (t.isInt()) {
+        	int value = ((IntLiteral) this).getValue();
+        	if (printHex) {
+        		compiler.addInstruction(new WSTR(Integer.toHexString(value)));
+        	} else {
+        		compiler.addInstruction(new WSTR(Integer.toString(value)));
+        	} 
+        } else if (t.isFloat()) {
+        	float value = ((FloatLiteral) this).getValue();
+        	if (printHex) {
+        		compiler.addInstruction(new WSTR(Float.toHexString(value)));
+        	} else {
+        		compiler.addInstruction(new WSTR(Float.toString(value)));
+        	} 
         }
     	//throw new UnsupportedOperationException("not yet implemented");
     }

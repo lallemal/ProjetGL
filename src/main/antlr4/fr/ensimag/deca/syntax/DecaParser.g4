@@ -87,20 +87,21 @@ list_decl_var[ListDeclVar l, AbstractIdentifier t]
 
 decl_var[AbstractIdentifier t] returns[AbstractDeclVar tree]
 @init   {
-            Initialization init = new Initialization($e.tree);
+            AbstractInitialization init;
         }
     : i=ident {
-    	  $tree = new DeclVar($t, $i.tree, new NoInitialization());
-    	  setLocation($tree, $i.start);
-    	  //pas de setLocation pour NoInitialization car cest une feuille
+    	//pas de setLocation pour NoInitialization car cest une feuille
+    	init = new NoInitialization();
+
         }
       (EQUALS e=expr {
+      	init = new Initialization($e.tree);
       	setLocation(init, $e.start);
-      	$tree = new DeclVar($t, $i.tree, init);
-      	setLocation($tree, $i.start);
+      	
         }
       )? {
-      		
+      	$tree = new DeclVar($t, $i.tree, init);
+      	setLocation($tree, $i.start);
         }
     ;
 
@@ -146,25 +147,32 @@ inst returns[AbstractInst tree]
         }
     | if_then_else {
             assert($if_then_else.tree != null);
+            $tree = $if_then_else.tree;
+            setLocation($tree, $if_then_else.start);
         }
     | WHILE OPARENT condition=expr CPARENT OBRACE body=list_inst CBRACE {
             assert($condition.tree != null);
             assert($body.tree != null);
+            $tree = new While($condition.tree, $body.tree);
         }
     | RETURN expr SEMI {
             assert($expr.tree != null);
+            $tree = new Return($expr.tree);
         }
     ;
 
 if_then_else returns[IfThenElse tree]
 @init {
+	
 }
     : if1=IF OPARENT condition=expr CPARENT OBRACE li_if=list_inst CBRACE {
+    	
         }
       (ELSE elsif=IF OPARENT elsif_cond=expr CPARENT OBRACE elsif_li=list_inst CBRACE {
         }
       )*
       (ELSE OBRACE li_else=list_inst CBRACE {
+      	$
         }
       )?
     ;
@@ -379,7 +387,6 @@ literal returns[AbstractExpr tree]
         }
     | STRING {
     	$tree = new StringLiteral($STRING.text);
-    	setLocation($tree, $STRING);
         }
     | TRUE {
         }

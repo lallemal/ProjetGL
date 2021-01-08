@@ -1,0 +1,15 @@
+// Test for if, elseif, else structur
+
+
+{
+    int i = 0;
+    if (i = 1){
+        print("if");
+    }
+    elseif (i = 0){
+        print("elseif");
+    }
+    else{
+        print("else");
+    }
+}

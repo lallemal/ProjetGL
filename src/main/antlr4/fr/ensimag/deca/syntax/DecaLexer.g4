@@ -65,9 +65,28 @@ SLASH : '/';
 DOT : '.';
 AND : '&&';
 OR : '||';
+
 // litteraux entiers
-NUM : DIGIT+;
+fragment POSITIVE_DIGIT : '1'..'9';
+INT : '0' | POSITIVE_DIGIT DIGIT;  
+
+// Litteraux flottants
+fragment NUM : DIGIT+;
+fragment SIGN : '+' | '-' | ' ';
+fragment EXP : ('E' | 'e') SIGN NUM;
+fragment DEC : NUM '.' NUM;
+fragment FLOATDEC : (DEC | DEC EXP) ('F' | 'f' | ' ');
+fragment DIGITHEX : POSITIVE_DIGIT | LETTRE;
+fragment NUMHEX : DIGITHEX+;
+fragment FLOATHEX : ('0x' | '0X') NUMHEX '.' NUMHEX ('P' | 'p') SIGN NUM ('F' | 'f' | ' ' );
+FLOAT : FLOATDEC | FLOATHEX;
+
 
 // mot reserve ne sont pas des ident donc le placer a la fin pour priorite
 IDENT : (LETTRE | '$' | '_')(LETTRE | DIGIT | '$' | '_')*;
+
+// inclusion fichier
+fragment FILENAME : (LETTRE | DIGIT | '.' | '-' | '_')+;
+INCLUDE : '#include' (' ')* '"' FILENAME '"' {doInclude(getText());};
+
 

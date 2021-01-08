@@ -1,10 +1,7 @@
 package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.DecacCompiler;
-import fr.ensimag.deca.context.ClassDefinition;
-import fr.ensimag.deca.context.ContextualError;
-import fr.ensimag.deca.context.EnvironmentExp;
-import fr.ensimag.deca.context.Type;
+import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.tools.DecacInternalError;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.instructions.WSTR;
@@ -83,7 +80,20 @@ public abstract class AbstractExpr extends AbstractInst {
             EnvironmentExp localEnv, ClassDefinition currentClass, 
             Type expectedType)
             throws ContextualError {
-        throw new UnsupportedOperationException("not yet implemented");
+        Type type2 = verifyExpr(compiler, localEnv, currentClass);
+        if (!expectedType.sameType(type2)) {
+            if (!expectedType.isFloat() && !type2.isInt()) {
+                if (type2.isClass() && expectedType.isClass() && (!(((ClassType) expectedType).isSubClassOf((ClassType) type2)))) {
+                    if (!type2.isNull()) {
+                        throw new ContextualError(ContextualError.ASSIGN_NOT_COMPATIBLE, getLocation());
+                    }
+                }
+            }
+            else {
+                return new ConvFloat(this);
+            }
+        }
+        return this;
     }
     
     

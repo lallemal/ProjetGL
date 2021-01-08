@@ -22,6 +22,13 @@ public abstract class AbstractOpArith extends AbstractBinaryExpr {
         Type type2 = getRightOperand().verifyExpr(compiler, localEnv, currentClass);
         if ((!type1.isInt() && !type1.isFloat()) || (!type2.isInt() && !type2.isFloat())) {
             throw new ContextualError(ContextualError.OP_BINARY_NOT_COMPATIBLE, getLocation());
+        } else {
+            if (type1.isInt() && type2.isFloat()) {
+                setLeftOperand(new ConvFloat(getLeftOperand()));
+            }
+            else if (type1.isFloat() && type2.isInt()) {
+                setRightOperand(new ConvFloat(getRightOperand()));
+            }
         }
         Type returnType = TypeOp.arith(compiler, type1, type2);
         setType(returnType);

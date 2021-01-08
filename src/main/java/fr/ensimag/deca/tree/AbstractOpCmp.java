@@ -29,6 +29,13 @@ public abstract class AbstractOpCmp extends AbstractBinaryExpr {
                 // if not it is a context error
                 throw new ContextualError(ContextualError.OP_BINARY_NOT_COMPATIBLE, getLocation());
             }
+        } else {
+            if (type1.isInt() && type2.isFloat()) {
+                setLeftOperand(new ConvFloat(getLeftOperand()));
+            }
+            else if (type1.isFloat() && type2.isInt()) {
+                setRightOperand(new ConvFloat(getRightOperand()));
+            }
         }
         setType(compiler.getBool());
         return compiler.getBool();

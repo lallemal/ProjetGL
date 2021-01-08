@@ -1,0 +1,4 @@
+[src/test/deca/decompile/DeclVarInit.deca]
+{
+    int i = 0;
+}

@@ -1,0 +1,6 @@
+[src/test/deca/decompile/WhileNoContent.deca]
+{
+    int i = 0;
+    while ( i != 0){
+    }
+}

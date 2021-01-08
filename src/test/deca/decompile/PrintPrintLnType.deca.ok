@@ -1,0 +1,6 @@
+[src/test/deca/decompile/PrintPrintLnType.deca]
+{
+    print(23);
+    print(2.23);
+    println("hello");
+}

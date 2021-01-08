@@ -4,5 +4,4 @@
 {
     printx("23");
     printlnx(23);
-
 }

@@ -1,0 +1,7 @@
+[src/test/deca/decompile/IfNoContent.deca]
+{
+    if (0 == 0){
+    }
+    else {
+    }
+}

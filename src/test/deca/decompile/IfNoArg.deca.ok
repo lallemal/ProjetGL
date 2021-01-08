@@ -1,0 +1,8 @@
+[src/test/deca/decompile/IfNoArg.deca]
+{
+    if (){
+        print("Ok!");
+    }
+    else {
+    }
+}

@@ -34,11 +34,14 @@ public class ManualTestInitialGencode {
             new Program(
                 new ListDeclClass(),
                 new Main(new ListDeclVar(),linst));
-        ListExpr lexp1 = new ListExpr(), lexp2 = new ListExpr();
+        ListExpr lexp1 = new ListExpr(), lexp2 = new ListExpr(), lexp3 = new ListExpr();
         linst.add(new Print(false,lexp1));
-        linst.add(new Println(false,lexp2));
+        linst.add(new Print(false,lexp2));
+        linst.add(new Print(true,lexp2));
+        linst.add(new Println(false,lexp3));
         lexp1.add(new IntLiteral(10));
         lexp2.add(new FloatLiteral((float) 10.10));
+        lexp3.add(new StringLiteral("Hello World test 2"));
         return source;
     }
     
@@ -74,8 +77,13 @@ public class ManualTestInitialGencode {
         assert(result.equals(
                 "; Main program\n" +
                 "; Beginning of main function:\n" +
-                "	WSTR \"10\"\n" +
-                "	WSTR \"10.10\"\n" +
+                "	LOAD #10, R1\n" +
+                "	WINT\n" +
+                "	LOAD #0x1.433334p3, R1" +
+                "	WFLOAT\n" +
+                "	LOAD #0x1.433334p3, R1" +
+                "	WFLOATX\n" +
+                "	WSTR \"Hello World test 2\"\n" +
                 "	WNL\n" +
                 "	HALT\n"));
     }

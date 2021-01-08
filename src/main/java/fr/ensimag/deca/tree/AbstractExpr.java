@@ -97,7 +97,9 @@ public abstract class AbstractExpr extends AbstractInst {
     protected void verifyInst(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass, Type returnType)
             throws ContextualError {
-        type = verifyExpr(compiler, localEnv, currentClass);
+        setType(verifyExpr(compiler, localEnv, currentClass));
+        System.out.println("ok ?");
+        System.out.println(getType());
         if (type != compiler.getInt() && type != compiler.getFloat() && type != compiler.getString()) {
             throw new ContextualError(ContextualError.PRINT_EXPR_NOT_COMPATIBLE, this.getLocation());
         }
@@ -125,7 +127,7 @@ public abstract class AbstractExpr extends AbstractInst {
      */
     protected void codeGenPrint(DecacCompiler compiler, boolean printHex) {
         Type t = getType();
-        System.out.println("ICI : ");
+        System.out.println("ICI 0 : ");
         System.out.println(t == null);
         if (t.isString()) {
             String value = ((StringLiteral) this).getValue();

@@ -1,0 +1,8 @@
+// Description : Assignation incompatible.
+// Resultat : f=x fonctione mais echec en ligne 9, un entier ne peut etre assigné par un string
+
+{
+    int x = 4;
+    String y = "blabl";
+    x = y;
+}

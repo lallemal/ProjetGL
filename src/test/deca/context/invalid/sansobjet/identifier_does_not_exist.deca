@@ -1,0 +1,7 @@
+// Description : Affectation d'une variable avec un identifiant n'existant pas dans l'environnement
+// Resultat : Erreur ligne 6 : y n'existe dans l'environnement
+
+{
+    int x;
+    y = 4;
+}

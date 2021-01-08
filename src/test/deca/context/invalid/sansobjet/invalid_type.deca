@@ -1,0 +1,7 @@
+// Description : Declaration d'une variable d'un type n'étant pas un type.
+// Resultat : Erreur ligne 6 : Le type n'est pas dans env_types puisqu'il n'est pas un type
+
+{
+    int x; // Declaration correct pour faire de x un identifier existant.
+    x y;   // Le type de y n'existe pas en tant que type.
+}

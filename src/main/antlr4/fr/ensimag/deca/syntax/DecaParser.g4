@@ -163,22 +163,32 @@ inst returns[AbstractInst tree]
 
 if_then_else returns[IfThenElse tree]
 @init {
-	
+	ListInst listIf = new ListInst();
+	ListInst listElse = new ListInst();
 }
     : if1=IF OPARENT condition=expr CPARENT OBRACE li_if=list_inst CBRACE {
-    	
+    	assert($condition.tree != null);
+    	assert($li_if.tree != null);
+    	IfThenElse ifThen = new IfThenElse($condition.tree, new ListInst());
+    	listIf.add(ifThen);
         }
       (ELSE elsif=IF OPARENT elsif_cond=expr CPARENT OBRACE elsif_li=list_inst CBRACE {
+      	assert($elsif_cond.tree != null);
+      	assert($elsif_li.tree != null);
+      	IfThenElse elseIfThen  = new IfThenElse($elsif_cond.tree, $elsif_li.tree, new ListInst());
+      	listElse.add(elsif); 
         }
       )*
       (ELSE OBRACE li_else=list_inst CBRACE {
-      	$
+      	assert($li_else.tree != null);
+      	IfThenElse elseThen = new IfThenElse($e_cond.tree, )
         }
       )?
     ;
 
 list_expr returns[ListExpr tree]
 @init   {
+
 	$tree = new ListExpr();
         }
     : (e1=expr {
@@ -377,6 +387,8 @@ select_expr returns[AbstractExpr tree]
         (o=OPARENT args=list_expr CPARENT {
             // we matched "e1.i(args)"
             assert($args.tree != null);
+            $tree = new MethodCall($e1.tree, $i.tree, $args.tree);
+            setLocation($tree, $e1.start);
         }
         | /* epsilon */ {
             // we matched "e.i"
@@ -392,6 +404,7 @@ primary_expr returns[AbstractExpr tree]
     | m=ident OPARENT args=list_expr CPARENT {
             assert($args.tree != null);
             assert($m.tree != null);
+            $tree = new MethodCall(new This(), $m.tree, $args.tree);
         }
     | OPARENT expr CPARENT {
             assert($expr.tree != null);
@@ -429,11 +442,7 @@ type returns[AbstractIdentifier tree]
 
 literal returns[AbstractExpr tree]
     : INT {
-    	try{
-   			$tree = new IntLiteral(Integer.parseInt($INTEGER.text);
-    	} catch(RecognitionException e){
-
-    	}
+   			$tree = new IntLiteral(Integer.parseInt($INT.text));
 
         }
     | fd=FLOAT {
@@ -454,7 +463,7 @@ literal returns[AbstractExpr tree]
     	$tree = new BooleanLiteral(false);
         }
     | THIS {
-    	
+    	$tree = new This();
         }
     | NULL {
     	$tree = new Null();

@@ -118,13 +118,7 @@ public abstract class AbstractExpr extends AbstractInst {
      * @param compiler
      */
     protected void codeGenPrint(DecacCompiler compiler) {
-        Type t = getType();
-        if (t.isString()) {
-        	StringLiteral str = (StringLiteral) this;
-            String value = str.getValue();
-            compiler.addInstruction(new WSTR(value));
-        }
-    	//throw new UnsupportedOperationException("not yet implemented");
+        throw new UnsupportedOperationException("not yet implemented");
     }
 
     @Override

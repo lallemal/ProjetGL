@@ -13,20 +13,26 @@ options {
 }
 
 // Deca lexer rules. print('hello World')
+
 COMMENT : (('/*' .*? '*/') | ('//' .*? '\n')) { skip(); } ;
 fragment LETTRE : 'a'..'z' | 'A'..'Z' ;
 fragment SPECIALS : '!' | '?' | ',' | ';' ;
 fragment STRING_CAR : ~('"' | '\\' | '\n' ) ;
 STRING : '"' (STRING_CAR | '\\' )*? '"';
+MULTI_LINE_STRING : '"' (STRING_CAR | '\n' | '\\' )*? '"'; 
+
+// caractere speciaux
 OBRACE : '{' ;
 CBRACE : '}' ; 
 OPARENT : '(' ;
 CPARENT : ')' ;
-PRINT : 'print' ;
-PRINTLN : 'println' ;
 SEMI : ';' ;
 COMMA : ',' ; 
-MULTI_LINE_STRING : '"' (STRING_CAR | '\n' | '\\' )*? '"'; 
+
+// mot reserve
+PRINT : 'print' ;
+PRINTLN : 'println' ;
+
 
 
 WS : (' ' | '\n' | '\t' | '\r') { skip(); };
@@ -34,6 +40,7 @@ WS : (' ' | '\n' | '\t' | '\r') { skip(); };
 
 // identificateurs
 fragment DIGIT : '0'..'9';
+
 // mot reserve
 ASM : 'asm';
 EXTENDS : 'extends';
@@ -48,24 +55,33 @@ PRINTX : 'printx';
 PROTECTED : 'protected';
 WHILE : 'while';
 
+// mot reserve deca avec objet a decommenter pour l'ajouter
+//RETURN : return; 
+//INSTANCEOF : instanceof; 
+//NEW : new;
+//THIS : this;
+//NULL : null;
+//CLASS : class;
+
 // symbole speciaux
-fragment PLUS : '+';
-fragment MINUS : '-';
+PLUS : '+';
+MINUS : '-';
 INF : '<';
 SUP : '>';
 INFEQ : '<=';
 SUPEQ : '>=';
 EXCLAM : '!';
-INTERRO : '?';
 EQUALS : '=';
 EGALITE : '==';
 DIFF : '!=';
 MULT : '*';
 MODULO : '%';
 SLASH : '/';
-DOT : '.';
 AND : '&&';
 OR : '||';
+
+// que avec objet
+//DOT : '.';
 
 // litteraux entiers doit lever erreur si trop grand
 fragment POSITIVE_DIGIT : '1'..'9';
@@ -77,7 +93,7 @@ fragment SIGN : '+' | '-' | ' ';
 fragment EXP : ('E' | 'e') SIGN NUM;
 fragment DEC : NUM '.' NUM;
 fragment FLOATDEC : (DEC | DEC EXP) ('F' | 'f' | ' ');
-fragment DIGITHEX : POSITIVE_DIGIT | LETTRE;
+fragment DIGITHEX : 'O'..'9' | 'A'..'F' | 'a'..'f';
 fragment NUMHEX : DIGITHEX+;
 fragment FLOATHEX : ('0x' | '0X') NUMHEX '.' NUMHEX ('P' | 'p') SIGN NUM ('F' | 'f' | ' ' );
 FLOAT : FLOATDEC | FLOATHEX;

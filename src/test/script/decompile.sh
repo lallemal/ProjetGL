@@ -15,10 +15,8 @@ cd "$(dirname "$0")"/../../.. || exit 1
 
 PATH=./src/test/script/launchers:"$PATH"
 
-#(decac -p ./src/test/deca/decompile/PrintMultArg.deca) > PrintMultArg.test
 
-
-for i in src/test/deca/decompile/Print*.deca
+for i in src/test/deca/decompile/*.deca
 do
   resultat=$(decac -p $i)
   if [ "$(less $i.ok)" = "$resultat" ]; then

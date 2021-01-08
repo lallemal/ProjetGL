@@ -68,5 +68,6 @@ OR : '||';
 // litteraux entiers
 NUM : DIGIT+;
 
-
+// mot reserve ne sont pas des ident donc le placer a la fin pour priorite
+IDENT : (LETTRE | '$' | '_')(LETTRE | DIGIT | '$' | '_')*;
 

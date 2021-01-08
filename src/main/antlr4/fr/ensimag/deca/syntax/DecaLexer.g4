@@ -9,6 +9,7 @@ options {
 }
 
 @members {
+
 }
 
 // Deca lexer rules. print('hello World')
@@ -66,9 +67,9 @@ DOT : '.';
 AND : '&&';
 OR : '||';
 
-// litteraux entiers
+// litteraux entiers doit lever erreur si trop grand
 fragment POSITIVE_DIGIT : '1'..'9';
-INT : '0' | POSITIVE_DIGIT DIGIT;  
+INT : '0' | POSITIVE_DIGIT DIGIT* {intCondition(getText());};  
 
 // Litteraux flottants
 fragment NUM : DIGIT+;

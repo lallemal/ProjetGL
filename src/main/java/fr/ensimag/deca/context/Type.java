@@ -57,7 +57,7 @@ public abstract class Type {
     }
 
     public boolean isString() {
-        return true; //Pour HelloWorld on a besoin que de String ..
+        return false;
     }
 
     public boolean isNull() {

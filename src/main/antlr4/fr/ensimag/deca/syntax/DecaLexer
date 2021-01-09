@@ -36,6 +36,7 @@ PRINTLN : 'println' ;
 
 
 WS : (' ' | '\n' | '\t' | '\r') { skip(); };
+// Deca lexer rules sans objets
 
 // identificateurs
 fragment DIGIT : '0'..'9';
@@ -83,19 +84,15 @@ OR : '||';
 //DOT : '.';
 
 // Litteraux flottants
+fragment DOTF : '.';
 fragment NUM : DIGIT+;
-fragment DEC : NUM '.' NUM;
-fragment SIGN : '+' | '-';
-// prendre en compte si signe = ''
-fragment EXP :   ('E' | 'e') NUM | ('E' | 'e') SIGN NUM  ;
-fragment FLOATDEC : (DEC | DEC EXP) ('F' | 'f') | (DEC | DEC EXP);
+fragment SIGN : '+' | '-' | ' ';
+fragment EXP : ('E' | 'e') SIGN NUM;
+fragment DEC : NUM DOTF NUM;
+fragment FLOATDEC : (DEC | DEC EXP) ('F' | 'f' | ' ');
 fragment DIGITHEX : '0'..'9' | 'A'..'F' | 'a'..'f';
 fragment NUMHEX : DIGITHEX+;
-// ici quatre expressions
-fragment FLOATHEX : ('0x' | '0X') NUMHEX '.' NUMHEX ('P' | 'p') SIGN NUM ('F' | 'f') |
-('0x' | '0X') NUMHEX '.' NUMHEX ('P' | 'p') SIGN NUM |
-('0x' | '0X') NUMHEX '.' NUMHEX ('P' | 'p') NUM ('F' | 'f') |
-('0x' | '0X') NUMHEX '.' NUMHEX ('P' | 'p') NUM ; 
+fragment FLOATHEX : ('0x' | '0X') NUMHEX '.' NUMHEX ('P' | 'p') SIGN NUM ('F' | 'f' | ' ' );
 FLOAT : FLOATDEC | FLOATHEX;
 
 

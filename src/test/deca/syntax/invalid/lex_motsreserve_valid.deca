@@ -1,0 +1,16 @@
+// Test mots reserve
+// Resultat: il ne faut pas que ce soit des IDENT
+asm
+extends
+if
+else
+false
+true
+readint
+readFloat
+printlnx
+printx
+protected
+while
+
+

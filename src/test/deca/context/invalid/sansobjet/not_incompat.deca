@@ -2,5 +2,5 @@
 // Resultat : not ne peut être appliqué à un entier : Erreur ligne 5.
 
 {
-    bool y =  !2;
+    boolean y =  !2;
 }

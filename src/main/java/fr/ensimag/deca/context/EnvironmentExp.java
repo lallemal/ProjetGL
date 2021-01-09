@@ -74,7 +74,7 @@ public class EnvironmentExp {
             
             }
         else{
-              current.replace(name, current.get(name), def);
+              current.put(name, def);
             }
         }
     }

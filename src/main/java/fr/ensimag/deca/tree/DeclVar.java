@@ -5,6 +5,7 @@ import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.deca.tools.SymbolTable;
 import org.apache.commons.lang.Validate;
+import org.apache.log4j.Logger;
 
 import java.io.PrintStream;
 
@@ -14,7 +15,8 @@ import java.io.PrintStream;
  */
 public class DeclVar extends AbstractDeclVar {
 
-    
+    private static final Logger LOG = Logger.getLogger(Main.class);
+
     final private AbstractIdentifier type;
     final private AbstractIdentifier varName;
     final private AbstractInitialization initialization;
@@ -32,6 +34,7 @@ public class DeclVar extends AbstractDeclVar {
     protected void verifyDeclVar(DecacCompiler compiler,
             EnvironmentExp localEnv, ClassDefinition currentClass)
             throws ContextualError {
+        LOG.debug("verify DeclVar : start " + varName.decompile() );
         // verify if the type is correct and return it
         Type typeToCheck = this.type.verifyType(compiler);
         // raise error in case of void type for the variable
@@ -47,6 +50,7 @@ public class DeclVar extends AbstractDeclVar {
         } catch (EnvironmentExp.DoubleDefException e) {
             throw new ContextualError(ContextualError.DEFINITION_ALREADY_IN_ENV, getLocation());
         }
+        LOG.debug("Verify DeclVar : end");
     }
 
     

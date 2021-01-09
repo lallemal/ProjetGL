@@ -4,8 +4,8 @@ import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.tools.DecacInternalError;
 import fr.ensimag.deca.tools.IndentPrintStream;
-import fr.ensimag.ima.pseudocode.instructions.WSTR;
 import org.apache.commons.lang.Validate;
+import org.apache.log4j.Logger;
 
 import java.io.PrintStream;
 
@@ -16,6 +16,7 @@ import java.io.PrintStream;
  * @date 01/01/2021
  */
 public abstract class AbstractExpr extends AbstractInst {
+    private static final Logger LOG = Logger.getLogger(AbstractExpr.class);
     /**
      * @return true if the expression does not correspond to any concrete token
      * in the source code (and should be decompiled to the empty string).
@@ -80,6 +81,7 @@ public abstract class AbstractExpr extends AbstractInst {
             EnvironmentExp localEnv, ClassDefinition currentClass, 
             Type expectedType)
             throws ContextualError {
+        LOG.debug("verify AbstractExpr RValue : start");
         Type type2 = verifyExpr(compiler, localEnv, currentClass);
         if (!expectedType.sameType(type2)) {
             if (!expectedType.isFloat() && !type2.isInt()) {
@@ -93,6 +95,7 @@ public abstract class AbstractExpr extends AbstractInst {
                 return new ConvFloat(this);
             }
         }
+        LOG.debug("verify AbstractExpr Rvalue : end");
         return this;
     }
     
@@ -101,16 +104,20 @@ public abstract class AbstractExpr extends AbstractInst {
     protected void verifyInst(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass, Type returnType)
             throws ContextualError {
+        LOG.debug("verify AbstractExpr Inst : start");
         verifyExpr(compiler, localEnv, currentClass);
+        LOG.debug("verify AbstractExpr Inst : end");
     }
 
     protected void verifyPrint(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass, Type returnType)
             throws ContextualError {
+        LOG.debug("verify AbstractExpr Print : start");
         type = verifyExpr(compiler, localEnv, currentClass);
         if (type != compiler.getInt() && type != compiler.getFloat() && type != compiler.getString()) {
             throw new ContextualError(ContextualError.PRINT_EXPR_NOT_COMPATIBLE, this.getLocation());
         }
+        LOG.debug("verify AbstractExpr print : end");
     }
     /**
      * Verify the expression as a condition, i.e. check that the type is
@@ -124,9 +131,12 @@ public abstract class AbstractExpr extends AbstractInst {
      */
     void verifyCondition(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass) throws ContextualError {
+        LOG.debug("verify AbstractExpr Condition : start");
+        this.verifyExpr(compiler, localEnv, currentClass);
         if (!type.isBoolean()) {
             throw new ContextualError(ContextualError.EXPR_CONDITION_NOT_BOOLEAN, getLocation());
         }
+        LOG.debug("verify AbstractExpr Condition : end");
     }
 
     /**

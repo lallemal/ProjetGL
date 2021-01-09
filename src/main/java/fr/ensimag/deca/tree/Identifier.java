@@ -6,6 +6,7 @@ import fr.ensimag.deca.tools.DecacInternalError;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.deca.tools.SymbolTable.Symbol;
 import org.apache.commons.lang.Validate;
+import org.apache.log4j.Logger;
 
 import java.io.PrintStream;
 
@@ -16,6 +17,7 @@ import java.io.PrintStream;
  * @date 01/01/2021
  */
 public class Identifier extends AbstractIdentifier {
+    private static final Logger LOG = Logger.getLogger(Identifier.class);
     
     @Override
     protected void checkDecoration() {
@@ -158,6 +160,7 @@ public class Identifier extends AbstractIdentifier {
     @Override
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass) throws ContextualError {
+        LOG.debug("verify Identifier Expr : start");
         if (localEnv.get(name) == null) {
             throw new ContextualError(ContextualError.IDENTIFIER_EXP_UNDEFINED + " " + name.toString(), getLocation());
         }
@@ -166,6 +169,8 @@ public class Identifier extends AbstractIdentifier {
         if (!def.isField() && !def.isParam() && !def.isExpression()) {
             throw new ContextualError(ContextualError.LVALUE_IDENT_TYPE, getLocation());
         }
+        setType(def.getType());
+        LOG.debug("verify Identifier Expr : end");
         return def.getType();
     }
 

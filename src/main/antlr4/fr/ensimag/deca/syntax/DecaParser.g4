@@ -157,7 +157,7 @@ inst returns[AbstractInst tree]
         }
     | RETURN expr SEMI {
             assert($expr.tree != null);
-            $tree = new Return($expr.tree);
+            // $tree = new Return($expr.tree);
         }
     ;
 
@@ -181,7 +181,9 @@ if_then_else returns[IfThenElse tree]
       )*
       (ELSE OBRACE li_else=list_inst CBRACE {
       	assert($li_else.tree != null);
-      	elseList.add($li_else.tree);
+      	for (AbstractInst inst : $li_else.tree.getList()) {
+            elseList.add(inst);
+        }
         }
       )?
     ;
@@ -446,12 +448,8 @@ literal returns[AbstractExpr tree]
 
         }
     | fd=FLOAT {
-    	try{
-    		$tree = new FloatLiteral(Double.parseDouble($fd.text));
-    	}catch(RecognitionExcception e){
-    		
-    	}
-    	
+    		$tree = new FloatLiteral(Float.parseFloat($fd.text));
+
         }
     | STRING {
     	$tree = new StringLiteral($STRING.text);
@@ -472,7 +470,7 @@ literal returns[AbstractExpr tree]
 
 ident returns[AbstractIdentifier tree]
     : IDENT {
-    	$tree = new Identifier()
+    	$tree = new Identifier(getDecacCompiler().getSymbols().create($IDENT.text));
         }
     ;
 

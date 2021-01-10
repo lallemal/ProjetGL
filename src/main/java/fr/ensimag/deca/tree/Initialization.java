@@ -6,6 +6,7 @@ import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.DAddr;
 import java.io.PrintStream;
 import org.apache.commons.lang.Validate;
 
@@ -29,6 +30,11 @@ public class Initialization extends AbstractInitialization {
     public Initialization(AbstractExpr expression) {
         Validate.notNull(expression);
         this.expression = expression;
+    }
+    
+    @Override
+    protected void codeGenDecl(DecacCompiler compiler, DAddr address) {
+    	expression.codeGenDecl(compiler, address);
     }
 
     @Override

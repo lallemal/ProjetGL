@@ -15,8 +15,7 @@ import org.apache.commons.lang.Validate;
  */
 public class DeclVar extends AbstractDeclVar {
 
-    
-    final private AbstractIdentifier type;
+	final private AbstractIdentifier type;
     final private AbstractIdentifier varName;
     final private AbstractInitialization initialization;
 
@@ -37,7 +36,9 @@ public class DeclVar extends AbstractDeclVar {
 
     @Override
     protected void codeGenDecl(DecacCompiler compiler) {
-    	//TODO
+    	System.out.println("ICI : ");
+    	System.out.println(varName.getExpDefinition() == null);
+    	initialization.codeGenDecl(compiler, varName.getExpDefinition().getOperand());
     }
     
     @Override

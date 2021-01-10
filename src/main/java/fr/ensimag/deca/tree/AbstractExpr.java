@@ -14,6 +14,7 @@ import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.instructions.WFLOAT;
 import fr.ensimag.ima.pseudocode.instructions.WFLOATX;
+import fr.ensimag.ima.pseudocode.DAddr;
 import org.apache.commons.lang.Validate;
 
 import java.io.PrintStream;
@@ -127,8 +128,6 @@ public abstract class AbstractExpr extends AbstractInst {
      */
     protected void codeGenPrint(DecacCompiler compiler, boolean printHex) {
         Type t = getType();
-        System.out.println("ICI 0 : ");
-        System.out.println(t == null);
         if (t.isString()) {
             String value = ((StringLiteral) this).getValue();
             compiler.addInstruction(new WSTR(value));
@@ -145,6 +144,10 @@ public abstract class AbstractExpr extends AbstractInst {
         		compiler.addInstruction(new WFLOAT());
         	}
         }
+    	//throw new UnsupportedOperationException("not yet implemented");
+    }
+    
+    protected void codeGenDecl(DecacCompiler compiler, DAddr address) {
     	//throw new UnsupportedOperationException("not yet implemented");
     }
 

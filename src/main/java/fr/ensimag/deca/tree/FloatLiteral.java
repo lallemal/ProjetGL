@@ -7,11 +7,12 @@ import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.RegisterOffset;
+import fr.ensimag.ima.pseudocode.instructions.STORE;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
 import fr.ensimag.ima.pseudocode.instructions.WFLOAT;
 import fr.ensimag.ima.pseudocode.instructions.WFLOATX;
-import fr.ensimag.ima.pseudocode.instructions.WINT;
-import fr.ensimag.ima.pseudocode.instructions.WSTR;
+import fr.ensimag.ima.pseudocode.DAddr;
 
 import java.io.PrintStream;
 import org.apache.commons.lang.Validate;
@@ -55,6 +56,12 @@ public class FloatLiteral extends AbstractExpr {
     	}
     }
 
+    @Override
+    protected void codeGenDecl(DecacCompiler compiler, DAddr address) {
+    	compiler.addInstruction(new LOAD(value, Register.getR(2)));
+    	compiler.addInstruction(new STORE(Register.getR(2), address));
+    }
+    
     @Override
     public void decompile(IndentPrintStream s) {
         s.print(java.lang.Float.toHexString(value));

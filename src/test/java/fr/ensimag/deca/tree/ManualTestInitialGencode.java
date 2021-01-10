@@ -6,6 +6,8 @@
 package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.tools.SymbolTable;
+import fr.ensimag.deca.tools.SymbolTable.Symbol;
 
 /**
  *
@@ -42,6 +44,20 @@ public class ManualTestInitialGencode {
         lexp1.add(new IntLiteral(10));
         lexp2.add(new FloatLiteral((float) 10.10));
         lexp3.add(new StringLiteral("Hello World test 2"));
+        return source;
+    }
+    
+    public static AbstractProgram initTest3() {
+        ListInst linst = new ListInst();
+        ListDeclVar lvar= new ListDeclVar();
+        SymbolTable symbols = new SymbolTable();
+        Symbol integer = symbols.create("int");
+        Symbol x = symbols.create("x");
+        AbstractProgram source =
+            new Program(
+                new ListDeclClass(),
+                new Main(lvar,linst));
+        lvar.add(new DeclVar(new Identifier(integer), new Identifier(x), new NoInitialization()));
         return source;
     }
     
@@ -85,6 +101,21 @@ public class ManualTestInitialGencode {
                 "	WFLOATX\n" +
                 "	WSTR \"Hello World test 2\"\n" +
                 "	WNL\n" +
+                "	HALT\n"));
+    }
+    
+    public static void test3() {
+        AbstractProgram source = initTest3();
+        System.out.println("---- From the following Abstract Syntax Tree ----");
+        source.prettyPrint(System.out);
+        System.out.println("---- We generate the following assembly code ----");        
+        String result = gencodeSource(source);
+        System.out.println(result);
+        assert(result.equals(
+                "; Main program\n" +
+                "; Beginning of main function:\n" +
+                "	LOAD #0, R2\n" +
+                "	STORE R2 1(GB)" +
                 "	HALT\n"));
     }
         

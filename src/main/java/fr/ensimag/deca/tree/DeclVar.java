@@ -35,6 +35,10 @@ public class DeclVar extends AbstractDeclVar {
             throws ContextualError {
     }
 
+    @Override
+    protected void codeGenDecl(DecacCompiler compiler) {
+    	//TODO
+    }
     
     @Override
     public void decompile(IndentPrintStream s) {

@@ -1,22 +1,14 @@
 package fr.ensimag.deca.tree;
 
-import fr.ensimag.deca.context.Type;
-import fr.ensimag.deca.context.ClassType;
 import fr.ensimag.deca.DecacCompiler;
-import fr.ensimag.deca.context.ClassDefinition;
-import fr.ensimag.deca.context.ContextualError;
-import fr.ensimag.deca.context.Definition;
-import fr.ensimag.deca.context.EnvironmentExp;
-import fr.ensimag.deca.context.FieldDefinition;
-import fr.ensimag.deca.context.MethodDefinition;
-import fr.ensimag.deca.context.ExpDefinition;
-import fr.ensimag.deca.context.VariableDefinition;
+import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.tools.DecacInternalError;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.deca.tools.SymbolTable.Symbol;
-import java.io.PrintStream;
 import org.apache.commons.lang.Validate;
 import org.apache.log4j.Logger;
+
+import java.io.PrintStream;
 
 /**
  * Deca Identifier
@@ -25,6 +17,7 @@ import org.apache.log4j.Logger;
  * @date 01/01/2021
  */
 public class Identifier extends AbstractIdentifier {
+    private static final Logger LOG = Logger.getLogger(Identifier.class);
     
     @Override
     protected void checkDecoration() {
@@ -167,7 +160,18 @@ public class Identifier extends AbstractIdentifier {
     @Override
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass) throws ContextualError {
-        throw new UnsupportedOperationException("not yet implemented");
+        LOG.debug("verify Identifier Expr : start");
+        if (localEnv.get(name) == null) {
+            throw new ContextualError(ContextualError.IDENTIFIER_EXP_UNDEFINED + " " + name.toString(), getLocation());
+        }
+        ExpDefinition def = localEnv.get(name);
+        setDefinition(def);
+        if (!def.isField() && !def.isParam() && !def.isExpression()) {
+            throw new ContextualError(ContextualError.LVALUE_IDENT_TYPE, getLocation());
+        }
+        setType(def.getType());
+        LOG.debug("verify Identifier Expr : end");
+        return def.getType();
     }
 
     /**
@@ -176,7 +180,13 @@ public class Identifier extends AbstractIdentifier {
      */
     @Override
     public Type verifyType(DecacCompiler compiler) throws ContextualError {
-        throw new UnsupportedOperationException("not yet implemented");
+        if (compiler.getEnv_types().get(name) == null) {
+            throw new ContextualError(ContextualError.IDENTIFIER_TYPE_UNDEFINED + " " + name.toString(), getLocation());
+        }
+        if (!compiler.getEnv_types().get(name).getNature().equals("type")) {
+            throw new ContextualError(ContextualError.IDENTIFIER_TYPE_NOTTYPE, getLocation());
+        }
+        return compiler.getEnv_types().get(name).getType();
     }
     
     

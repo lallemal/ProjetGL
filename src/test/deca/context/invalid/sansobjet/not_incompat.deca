@@ -1,0 +1,6 @@
+// Description : Utilisation du not avec une type impossible
+// Resultat : not ne peut être appliqué à un entier : Erreur ligne 5.
+
+{
+    boolean y =  !2;
+}

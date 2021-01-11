@@ -287,20 +287,21 @@ public abstract class AbstractDecaLexer extends Lexer {
     // nombre maximum entier signé positif sur 32 bits => un bit de signe 
     //le maximum est donc 2^31-1 donc 2147483647 on va comparer les chaine de caractere
     // des deux nombres
-     void intCondition(String stringEntier) throws IllegalArgumentException{
+     void intCondition(String stringentier) throws IllegalArgumentException{
+    	
     	String maximum = "2147483647";
     	
-    	if (stringEntier.length() < 10) {
+    	if (stringentier.length() < 10) {
     		return;
     	}
-    	if (stringEntier.length() >10) {
+    	if (stringentier.length() >10) {
     		throw new IllegalArgumentException("entier trop grand");
     	}
     	// chaine de meme longueur
     	for (int i = 0;i< maximum.length();i++) {
     		// compare asci mais '1' <'2' donc marche bien
     		int max =maximum.charAt(i);
-    		int entier = stringEntier.charAt(i);
+    		int entier = stringentier.charAt(i);
     		if(max < entier) {
     			throw new IllegalArgumentException("entier trop grand");
     		}
@@ -308,4 +309,201 @@ public abstract class AbstractDecaLexer extends Lexer {
     	return;
     	
     }
+
+     /* Fonction  associee si le float est un decimal*/
+
+      // valeur minimale = 1.4012985E-45
+      // valeur maximale = 3.402 823 46 E38
+      void isDecimal(String stringdec) throws IllegalArgumentException{
+    	 // System.out.println("est une decimal");
+     	 if(stringdec.charAt(0) == '0') {
+     		  beginZeroDec(stringdec);
+     	 }
+     	 else {
+     		 beginNotZeroDec(stringdec);
+     	 }
+     	 
+     }
+           
+
+      void beginZeroDec(String stringzero) throws IllegalArgumentException{
+     	  System.out.println("dec commence par 0"); 
+     	  boolean debutmantisse = false;
+     	  int exposant = -1;
+     	  String mantisse = "";
+     	  for (int i = 2; i < stringzero.length(); i++){
+     		  switch(stringzero.charAt(i)) {
+     		  // fin du float
+     		  case 'f':
+     			  break;
+     		  case 'F':
+     			  break;
+     		  case 'e':
+     			  exposantFlottantDec(mantisse, exposant, stringzero.substring(i+1, stringzero.length()));
+     			  return;
+     		  case 'E':
+     			  exposantFlottantDec(mantisse, exposant, stringzero.substring(i+1, stringzero.length()));
+     			  return;
+     		  case '0':
+     			  if(!debutmantisse) {
+     				  exposant -= 1;
+     			  }
+     			  else {
+     				  mantisse += '0';
+     			  }
+     			  break;
+     		  default:
+     			  mantisse += stringzero.charAt(i);
+     			  debutmantisse = true;
+     		  }
+     	  }
+     	  // cas 0.000...
+     	  if (mantisse == "") {
+     		  return;
+     	  }
+     	  // deux premier cas le de la fonction a traiter en exemple
+     	  compareExposantDec(exposant, mantisse);
+     	 
+      }
+      
+      void beginNotZeroDec(String stringzero) throws IllegalArgumentException{
+     	 System.out.println("dec ne commence pas par 0");
+     	 // ajoute exposant en plus exemple: 100.0 = 1.0 E2
+     	 boolean findot = false;
+     	 String mantisse = "";
+     	 int exposant = -1;
+     	 for (int i = 0; i < stringzero.length(); i++) {
+     		 switch(stringzero.charAt(i)) {
+     		 	case 'f':
+     		 		break;
+     		 	case 'F':
+     		 		break;
+     		 	case 'e':
+     		 		exposantFlottantDec(mantisse, exposant, stringzero.substring(i+1, stringzero.length()));
+     		 		return;
+    		  	 	case 'E':
+    		  	 		exposantFlottantDec(mantisse, exposant, stringzero.substring(i+1, stringzero.length()));
+    		  	 		return;
+    		  	 	case '.':
+    		  	 		findot = true;
+    		  	 		break;
+    		  	 	default:
+    		  	 		mantisse += stringzero.charAt(i);
+    		  	 		if(!findot) {
+    		  	 			exposant++;
+    		  	 		}
+    		  	 		break;
+     		 }
+     	 }
+  	 	compareExposantDec(exposant, mantisse);
+      }
+      
+      // valeur minimale = 1.4012985E-45
+      // valeur maximale = 3.402 823 46 E38
+      void compareMantisseminDec(String mantisse) throws IllegalArgumentException{
+     	
+     	String min = "14012985";
+     	int longueur = minimum(mantisse.length(), min.length());
+     
+     	for (int i = 0; i< longueur; i++) {
+     		int mininum = min.charAt(i);
+     		int mantissei = mantisse.charAt(i);
+     		if (mantissei < mininum) {
+     			throw new IllegalArgumentException("arrondi a zero et flottant non nulle");
+     		}
+     	 }
+       // mantisse plus longue donc >= min donc pas d'erreur de debordement
+     	 
+      }
+      void compareManthissemaxDec(String mantisse) throws IllegalArgumentException{
+     	String max =  "340282346";
+     	int longueur = minimum(mantisse.length(),max.length());
+     
+     	for( int i = 0; i < longueur; i ++) {
+     		int maximum =max.charAt(i);
+     		int mantissei = mantisse.charAt(i);
+     		if(maximum < mantissei) {
+     			throw new IllegalArgumentException("arrondi a l infini");
+     		}
+     	}
+     	// mantisse plus longue mais que avec des 0 a la fin donc egaux sinon erreur
+     	if (mantisse.length() > max.length()) {
+     		for (int j = max.length(); j < mantisse.length(); j++ ) {
+     			if(mantisse.charAt(j) != '0') {
+     				throw new IllegalArgumentException("arrondi a l infini");
+     			}
+     		}
+     	}
+      }
+      
+      void exposantFlottantDec(String mantisse, int exposant, String charexposant) throws IllegalArgumentException{
+     	 int expofinal = exposant;
+     	 char signe = '+';
+     	 String exposantsupp = "";
+     	 for (int i = 0; i< charexposant.length(); i++) {
+     		 switch (charexposant.charAt(i)) {
+     		 	case '-':
+     		 		signe = '-';
+     		 		break;
+     		 	case '+':
+     		 		break;
+     		 	case 'f':
+     		 		break;
+     		 	case 'F':
+     		 		break;
+     		 	default:
+     		 		exposantsupp += charexposant.charAt(i);
+     		 }
+     	 }
+     	 
+     	 // calcul de l'exposant
+     	 expofinal += calculExposant(signe,exposantsupp);
+     	 compareExposantDec(expofinal, mantisse);
+      }
+     
+      int minimum(int i, int j) {
+     	 if (i>j) {
+     		return j; 
+     	 }
+     	 else {
+     		 return i;
+     	 }
+      }
+      
+      void compareExposantDec(int exposant, String mantisse) throws IllegalArgumentException{
+     	 if (exposant< -45) {
+     		 System.out.println("exposant =" + exposant + " mantisse =" + mantisse );
+     		 throw new IllegalArgumentException("arrondi a zero et flottant non nulle");
+     	  }
+     	 
+     	 // cas limite il faut comparer mantisse
+     	 if(exposant== -45) {
+     		 System.out.println("exposant =" + exposant + " mantisse =" + mantisse );
+     		 compareMantisseminDec(mantisse);
+     	 }
+     	 if(exposant== 38) {
+     		 System.out.println("exposant =" + exposant+ " mantisse =" + mantisse );
+     		 compareManthissemaxDec(mantisse); 
+     	 }
+     	 if (exposant> 38) {
+     		 System.out.println("exposant =" + exposant+ " mantisse =" + mantisse );
+     		 throw new IllegalArgumentException("arrondi a l infini");
+     	 }
+     	System.out.println("exposant =" + exposant+ " mantisse =" + mantisse );
+      }
+      
+      int calculExposant(char signe,String exposant) {
+     	 int expo;
+     	 expo = Integer.parseInt(exposant);
+     	 if (signe == '-') {
+     		 expo = expo * (-1);
+     	 }
+     	return expo; 
+      } 
+ 
+      void isHexadecimal(String stringhex) throws IllegalArgumentException{
+    	 // throw new IllegalArgumentException();
+     	 System.out.println("est un hexadecimal");
+      }
+
 }

@@ -96,7 +96,7 @@ fragment FLOATHEX : ('0x' | '0X') NUMHEX '.' NUMHEX ('P' | 'p') SIGN NUM ('F' | 
 ('0x' | '0X') NUMHEX '.' NUMHEX ('P' | 'p') SIGN NUM |
 ('0x' | '0X') NUMHEX '.' NUMHEX ('P' | 'p') NUM ('F' | 'f') |
 ('0x' | '0X') NUMHEX '.' NUMHEX ('P' | 'p') NUM ; 
-FLOAT : FLOATDEC | FLOATHEX;
+FLOAT : FLOATDEC {isDecimal(getText());}| FLOATHEX { isHexadecimal(getText());};
 
 
 // litteraux entiers doit lever erreur si trop grand

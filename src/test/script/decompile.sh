@@ -15,17 +15,17 @@ cd "$(dirname "$0")"/../../.. || exit 1
 
 PATH=./src/test/script/launchers:"$PATH"
 
-
-for i in src/test/deca/decompile/*.deca
+cd src/test/deca/decompile
+for i in *.deca
 do
   resultat=$(decac -p $i)
-  if [ "$(less $i.ok)" = "$resultat" ]; then
-        echo "Tout va bien"
+  if [ "$(less Modeles_OK/$i.ok)" = "$resultat" ]; then
+        echo "$i ok"
   else
         echo "Résultat innatendu, le résultat:"
         echo "$resultat"
         echo "ce qui était attendu:"
-        echo "$(less $i.ok)"
+        echo "$(less Modeles_OK/$i.ok)"
         exit 1
   fi
 done

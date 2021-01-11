@@ -1,0 +1,7 @@
+[IfNoContent.deca]
+{
+	if (0 == 0) {
+	}
+	else {
+	}
+}

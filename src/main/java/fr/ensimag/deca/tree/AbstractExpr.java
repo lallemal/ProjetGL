@@ -89,6 +89,8 @@ public abstract class AbstractExpr extends AbstractInst {
                     if (!type2.isNull()) {
                         throw new ContextualError(ContextualError.ASSIGN_NOT_COMPATIBLE, getLocation());
                     }
+                } else {
+                    throw new ContextualError(ContextualError.ASSIGN_NOT_COMPATIBLE, getLocation());
                 }
             }
             else {

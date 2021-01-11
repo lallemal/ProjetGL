@@ -30,7 +30,7 @@ public class Assign extends AbstractBinaryExpr {
             ClassDefinition currentClass) throws ContextualError {
         // TODO LeftOperand is lvalue 3.64 certainly lvalue class has to be completed
         Type type = getLeftOperand().verifyExpr(compiler, localEnv, currentClass);
-        getRightOperand().verifyRValue(compiler, localEnv, currentClass, type);
+        setRightOperand(getRightOperand().verifyRValue(compiler, localEnv, currentClass, type));
         setType(type);
         return type;
     }

@@ -27,7 +27,7 @@ for i in *.deca
 do
   if test_context $i 2>&1 | grep -q -e "$i:"
   then
-    echo "Echec pour test_lex"
+    echo "Echec (attendu) pour test_lex"
   else
     echo "Succès inattendu pour test_context"
   fi

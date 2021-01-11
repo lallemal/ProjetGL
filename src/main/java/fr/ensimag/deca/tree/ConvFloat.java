@@ -25,7 +25,8 @@ public class ConvFloat extends AbstractUnaryExpr {
         if (!baseType.isInt()) {
             throw new ContextualError(ContextualError.CONV_FLOAT_OPERAND_NOT_INT, getLocation());
         }
-        return compiler.getFloat();
+        setType(compiler.getFloat());
+        return getType();
     }
 
 

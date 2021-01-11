@@ -28,7 +28,8 @@ public class BooleanLiteral extends AbstractExpr {
     @Override
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass) throws ContextualError {
-        return compiler.getBool();
+        setType(compiler.getBool());
+        return getType();
     }
 
 

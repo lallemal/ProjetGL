@@ -47,6 +47,7 @@ public class DeclVar extends AbstractDeclVar {
         // Do the union : reject and raise error if it already exists in this env
         try {
             localEnv.declare(name, new VariableDefinition(typeToCheck, getLocation()));
+            this.varName.setDefinition(localEnv.get(name));
         } catch (EnvironmentExp.DoubleDefException e) {
             throw new ContextualError(ContextualError.DEFINITION_ALREADY_IN_ENV, getLocation());
         }

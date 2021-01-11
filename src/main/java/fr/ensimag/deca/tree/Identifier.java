@@ -186,6 +186,7 @@ public class Identifier extends AbstractIdentifier {
         if (!compiler.getEnv_types().get(name).getNature().equals("type")) {
             throw new ContextualError(ContextualError.IDENTIFIER_TYPE_NOTTYPE, getLocation());
         }
+        setDefinition(compiler.getEnv_types().get(name));
         return compiler.getEnv_types().get(name).getType();
     }
     

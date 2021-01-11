@@ -120,6 +120,7 @@ public class ManualTestInitialGencode {
     }
         
     public static void main(String args[]) {
-        test2();
+    	System.out.println("test3 :");
+        test3();
     }
 }

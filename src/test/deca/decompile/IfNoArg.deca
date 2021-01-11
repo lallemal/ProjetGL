@@ -1,7 +1,0 @@
-// Test with if and no condition in it
-
-{
-    if (){
-        print("Ok!");
-    }
-}

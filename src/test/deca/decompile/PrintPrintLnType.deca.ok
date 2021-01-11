@@ -1,6 +1,6 @@
 [src/test/deca/decompile/PrintPrintLnType.deca]
 {
-    print(23);
-    print(2.23);
-    println("hello");
+	print(23);
+	print(0x1.eb851ep-4);
+	println("hello");
 }

@@ -6,6 +6,6 @@
         print("ok!");
     }
     else{
-        print("pas ok!"):
+        print("pas ok!");
     }
 }

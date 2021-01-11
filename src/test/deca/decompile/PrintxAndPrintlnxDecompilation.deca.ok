@@ -1,5 +1,5 @@
 [src/test/deca/decompile/PrintxAndPrintlnxDecompilation.deca]
 {
-    printx("23");
-    printlnx(23);
+	printx("23");
+	printlnx(23);
 }

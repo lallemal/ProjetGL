@@ -58,7 +58,6 @@ public class DeclVar extends AbstractDeclVar {
     public void decompile(IndentPrintStream s) {
         s.print(type.getName() + " " + varName.getName());
         initialization.decompile(s);
-        s.println();
     }
 
     @Override

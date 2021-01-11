@@ -1,15 +1,16 @@
 [src/test/deca/decompile/IfElseIfElse.deca]
 {
-    int i = 0;
-    if (i = 1){
-        print("if");
-    }
-    else{
-        if(i = 0){
-            print("elseif");
-        }
-        else{
-            print("else");
-        }
-    }
+	int i=0;
+	if (i = 1) {
+		print("if");
+	}
+	else {
+		if (i = 0) {
+			print("elseif");
+		}
+		else {
+			print("else");
+		}
+	}
 }
+

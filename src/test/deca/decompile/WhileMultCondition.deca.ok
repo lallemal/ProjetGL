@@ -1,9 +1,9 @@
 [src/test/deca/decompile/WhileMultCondition.deca]
 {
-    int i = 0;
-    int j = 0;
-    while (i != 2 || j != 1){
-        i = i + 1;
-        j = j + 1;
-    }
+	int i=0;
+	int j=0;
+	while ((i != 2) || (j != 1)) {
+		(i = (i + 1));
+		(j = (j + 1));
+	}
 }

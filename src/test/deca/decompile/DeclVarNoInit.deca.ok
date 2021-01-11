@@ -1,4 +1,4 @@
 [src/test/deca/decompile/DeclVarNoInit.deca]
 {
-    int i;
+	int i;
 }

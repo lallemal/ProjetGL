@@ -1,10 +1,10 @@
 [src/test/deca/decompile/IfElse.deca]
 {
-    int i = 0;
-    if (i == 0){
-        print("ok!");
-    }
-    else{
-        print("pas ok!"):
-    }
+	int i=0;
+	if (i == 0) {
+		print("ok!");
+	}
+	else {
+		print("pas ok!");
+	}
 }

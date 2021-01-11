@@ -6,8 +6,14 @@
 package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.context.ExpDefinition;
+import fr.ensimag.deca.context.FloatType;
+import fr.ensimag.deca.context.IntType;
+import fr.ensimag.deca.context.VariableDefinition;
 import fr.ensimag.deca.tools.SymbolTable;
 import fr.ensimag.deca.tools.SymbolTable.Symbol;
+import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.RegisterOffset;
 
 /**
  *
@@ -52,12 +58,29 @@ public class ManualTestInitialGencode {
         ListDeclVar lvar= new ListDeclVar();
         SymbolTable symbols = new SymbolTable();
         Symbol integer = symbols.create("int");
+        Symbol floatType = symbols.create("float");
         Symbol x = symbols.create("x");
+        Symbol y = symbols.create("y");
+        Symbol z = symbols.create("z");
+        Identifier varNameX = new Identifier(x);
+        Identifier varNameY = new Identifier(y);
+        Identifier varNameZ = new Identifier(z);
+        varNameX.setDefinition(new VariableDefinition(new IntType(integer), new Location(1, 1, "CoucouX")));
+        varNameY.setDefinition(new VariableDefinition(new IntType(integer), new Location(2, 2, "CoucouY")));
+        varNameZ.setDefinition(new VariableDefinition(new FloatType(floatType), new Location(3, 3, "CoucouZ")));
+        VariableDefinition varDefX = varNameX.getVariableDefinition();
+        varDefX.setOperand(new RegisterOffset(1, Register.GB));
+        VariableDefinition varDefY = varNameY.getVariableDefinition();
+        varDefY.setOperand(new RegisterOffset(2, Register.GB));
+        VariableDefinition varDefZ = varNameZ.getVariableDefinition();
+        varDefZ.setOperand(new RegisterOffset(3, Register.GB));
         AbstractProgram source =
             new Program(
                 new ListDeclClass(),
                 new Main(lvar,linst));
-        lvar.add(new DeclVar(new Identifier(integer), new Identifier(x), new NoInitialization()));
+        lvar.add(new DeclVar(new Identifier(integer), varNameX, new NoInitialization()));
+        lvar.add(new DeclVar(new Identifier(integer), varNameY, new Initialization(new IntLiteral(3))));
+        lvar.add(new DeclVar(new Identifier(floatType), varNameZ, new Initialization(new FloatLiteral((float)3.5))));
         return source;
     }
     
@@ -116,10 +139,14 @@ public class ManualTestInitialGencode {
                 "; Beginning of main function:\n" +
                 "	LOAD #0, R2\n" +
                 "	STORE R2 1(GB)" +
+                "	LOAD #2, R2\n" +
+                "	STORE R2 2(GB)" +
+                "	LOAD #3.5, R2\n" +
+                "	STORE R2 3(GB)" +
                 "	HALT\n"));
     }
         
     public static void main(String args[]) {
-        test2();
+        test3();
     }
 }

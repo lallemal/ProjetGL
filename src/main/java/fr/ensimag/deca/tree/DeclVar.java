@@ -37,7 +37,7 @@ public class DeclVar extends AbstractDeclVar {
     @Override
     protected void codeGenDecl(DecacCompiler compiler) {
     	System.out.println("ICI : ");
-    	System.out.println(varName.getExpDefinition() == null);
+    	System.out.println(varName.getExpDefinition().getOperand() == null);
     	initialization.codeGenDecl(compiler, varName.getExpDefinition().getOperand());
     }
     

@@ -1,0 +1,9 @@
+//Test les paramètres dans une déclaration de méthode
+
+class Thing {
+
+    int getI(int i){
+        print("cool");
+    }
+
+}

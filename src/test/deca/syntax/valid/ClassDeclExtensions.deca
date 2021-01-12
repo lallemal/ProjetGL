@@ -1,0 +1,4 @@
+//Test class declaration with extension and without body
+
+class Thing extends Objet {
+}

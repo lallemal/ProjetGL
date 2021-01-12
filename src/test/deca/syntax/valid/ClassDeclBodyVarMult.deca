@@ -1,0 +1,6 @@
+//Test of class declaration with body and without extension with multiple fields
+
+class Thing {
+    protected int i = 0, j = 1;
+    protected float k;
+}

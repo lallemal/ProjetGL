@@ -61,7 +61,7 @@ WHILE : 'while';
 //NEW : new;
 //THIS : this;
 //NULL : null;
-//CLASS : class;
+CLASS : 'class';
 
 // symbole speciaux
 PLUS : '+';

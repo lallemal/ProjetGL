@@ -6,8 +6,8 @@ import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.ima.pseudocode.DVal;
-import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.Label;
+import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.instructions.CMP;
 
 /**
@@ -47,9 +47,13 @@ public abstract class AbstractOpCmp extends AbstractBinaryExpr {
 
     @Override
     protected void codeGenBranch(DecacCompiler compiler, boolean evaluate, Label label) {
-        // TODO retrieve opG opD
-        DVal opG = null;
-        GPRegister opD = null;
-        compiler.addInstruction(new CMP(opG, opD));
+        DVal opG = getLeftOperand().dval();
+        getRightOperand().codeExp(compiler, 3);
+        if (opG == null) {
+            getLeftOperand().codeExp(compiler, 2);
+            compiler.addInstruction(new CMP(Register.getR(2), Register.getR(3)));
+        } else {
+            compiler.addInstruction(new CMP(opG, Register.getR(3)));
+        }
     }
 }

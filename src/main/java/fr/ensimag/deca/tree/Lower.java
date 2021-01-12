@@ -4,7 +4,7 @@ package fr.ensimag.deca.tree;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.ima.pseudocode.Label;
 import fr.ensimag.ima.pseudocode.instructions.BGT;
-import fr.ensimag.ima.pseudocode.instructions.BLT;
+import fr.ensimag.ima.pseudocode.instructions.BLE;
 
 /**
  *
@@ -27,9 +27,9 @@ public class Lower extends AbstractOpIneq {
     protected void codeGenBranch(DecacCompiler compiler, boolean evaluate, Label label) {
         super.codeGenBranch(compiler, evaluate, label);
         if (evaluate) {
-            compiler.addInstruction(new BLT(label));
-        } else {
             compiler.addInstruction(new BGT(label));
+        } else {
+            compiler.addInstruction(new BLE(label));
         }
     }
 }

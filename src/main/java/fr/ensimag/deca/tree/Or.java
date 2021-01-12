@@ -23,7 +23,7 @@ public class Or extends AbstractOpBool {
     @Override
     protected void codeGenBranch(DecacCompiler compiler, boolean evaluate, Label label) {
         if (!evaluate) {
-            Label labelFin = new Label(label.toString() + "_fin.n");
+            Label labelFin = new Label(label.toString() + "_fin_" + getLocation().getLine() + "_" + getLocation().getPositionInLine());
             getLeftOperand().codeGenBranch(compiler, true, labelFin);
             getRightOperand().codeGenBranch(compiler, false, label);
             compiler.addLabel(labelFin);

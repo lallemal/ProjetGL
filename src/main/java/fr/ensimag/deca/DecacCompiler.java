@@ -1,6 +1,5 @@
 package fr.ensimag.deca;
 
-import fr.ensimag.deca.codegen.ManageRegister;
 import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.syntax.DecaLexer;
 import fr.ensimag.deca.syntax.DecaParser;
@@ -50,8 +49,13 @@ public class DecacCompiler {
         this.symbols = new SymbolTable();
         this.env_types = new EnvironmentType(null);
         createPredefTypes();
+        this.rmax = 15;
         
-        manageRegister = new ManageRegister();
+    }
+    private int rmax;
+    
+    public int getRmax() {
+    	return rmax;
     }
 
     /**
@@ -210,11 +214,6 @@ public class DecacCompiler {
         program.display(new PrintStream(fstream));
         LOG.info("Compilation of " + sourceName + " successful.");
         return false;
-    }
-    private ManageRegister manageRegister;
-
-    public ManageRegister getManageRegister() {
-    	return manageRegister;
     }
     
     /**

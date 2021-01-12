@@ -37,10 +37,7 @@ public class Assign extends AbstractBinaryExpr {
     protected void codeGenInst(DecacCompiler compiler) {
         Identifier x = (Identifier) this.getLeftOperand();
         AbstractExpr e = this.getRightOperand();
-        int i = compiler.getManageRegister().useFreeRegister();
-    	evaluateRegister(compiler, e, i);
-    	compiler.getManageRegister().freed(i);
-        compiler.addInstruction(new STORE(Register.getR(i), x.getExpDefinition().getOperand()));
+        compiler.addInstruction(new STORE(Register.getR(0), x.getExpDefinition().getOperand()));
     }
 
     @Override

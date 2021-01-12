@@ -1,6 +1,7 @@
 package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.ima.pseudocode.DVal;
 import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.instructions.ADD;
 
@@ -14,19 +15,8 @@ public class Plus extends AbstractOpArith {
     }
     
     @Override
-    protected void codeGenInst(DecacCompiler compiler) {
-    	int i = compiler.getManageRegister().useFreeRegister();
-    	evaluateRegister(compiler, this, i);
-    	compiler.getManageRegister().freed(i);
-    }
-    
-    @Override
-    protected void evaluateRegister(DecacCompiler compiler, AbstractExpr e, int i) {
-    	int i2 = compiler.getManageRegister().useFreeRegister();
-    	evaluateRegister(compiler, this.getLeftOperand(), i);
-    	evaluateRegister(compiler, this.getRightOperand(), i2);
-    	compiler.getManageRegister().freed(i2);
-    	compiler.addInstruction(new ADD(Register.getR(i2), Register.getR(i)));
+    public void mnemo(DecacCompiler compiler, DVal dval, int n) {
+    	compiler.addInstruction(new ADD(dval, Register.getR(n)));
     }
     
     @Override

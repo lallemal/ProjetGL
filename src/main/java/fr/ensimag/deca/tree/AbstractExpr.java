@@ -8,6 +8,8 @@ import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.DecacInternalError;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.DAddr;
+import fr.ensimag.ima.pseudocode.DVal;
+import fr.ensimag.ima.pseudocode.NullOperand;
 import org.apache.commons.lang.Validate;
 
 import java.io.PrintStream;
@@ -132,13 +134,11 @@ public abstract class AbstractExpr extends AbstractInst {
         throw new UnsupportedOperationException("not yet implemented");
     }
     
-    /**
-     * evaluate the value of the abstract expression in the register Ri 
-     * @param compiler
-     * @param e
-     * @param i
-     */
-    protected void evaluateRegister(DecacCompiler compiler, AbstractExpr e, int i) {
+    protected DVal dval() {
+    	return null;
+    }
+    
+    protected void codeExp(DecacCompiler compiler, int n) {
     	//nothing to do
     }
 

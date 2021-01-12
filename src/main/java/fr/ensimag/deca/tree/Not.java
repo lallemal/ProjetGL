@@ -27,22 +27,6 @@ public class Not extends AbstractUnaryExpr {
     }
 
     @Override
-    protected void codeGenInst(DecacCompiler compiler) {
-    	int i = compiler.getManageRegister().useFreeRegister();
-    	evaluateRegister(compiler, this, i);
-    	compiler.getManageRegister().freed(i);
-    }
-    
-    @Override
-    protected void evaluateRegister(DecacCompiler compiler, AbstractExpr e, int i) {
-    	int i2 = compiler.getManageRegister().useFreeRegister();
-    	compiler.addInstruction(new LOAD(1, Register.getR(i)));
-    	evaluateRegister(compiler, this.getOperand(), i2);
-    	compiler.getManageRegister().freed(i2);
-    	compiler.addInstruction(new SUB(Register.getR(i2), Register.getR(i)));
-    }
-
-    @Override
     protected String getOperatorName() {
         return "!";
     }

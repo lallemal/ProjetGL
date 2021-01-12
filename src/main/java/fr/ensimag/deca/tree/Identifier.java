@@ -6,6 +6,11 @@ import fr.ensimag.deca.tools.DecacInternalError;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.deca.tools.SymbolTable.Symbol;
 import fr.ensimag.ima.pseudocode.DVal;
+import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.instructions.LOAD;
+import fr.ensimag.ima.pseudocode.instructions.WFLOAT;
+import fr.ensimag.ima.pseudocode.instructions.WFLOATX;
+import fr.ensimag.ima.pseudocode.instructions.WINT;
 
 import java.io.PrintStream;
 import org.apache.commons.lang.Validate;
@@ -177,8 +182,36 @@ public class Identifier extends AbstractIdentifier {
     }
     
     @Override
+    protected void codeGenPrint(DecacCompiler compiler, boolean printHex) {
+    	Type type = this.getType();
+    	if (type.isInt()) {
+    		compiler.addInstruction(new LOAD(this.getExpDefinition().getOperand(), Register.R1));
+    		compiler.addInstruction(new WINT());
+    	} else if (type.isFloat()) {
+    		if (printHex) {
+    			compiler.addInstruction(new LOAD(this.getExpDefinition().getOperand(), Register.R1));
+    			compiler.addInstruction(new WFLOATX());
+    		} else {
+    			compiler.addInstruction(new LOAD(this.getExpDefinition().getOperand(), Register.R1));
+    			compiler.addInstruction(new WFLOAT());
+    		}
+    	} else if (type.isString()) {
+    		//TODO
+    	}
+    }
+    
+    @Override
     protected DVal dval() {
     	return this.getExpDefinition().getOperand();
+    }
+    
+    @Override
+    protected void codeGenInst(DecacCompiler compiler) {
+        codeExp(compiler, 2);
+    }
+    
+    protected void codeExp(DecacCompiler compiler, int n) {
+    	compiler.addInstruction(new LOAD(this.getExpDefinition().getOperand(), Register.getR(n)));
     }
 
     /**

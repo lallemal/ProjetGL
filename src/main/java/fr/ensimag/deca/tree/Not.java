@@ -8,6 +8,7 @@ import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.ima.pseudocode.instructions.SUB;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
 import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.Label;
 
 /**
  *
@@ -34,5 +35,10 @@ public class Not extends AbstractUnaryExpr {
     @Override
     protected String getOperatorName() {
         return "!";
+    }
+
+    @Override
+    protected void codeGenBranch(DecacCompiler compiler, boolean evaluate, Label label) {
+        getOperand().codeGenBranch(compiler, !evaluate, label);
     }
 }

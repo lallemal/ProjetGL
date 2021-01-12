@@ -6,6 +6,9 @@ import fr.ensimag.deca.tools.DecacInternalError;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.DAddr;
 import fr.ensimag.ima.pseudocode.DVal;
+import fr.ensimag.ima.pseudocode.Label;
+import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.instructions.*;
 import org.apache.commons.lang.Validate;
 import org.apache.log4j.Logger;
 
@@ -165,9 +168,11 @@ public abstract class AbstractExpr extends AbstractInst {
     protected DVal dval() {
     	return null;
     }
-    
     protected void codeExp(DecacCompiler compiler, int n) {
     	//nothing to do
+	}
+
+    protected void codeGenBranch(DecacCompiler compiler, boolean evaluate, Label label) {
     }
 
     @Override

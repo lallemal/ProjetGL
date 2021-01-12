@@ -327,7 +327,7 @@ public abstract class AbstractDecaLexer extends Lexer {
 
 
  	void beginZeroDec(String stringzero){
- 		System.out.println("dec commence par 0"); 
+ 		//System.out.println("dec commence par 0"); 
  		boolean debutmantisse = false;
  		int exposant = -1;
  		String mantisse = "";
@@ -472,7 +472,7 @@ public abstract class AbstractDecaLexer extends Lexer {
  	}
 
  	void compareExposantDec(int exposant, String mantisse) throws IllegalArgumentException{
- 		System.out.println("exposant =" + exposant + " mantisse =" + mantisse );
+ 		//System.out.println("exposant =" + exposant + " mantisse =" + mantisse );
  		if (exposant< -45) {
 
  			throw new IllegalArgumentException("arrondi a zero et flottant non nul");
@@ -510,6 +510,7 @@ public abstract class AbstractDecaLexer extends Lexer {
  	// exposant = 127 max = 0x1.7FFFFF * 2^127
 
  	// calculer exposant et mantisse tel que un seul chiffre apres la virgule
+ 	// ex: 10.23p1 = 1.023p5 
 
  	void isHexadecimal(String stringhex) throws IllegalArgumentException{
  		//System.out.println("est un hexadecimal");
@@ -617,10 +618,10 @@ public abstract class AbstractDecaLexer extends Lexer {
  		if(exposant < -126) {
  			throw new IllegalArgumentException("arrondi a zero et flottant non nulle");
  		}
-
- 		if(exposant == -126) {  
- 			compareMantisseMinHex(mantisse);
- 		}
+ 		// si l'exposant == 126 OK
+ 		//if(exposant == -126) {  
+ 		//	compareMantisseMinHex(mantisse);
+ 		//}
 
  		if (exposant == 127) {
  			compareMantisseMaxHex(mantisse);
@@ -632,9 +633,9 @@ public abstract class AbstractDecaLexer extends Lexer {
 
  	}
 
-
+/*
  	void compareMantisseMinHex(String mantisse){
- 		// comparer a 100000
+ 		// comparer a 100000 il faut que la mantisse soit superieur lors du parcours
  		if(mantisse.charAt(0) != '1'){
  			throw new IllegalArgumentException("arrondi a zero et flottant non nulle");
  		}
@@ -644,7 +645,7 @@ public abstract class AbstractDecaLexer extends Lexer {
  			}
  		}
  	}
-
+*/
  	void compareMantisseMaxHex(String mantisse) {
  		// caractere asci 0..9 de 48 à 57
  		//				   A..F de 65 a 70

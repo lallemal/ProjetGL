@@ -271,8 +271,6 @@ public class DecacCompiler {
         SymbolTable.Symbol boolSymbol = symbols.create("boolean");
         SymbolTable.Symbol floatSymbol =symbols.create("float");
         SymbolTable.Symbol intSymbol =symbols.create("int");
-        SymbolTable.Symbol stringSymbol =symbols.create("String");
-        SymbolTable.Symbol nullSymbol =symbols.create("null");
 
         // Creation of predef types
         try {
@@ -280,8 +278,6 @@ public class DecacCompiler {
             env_types.declare(boolSymbol, new TypeDefinition(new BooleanType(boolSymbol), Location.BUILTIN));
             env_types.declare(floatSymbol, new TypeDefinition(new FloatType(floatSymbol), Location.BUILTIN));
             env_types.declare(intSymbol, new TypeDefinition(new IntType(intSymbol), Location.BUILTIN));
-            env_types.declare(stringSymbol, new TypeDefinition(new StringType(stringSymbol), Location.BUILTIN));
-            env_types.declare(nullSymbol, new TypeDefinition(new NullType(nullSymbol), Location.BUILTIN));
         } catch (EnvironmentType.DoubleDefException e){
             LOG.fatal("Creation of Predefined Type in" + source.getName() + " failed", e);
             return true;
@@ -296,7 +292,7 @@ public class DecacCompiler {
 
     // TODO Check if not exist
     public Type getBuiltInType(String name) {
-        return  env_types.get(symbols.create("void")).getType();
+        return  env_types.get(symbols.create(name)).getType();
     }
 
     public Type getInt() {
@@ -312,9 +308,9 @@ public class DecacCompiler {
         return env_types.get(symbols.create("boolean")).getType();
     }
     public Type getNull() {
-        return env_types.get(symbols.create("null")).getType();
+        return new NullType(symbols.create("null"));
     }
     public Type getString() {
-        return env_types.get(symbols.create("String")).getType();
+        return new StringType(symbols.create("string"));
     }
 }

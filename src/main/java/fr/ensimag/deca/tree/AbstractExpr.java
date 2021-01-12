@@ -7,8 +7,6 @@ import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.DAddr;
 import fr.ensimag.ima.pseudocode.DVal;
 import fr.ensimag.ima.pseudocode.Label;
-import fr.ensimag.ima.pseudocode.Register;
-import fr.ensimag.ima.pseudocode.instructions.*;
 import org.apache.commons.lang.Validate;
 import org.apache.log4j.Logger;
 
@@ -121,7 +119,7 @@ public abstract class AbstractExpr extends AbstractInst {
             throws ContextualError {
         LOG.debug("verify AbstractExpr Print : start");
         type = verifyExpr(compiler, localEnv, currentClass);
-        if (type != compiler.getInt() && type != compiler.getFloat() && type != compiler.getString()) {
+        if (!type.isInt() && !type.isFloat() && !type.isString()) {
             throw new ContextualError(ContextualError.PRINT_EXPR_NOT_COMPATIBLE, this.getLocation());
         }
         LOG.debug("verify AbstractExpr print : end");

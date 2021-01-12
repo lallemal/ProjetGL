@@ -1,0 +1,8 @@
+//méthode dans une classe sans nom
+
+class Thing {
+    
+    int {
+    }
+
+}

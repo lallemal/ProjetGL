@@ -1,0 +1,4 @@
+//Classe extends mais sans nom d'extends
+
+class Thing extends {
+}

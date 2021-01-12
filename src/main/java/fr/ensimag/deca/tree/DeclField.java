@@ -14,13 +14,13 @@ import java.io.PrintStream;
  */
 public class DeclField extends Tree{
     
-    //private Visibility visib;
+    private Visibility visib;
     private AbstractIdentifier type;
     private AbstractIdentifier nom;
     private AbstractInitialization init;
     
-    public DeclField(AbstractIdentifier type, AbstractIdentifier nom, AbstractInitialization init){
-        //this.visib = visib;
+    public DeclField(Visibility visib, AbstractIdentifier type, AbstractIdentifier nom, AbstractInitialization init){
+        this.visib = visib;
         this.type = type;
         this.nom = nom;
         this.init = init;
@@ -33,7 +33,7 @@ public class DeclField extends Tree{
 
     @Override
     protected void prettyPrintChildren(PrintStream s, String prefix) {
-        //s.print(visib);
+        s.println(prefix+ "Visibility: " + visib);
         type.prettyPrint(s, prefix, false);
         nom.prettyPrint(s, prefix, false);
         init.prettyPrint(s, prefix, true);

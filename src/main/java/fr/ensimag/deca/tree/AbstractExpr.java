@@ -1,16 +1,13 @@
 package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.DecacCompiler;
-import fr.ensimag.deca.context.ClassDefinition;
-import fr.ensimag.deca.context.ContextualError;
-import fr.ensimag.deca.context.EnvironmentExp;
-import fr.ensimag.deca.context.Type;
+import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.tools.DecacInternalError;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.DAddr;
 import fr.ensimag.ima.pseudocode.DVal;
-import fr.ensimag.ima.pseudocode.NullOperand;
 import org.apache.commons.lang.Validate;
+import org.apache.log4j.Logger;
 
 import java.io.PrintStream;
 
@@ -21,6 +18,7 @@ import java.io.PrintStream;
  * @date 01/01/2021
  */
 public abstract class AbstractExpr extends AbstractInst {
+    private static final Logger LOG = Logger.getLogger(AbstractExpr.class);
     /**
      * @return true if the expression does not correspond to any concrete token
      * in the source code (and should be decompiled to the empty string).
@@ -85,7 +83,24 @@ public abstract class AbstractExpr extends AbstractInst {
             EnvironmentExp localEnv, ClassDefinition currentClass, 
             Type expectedType)
             throws ContextualError {
-        throw new UnsupportedOperationException("not yet implemented");
+        LOG.debug("verify AbstractExpr RValue : start");
+        Type type2 = verifyExpr(compiler, localEnv, currentClass);
+        if (!expectedType.sameType(type2)) {
+            if (!expectedType.isFloat() && !type2.isInt()) {
+                if (type2.isClass() && expectedType.isClass() && (!(((ClassType) expectedType).isSubClassOf((ClassType) type2)))) {
+                    if (!type2.isNull()) {
+                        throw new ContextualError(ContextualError.ASSIGN_NOT_COMPATIBLE, getLocation());
+                    }
+                } else {
+                    throw new ContextualError(ContextualError.ASSIGN_NOT_COMPATIBLE, getLocation());
+                }
+            }
+            else {
+                return new ConvFloat(this);
+            }
+        }
+        LOG.debug("verify AbstractExpr Rvalue : end");
+        return this;
     }
     
     
@@ -93,14 +108,21 @@ public abstract class AbstractExpr extends AbstractInst {
     protected void verifyInst(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass, Type returnType)
             throws ContextualError {
-        setType(verifyExpr(compiler, localEnv, currentClass));
-        System.out.println("ok ?");
-        System.out.println(getType());
+        LOG.debug("verify AbstractExpr Inst : start");
+        verifyExpr(compiler, localEnv, currentClass);
+        LOG.debug("verify AbstractExpr Inst : end");
+    }
+
+    protected void verifyPrint(DecacCompiler compiler, EnvironmentExp localEnv,
+            ClassDefinition currentClass, Type returnType)
+            throws ContextualError {
+        LOG.debug("verify AbstractExpr Print : start");
+        type = verifyExpr(compiler, localEnv, currentClass);
         if (type != compiler.getInt() && type != compiler.getFloat() && type != compiler.getString()) {
             throw new ContextualError(ContextualError.PRINT_EXPR_NOT_COMPATIBLE, this.getLocation());
         }
+        LOG.debug("verify AbstractExpr print : end");
     }
-
     /**
      * Verify the expression as a condition, i.e. check that the type is
      * boolean.
@@ -113,7 +135,12 @@ public abstract class AbstractExpr extends AbstractInst {
      */
     void verifyCondition(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass) throws ContextualError {
-        throw new UnsupportedOperationException("not yet implemented");
+        LOG.debug("verify AbstractExpr Condition : start");
+        this.verifyExpr(compiler, localEnv, currentClass);
+        if (!type.isBoolean()) {
+            throw new ContextualError(ContextualError.EXPR_CONDITION_NOT_BOOLEAN, getLocation());
+        }
+        LOG.debug("verify AbstractExpr Condition : end");
     }
 
     /**
@@ -121,6 +148,7 @@ public abstract class AbstractExpr extends AbstractInst {
      *
      * @param compiler
      */
+
     protected void codeGenPrint(DecacCompiler compiler, boolean printHex) {
     	//nothing to do
     }

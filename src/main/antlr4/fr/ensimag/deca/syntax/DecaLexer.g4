@@ -9,24 +9,106 @@ options {
 }
 
 @members {
+
 }
 
-// Deca lexer rules.
+// Deca lexer rules. print('hello World')
+
 COMMENT : (('/*' .*? '*/') | ('//' .*? '\n')) { skip(); } ;
 fragment LETTRE : 'a'..'z' | 'A'..'Z' ;
-fragment DIGIT : '0'..'9';
 fragment SPECIALS : '!' | '?' | ',' | ';' ;
 fragment STRING_CAR : ~('"' | '\\' | '\n' ) ;
 STRING : '"' (STRING_CAR | '\\' )*? '"';
+MULTI_LINE_STRING : '"' (STRING_CAR | '\n' | '\\' )*? '"'; 
+
+// caractere speciaux
 OBRACE : '{' ;
 CBRACE : '}' ; 
 OPARENT : '(' ;
 CPARENT : ')' ;
-PRINT : 'print' ;
-PRINTLN : 'println' ;
 SEMI : ';' ;
 COMMA : ',' ; 
-MULTI_LINE_STRING : '"' (STRING_CAR | '\n' | '\\' )*? '"'; 
+
+// mot reserve
+PRINT : 'print' ;
+PRINTLN : 'println' ;
+
 
 
 WS : (' ' | '\n' | '\t' | '\r') { skip(); };
+
+// identificateurs
+fragment DIGIT : '0'..'9';
+
+// mot reserve
+ASM : 'asm';
+EXTENDS : 'extends';
+IF : 'if';
+ELSE : 'else';
+FALSE : 'false';
+TRUE : 'true';
+READINT : 'readint';
+READFLOAT : 'readFloat';
+PRINTLNX : 'printlnx';
+PRINTX : 'printx';
+PROTECTED : 'protected';
+WHILE : 'while';
+
+// mot reserve deca avec objet a decommenter pour l'ajouter
+//RETURN : return; 
+//INSTANCEOF : instanceof; 
+//NEW : new;
+//THIS : this;
+//NULL : null;
+//CLASS : class;
+
+// symbole speciaux
+PLUS : '+';
+MINUS : '-';
+LT : '<';
+GT : '>';
+LEQ : '<=';
+GEQ : '>=';
+EXCLAM : '!';
+EQUALS : '=';
+EQEQ : '==';
+NEQ : '!=';
+TIMES : '*';
+PERCENT : '%';
+SLASH : '/';
+AND : '&&';
+OR : '||';
+
+// que avec objet
+//DOT : '.';
+
+// Litteraux flottants
+fragment NUM : DIGIT+;
+fragment DEC : NUM '.' NUM;
+fragment SIGN : '+' | '-';
+// prendre en compte si signe = ''
+fragment EXP :   ('E' | 'e') NUM | ('E' | 'e') SIGN NUM  ;
+fragment FLOATDEC : (DEC | DEC EXP) ('F' | 'f') | (DEC | DEC EXP);
+fragment DIGITHEX : '0'..'9' | 'A'..'F' | 'a'..'f';
+fragment NUMHEX : DIGITHEX+;
+// ici quatre expressions
+fragment FLOATHEX : ('0x' | '0X') NUMHEX '.' NUMHEX ('P' | 'p') SIGN NUM ('F' | 'f') |
+('0x' | '0X') NUMHEX '.' NUMHEX ('P' | 'p') SIGN NUM |
+('0x' | '0X') NUMHEX '.' NUMHEX ('P' | 'p') NUM ('F' | 'f') |
+('0x' | '0X') NUMHEX '.' NUMHEX ('P' | 'p') NUM ; 
+FLOAT : FLOATDEC | FLOATHEX;
+
+
+// litteraux entiers doit lever erreur si trop grand
+fragment POSITIVE_DIGIT : '1'..'9';
+INT : '0' | POSITIVE_DIGIT DIGIT* {intCondition(getText());};  
+
+
+// mot reserve ne sont pas des ident donc le placer a la fin pour priorite
+IDENT : (LETTRE | '$' | '_')(LETTRE | DIGIT | '$' | '_')*;
+
+// inclusion fichier
+fragment FILENAME : (LETTRE | DIGIT | '.' | '-' | '_')+;
+INCLUDE : '#include' (' ')* '"' FILENAME '"' {doInclude(getText());};
+
+

@@ -261,7 +261,7 @@ public class DecacCompiler {
         SymbolTable.Symbol boolSymbol = symbols.create("boolean");
         SymbolTable.Symbol floatSymbol =symbols.create("float");
         SymbolTable.Symbol intSymbol =symbols.create("int");
-        SymbolTable.Symbol stringSymbol =symbols.create("string");
+        SymbolTable.Symbol stringSymbol =symbols.create("String");
         SymbolTable.Symbol nullSymbol =symbols.create("null");
 
         // Creation of predef types
@@ -305,6 +305,6 @@ public class DecacCompiler {
         return env_types.get(symbols.create("null")).getType();
     }
     public Type getString() {
-        return env_types.get(symbols.create("string")).getType();
+        return env_types.get(symbols.create("String")).getType();
     }
 }

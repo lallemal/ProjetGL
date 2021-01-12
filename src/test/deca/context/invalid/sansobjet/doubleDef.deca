@@ -1,0 +1,7 @@
+// Description : Double definition in the same environement
+// Resultat : x est re déclaré : erreur ligne 6
+
+{
+    int x = 5;
+    int x = 6;
+}

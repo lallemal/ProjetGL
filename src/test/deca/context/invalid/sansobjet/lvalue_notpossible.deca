@@ -1,0 +1,6 @@
+// Description : Test avec une lvalue d'assign qui n'est ni un field, param ou var.
+// Resultat : Erreur ligne 5 : lvalue de nature type.
+
+{
+    int = 5;
+}

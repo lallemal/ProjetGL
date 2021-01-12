@@ -1,0 +1,7 @@
+// Description : Incompatibilité du plus entre deux types différents (non entier, float)
+// Resultat : Echec ligne 6 : int et true ne peuvent être multiplié.
+
+{
+    int x = 5;
+    x = x + true;
+}

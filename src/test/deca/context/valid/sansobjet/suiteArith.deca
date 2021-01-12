@@ -1,0 +1,23 @@
+// Description : Fichier valide avec affectation, declaration, while, if, else, print, +, /, %, >, <
+// Résultat : fonctionnel
+
+
+
+{
+    int x;
+    int y = 4;
+    x = 0;
+    while (x > 0 && x < y) {
+        if (x % 2 == 0) {
+            println(x);
+            x = x + 1;
+        }
+        else {
+            println(x);
+            x = x / 2;
+        }
+    }
+
+
+
+}

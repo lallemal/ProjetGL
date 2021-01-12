@@ -1,0 +1,12 @@
+// Description : Condition de if / boucle pas booléenne
+// Resultat : Erreur ligne 8 : x n'est pas booléen.
+
+{
+    int x = 1;
+    while (x > 0) {
+        x = x - 1;
+        if (x) {
+            x = x + 2;
+        }
+    }
+}

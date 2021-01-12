@@ -4,8 +4,9 @@ import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
-import fr.ensimag.deca.context.Definition;
 import fr.ensimag.deca.context.EnvironmentExp;
+import fr.ensimag.ima.pseudocode.instructions.STORE;
+import fr.ensimag.ima.pseudocode.Register;
 
 /**
  * Assignment, i.e. lvalue = expr.
@@ -31,7 +32,16 @@ public class Assign extends AbstractBinaryExpr {
             ClassDefinition currentClass) throws ContextualError {
         throw new UnsupportedOperationException("not yet implemented");
     }
-
+    
+    @Override
+    protected void codeGenInst(DecacCompiler compiler) {
+        Identifier x = (Identifier) this.getLeftOperand();
+        AbstractExpr e = this.getRightOperand();
+        int i = compiler.getManageRegister().useFreeRegister();
+    	evaluateRegister(compiler, e, i);
+    	compiler.getManageRegister().freed(i);
+        compiler.addInstruction(new STORE(Register.getR(i), x.getExpDefinition().getOperand()));
+    }
 
     @Override
     protected String getOperatorName() {

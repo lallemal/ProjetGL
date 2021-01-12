@@ -1,5 +1,6 @@
 package fr.ensimag.deca;
 
+import fr.ensimag.deca.codegen.ManageRegister;
 import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.syntax.DecaLexer;
 import fr.ensimag.deca.syntax.DecaParser;
@@ -49,6 +50,8 @@ public class DecacCompiler {
         this.symbols = new SymbolTable();
         this.env_types = new EnvironmentType(null);
         createPredefTypes();
+        
+        manageRegister = new ManageRegister();
     }
 
     /**
@@ -178,7 +181,7 @@ public class DecacCompiler {
             PrintStream out, PrintStream err)
             throws DecacFatalError, LocationException {
         AbstractProgram prog = doLexingAndParsing(sourceName, err);
-
+        
         if (prog == null) {
             LOG.info("Parsing failed");
             return true;
@@ -208,7 +211,12 @@ public class DecacCompiler {
         LOG.info("Compilation of " + sourceName + " successful.");
         return false;
     }
+    private ManageRegister manageRegister;
 
+    public ManageRegister getManageRegister() {
+    	return manageRegister;
+    }
+    
     /**
      * Build and call the lexer and parser to build the primitive abstract
      * syntax tree.

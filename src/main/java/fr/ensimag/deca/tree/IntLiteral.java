@@ -2,6 +2,7 @@ package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.codegen.ManageRegister;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
@@ -38,6 +39,18 @@ public class IntLiteral extends AbstractExpr {
     	//throw new UnsupportedOperationException("not yet implemented");
     }
 
+    @Override
+    protected void codeGenInst(DecacCompiler compiler) {
+    	ManageRegister manageRegister = compiler.getManageRegister();
+        int i = manageRegister.getFreeRegister();
+        evaluateRegister(compiler, this, i);
+    }
+    
+    @Override
+    protected void evaluateRegister(DecacCompiler compiler, AbstractExpr e, int i) {
+    	compiler.addInstruction(new LOAD(value, Register.getR(i)));
+    }
+    
     @Override
     protected void codeGenPrint(DecacCompiler compiler, boolean printHex) {
          	int value = this.getValue();

@@ -7,13 +7,6 @@ import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.DecacInternalError;
 import fr.ensimag.deca.tools.IndentPrintStream;
-import fr.ensimag.ima.pseudocode.instructions.WSTR;
-import fr.ensimag.ima.pseudocode.instructions.WINT;
-import fr.ensimag.ima.pseudocode.instructions.LOAD;
-import fr.ensimag.ima.pseudocode.GPRegister;
-import fr.ensimag.ima.pseudocode.Register;
-import fr.ensimag.ima.pseudocode.instructions.WFLOAT;
-import fr.ensimag.ima.pseudocode.instructions.WFLOATX;
 import fr.ensimag.ima.pseudocode.DAddr;
 import org.apache.commons.lang.Validate;
 
@@ -127,24 +120,7 @@ public abstract class AbstractExpr extends AbstractInst {
      * @param compiler
      */
     protected void codeGenPrint(DecacCompiler compiler, boolean printHex) {
-        Type t = getType();
-        if (t.isString()) {
-            String value = ((StringLiteral) this).getValue();
-            compiler.addInstruction(new WSTR(value));
-        } else if (t.isInt()) {
-        	int value = ((IntLiteral) this).getValue();
-        	compiler.addInstruction(new LOAD(value, Register.R1));
-        	compiler.addInstruction(new WINT());
-        } else if (t.isFloat()) {
-        	float value = ((FloatLiteral) this).getValue();
-        	compiler.addInstruction(new LOAD(value, Register.R1));
-        	if (printHex) {
-        		compiler.addInstruction(new WFLOATX());
-        	} else {
-        		compiler.addInstruction(new WFLOAT());
-        	}
-        }
-    	//throw new UnsupportedOperationException("not yet implemented");
+    	//nothing to do
     }
     
     protected void codeGenDecl(DecacCompiler compiler, DAddr address) {
@@ -156,6 +132,15 @@ public abstract class AbstractExpr extends AbstractInst {
         throw new UnsupportedOperationException("not yet implemented");
     }
     
+    /**
+     * evaluate the value of the abstract expression in the register Ri 
+     * @param compiler
+     * @param e
+     * @param i
+     */
+    protected void evaluateRegister(DecacCompiler compiler, AbstractExpr e, int i) {
+    	//nothing to do
+    }
 
     @Override
     protected void decompileInst(IndentPrintStream s) {

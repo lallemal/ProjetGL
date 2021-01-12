@@ -56,11 +56,11 @@ PROTECTED : 'protected';
 WHILE : 'while';
 
 // mot reserve deca avec objet a decommenter pour l'ajouter
-//RETURN : return; 
+RETURN : 'return'; 
 //INSTANCEOF : instanceof; 
-//NEW : new;
-//THIS : this;
-//NULL : null;
+NEW : 'new';
+THIS : 'this';
+NULL : 'null';
 CLASS : 'class';
 
 // symbole speciaux
@@ -81,7 +81,7 @@ AND : '&&';
 OR : '||';
 
 // que avec objet
-//DOT : '.';
+DOT : '.';
 
 // litteraux entiers doit lever erreur si trop grand
 fragment POSITIVE_DIGIT : '1'..'9';

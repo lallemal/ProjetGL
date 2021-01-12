@@ -17,8 +17,7 @@ public class New extends AbstractUnaryExpr{
 
 	@Override
 	protected String getOperatorName() {
-		// TODO Auto-generated method stub
-		return null;
+		return "new";
 	}
 
 	@Override

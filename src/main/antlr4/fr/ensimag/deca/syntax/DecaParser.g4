@@ -161,7 +161,8 @@ inst returns[AbstractInst tree]
         }
     | RETURN expr SEMI {
             assert($expr.tree != null);
-            // $tree = new Return($expr.tree);
+            $tree = new Return($expr.tree);
+            setLocation($tree, $RETURN);
         }
     ;
 
@@ -392,6 +393,8 @@ select_expr returns[AbstractExpr tree]
     | e1=select_expr DOT i=ident {
             assert($e1.tree != null);
             assert($i.tree != null);
+            $tree = new Selection($e1.tree, $i.tree);
+            setLocation($tree, $e1.start);
         }
         (o=OPARENT args=list_expr CPARENT {
             // we matched "e1.i(args)"
@@ -474,9 +477,11 @@ literal returns[AbstractExpr tree]
         }
     | THIS {
     	$tree = new This();
+        setLocation($tree, $THIS);
         }
     | NULL {
     	$tree = new Null();
+        setLocation($tree, $NULL);
         }
     ;
 
@@ -512,6 +517,7 @@ class_extension returns[AbstractIdentifier tree]
     : EXTENDS ident {
             assert($ident.tree != null);
             $tree = $ident.tree;
+            setLocation($tree, $EXTENDS);
         }
     | /* epsilon */ {
         }
@@ -584,7 +590,10 @@ decl_method returns[DeclMethod tree]
       | ASM OPARENT code=multi_line_string CPARENT SEMI {
         }
       ) {
+            assert($type.tree != null);
+            assert($ident.tree != null);
             $tree = new DeclMethod($type.tree, $ident.tree, $params.tree, $block.insts);
+            setLocation($tree, $type.start);
         }
     ;
 
@@ -616,5 +625,6 @@ param returns[DeclParam tree]
             assert($type.tree != null);
             assert($ident.tree != null);
             $tree = new DeclParam($type.tree, $ident.tree);
+            setLocation($tree, $type.start);
         }
     ;

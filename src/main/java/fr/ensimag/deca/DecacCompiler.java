@@ -36,6 +36,16 @@ import java.io.*;
 public class DecacCompiler {
     private static final Logger LOG = Logger.getLogger(DecacCompiler.class);
     
+    private int kGB = 1;
+    
+    public void incrementKGB() {
+    	kGB++;
+    }
+    
+    public int getKGB() {
+    	return kGB;
+    }
+    
     /**
      * Portable newline character.
      */

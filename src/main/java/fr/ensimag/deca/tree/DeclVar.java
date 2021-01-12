@@ -4,6 +4,9 @@ import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.deca.tools.SymbolTable;
+import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.RegisterOffset;
+
 import org.apache.commons.lang.Validate;
 import org.apache.log4j.Logger;
 
@@ -56,8 +59,8 @@ public class DeclVar extends AbstractDeclVar {
 
     @Override
     protected void codeGenDecl(DecacCompiler compiler) {
-    	System.out.println("ICI : ");
-    	System.out.println(varName.getExpDefinition().getOperand() == null);
+    	varName.getExpDefinition().setOperand(new RegisterOffset(compiler.getKGB(), Register.GB));
+    	compiler.incrementKGB();
     	initialization.codeGenDecl(compiler, varName.getExpDefinition().getOperand());
     }
     

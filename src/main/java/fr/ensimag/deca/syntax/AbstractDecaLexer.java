@@ -295,7 +295,7 @@ public abstract class AbstractDecaLexer extends Lexer {
     		return;
     	}
     	if (stringentier.length() >10) {
-    		throw new IllegalArgumentException("entier trop grand");
+    		System.err.println("Erreur de compilation: entier trop grand");
     	}
     	// chaine de meme longueur
     	for (int i = 0;i< maximum.length();i++) {
@@ -303,7 +303,7 @@ public abstract class AbstractDecaLexer extends Lexer {
     		int max =maximum.charAt(i);
     		int entier = stringentier.charAt(i);
     		if(max < entier) {
-    			throw new IllegalArgumentException("entier trop grand");
+    			System.err.println("Erreur de compilation: entier trop grand");
     		}
     	}
     	return;
@@ -409,7 +409,7 @@ public abstract class AbstractDecaLexer extends Lexer {
  			int mininum = min.charAt(i);
  			int mantissei = mantisse.charAt(i);
  			if (mantissei < mininum) {
- 				throw new IllegalArgumentException("arrondi a zero et flottant non nul");
+ 				System.err.println("Erreur de compilation: arrondi a zero et flottant non nul");
  			}
  		}
  		// mantisse plus longue donc >= min donc pas d'erreur de debordement
@@ -424,14 +424,14 @@ public abstract class AbstractDecaLexer extends Lexer {
  			int maximum =max.charAt(i);
  			int mantissei = mantisse.charAt(i);
  			if(maximum < mantissei) {
- 				throw new IllegalArgumentException("arrondi a l infini");
+ 				System.err.println("Erreur de compilation: arrondi a l infini");
  			}
  		}
  		// mantisse plus longue mais que avec des 0 a la fin donc egaux sinon erreur
  		if (mantisse.length() > max.length()) {
  			for (int j = max.length(); j < mantisse.length(); j++ ) {
  				if(mantisse.charAt(j) != '0') {
- 					throw new IllegalArgumentException("arrondi a l infini");
+ 					System.err.println("Erreur de compilation: arrondi a l infini");
  				}
  			}
  		}
@@ -475,7 +475,7 @@ public abstract class AbstractDecaLexer extends Lexer {
  		//System.out.println("exposant =" + exposant + " mantisse =" + mantisse );
  		if (exposant< -45) {
 
- 			throw new IllegalArgumentException("arrondi a zero et flottant non nul");
+ 			System.err.println("Erreur de compilation: arrondi a zero et flottant non nul");
  		}
 
  		// cas limite il faut comparer mantisse
@@ -486,7 +486,7 @@ public abstract class AbstractDecaLexer extends Lexer {
  			compareManthissemaxDec(mantisse); 
  		}
  		if (exposant> 38) {
- 			throw new IllegalArgumentException("arrondi a l infini");
+ 			System.err.println("Erreur de compilation: arrondi a l infini");
  		}
  	}
 
@@ -614,9 +614,9 @@ public abstract class AbstractDecaLexer extends Lexer {
  	}
 
  	void compareExposantHex(int exposant, String mantisse) {
- 		System.out.println("exposant= " + exposant + " mantisse= "+ mantisse);
+ 		//System.out.println("exposant= " + exposant + " mantisse= "+ mantisse);
  		if(exposant < -126) {
- 			throw new IllegalArgumentException("arrondi a zero et flottant non nulle");
+ 			System.err.println("Erreur de compilation: arrondi a zero et flottant non nulle");
  		}
  		// si l'exposant == 126 OK
  		//if(exposant == -126) {  
@@ -628,7 +628,7 @@ public abstract class AbstractDecaLexer extends Lexer {
  		}
 
  		if (exposant >127) {
- 			throw new IllegalArgumentException("arrondi a l infini");
+ 			System.err.println("Erreur de compilation: arrondi a l infini");
  		}
 
  	}
@@ -637,11 +637,11 @@ public abstract class AbstractDecaLexer extends Lexer {
  	void compareMantisseMinHex(String mantisse){
  		// comparer a 100000 il faut que la mantisse soit superieur lors du parcours
  		if(mantisse.charAt(0) != '1'){
- 			throw new IllegalArgumentException("arrondi a zero et flottant non nulle");
+ 			System.err.println("arrondi a zero et flottant non nulle");
  		}
  		for(int i = 1; i< mantisse.length(); i++) {
  			if(mantisse.charAt(i) != '0') {
- 				throw new IllegalArgumentException("arrondi a zero et flottant non nulle");
+ 				System.err.println("arrondi a zero et flottant non nulle");
  			}
  		}
  	}
@@ -656,7 +656,7 @@ public abstract class AbstractDecaLexer extends Lexer {
  			int max = mantissecomp.charAt(i);
  			int mantissen = mantisse.charAt(i);
  			if(max < mantissen) {
- 				throw new IllegalArgumentException("arrondi a l infini");
+ 				System.err.println("Erreur de compilation: arrondi a l infini");
  			}
  		}
  		// si la longueur de la mantisse est la plus eleve et meme valeur verifier nombre apres
@@ -664,7 +664,7 @@ public abstract class AbstractDecaLexer extends Lexer {
  		if(mantisse.length() > lengthmin) {
  			for( int j = lengthmin; j < mantisse.length(); j++) {
  				if (mantisse.charAt(j) != '0') {
- 					throw new IllegalArgumentException("arrondi a l infini");
+ 					System.err.println("Erreur de compilation: arrondi a l infini");
  				}
  			}
  		}

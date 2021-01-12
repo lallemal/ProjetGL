@@ -1,4 +1,6 @@
+//Valide pour le lexer, invalide pour le parser
 // Test avec un string complexe (saut de ligne, caractères spéciaux...)
+
 
 "Des sabres sont partout posés sur les provinces.
 L'autel ment. On entend ceux qu'on nomme les princes

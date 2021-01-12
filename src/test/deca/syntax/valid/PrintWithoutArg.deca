@@ -1,4 +1,7 @@
+//Valide pour le lexer, invalide pour le parser
 // Test avec un print mais sans argument
-// Ce test est lexicalement correct mais ne sera pas valide au niveau syntaxique
+
+
 
 print ;
+

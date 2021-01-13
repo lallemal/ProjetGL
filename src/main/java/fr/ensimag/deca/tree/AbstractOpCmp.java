@@ -35,10 +35,14 @@ public abstract class AbstractOpCmp extends AbstractBinaryExpr {
             }
         } else {
             if (type1.isInt() && type2.isFloat()) {
-                setLeftOperand(new ConvFloat(getLeftOperand()));
+                AbstractExpr conv = new ConvFloat(getLeftOperand());
+                conv.verifyExpr(compiler, localEnv, currentClass);
+                setLeftOperand(conv);
             }
             else if (type1.isFloat() && type2.isInt()) {
-                setRightOperand(new ConvFloat(getRightOperand()));
+                AbstractExpr conv = new ConvFloat(getRightOperand());
+                conv.verifyExpr(compiler, localEnv, currentClass);
+                setRightOperand(conv);
             }
         }
         setType(compiler.getBool());

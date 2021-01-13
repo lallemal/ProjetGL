@@ -17,7 +17,7 @@
 	float r = 2.7;
 	float u = 3.4;
 	
-	println(" --- TEST de la disvision sur les entiers --- ");
+	println(" --- TEST de la disvision --- ");
 	
 	resultAB = a / b; 
 	println("Division de a=9 par b =3: 3 == ", resultAB);
@@ -25,10 +25,12 @@
 	resultMJ = m / j;
 	println("Divisiion de l'entier m = 1 par l'entier j =2: 0 == ", resultMJ);
 	
-	resultMJ = m / k;
+	resultMK = m / k;
 	println("Divisiion de l'entier m = 1 par le float k =2: 0 == ", resultMK);
 	
+	println("Division de 3 par 2  dans le print: 3 ==", (3/2));
 	
+	println("Division de r=2.7 par u=3.4: 0.79411765 ==", (r/u);
 	
 	
 	

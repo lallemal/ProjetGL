@@ -32,7 +32,6 @@ public class DeclField extends Tree{
         type.decompile(s);
         s.print(" ");
         name.decompile(s);
-        s.print(" ");
         init.decompile(s);
     }
 

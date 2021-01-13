@@ -7,8 +7,6 @@ import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.DAddr;
 import fr.ensimag.ima.pseudocode.DVal;
 import fr.ensimag.ima.pseudocode.Label;
-import fr.ensimag.ima.pseudocode.Register;
-import fr.ensimag.ima.pseudocode.instructions.*;
 import org.apache.commons.lang.Validate;
 import org.apache.log4j.Logger;
 
@@ -92,10 +90,10 @@ public abstract class AbstractExpr extends AbstractInst {
             if (!expectedType.isFloat() && !type2.isInt()) {
                 if (type2.isClass() && expectedType.isClass() && (!(((ClassType) expectedType).isSubClassOf((ClassType) type2)))) {
                     if (!type2.isNull()) {
-                        throw new ContextualError(ContextualError.ASSIGN_NOT_COMPATIBLE, getLocation());
+                        throw new ContextualError(ContextualError.ASSIGN_NOT_COMPATIBLE + " (" + expectedType.toString() + "," + type2.toString() + ")", getLocation());
                     }
                 } else {
-                    throw new ContextualError(ContextualError.ASSIGN_NOT_COMPATIBLE, getLocation());
+                    throw new ContextualError(ContextualError.ASSIGN_NOT_COMPATIBLE + " (" + expectedType.toString() + ","  + type2.toString() + ")" , getLocation());
                 }
             }
             else {
@@ -121,8 +119,8 @@ public abstract class AbstractExpr extends AbstractInst {
             throws ContextualError {
         LOG.debug("verify AbstractExpr Print : start");
         type = verifyExpr(compiler, localEnv, currentClass);
-        if (type != compiler.getInt() && type != compiler.getFloat() && type != compiler.getString()) {
-            throw new ContextualError(ContextualError.PRINT_EXPR_NOT_COMPATIBLE, this.getLocation());
+        if (!type.isInt() && !type.isFloat() && !type.isString()) {
+            throw new ContextualError(ContextualError.PRINT_EXPR_NOT_COMPATIBLE + " (given type :" + type.toString() + ")", this.getLocation());
         }
         LOG.debug("verify AbstractExpr print : end");
     }

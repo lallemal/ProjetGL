@@ -1,3 +1,4 @@
+// The type of expression to be printed is not int, float or string
 // Description : essai de print d'un type qui n'est pas float, int ou string
 // Resultat : Echec ligne 5 : true est un booléan ce n'est pas supporté.
 

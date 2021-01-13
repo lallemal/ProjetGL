@@ -1,5 +1,6 @@
+// The ReturnType of the expression evaluated by the condition is not boolean
 // Description : Condition de if / boucle pas booléenne
-// Resultat : Erreur ligne 8 : x n'est pas booléen.
+// Resultat : Erreur ligne 9 : x n'est pas booléen.
 
 {
     int x = 1;

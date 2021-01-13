@@ -1,5 +1,7 @@
-// Description : Test avec une lvalue d'assign qui n'est ni un field, param ou var.
-// Resultat : Erreur ligne 5 : lvalue de nature type.
+// Definition in env_exp does not exist with the name : int
+// Description : Test avec une lvalue d'assign qui n'est ni un field, param ou var. L'erreur n'est pas celle attendu :
+// "The nature of the left member is not of type field, parameters of variables" car dans cet exemple, int n'est même pas dans le bon env
+// Resultat : Erreur ligne 7 : lvalue de nature type.
 
 {
     int = 5;

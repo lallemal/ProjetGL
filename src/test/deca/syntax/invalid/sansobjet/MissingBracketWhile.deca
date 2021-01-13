@@ -1,0 +1,10 @@
+// 
+// Description: test soustraction incorrecte
+// Resultat: erreur ligne 4: il manque une parenthere
+{
+
+    while(1)
+
+    }
+    
+}

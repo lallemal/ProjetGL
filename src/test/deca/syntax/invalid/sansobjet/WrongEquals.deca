@@ -1,0 +1,8 @@
+// 
+// Description: test soustraction incorrecte
+// Resultat: erreur ligne 6: il manque une parenthere
+{
+    if (a ==  {
+
+    }
+}

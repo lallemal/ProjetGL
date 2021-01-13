@@ -1,0 +1,9 @@
+// 
+// Description: test soustraction incorrecte
+// Resultat: erreur ligne 6: il manque une parenthere
+{
+    int s = 1;
+    if (s == 2{
+
+    }
+}

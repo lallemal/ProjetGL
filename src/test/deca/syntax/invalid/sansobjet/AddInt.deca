@@ -1,0 +1,6 @@
+// 
+// Description: teste addition sans second membre
+// Resultat: mismatchinput ligne 5 
+{
+    int a = 1 +; 
+}

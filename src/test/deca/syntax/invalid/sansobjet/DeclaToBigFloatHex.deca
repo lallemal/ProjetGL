@@ -1,0 +1,6 @@
+// erreur de compilation
+// Description: teste creation folttant converti a l infini
+// Resultat: erreur ligne 5: levee d exception
+{
+    float t = 0x1.FFFFFFp127;
+}

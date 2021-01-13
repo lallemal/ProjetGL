@@ -36,7 +36,7 @@ public class BooleanLiteral extends AbstractExpr {
         setType(compiler.getBool());
         return getType();
     }
-       
+          
     @Override
     protected DVal dval() {
     	return new ImmediateInteger(value ? 1 : 0);

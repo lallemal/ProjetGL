@@ -1,0 +1,4 @@
+[DeclVarNoInit.deca]
+{
+	int i;
+}

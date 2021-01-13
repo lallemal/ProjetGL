@@ -1,0 +1,5 @@
+[PrintMultArg.deca]
+{
+	print("Hello", "You");
+	println("How", "Are", "You", "Today", "?");
+}

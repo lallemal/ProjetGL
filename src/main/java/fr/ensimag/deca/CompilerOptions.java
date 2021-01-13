@@ -31,6 +31,10 @@ public class CompilerOptions {
         return printBanner;
     }
     
+    public boolean getParse(){
+        return parse;
+    }
+    
     public List<File> getSourceFiles() {
         return Collections.unmodifiableList(sourceFiles);
     }
@@ -38,6 +42,7 @@ public class CompilerOptions {
     private int debug = 0;
     private boolean parallel = false;
     private boolean printBanner = false;
+    private boolean parse = false;
     private List<File> sourceFiles = new ArrayList<File>();
 
     
@@ -58,7 +63,8 @@ public class CompilerOptions {
     	for (int i = 0; i < args.length; i++) {
     		switch(args[i]) {
     			case "-p":
-    				throw new UnsupportedOperationException("parse is not yet implemented");
+    				parse = true;
+                                break;
     			case "-v":
     				throw new UnsupportedOperationException("verification is not yet implemented");
     			case "-n":

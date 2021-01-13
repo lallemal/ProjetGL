@@ -1,0 +1,5 @@
+// Test multiple declaration of variables with no init
+
+{
+    int i = 1, j = i;
+}

@@ -1,0 +1,7 @@
+// Test with if with no content and no else
+
+
+{
+    if (0 == 0){
+    }
+}

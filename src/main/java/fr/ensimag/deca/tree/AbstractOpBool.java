@@ -1,15 +1,14 @@
 package fr.ensimag.deca.tree;
 
-import fr.ensimag.deca.context.Type;
-import fr.ensimag.ima.pseudocode.DVal;
-import fr.ensimag.ima.pseudocode.Register;
-import fr.ensimag.ima.pseudocode.instructions.LOAD;
-import fr.ensimag.ima.pseudocode.instructions.POP;
-import fr.ensimag.ima.pseudocode.instructions.PUSH;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
+import fr.ensimag.deca.context.Type;
+import fr.ensimag.ima.pseudocode.Label;
+import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.instructions.BRA;
+import fr.ensimag.ima.pseudocode.instructions.LOAD;
 
 /**
  *
@@ -34,4 +33,18 @@ public abstract class AbstractOpBool extends AbstractBinaryExpr {
         return type1;
     }
 
+
+    @Override
+    protected void codeExp(DecacCompiler compiler, int n) {
+        String label = "boolOp_";
+        String pos = getLocation().getLine() + "_" + getLocation().getPositionInLine();
+        Label sinonLabel = new Label(label + "False." + pos);
+        Label finLabel = new Label(label + "Fin." + pos);
+        this.codeGenBranch(compiler, false, sinonLabel);
+        compiler.addInstruction(new LOAD(1, Register.getR(n)));
+        compiler.addInstruction(new BRA(finLabel));
+        compiler.addLabel(sinonLabel);
+        compiler.addInstruction(new LOAD(0, Register.getR(n)));
+        compiler.addLabel(finLabel);
+    }
 }

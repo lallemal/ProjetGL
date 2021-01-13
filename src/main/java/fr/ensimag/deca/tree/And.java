@@ -31,4 +31,5 @@ public class And extends AbstractOpBool {
             getRightOperand().codeGenBranch(compiler, false, label);
         }
     }
+
 }

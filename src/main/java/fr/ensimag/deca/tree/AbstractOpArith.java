@@ -1,13 +1,12 @@
 package fr.ensimag.deca.tree;
 
-import fr.ensimag.deca.context.Type;
+import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.context.*;
 import fr.ensimag.ima.pseudocode.DVal;
 import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
 import fr.ensimag.ima.pseudocode.instructions.POP;
 import fr.ensimag.ima.pseudocode.instructions.PUSH;
-import fr.ensimag.deca.DecacCompiler;
-import fr.ensimag.deca.context.*;
 import org.apache.log4j.Logger;
 
 
@@ -47,36 +46,39 @@ public abstract class AbstractOpArith extends AbstractBinaryExpr {
         LOG.debug("verify AbstractOpArith : end");
         return returnType;
     }
-    
-    @Override
-    protected void codeGenInst(DecacCompiler compiler) {
-    	this.codeExp(compiler, 2);
-    }
-    
+
+
     @Override
     protected void codeExp(DecacCompiler compiler, int n) {
-    	AbstractExpr e1 = this.getLeftOperand();
-    	AbstractExpr e2 = this.getRightOperand();
-    	if (e2.dval() != null) {
-    		e1.codeExp(compiler, n);
-    		this.mnemo(compiler, e2.dval(), n);
-    	} else {
-    		if (compiler.getRmax() > n) {
-    			e1.codeExp(compiler, n);
-    			e2.codeExp(compiler, n+1);
-    			this.mnemo(compiler, Register.getR(n+1), n);
-    		} else {
-    			e1.codeExp(compiler, n);
-    			compiler.addInstruction(new PUSH(Register.getR(n)));
-    			e2.codeExp(compiler, n);
-    			compiler.addInstruction(new LOAD(Register.getR(n), Register.R0));
-    			compiler.addInstruction(new POP(Register.getR(n)));
-    			this.mnemo(compiler, Register.R0, n);
-    		}
-    	}
+        AbstractExpr e1 = this.getLeftOperand();
+        AbstractExpr e2 = this.getRightOperand();
+        if (e2.dval() != null) {
+            e1.codeExp(compiler, n);
+            this.mnemo(compiler, e2.dval(), n);
+        } else {
+            if (compiler.getRmax() > n) {
+                e1.codeExp(compiler, n);
+                e2.codeExp(compiler, n+1);
+                this.mnemo(compiler, Register.getR(n+1), n);
+            } else {
+                e1.codeExp(compiler, n);
+                compiler.addInstruction(new PUSH(Register.getR(n)));
+                e2.codeExp(compiler, n);
+                compiler.addInstruction(new LOAD(Register.getR(n), Register.R0));
+                compiler.addInstruction(new POP(Register.getR(n)));
+                this.mnemo(compiler, Register.R0, n);
+            }
+        }
     }
-    
+
+    @Override
+    protected void codeGenInst(DecacCompiler compiler) {
+        this.codeExp(compiler, 2);
+    }
+
+
+
     protected void mnemo(DecacCompiler compiler, DVal dval, int n) {
-    	
+
     }
 }

@@ -6,15 +6,10 @@ import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
-import fr.ensimag.ima.pseudocode.DAddr;
-import fr.ensimag.ima.pseudocode.DVal;
-import fr.ensimag.ima.pseudocode.NullOperand;
-import fr.ensimag.ima.pseudocode.Label;
-import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.*;
 import fr.ensimag.ima.pseudocode.instructions.BRA;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
 import fr.ensimag.ima.pseudocode.instructions.STORE;
-import fr.ensimag.ima.pseudocode.ImmediateInteger;
 
 import java.io.PrintStream;
 
@@ -60,7 +55,9 @@ public class BooleanLiteral extends AbstractExpr {
                 compiler.addInstruction(new BRA(label));
             }
         } else {
-            this.codeGenBranch(compiler, !evaluate, label);
+            if (!evaluate) {
+                compiler.addInstruction(new BRA(label));
+            }
         }
     }
 

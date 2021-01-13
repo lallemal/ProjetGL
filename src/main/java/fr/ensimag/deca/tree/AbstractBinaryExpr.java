@@ -1,11 +1,9 @@
 package fr.ensimag.deca.tree;
 
-import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.tools.IndentPrintStream;
-import fr.ensimag.ima.pseudocode.DVal;
+import org.apache.commons.lang.Validate;
 
 import java.io.PrintStream;
-import org.apache.commons.lang.Validate;
 
 /**
  * Binary expressions.
@@ -67,5 +65,6 @@ public abstract class AbstractBinaryExpr extends AbstractExpr {
         leftOperand.prettyPrint(s, prefix, false);
         rightOperand.prettyPrint(s, prefix, true);
     }
+
 
 }

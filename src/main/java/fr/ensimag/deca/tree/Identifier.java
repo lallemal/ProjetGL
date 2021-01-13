@@ -6,15 +6,13 @@ import fr.ensimag.deca.tools.DecacInternalError;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.deca.tools.SymbolTable.Symbol;
 import fr.ensimag.ima.pseudocode.DVal;
+import fr.ensimag.ima.pseudocode.Label;
 import fr.ensimag.ima.pseudocode.Register;
-import fr.ensimag.ima.pseudocode.instructions.LOAD;
-import fr.ensimag.ima.pseudocode.instructions.WFLOAT;
-import fr.ensimag.ima.pseudocode.instructions.WFLOATX;
-import fr.ensimag.ima.pseudocode.instructions.WINT;
-
-import java.io.PrintStream;
+import fr.ensimag.ima.pseudocode.instructions.*;
 import org.apache.commons.lang.Validate;
 import org.apache.log4j.Logger;
+
+import java.io.PrintStream;
 
 
 /**
@@ -263,4 +261,15 @@ public class Identifier extends AbstractIdentifier {
         }
     }
 
+    @Override
+    protected void codeGenBranch(DecacCompiler compiler, boolean evaluate, Label label) {
+        codeExp(compiler, 0);
+        compiler.addInstruction(new CMP(0, Register.R0));
+        if (evaluate) {
+            compiler.addInstruction(new BNE(label));
+        } else {
+            compiler.addInstruction(new BEQ(label));
+        }
+
+    }
 }

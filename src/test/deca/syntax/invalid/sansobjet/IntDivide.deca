@@ -1,5 +1,5 @@
 // 
-// description: test soustraction incorrecte
+// description: test division incorrecte
 // resultat: erreur ligne 5: pas de deuxieme terme
 {
     int i = 1-;

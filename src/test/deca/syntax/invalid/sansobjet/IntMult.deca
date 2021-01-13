@@ -1,0 +1,6 @@
+// 
+// Description: test produit incorrecte
+// Resultat: erreur ligne 5: pas de deuxieme terme
+{
+    int i = 1*;
+}

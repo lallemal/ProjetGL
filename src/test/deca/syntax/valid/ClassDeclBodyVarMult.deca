@@ -3,4 +3,5 @@
 class Thing {
     protected int i = 0, j = 1;
     protected float k;
+    string y;
 }

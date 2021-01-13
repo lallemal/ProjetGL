@@ -2,7 +2,7 @@
 
 class Thing {
 
-    int i;
+    int i = new Objet();
     
 }
 {

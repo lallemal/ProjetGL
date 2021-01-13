@@ -40,7 +40,20 @@ public class DeclMethod extends AbstractExpr {
 
     @Override
     public void decompile(IndentPrintStream s) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        type.decompile(s);
+        s.print(" ");
+        name.decompile(s);
+        s.print("(");
+        if (param != null){
+            param.decompile(s);
+        }
+        s.println(") {");
+        s.indent();
+        if (body != null){
+            body.decompile(s);
+        }
+        s.unindent();
+        s.println("}");
     }
 
     @Override
@@ -57,7 +70,14 @@ public class DeclMethod extends AbstractExpr {
 
     @Override
     protected void iterChildren(TreeFunction f) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        type.iter(f);
+        name.iter(f);
+        if (param != null){
+            param.iterChildren(f);
+        }
+        if (body != null){
+            body.iterChildren(f);
+        }
     }
     
     

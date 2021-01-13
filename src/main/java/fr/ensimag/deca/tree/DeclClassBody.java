@@ -29,7 +29,9 @@ public class DeclClassBody extends Tree {
 
     @Override
     public void decompile(IndentPrintStream s) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        field.decompile(s);
+        s.println();
+        method.decompile(s);
     }
 
     @Override
@@ -40,7 +42,12 @@ public class DeclClassBody extends Tree {
 
     @Override
     protected void iterChildren(TreeFunction f) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (field != null){
+            field.iterChildren(f);
+        }
+        if (method != null){
+            method.iterChildren(f);
+        }
     }
     
 }

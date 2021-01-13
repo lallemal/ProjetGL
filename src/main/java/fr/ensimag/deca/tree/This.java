@@ -20,7 +20,7 @@ public class This extends AbstractExpr{
 
 	@Override
 	public void decompile(IndentPrintStream s) {
-		// TODO Auto-generated method stub
+		s.print("this");
 		
 	}
 
@@ -31,7 +31,7 @@ public class This extends AbstractExpr{
 
 	@Override
 	protected void iterChildren(TreeFunction f) {
-		// TODO Auto-generated method stub
+		//nothing to do
 		
 	}
 

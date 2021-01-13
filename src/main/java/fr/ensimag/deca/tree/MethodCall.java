@@ -30,8 +30,12 @@ public class MethodCall extends AbstractExpr{
 
 	@Override
 	public void decompile(IndentPrintStream s) {
-		// TODO Auto-generated method stub
-		
+		expr.decompile(s);
+                s.print(".");
+                ident.decompile(s);
+                s.print("(");
+                listExpr.decompile(s);
+                s.print(")");
 	}
 
 	@Override
@@ -44,8 +48,9 @@ public class MethodCall extends AbstractExpr{
 
 	@Override
 	protected void iterChildren(TreeFunction f) {
-		// TODO Auto-generated method stub
-		
+		expr.iter(f);
+                ident.iter(f);
+                listExpr.iterChildren(f);
 	}
 
 }

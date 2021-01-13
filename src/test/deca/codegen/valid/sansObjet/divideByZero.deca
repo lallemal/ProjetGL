@@ -1,0 +1,7 @@
+{
+	int denominateur = 0;
+	int numerateur = 1;
+	
+	println(numerateur /denominateur);
+	
+}

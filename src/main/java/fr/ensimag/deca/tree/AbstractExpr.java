@@ -7,6 +7,10 @@ import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.DAddr;
 import fr.ensimag.ima.pseudocode.DVal;
 import fr.ensimag.ima.pseudocode.Label;
+import fr.ensimag.ima.pseudocode.instructions.WFLOAT;
+import fr.ensimag.ima.pseudocode.instructions.WFLOATX;
+import fr.ensimag.ima.pseudocode.instructions.WINT;
+
 import org.apache.commons.lang.Validate;
 import org.apache.log4j.Logger;
 
@@ -153,7 +157,18 @@ public abstract class AbstractExpr extends AbstractInst {
      */
 
     protected void codeGenPrint(DecacCompiler compiler, boolean printHex) {
-    	//nothing to do
+    	this.codeExp(compiler, 1);
+    	if (this.getType().isInt()) {
+    		compiler.addInstruction(new WINT());
+    	} else if (this.getType().isFloat()) {
+    		if (printHex) {
+    			compiler.addInstruction(new WFLOATX());
+    		} else {
+    			compiler.addInstruction(new WFLOAT());
+    		}
+    	} else {
+    		//nothing to do
+    	}
     }
     
     protected void codeGenDecl(DecacCompiler compiler, DAddr address) {

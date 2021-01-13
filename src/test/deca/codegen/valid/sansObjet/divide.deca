@@ -1,0 +1,33 @@
+{
+	int a, b, c;
+	
+	a = 9;
+	b = 3;
+	c = 7;
+	println(" --- TEST de la disvision sur les entiers --- ");
+	println("Division de a par b: 3 == " + (a / b));
+	println("Division de a par 3: 3 == " + (a / 3));
+	
+	println("Divsion de a par b par c: 1 == " + (a / b / c));
+	
+	int m;
+	m = 1;
+	int j = 2; 
+	
+	println("1 divisé par 2: 0 == " + (m / j));
+	
+	println(" --- TEST de la disvision sur les float --- ");
+	
+	int d = 1;
+	float p = 2;
+	
+	println(" Division de l'entier 1 par le flottant 2: 0.5 == " + (d / p));
+	
+	float r = 2.7;
+	float u = 3.4;
+	println("Division de r=2.7 par u=3.4: " + (u/r));
+	println("Division de 1 par 3: 0.333333.. == " + (1/3)); 
+	
+	
+	
+}

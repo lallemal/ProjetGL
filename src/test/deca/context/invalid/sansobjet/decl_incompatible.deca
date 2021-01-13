@@ -1,8 +1,8 @@
-// The type of the variable and its assignation are not compatible
+// Definition in env_types does not exist with the name : string
 // Description : Assignation incompatible.
 // Resultat : Echech en ligne 7 : un string ne peut pas être initialisé ni mis en tant que variable
 
 {
     int x = 4;
-    x = true;
+    string y = "blabl";
 }

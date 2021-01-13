@@ -1,5 +1,6 @@
 package fr.ensimag.deca;
 
+import fr.ensimag.deca.codegen.LabelError;
 import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.syntax.DecaLexer;
 import fr.ensimag.deca.syntax.DecaParser;
@@ -34,7 +35,14 @@ import java.io.*;
  * @date 01/01/2021
  */
 public class DecacCompiler {
+	
     private static final Logger LOG = Logger.getLogger(DecacCompiler.class);
+    
+    private LabelError labelError;
+    
+    public LabelError getLabelError() {
+    	return labelError;
+    }
     
     private int kGB = 1;
     
@@ -60,6 +68,7 @@ public class DecacCompiler {
         this.env_types = new EnvironmentType(null);
         createPredefTypes();
         this.rmax = 15;
+        this.labelError = new LabelError();
         
     }
     private int rmax;

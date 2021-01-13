@@ -90,10 +90,10 @@ public abstract class AbstractExpr extends AbstractInst {
             if (!expectedType.isFloat() && !type2.isInt()) {
                 if (type2.isClass() && expectedType.isClass() && (!(((ClassType) expectedType).isSubClassOf((ClassType) type2)))) {
                     if (!type2.isNull()) {
-                        throw new ContextualError(ContextualError.ASSIGN_NOT_COMPATIBLE, getLocation());
+                        throw new ContextualError(ContextualError.ASSIGN_NOT_COMPATIBLE + " (" + expectedType.toString() + "," + type2.toString() + ")", getLocation());
                     }
                 } else {
-                    throw new ContextualError(ContextualError.ASSIGN_NOT_COMPATIBLE, getLocation());
+                    throw new ContextualError(ContextualError.ASSIGN_NOT_COMPATIBLE + " (" + expectedType.toString() + ","  + type2.toString() + ")" , getLocation());
                 }
             }
             else {
@@ -120,7 +120,7 @@ public abstract class AbstractExpr extends AbstractInst {
         LOG.debug("verify AbstractExpr Print : start");
         type = verifyExpr(compiler, localEnv, currentClass);
         if (!type.isInt() && !type.isFloat() && !type.isString()) {
-            throw new ContextualError(ContextualError.PRINT_EXPR_NOT_COMPATIBLE, this.getLocation());
+            throw new ContextualError(ContextualError.PRINT_EXPR_NOT_COMPATIBLE + " (given type :" + type.toString() + ")", this.getLocation());
         }
         LOG.debug("verify AbstractExpr print : end");
     }

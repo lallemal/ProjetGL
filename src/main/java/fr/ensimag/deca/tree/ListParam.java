@@ -17,7 +17,11 @@ import java.io.PrintStream;
  *
  * @author louise
  */
-public class ListParam extends TreeList<DeclParam> {
+public class ListParam extends TreeList<AbstractDeclParam> {
+    
+    public void verifyListDeclField(DecacCompiler compiler) throws ContextualError {
+        throw new UnsupportedOperationException("not yet implemented");
+    }
 
     @Override
     public void decompile(IndentPrintStream s) {

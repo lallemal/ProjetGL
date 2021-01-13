@@ -508,7 +508,7 @@ list_classes returns[ListDeclClass tree]
 class_decl returns[DeclClass tree]
     : CLASS name=ident superclass=class_extension OBRACE class_body CBRACE {
             assert($name.tree != null);
-            $tree = new DeclClass($name.tree, $superclass.tree, $class_body.tree);
+            $tree = new DeclClass($name.tree, $superclass.tree, $class_body.list_field, $class_body.list_meth);
             setLocation($tree, $name.start);
         }
     ;
@@ -524,7 +524,7 @@ class_extension returns[AbstractIdentifier tree]
     ;
 
 
-class_body returns[DeclClassBody tree ,ListDeclMethod list_meth, ListDeclField list_field]
+class_body returns[ListDeclMethod list_meth, ListDeclField list_field]
 @init {
        $list_meth = new ListDeclMethod();
        $list_field = new ListDeclField();
@@ -535,7 +535,6 @@ class_body returns[DeclClassBody tree ,ListDeclMethod list_meth, ListDeclField l
       | decl_field_set[$list_field]{
       }
       )*{
-      $tree = new DeclClassBody($list_meth, $list_field);
       }
     ;
 
@@ -584,15 +583,19 @@ decl_field[AbstractIdentifier t, Visibility v] returns[DeclField tree]
 
 decl_method returns[DeclMethod tree]
 @init {
+        
 }
     : type ident OPARENT params=list_params CPARENT (block {
-        }
-      | ASM OPARENT code=multi_line_string CPARENT SEMI {
-        }
-      ) {
             assert($type.tree != null);
             assert($ident.tree != null);
-            $tree = new DeclMethod($type.tree, $ident.tree, $params.tree, $block.insts);
+            $tree = new DeclMethod($type.tree, $ident.tree, $params.tree, new MethodBody($block.decls, $block.insts));
+        }
+      | ASM OPARENT code=multi_line_string CPARENT SEMI {
+            assert($type.tree != null);
+            assert($ident.tree != null);
+            $tree = new DeclMethod($type.tree, $ident.tree, $params.tree, new MethodAsmBody(new StringLiteral($code.text)));
+        }
+      ) {
             setLocation($tree, $type.start);
         }
     ;

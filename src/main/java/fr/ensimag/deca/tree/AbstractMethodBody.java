@@ -7,24 +7,14 @@ package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ContextualError;
-import fr.ensimag.deca.tools.IndentPrintStream;
 
 /**
  *
  * @author louise
  */
-public class ListDeclField extends TreeList<AbstractDeclField>{
+public abstract class AbstractMethodBody extends Tree {
     
-    public void verifyListDeclField(DecacCompiler compiler) throws ContextualError {
+    public void verifyMethodBody(DecacCompiler compiler) throws ContextualError {
         throw new UnsupportedOperationException("not yet implemented");
     }
-
-    @Override
-    public void decompile(IndentPrintStream s) {
-        for (DeclField c : getList()) {
-            c.decompile(s);
-            s.println();
-        }
-    }
-
 }

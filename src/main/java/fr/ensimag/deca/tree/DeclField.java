@@ -5,6 +5,10 @@
  */
 package fr.ensimag.deca.tree;
 
+import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.context.ClassDefinition;
+import fr.ensimag.deca.context.ContextualError;
+import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import java.io.PrintStream;
 
@@ -12,7 +16,7 @@ import java.io.PrintStream;
  *
  * @author louise
  */
-public class DeclField extends Tree{
+public class DeclField extends AbstractDeclField{
     
     private Visibility visib;
     private AbstractIdentifier type;
@@ -48,6 +52,11 @@ public class DeclField extends Tree{
         type.iter(f);
         name.iter(f);
         init.iter(f);
+    }
+
+    @Override
+    protected void verifyDeclField(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass) throws ContextualError {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

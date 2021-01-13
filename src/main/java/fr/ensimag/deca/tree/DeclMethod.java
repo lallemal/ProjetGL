@@ -17,25 +17,20 @@ import java.io.PrintStream;
  *
  * @author louise
  */
-public class DeclMethod extends AbstractExpr {
+public class DeclMethod extends AbstractDeclMethod {
     
     private AbstractIdentifier type;
     private AbstractIdentifier name;
     private ListParam param;
-    private ListInst body;
+    private AbstractMethodBody body;
     
-    public DeclMethod(AbstractIdentifier type, AbstractIdentifier name, ListParam param, ListInst body){
+    public DeclMethod(AbstractIdentifier type, AbstractIdentifier name, ListParam param, AbstractMethodBody body){
         assert(type != null);
         assert(name != null);
         this.type = type;
         this.name = name;
         this.param = param;
         this.body = body;
-    }
-
-    @Override
-    public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass) throws ContextualError {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -79,6 +74,11 @@ public class DeclMethod extends AbstractExpr {
             body.iterChildren(f);
         }
     }
-    
+
+    @Override
+    protected void verifyDeclMethod(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass) throws ContextualError {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     
 }

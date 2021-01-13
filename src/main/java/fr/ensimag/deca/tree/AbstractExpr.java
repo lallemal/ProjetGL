@@ -7,6 +7,8 @@ import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.DAddr;
 import fr.ensimag.ima.pseudocode.DVal;
 import fr.ensimag.ima.pseudocode.Label;
+import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.instructions.STORE;
 import fr.ensimag.ima.pseudocode.instructions.WFLOAT;
 import fr.ensimag.ima.pseudocode.instructions.WFLOATX;
 import fr.ensimag.ima.pseudocode.instructions.WINT;
@@ -172,7 +174,8 @@ public abstract class AbstractExpr extends AbstractInst {
     }
     
     protected void codeGenDecl(DecacCompiler compiler, DAddr address) {
-    	//throw new UnsupportedOperationException("not yet implemented");
+    	this.codeExp(compiler, 2);
+    	compiler.addInstruction(new STORE(Register.getR(2), address));
     }
 
     @Override

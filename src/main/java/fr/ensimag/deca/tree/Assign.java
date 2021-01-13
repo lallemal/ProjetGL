@@ -39,6 +39,7 @@ public class Assign extends AbstractBinaryExpr {
     
     @Override
     protected void codeGenInst(DecacCompiler compiler) {
+    	System.out.println("coucou");
         Identifier x = (Identifier) this.getLeftOperand();
         AbstractExpr e = this.getRightOperand();
         e.codeExp(compiler, 2);

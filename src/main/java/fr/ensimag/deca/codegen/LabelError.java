@@ -26,11 +26,11 @@ public class LabelError {
 	}
 	
 	public void setErrorMod0(boolean b) {
-		errorDiv0 = b;
+		errorMod0 = b;
 	}
 	
 	public Label getLabelErrorMod0() {
-		return div0;
+		return mod0;
 	}
 	
 	public void setErrorReadInt(boolean b) {

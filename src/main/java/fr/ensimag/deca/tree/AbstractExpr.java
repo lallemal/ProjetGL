@@ -97,7 +97,9 @@ public abstract class AbstractExpr extends AbstractInst {
                 }
             }
             else {
-                return new ConvFloat(this);
+                AbstractExpr floatNew = new ConvFloat(this);
+                floatNew.verifyExpr(compiler, localEnv, currentClass);
+                return floatNew;
             }
         }
         LOG.debug("verify AbstractExpr Rvalue : end");

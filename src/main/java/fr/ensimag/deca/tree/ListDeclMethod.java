@@ -17,8 +17,11 @@ import java.io.PrintStream;
  *
  * @author louise
  */
-public class ListDeclMethod extends TreeList<DeclMethod>{
+public class ListDeclMethod extends TreeList<AbstractDeclMethod>{
 
+    public void verifyListDeclMethod(DecacCompiler compiler) throws ContextualError {
+        throw new UnsupportedOperationException("not yet implemented");
+    }
     
     @Override
     public void decompile(IndentPrintStream s) {

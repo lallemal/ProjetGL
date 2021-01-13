@@ -23,7 +23,7 @@ import java.io.PrintStream;
  *
  * @author louise
  */
-public class DeclParam extends Tree{
+public class DeclParam extends AbstractDeclParam{
     
     private AbstractIdentifier type;
     private AbstractIdentifier name;
@@ -46,6 +46,11 @@ public class DeclParam extends Tree{
 
     @Override
     protected void iterChildren(TreeFunction f) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    protected void verifyDeclParam(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass) throws ContextualError {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

@@ -16,12 +16,15 @@ public class DeclClass extends AbstractDeclClass {
         
     private AbstractIdentifier ident;
     private AbstractIdentifier parent;
-    private DeclClassBody body;
+    private ListDeclField field;
+    private ListDeclMethod method;
     
-    public DeclClass(AbstractIdentifier ident, AbstractIdentifier parent, DeclClassBody body){
+    
+    public DeclClass(AbstractIdentifier ident, AbstractIdentifier parent, ListDeclField field, ListDeclMethod method){
         this.ident = ident;
         this.parent = parent;
-        this.body = body;
+        this.field = field;
+        this.method = method;
     }
 
     @Override
@@ -52,8 +55,11 @@ public class DeclClass extends AbstractDeclClass {
         if (parent != null){
             parent.prettyPrint(s, prefix, false);
         }
-        if (body != null){
-            body.prettyPrintChildren(s, prefix);
+        if (field != null){
+            field.prettyPrintChildren(s, prefix);
+        }
+        if (method != null){
+            method.prettyPrintChildren(s, prefix);
         }
     }
 

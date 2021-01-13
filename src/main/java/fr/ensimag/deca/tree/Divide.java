@@ -20,7 +20,7 @@ public class Divide extends AbstractOpArith {
         super(leftOperand, rightOperand);
     }
     
-    public void mnemo(DecacCompiler compiler, DVal dval, int n) {
+    protected void mnemo(DecacCompiler compiler, DVal dval, int n) {
     	compiler.getLabelError().setErrorDiv0(true);
     	compiler.addInstruction(new LOAD(dval, Register.R0));
     	if (this.getRightOperand().getType().isFloat()) {

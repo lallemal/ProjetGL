@@ -12,6 +12,10 @@ public class LabelError {
 	private Label div0;
 	private boolean errorMod0;
 	private Label mod0;
+	private boolean errorReadInt;
+	private Label errorRINT;
+	private boolean errorReadFloat;
+	private Label errorRFLOAT;
 	
 	public void setErrorDiv0(boolean b) {
 		errorDiv0 = b;
@@ -29,11 +33,31 @@ public class LabelError {
 		return div0;
 	}
 	
+	public void setErrorReadInt(boolean b) {
+		errorReadInt = b;
+	}
+	
+	public Label getLabelErrorRINT() {
+		return errorRINT;
+	}
+	
+	public void setErrorReadFloat(boolean b) {
+		errorReadFloat = b;
+	}
+	
+	public Label getLabelErrorRFLOAT() {
+		return errorRFLOAT;
+	}
+	
 	public LabelError() {
 		errorDiv0 = false;
 		div0 = new Label("division_par_zero");
 		errorMod0 = false;
-		mod0 = new Label("division_par_zero");
+		mod0 = new Label("modulo_zero");
+		errorReadInt = false;
+		errorRINT = new Label("error_read_int");
+		errorReadFloat = false;
+		errorRFLOAT = new Label("error_read_float");
 	}
 	
 	public void codeGenLabelError(DecacCompiler compiler) {
@@ -42,6 +66,12 @@ public class LabelError {
 		}
 		if (errorMod0) {
 			addError(compiler, mod0, "modulo zero", "Erreur : reste entier par zero impossible");
+		}
+		if (errorReadInt) {
+			addError(compiler, errorRINT, "lecture entier", "Erreur : un entier est attendu");
+		}
+		if (errorReadFloat) {
+			addError(compiler, errorRFLOAT, "lecture flottant", "Erreur : un float est attendu");
 		}
 	}
 	

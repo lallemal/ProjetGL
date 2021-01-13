@@ -74,7 +74,7 @@ public abstract class AbstractOpArith extends AbstractBinaryExpr {
     	}
     }
     
-    public void mnemo(DecacCompiler compiler, DVal dval, int n) {
+    protected void mnemo(DecacCompiler compiler, DVal dval, int n) {
     	
     }
 }

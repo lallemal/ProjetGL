@@ -15,7 +15,7 @@ public class Multiply extends AbstractOpArith {
     }
 
     @Override
-    public void mnemo(DecacCompiler compiler, DVal dval, int n) {
+	protected void mnemo(DecacCompiler compiler, DVal dval, int n) {
     	compiler.addInstruction(new MUL(dval, Register.getR(n)));
     }
 

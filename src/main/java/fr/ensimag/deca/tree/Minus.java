@@ -15,7 +15,7 @@ public class Minus extends AbstractOpArith {
     }
 
     @Override
-    public void mnemo(DecacCompiler compiler, DVal dval, int n) {
+	protected void mnemo(DecacCompiler compiler, DVal dval, int n) {
     	compiler.addInstruction(new SUB(dval, Register.getR(n)));
     }
 

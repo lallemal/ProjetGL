@@ -35,7 +35,7 @@ public class Modulo extends AbstractOpArith {
         return type1;
     }
 
-    public void mnemo(DecacCompiler compiler, DVal dval, int n) {
+    protected void mnemo(DecacCompiler compiler, DVal dval, int n) {
     	compiler.getLabelError().setErrorDiv0(true);
     	compiler.addInstruction(new LOAD(dval, Register.R0));
     	compiler.addInstruction(new CMP(0, Register.R0));

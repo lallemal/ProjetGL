@@ -195,8 +195,6 @@ public class Identifier extends AbstractIdentifier {
     			compiler.addInstruction(new LOAD(this.getExpDefinition().getOperand(), Register.R1));
     			compiler.addInstruction(new WFLOAT());
     		}
-    	} else if (type.isString()) {
-    		//TODO
     	}
     }
     

@@ -1,0 +1,10 @@
+// Test different type for print and println with decompilation
+
+
+{
+
+    print(23);
+    print(2.23);
+    println("hello");
+
+}

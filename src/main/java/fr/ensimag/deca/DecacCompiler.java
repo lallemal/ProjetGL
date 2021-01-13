@@ -211,7 +211,12 @@ public class DecacCompiler {
             return true;
         }
         assert(prog.checkAllLocations());
-
+        
+        if (compilerOptions.getParse()){
+            prog.decompile(out);
+            LOG.info("the decompilation of the programm is done");
+            return false;
+        }
 
         prog.verifyProgram(this);
         prog.checkAllDecorations();

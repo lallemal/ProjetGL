@@ -1,0 +1,8 @@
+// Test printx and printlnx for decompilation
+
+
+{
+    printx("23");
+    printlnx(23);
+
+}

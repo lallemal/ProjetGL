@@ -1,0 +1,13 @@
+// Test multiple while in cascade
+
+
+{
+    int i = 0;
+    int j = 0;
+    while ( i != 2){
+        i = i + 1;
+        while (j != 2){
+            j = j + 1;
+        }
+    }
+}

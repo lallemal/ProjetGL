@@ -8,6 +8,7 @@
 	float resultMK;
 	
 	int m = 1;
+	float mf = 1.0;
 	int j = 2;
 	float k = 2; 
 	
@@ -17,21 +18,21 @@
 	float r = 2.7;
 	float u = 3.4;
 	
-	println(" --- TEST de la disvision --- ");
+	println(" --- TEST de la division --- ");
 	
 	resultAB = a / b; 
-	println("Division de a=9 par b =3: 3 == ", resultAB);
+	println("Division de a = 9 par b = 3: 3 == ", resultAB);
 	
 	resultMJ = m / j;
-	println("Divisiion de l'entier m = 1 par l'entier j =2: 0 == ", resultMJ);
+	println("Division de l'entier m = 1 par l'entier j = 2: 0 == ", resultMJ);
+
+	resultMK = mf / k;
+	println("Division de l'entier mf = 1 par l'entier k = 2: 0 == ", resultMK);
 	
-	resultMK = m / k;
-	println("Divisiion de l'entier m = 1 par le float k =2: 0 == ", resultMK);
+	println("Division de 3 par 2  dans le print: 1 ==", (3/2));
 	
-	println("Division de 3 par 2  dans le print: 3 ==", (3/2));
+	println("Division de 3.0 par 2.0  dans le print: 1.5 ==", (3.0/2));
 	
-	println("Division de r=2.7 par u=3.4: 0.79411765 ==", (r/u);
-	
-	
+	println("Division de r=2.7 par u=3.4: 0.79411765 ==", (r/u));
 	
 }

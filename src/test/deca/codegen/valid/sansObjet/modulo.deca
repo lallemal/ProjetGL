@@ -1,15 +1,12 @@
 {
 	int n1 = 17;
-	int n2 = -2;  
+	int n2 = -12;  
 	int n3 = 4;
 	int a1 = 17;
 	
-
-	
 	int r1 = a1 % n1;
-	println("17 modolo 17: 0 ==", r1);
-	println("17 modulo -2: 1 == ", (a1 % n2));
-	println("17 modolo 4: 1 ==", (a1 % n3));
-	
-
+	println("17 modulo 17: 0 ==", r1);
+	println("17 modulo -12: 1 == ", (a1 % n2));
+	println("17 modulo 4: 1 ==", (a1 % n3));
+	println("17 modulo 39: 17 ==", (17%39));
 }

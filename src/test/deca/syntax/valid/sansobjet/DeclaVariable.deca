@@ -1,0 +1,6 @@
+// ListeDesClasse ListDecVar ListInst
+// Description: test empt mainprogram
+// Resultat: OK 
+{
+    int i, j, k = 10000000000000000;
+}

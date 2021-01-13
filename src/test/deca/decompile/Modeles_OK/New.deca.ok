@@ -1,8 +1,8 @@
 [New.deca]
 class Thing {
-	PUBLIC int i= new Objet;
+	PUBLIC int i=new Objet;
 
 }
 {
-	Thing i= new Thing;
+	Thing i=new Thing;
 }

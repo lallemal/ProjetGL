@@ -22,13 +22,13 @@ public class MethodAsmBody extends AbstractMethodBody {
     
     @Override
     public void decompile(IndentPrintStream s) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        cont.decompile(s);
     }
 
  
     @Override
     protected void iterChildren(TreeFunction f) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        cont.iter(f);
     }
 
     @Override

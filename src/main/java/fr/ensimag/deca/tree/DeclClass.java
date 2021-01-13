@@ -36,12 +36,16 @@ public class DeclClass extends AbstractDeclClass {
             parent.decompile(s);
         }
         s.println(" {");
-        if (body != null){
-            s.indent();
-            body.decompile(s);
-            s.unindent();
+        s.indent();
+        if (field != null){
+            field.decompile(s);
         }
-        s.print('}');
+        s.println();
+        if (method != null){
+            method.decompile(s);
+        }
+        s.unindent();
+        s.print("}");
     }
 
     @Override
@@ -81,8 +85,11 @@ public class DeclClass extends AbstractDeclClass {
         if (parent != null){
             parent.iter(f);
         }
-        if (body != null){
-            body.iterChildren(f);
+        if (field != null){
+            field.iterChildren(f);
+        }
+        if (method != null){
+            method.iterChildren(f);
         }
     }
 

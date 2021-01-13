@@ -25,7 +25,7 @@ public class ListDeclMethod extends TreeList<AbstractDeclMethod>{
     
     @Override
     public void decompile(IndentPrintStream s) {
-        for (DeclMethod c : getList()) {
+        for (AbstractDeclMethod c : getList()) {
             c.decompile(s);
             s.println();
         }

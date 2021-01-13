@@ -22,7 +22,7 @@ public class New extends AbstractUnaryExpr{
         
         @Override
         public void decompile(IndentPrintStream s){
-            s.print(" new ");
+            s.print("new ");
             this.getOperand().decompile(s);
         }
 

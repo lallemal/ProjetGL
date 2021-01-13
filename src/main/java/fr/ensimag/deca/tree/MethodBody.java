@@ -23,9 +23,8 @@ public class MethodBody extends AbstractMethodBody {
     }
     @Override
     public void decompile(IndentPrintStream s) {
-        field.decompile(s);
-        s.println();
-        method.decompile(s);
+        var.decompile(s);
+        inst.decompile(s);
     }
 
     @Override
@@ -36,11 +35,11 @@ public class MethodBody extends AbstractMethodBody {
 
     @Override
     protected void iterChildren(TreeFunction f) {
-        if (field != null){
-            field.iterChildren(f);
+        if (var != null){
+            var.iterChildren(f);
         }
-        if (method != null){
-            method.iterChildren(f);
+        if (inst != null){
+            inst.iterChildren(f);
         }
     }
     

@@ -5,6 +5,7 @@
 
     x = 1;
     z = x + y;
+    z = z + 1;
     println(z);
 
 }

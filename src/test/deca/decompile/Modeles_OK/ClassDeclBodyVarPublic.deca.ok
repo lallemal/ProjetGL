@@ -1,0 +1,5 @@
+[ClassDeclBodyVarPublic.deca]
+class Thing {
+	PUBLIC int i;
+
+}

@@ -1,0 +1,4 @@
+[DecompilationWithType.deca]
+{
+	println("hello");
+}

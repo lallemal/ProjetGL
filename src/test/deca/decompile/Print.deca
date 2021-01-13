@@ -1,0 +1,6 @@
+// Test avec un print avec argument
+
+{
+        print("Hello");
+}
+

@@ -1,0 +1,8 @@
+[DeclClassBodyMethodWithcontent.deca]
+class Thing {
+
+	int getI() {
+		print(i);
+	}
+
+}

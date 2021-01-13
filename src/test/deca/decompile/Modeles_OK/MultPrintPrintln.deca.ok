@@ -1,0 +1,7 @@
+[MultPrintPrintln.deca]
+{
+	print("Hello");
+	println("Are");
+	print("You");
+	println("Ok?");
+}

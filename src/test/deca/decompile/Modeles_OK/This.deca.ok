@@ -1,0 +1,9 @@
+[This.deca]
+class Thing {
+	PUBLIC int i;
+
+	int getI() {
+		(this.i = i);
+	}
+
+}

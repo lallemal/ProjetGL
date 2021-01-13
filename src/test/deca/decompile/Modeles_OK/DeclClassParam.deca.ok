@@ -1,0 +1,8 @@
+[DeclClassParam.deca]
+class Thing {
+
+	int getI(int i) {
+		print("cool");
+	}
+
+}

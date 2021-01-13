@@ -1,0 +1,7 @@
+[DeclClassBodyempty.deca]
+class Thing {
+
+	int getI() {
+	}
+
+}

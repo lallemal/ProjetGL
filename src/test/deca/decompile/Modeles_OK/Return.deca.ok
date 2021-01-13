@@ -1,0 +1,13 @@
+[Return.deca]
+class Thing {
+	PUBLIC int i;
+
+	int getI() {
+		return i;
+	}
+
+}
+{
+	int i=0;
+	return i;
+}

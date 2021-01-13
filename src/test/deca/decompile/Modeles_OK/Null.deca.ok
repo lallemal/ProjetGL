@@ -1,0 +1,8 @@
+[Null.deca]
+class Thing {
+	PUBLIC int i= null ;
+
+}
+{
+	int j= null ;
+}

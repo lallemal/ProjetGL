@@ -1,0 +1,9 @@
+[ClassDeclBodyMeth.deca]
+class Thing {
+	PROTECTED int i;
+
+	int getI() {
+		return i;
+	}
+
+}

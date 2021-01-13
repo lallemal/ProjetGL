@@ -1,0 +1,13 @@
+[DeclClassBodyEmptyMult.deca]
+class Thing {
+
+	int getI() {
+	}
+
+	int getJ() {
+	}
+
+	int getW() {
+	}
+
+}

@@ -1,0 +1,13 @@
+//Test pour de multiple déclaration de méthode dans une classe
+
+class Thing {
+    
+    int getI(){
+    }
+    
+    int getJ(){
+    }
+
+    int getW(){
+    }
+}

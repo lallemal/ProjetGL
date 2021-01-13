@@ -1,4 +1,9 @@
-//Test declaration of class but with no real body in a method
+// Description :
+//    test décompilation déclaration d'une classe avec method sans body
+//
+// Resultats (en comparaison avec le résultat attendu 
+// disponible dans le fichier *.deca.ok dans le dossier Modeles_OK) :
+//    ok
 
 class Thing {
     

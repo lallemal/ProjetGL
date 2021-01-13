@@ -1,4 +1,9 @@
-//Test return dans main et classe
+// Description :
+//    test décompilation return dans classe et main
+//
+// Resultats (en comparaison avec le résultat attendu 
+// disponible dans le fichier *.deca.ok dans le dossier Modeles_OK) :
+//    ok
 
 class Thing {
 

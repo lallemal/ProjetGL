@@ -1,4 +1,9 @@
-// Test multiple declaration of variables with no init
+// Description :
+//    test décompilation main, déclaration multiple de variables
+//
+// Resultats (en comparaison avec le résultat attendu 
+// disponible dans le fichier *.deca.ok dans le dossier Modeles_OK) :
+//    ok
 
 {
     int i = 1, j = i;

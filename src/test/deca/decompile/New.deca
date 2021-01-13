@@ -1,4 +1,9 @@
-//Test new
+// Description :
+//    test décompilation new dans main et classe
+//
+// Resultats (en comparaison avec le résultat attendu 
+// disponible dans le fichier *.deca.ok dans le dossier Modeles_OK) :
+//    ok
 
 class Thing {
 

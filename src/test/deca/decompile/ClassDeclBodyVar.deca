@@ -1,4 +1,9 @@
-//Test of class declaration with body and without extension
+// Description :
+//    test décompilation déclaration d'une classe avec body(field seulement) sans extension
+//
+// Resultats (en comparaison avec le résultat attendu 
+// disponible dans le fichier *.deca.ok dans le dossier Modeles_OK) :
+//    ok
 
 class Thing {
     protected int i;

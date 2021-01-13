@@ -1,4 +1,9 @@
-//Test of class declaration with body and without extension with multiple fields
+// Description :
+//    test décompilation déclaration d'une classe avec field multiples
+//
+// Resultats (en comparaison avec le résultat attendu 
+// disponible dans le fichier *.deca.ok dans le dossier Modeles_OK) :
+//    ok
 
 class Thing {
     protected int i = 0, j = 1;

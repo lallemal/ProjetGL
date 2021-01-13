@@ -1,4 +1,9 @@
-// Un exemple de programme Deca
+// Description :
+//    test décompilation Test Objet exemple du poly
+//
+// Resultats (en comparaison avec le résultat attendu 
+// disponible dans le fichier *.deca.ok dans le dossier Modeles_OK) :
+//    ok
 
 class A {
     protected int x ;

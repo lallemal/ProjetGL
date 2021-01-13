@@ -1,4 +1,9 @@
-// Test of while
+// Description :
+//    test décompilation while
+//
+// Resultats (en comparaison avec le résultat attendu 
+// disponible dans le fichier *.deca.ok dans le dossier Modeles_OK) :
+//    ok
 
 
 {

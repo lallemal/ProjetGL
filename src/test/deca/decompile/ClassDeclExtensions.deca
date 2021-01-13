@@ -1,4 +1,9 @@
-//Test class declaration with extension and without body
+// Description :
+//    test décompilation déclaration d'une classe sans body avec extension
+//
+// Resultats (en comparaison avec le résultat attendu 
+// disponible dans le fichier *.deca.ok dans le dossier Modeles_OK) :
+//    ok
 
 class Thing extends Objet {
 }

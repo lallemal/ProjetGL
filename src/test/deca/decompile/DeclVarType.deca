@@ -1,4 +1,9 @@
-// Test for the different type in a declaration of variable
+// Description :
+//    test décompilation déclaration multiple de variable de type multiples
+//
+// Resultats (en comparaison avec le résultat attendu 
+// disponible dans le fichier *.deca.ok dans le dossier Modeles_OK) :
+//    ok
 
 {
     int x = 2;

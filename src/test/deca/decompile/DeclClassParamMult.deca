@@ -1,4 +1,9 @@
-//Test pour de mutliple paramètres dans la déclaration d'une fonction
+// Description :
+//    test décompilation déclaration méthode avec multiple paramètre
+//
+// Resultats (en comparaison avec le résultat attendu 
+// disponible dans le fichier *.deca.ok dans le dossier Modeles_OK) :
+//    ok
 
 class Thing {
 

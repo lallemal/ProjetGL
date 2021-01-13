@@ -1,5 +1,9 @@
-// Description : Programme en sans objet avec variable, if elseif else, >, <, minus, et print, while.
-// Resultat : OK
+// Description :
+//    Programme en sans objet avec variable, if elseif else, >, <, minus, et print, while.
+//
+// Resultats (en comparaison avec le résultat attendu 
+// disponible dans le fichier *.deca.ok dans le dossier Modeles_OK) :
+//    ok
 
 
 {

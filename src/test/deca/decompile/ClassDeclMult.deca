@@ -1,4 +1,9 @@
-//Test multiple declaration of class but with no body and no extends
+// Description :
+//    test décompilation multiple déclaration de classe
+//
+// Resultats (en comparaison avec le résultat attendu 
+// disponible dans le fichier *.deca.ok dans le dossier Modeles_OK) :
+//    ok
 
 class Bla{
 }

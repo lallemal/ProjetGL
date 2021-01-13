@@ -1,4 +1,9 @@
-//test this
+// Description :
+//    test décompilation this et selection
+//
+// Resultats (en comparaison avec le résultat attendu 
+// disponible dans le fichier *.deca.ok dans le dossier Modeles_OK) :
+//    ok
 
 class Thing {
 

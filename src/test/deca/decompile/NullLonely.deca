@@ -1,4 +1,9 @@
-//Null seul
+// Description :
+//    test décompilation null seulement
+//
+// Resultats (en comparaison avec le résultat attendu 
+// disponible dans le fichier *.deca.ok dans le dossier Modeles_OK) :
+//    ok
 
 {
     null ;

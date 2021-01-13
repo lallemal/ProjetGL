@@ -1,5 +1,9 @@
-// Test avec plusieurs print et println entre les accolades
-
+// Description :
+//    test décompilation multiples print et println
+//
+// Resultats (en comparaison avec le résultat attendu 
+// disponible dans le fichier *.deca.ok dans le dossier Modeles_OK) :
+//    ok
 {
         print("Hello");
         println("Are");

@@ -1,4 +1,9 @@
-// Test for mutliple if then else in cascade
+// Description :
+//    test décompilation if et else en cascade
+//
+// Resultats (en comparaison avec le résultat attendu 
+// disponible dans le fichier *.deca.ok dans le dossier Modeles_OK) :
+//    ok
 
 
 {

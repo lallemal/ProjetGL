@@ -1,6 +1,7 @@
 package fr.ensimag.deca;
 
 import fr.ensimag.deca.codegen.LabelError;
+
 import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.syntax.DecaLexer;
 import fr.ensimag.deca.syntax.DecaParser;

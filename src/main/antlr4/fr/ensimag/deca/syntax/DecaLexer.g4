@@ -47,7 +47,7 @@ IF : 'if';
 ELSE : 'else';
 FALSE : 'false';
 TRUE : 'true';
-READINT : 'readint';
+READINT : 'readInt';
 READFLOAT : 'readFloat';
 PRINTLNX : 'printlnx';
 PRINTX : 'printx';

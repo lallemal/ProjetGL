@@ -34,6 +34,12 @@ public class CompilerOptions {
     public boolean getParse(){
         return parse;
     }
+
+	public int getrMax() {
+		return rMax;
+	}
+
+	public boolean getVerif() {return verif;}
     
     public List<File> getSourceFiles() {
         return Collections.unmodifiableList(sourceFiles);
@@ -43,6 +49,8 @@ public class CompilerOptions {
     private boolean parallel = false;
     private boolean printBanner = false;
     private boolean parse = false;
+    private boolean verif = false;
+    private int rMax = 16;
     private List<File> sourceFiles = new ArrayList<File>();
 
     
@@ -63,14 +71,29 @@ public class CompilerOptions {
     	for (int i = 0; i < args.length; i++) {
     		switch(args[i]) {
     			case "-p":
+    				if (verif) {
+    					throw new CLIException("parse option is not compatible with verification option");
+					}
     				parse = true;
-                                break;
+					break;
     			case "-v":
-    				throw new UnsupportedOperationException("verification is not yet implemented");
+    				if (parse) {
+    					throw new CLIException("verification option is not compatible with parse option");
+
+					}
     			case "-n":
     				throw new UnsupportedOperationException("no check is not yet implemented");
     			case "-r":
-    				throw new UnsupportedOperationException("register is not yet implemented");
+    			    if (i+1 < args.length) {
+    			    	int rmax = Integer.parseInt(args[i+1]);
+    			    	if (4 <= rmax  && rmax <= 16 ) {
+							rMax = rmax;
+						} else {
+    			    		throw new CLIException("number of maximum registers has to be between 4 and 16");
+						}
+					} else {
+    			    	throw new CLIException("-r has to be followed by the maximum number of registers usable");
+					}
     			case "-d":
     				if (debug == TRACE) {
     					throw new CLIException("Too much -d option : This level of debugging does not exist");

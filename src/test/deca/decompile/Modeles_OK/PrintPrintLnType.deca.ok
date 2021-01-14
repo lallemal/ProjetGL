@@ -1,4 +1,3 @@
-[PrintPrintLnType.deca]
 {
 	print(23);
 	print(0x1.eb851ep-4);

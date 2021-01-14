@@ -1,0 +1,10 @@
+{
+    int x = 4;
+    int y = 3;
+
+    println("bonjour");
+    println("bonjour\n");
+    println("x");
+    println(x);
+    println("x+y", x+y);
+}

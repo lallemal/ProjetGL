@@ -1,4 +1,4 @@
 // Test d'un entier trop grand
 // sortie IllegalArgument line 1
-2147483649
+2147483648
 

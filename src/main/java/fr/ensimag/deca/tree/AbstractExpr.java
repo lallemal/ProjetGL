@@ -4,6 +4,15 @@ import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.tools.DecacInternalError;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.DAddr;
+import fr.ensimag.ima.pseudocode.DVal;
+import fr.ensimag.ima.pseudocode.Label;
+import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.instructions.STORE;
+import fr.ensimag.ima.pseudocode.instructions.WFLOAT;
+import fr.ensimag.ima.pseudocode.instructions.WFLOATX;
+import fr.ensimag.ima.pseudocode.instructions.WINT;
+
 import org.apache.commons.lang.Validate;
 import org.apache.log4j.Logger;
 
@@ -87,12 +96,17 @@ public abstract class AbstractExpr extends AbstractInst {
             if (!expectedType.isFloat() && !type2.isInt()) {
                 if (type2.isClass() && expectedType.isClass() && (!(((ClassType) expectedType).isSubClassOf((ClassType) type2)))) {
                     if (!type2.isNull()) {
-                        throw new ContextualError(ContextualError.ASSIGN_NOT_COMPATIBLE, getLocation());
+                        throw new ContextualError(ContextualError.ASSIGN_NOT_COMPATIBLE + " (" + expectedType.toString() + "," + type2.toString() + ")", getLocation());
                     }
+                } else {
+                    throw new ContextualError(ContextualError.ASSIGN_NOT_COMPATIBLE + " (" + expectedType.toString() + ","  + type2.toString() + ")" , getLocation());
                 }
             }
             else {
-                return new ConvFloat(this);
+                AbstractExpr floatNew = new ConvFloat(this);
+                floatNew.verifyExpr(compiler, localEnv, currentClass);
+                LOG.debug("verify AbstractExpr Rvalue : end");
+                return floatNew;
             }
         }
         LOG.debug("verify AbstractExpr Rvalue : end");
@@ -114,8 +128,8 @@ public abstract class AbstractExpr extends AbstractInst {
             throws ContextualError {
         LOG.debug("verify AbstractExpr Print : start");
         type = verifyExpr(compiler, localEnv, currentClass);
-        if (type != compiler.getInt() && type != compiler.getFloat() && type != compiler.getString()) {
-            throw new ContextualError(ContextualError.PRINT_EXPR_NOT_COMPATIBLE, this.getLocation());
+        if (!type.isInt() && !type.isFloat() && !type.isString()) {
+            throw new ContextualError(ContextualError.PRINT_EXPR_NOT_COMPATIBLE + " (given type :" + type.toString() + ")", this.getLocation());
         }
         LOG.debug("verify AbstractExpr print : end");
     }
@@ -144,15 +158,41 @@ public abstract class AbstractExpr extends AbstractInst {
      *
      * @param compiler
      */
-    protected void codeGenPrint(DecacCompiler compiler) {
-        throw new UnsupportedOperationException("not yet implemented");
+
+    protected void codeGenPrint(DecacCompiler compiler, boolean printHex) {
+    	this.codeExp(compiler, 1);
+    	if (this.getType().isInt()) {
+    		compiler.addInstruction(new WINT());
+    	} else if (this.getType().isFloat()) {
+    		if (printHex) {
+    			compiler.addInstruction(new WFLOATX());
+    		} else {
+    			compiler.addInstruction(new WFLOAT());
+    		}
+    	} else {
+    		//nothing to do
+    	}
+    }
+    
+    protected void codeGenDecl(DecacCompiler compiler, DAddr address) {
+    	this.codeExp(compiler, 2);
+    	compiler.addInstruction(new STORE(Register.getR(2), address));
     }
 
     @Override
     protected void codeGenInst(DecacCompiler compiler) {
-        throw new UnsupportedOperationException("not yet implemented");
+        //nothing to do
     }
     
+    protected DVal dval() {
+    	return null;
+    }
+    protected void codeExp(DecacCompiler compiler, int n) {
+    	//nothing to do
+	}
+
+    protected void codeGenBranch(DecacCompiler compiler, boolean evaluate, Label label) {
+    }
 
     @Override
     protected void decompileInst(IndentPrintStream s) {

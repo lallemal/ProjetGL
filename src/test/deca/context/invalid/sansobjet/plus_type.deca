@@ -1,5 +1,6 @@
+// At least one of the members of this operation is not compatible with this operator
 // Description : Incompatibilité du plus entre deux types différents (non entier, float)
-// Resultat : Echec ligne 6 : int et true ne peuvent être multiplié.
+// Resultat : Echec ligne 7 : int et true ne peuvent être additionné.
 
 {
     int x = 5;

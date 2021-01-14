@@ -4,6 +4,9 @@ import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.deca.tools.SymbolTable;
+import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.RegisterOffset;
+
 import org.apache.commons.lang.Validate;
 import org.apache.log4j.Logger;
 
@@ -47,16 +50,24 @@ public class DeclVar extends AbstractDeclVar {
         // Do the union : reject and raise error if it already exists in this env
         try {
             localEnv.declare(name, new VariableDefinition(typeToCheck, getLocation()));
+            this.varName.setDefinition(localEnv.get(name));
         } catch (EnvironmentExp.DoubleDefException e) {
             throw new ContextualError(ContextualError.DEFINITION_ALREADY_IN_ENV, getLocation());
         }
         LOG.debug("Verify DeclVar : end");
     }
 
+    @Override
+    protected void codeGenDecl(DecacCompiler compiler) {
+    	varName.getExpDefinition().setOperand(new RegisterOffset(compiler.getKGB(), Register.GB));
+    	compiler.incrementKGB();
+    	initialization.codeGenDecl(compiler, varName.getExpDefinition().getOperand());
+    }
     
     @Override
     public void decompile(IndentPrintStream s) {
-        throw new UnsupportedOperationException("not yet implemented");
+        s.print(type.getName() + " " + varName.getName());
+        initialization.decompile(s);
     }
 
     @Override

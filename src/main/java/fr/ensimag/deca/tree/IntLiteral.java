@@ -6,6 +6,14 @@ import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.DAddr;
+import fr.ensimag.ima.pseudocode.DVal;
+import fr.ensimag.ima.pseudocode.ImmediateInteger;
+import fr.ensimag.ima.pseudocode.instructions.LOAD;
+import fr.ensimag.ima.pseudocode.instructions.WINT;
+import fr.ensimag.ima.pseudocode.instructions.STORE;
+
 import java.io.PrintStream;
 
 /**
@@ -28,10 +36,33 @@ public class IntLiteral extends AbstractExpr {
     @Override
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass) throws ContextualError {
+        setType(compiler.getInt());
         return compiler.getInt();
     }
 
-
+    @Override
+    protected DVal dval() {
+    	return new ImmediateInteger(value);
+    }
+    
+    @Override
+    protected void codeExp(DecacCompiler compiler, int n) {
+    	compiler.addInstruction(new LOAD(this.dval(), Register.getR(n)));
+    }
+    
+    @Override
+    protected void codeGenPrint(DecacCompiler compiler, boolean printHex) {
+         	int value = this.getValue();
+        	compiler.addInstruction(new LOAD(value, Register.R1));
+        	compiler.addInstruction(new WINT());
+    }
+    
+    @Override
+    protected void codeGenDecl(DecacCompiler compiler, DAddr address) {
+    	compiler.addInstruction(new LOAD(value, Register.getR(2)));
+    	compiler.addInstruction(new STORE(Register.getR(2), address));
+    }
+    
     @Override
     String prettyPrintNode() {
         return "Int (" + getValue() + ")";

@@ -1,0 +1,10 @@
+{
+    int x = 1;
+    if (x > 0) {
+        println(x);
+    } else if (x > 5) {
+        println(5);
+    } else {
+        println("ouah on est dans else");
+    }
+}

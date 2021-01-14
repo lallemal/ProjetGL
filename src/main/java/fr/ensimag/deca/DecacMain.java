@@ -17,6 +17,7 @@ public class DecacMain {
     public static void main(String[] args) {
     	
         // example log4j message.
+       
     
         LOG.info("Decac compiler started");
         boolean error = false;

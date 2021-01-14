@@ -4,6 +4,8 @@ import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
+import fr.ensimag.ima.pseudocode.instructions.STORE;
+import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.deca.context.Type;
 
 /**
@@ -30,10 +32,18 @@ public class Assign extends AbstractBinaryExpr {
             ClassDefinition currentClass) throws ContextualError {
         // TODO LeftOperand is lvalue 3.64 certainly lvalue class has to be completed
         Type type = getLeftOperand().verifyExpr(compiler, localEnv, currentClass);
-        getRightOperand().verifyRValue(compiler, localEnv, currentClass, type);
+        setRightOperand(getRightOperand().verifyRValue(compiler, localEnv, currentClass, type));
+        setType(type);
         return type;
     }
-
+    
+    @Override
+    protected void codeGenInst(DecacCompiler compiler) {
+        Identifier x = (Identifier) this.getLeftOperand();
+        AbstractExpr e = this.getRightOperand();
+        e.codeExp(compiler, 2);
+        compiler.addInstruction(new STORE(Register.getR(2), x.getExpDefinition().getOperand()));
+    }
 
     @Override
     protected String getOperatorName() {

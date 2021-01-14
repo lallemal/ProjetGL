@@ -1,8 +1,8 @@
+// The type of the variable and its assignation are not compatible
 // Description : Assignation incompatible.
-// Resultat : f=x fonctione mais echec en ligne 9, un entier ne peut etre assigné par un string
+// Resultat : Echech en ligne 7 : un string ne peut pas être initialisé ni mis en tant que variable
 
 {
     int x = 4;
-    String y = "blabl";
-    x = y;
+    x = true;
 }

@@ -1,0 +1,6 @@
+// Test for no init in a delcaration of variable
+
+
+{
+    int i;
+}

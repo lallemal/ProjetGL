@@ -1,0 +1,11 @@
+// Test if and else
+
+{
+    int i = 0;
+    if ( i == 0){
+        print("ok!");
+    }
+    else{
+        print("pas ok!");
+    }
+}

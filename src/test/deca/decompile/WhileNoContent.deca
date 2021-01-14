@@ -1,0 +1,8 @@
+// Test while with no content in it
+
+
+{
+    int i = 0;
+    while ( i != 0){
+    }
+}

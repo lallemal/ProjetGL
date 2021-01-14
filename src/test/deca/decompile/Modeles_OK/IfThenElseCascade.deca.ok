@@ -1,0 +1,19 @@
+[IfThenElseCascade.deca]
+{
+	int i=2;
+	if (i == 0) {
+		print("1er if");
+	}
+	else {
+		if (i == 1) {
+			print("2e if");
+		}
+		else {
+			if (i == 2) {
+				print("3e if");
+			}
+			else {
+			}
+		}
+	}
+}

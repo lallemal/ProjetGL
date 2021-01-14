@@ -1,0 +1,9 @@
+// Test for the different type in a declaration of variable
+
+{
+    int x = 2;
+    float y = 2.5 ;
+    string car = "Hello";
+    boolean bool = false;
+
+}

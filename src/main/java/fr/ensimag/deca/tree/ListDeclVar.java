@@ -18,7 +18,10 @@ public class ListDeclVar extends TreeList<AbstractDeclVar> {
     private static final Logger LOG = Logger.getLogger(ListDeclVar.class);
     @Override
     public void decompile(IndentPrintStream s) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        for (AbstractDeclVar i : getList()) {
+            i.decompile(s);
+            s.println();
+        };
     }
 
     /**
@@ -40,6 +43,12 @@ public class ListDeclVar extends TreeList<AbstractDeclVar> {
             var.verifyDeclVar(compiler, localEnv, currentClass);
         }
         LOG.debug("verify ListDeclVar : end");
+    }
+    
+    public void codeGenListDecl(DecacCompiler compiler) {
+        for (AbstractDeclVar d : getList()) {
+            d.codeGenDecl(compiler);
+        }
     }
 
 

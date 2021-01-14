@@ -257,6 +257,16 @@
                         </goals>
                     </execution>
                     <execution>
+                        <id>decompile</id>
+                        <configuration>
+                            <executable>./src/test/script/decompile.sh</executable>
+                        </configuration>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                    </execution>
+                    <execution>
                         <id>context-so-err</id>
                         <configuration>
                             <executable>./src/test/script/context-so-err.sh</executable>

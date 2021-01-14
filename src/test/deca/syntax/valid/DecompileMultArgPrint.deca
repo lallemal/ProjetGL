@@ -1,6 +1,0 @@
-// Test mutiple arguments for a print or a println for the decompilation
-
-{
-    print("Hello", "You");
-    println("How", "Are", "You", "Today", "?");
-}

@@ -106,3 +106,4 @@ do
     fi   
 done
 
+SupprimerCompa

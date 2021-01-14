@@ -1,5 +1,12 @@
 #! /bin/sh
 
+SupprimerComp(){
+    for i in ../../soresultat/*.comp
+    do
+        rm $i
+    done
+
+}
 # Auteur : gl40
 # Version initiale : 01/01/2021
 
@@ -16,6 +23,7 @@ cd "$(dirname "$0")"/../../.. || exit 1
 PATH=./src/test/script/launchers:"$PATH"
 
 cd src/test/deca/syntax/valid/sansobjet|| exit 1
+SupprimerComp
 nb=$(ls -l | wc -l)
 nb=$(($nb-1))
 echo "------- Démarrage des tests valide ($nb)"
@@ -70,6 +78,6 @@ do
      echo $error
     fi
 done
-
+SupprimerComp
 
 

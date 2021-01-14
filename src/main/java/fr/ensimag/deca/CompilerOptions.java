@@ -94,6 +94,8 @@ public class CompilerOptions {
 					} else {
     			    	throw new CLIException("-r has to be followed by the maximum number of registers usable");
 					}
+    			    i = i + 1;
+    			    continue;
     			case "-d":
     				if (debug == TRACE) {
     					throw new CLIException("Too much -d option : This level of debugging does not exist");

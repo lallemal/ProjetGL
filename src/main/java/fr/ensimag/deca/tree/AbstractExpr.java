@@ -191,7 +191,15 @@ public abstract class AbstractExpr extends AbstractInst {
     	//nothing to do
 	}
 
+    /**
+     * Generate the code for the branchement to label of the expression if this one is evaluated as _evaluate_
+     * Explication of all those methods is in poly-projet-Gl Partie 7.2 (page 220)
+     * @param compiler      The compiler : contains addInstruction method
+     * @param evaluate      Boolean of reference which has to be the same as the expression to do the branch
+     * @param label         The label to branch
+     */
     protected void codeGenBranch(DecacCompiler compiler, boolean evaluate, Label label) {
+        // Nothing to do for most of expression
     }
 
     @Override

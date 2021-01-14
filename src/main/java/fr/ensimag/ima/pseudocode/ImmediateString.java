@@ -16,6 +16,6 @@ public class ImmediateString extends Operand {
 
     @Override
     public String toString() {
-        return value; //"\"" + value.replace("\"", "\"\"") + "\"";
+        return "\"" + value.replace("\"", "\"\"") + "\"";
     }
 }

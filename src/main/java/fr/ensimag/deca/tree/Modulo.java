@@ -4,6 +4,7 @@ import fr.ensimag.deca.context.Type;
 import fr.ensimag.ima.pseudocode.DVal;
 import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.instructions.BEQ;
+import fr.ensimag.ima.pseudocode.instructions.BOV;
 import fr.ensimag.ima.pseudocode.instructions.CMP;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
 import fr.ensimag.ima.pseudocode.instructions.REM;
@@ -37,10 +38,8 @@ public class Modulo extends AbstractOpArith {
 
     protected void mnemo(DecacCompiler compiler, DVal dval, int n) {
     	compiler.getLabelError().setErrorMod0(true);
-    	compiler.addInstruction(new LOAD(dval, Register.R0));
-    	compiler.addInstruction(new CMP(0, Register.R0));
-	    compiler.addInstruction(new BEQ(compiler.getLabelError().getLabelErrorMod0()));
 	    compiler.addInstruction(new REM(dval, Register.getR(n)));
+	    compiler.addInstruction(new BOV(compiler.getLabelError().getLabelErrorMod0()));
     }
 
     @Override

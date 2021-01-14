@@ -26,12 +26,8 @@ public class Divide extends AbstractOpArith {
     	compiler.getLabelError().setErrorDiv0(true);
     	compiler.addInstruction(new LOAD(dval, Register.R0));
     	if (this.getRightOperand().getType().isFloat()) {
-	    	//compiler.addInstruction(new CMP((float) 0.0, Register.R0));
-	    	//compiler.addInstruction(new BEQ(compiler.getLabelError().getLabelErrorDiv0()));
 	    	compiler.addInstruction(new DIV(dval, Register.getR(n)));
     	} else if (this.getRightOperand().getType().isInt()) {
-    		//compiler.addInstruction(new CMP(0, Register.R0));
-	    	//compiler.addInstruction(new BEQ(compiler.getLabelError().getLabelErrorDiv0()));
 	    	compiler.addInstruction(new QUO(dval, Register.getR(n)));
     	}
     	compiler.addInstruction(new BOV(compiler.getLabelError().getLabelErrorDiv0()));

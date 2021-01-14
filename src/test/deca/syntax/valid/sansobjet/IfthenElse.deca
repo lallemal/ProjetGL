@@ -1,0 +1,19 @@
+// Description : Programme en sans objet avec variable, if elseif else, >, <, minus, et print, while.
+// Resultat : OK
+
+
+{
+    int x = 4;
+    if (x < 5) {
+        while (x > 0) {
+            x = x - 1;
+            print(x);
+        }
+    }
+    else if (x > 6) {
+        println(x);
+    }
+    else {
+        print("OUAH");
+    }
+}

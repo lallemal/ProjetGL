@@ -1,0 +1,6 @@
+//
+//Description: teste entier le plus grand
+//Resultats: l'arbre abstrait se creer 
+{
+    int i = 2147483647;
+}

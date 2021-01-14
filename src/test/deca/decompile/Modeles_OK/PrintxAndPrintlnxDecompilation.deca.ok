@@ -1,4 +1,3 @@
-[PrintxAndPrintlnxDecompilation.deca]
 {
 	printx("23");
 	printlnx(23);

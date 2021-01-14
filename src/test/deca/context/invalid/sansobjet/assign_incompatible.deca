@@ -1,6 +1,6 @@
 // The type of the variable and its assignation are not compatible
 // Description : Assignation incompatible.
-// Resultat : Echech en ligne 7 : un string ne peut pas être initialisé ni mis en tant que variable
+// Resultat : Echec en ligne 7 : un int ne peut recevoir un booléan
 
 {
     int x = 4;

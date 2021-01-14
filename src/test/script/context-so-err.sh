@@ -22,8 +22,7 @@ PATH=./src/test/script/launchers:"$PATH"
 
 
 cd src/test/deca/context/invalid/sansobjet || exit 1
-nb=$(ls -l | wc -l)
-((nb=$nb-1))
+nb=$(ls -l *.deca | wc -l)
 echo "------- Démarrage des tests invalide ($nb)"
 for i in *.deca
 do
@@ -34,22 +33,24 @@ do
   elif test_context $i 2>&1 | grep -q -e "$i:"
   then
     echo "Echec inattendu pour test_context"
+    exit 1
   else
     echo "Succès inattendu pour test_context"
+    exit 1
   fi
 
 done
 cd ../../../../../.. || exit 1
 
 cd src/test/deca/context/valid/sansobjet || exit 1
-nb=$(ls -l | wc -l)
-((nb=$nb-1))
+nb=$(ls -l *.deca | wc -l)
 echo "------ Démarrage des tests valide ($nb)"
 for i in *.deca
 do
   if test_context $i 2>&1 | grep -q -e "$i:"
   then
     echo "Echec inattendu pour test_context"
+    exit 1
   else
     echo "OK"
   fi

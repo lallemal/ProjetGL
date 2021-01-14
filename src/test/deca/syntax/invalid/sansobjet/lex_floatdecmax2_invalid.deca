@@ -1,0 +1,3 @@
+// Test limite flottant debordement
+// erreur IllegallArgument ligne 3
+3.40282346000001E39

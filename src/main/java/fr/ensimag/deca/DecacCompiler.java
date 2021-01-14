@@ -158,7 +158,7 @@ public class DecacCompiler implements Callable<Boolean> {
     public boolean compile() {
         // A FAIRE: calculer le nom du fichier .ass à partir du nom du
         // A FAIRE: fichier .deca.
-        rmax = compilerOptions.getrMax();
+        rmax = compilerOptions.getrMax()-1;
         String sourceFile = source.getAbsolutePath();
         int longueurSource = sourceFile.length();
         // on enleve le suffixe et on ajoute le nouveau

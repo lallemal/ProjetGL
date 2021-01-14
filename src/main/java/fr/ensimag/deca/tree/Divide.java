@@ -24,7 +24,6 @@ public class Divide extends AbstractOpArith {
     
     protected void mnemo(DecacCompiler compiler, DVal dval, int n) {
     	compiler.getLabelError().setErrorDiv0(true);
-    	compiler.addInstruction(new LOAD(dval, Register.R0));
     	if (this.getRightOperand().getType().isFloat()) {
 	    	compiler.addInstruction(new DIV(dval, Register.getR(n)));
     	} else if (this.getRightOperand().getType().isInt()) {

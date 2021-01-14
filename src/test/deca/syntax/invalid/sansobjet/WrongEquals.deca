@@ -1,8 +1,8 @@
-// 
-// Description: test soustraction incorrecte
-// Resultat: erreur ligne 6: il manque une parenthere
+//WrongEquals.deca:5:15: no viable alternative at input '{'
+//Description: test soustraction incorrecte
+//Resultat: erreur ligne 6: il manque une parenthere )
 {
-    if (a ==  {
+    if (a == 1 {
 
     }
 }

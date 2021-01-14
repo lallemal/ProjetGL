@@ -1,10 +1,7 @@
-// 
-// Description: test soustraction incorrecte
-// Resultat: erreur ligne 4: il manque une parenthere
+//MissingBracketWhile.deca:6:4: missing '{' at '}'
+//Description: test soustraction incorrecte
+//Resultats: erreur ligne 5: il manque une { pour le while
 {
-
     while(1)
-
     }
-    
 }

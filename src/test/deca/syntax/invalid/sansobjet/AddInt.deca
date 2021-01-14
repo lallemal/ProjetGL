@@ -1,6 +1,6 @@
-// 
-// Description: teste addition sans second membre
-// Resultat: mismatchinput ligne 5 
+//AddInt.deca:5:15: mismatched input ';' expecting {STRING, '(', 'false', 'true', 'readint', 'readFloat', '-', '!', FLOAT, INT, IDENT, NEW, THIS, NULL}
+//Description: teste addition sans second membre
+//Resultats: ligne 5: il manque une exporession a droite de + sumexpr)
 {
     int a = 1 +; 
 }

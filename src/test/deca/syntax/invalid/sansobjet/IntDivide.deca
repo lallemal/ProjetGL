@@ -1,6 +1,6 @@
-// 
-// description: test division incorrecte
-// resultat: erreur ligne 5: pas de deuxieme terme
+//IntDivide.deca:5:14: mismatched input ';' expecting {STRING, '(', 'false', 'true', 'readint', 'readFloat', '-', '!', FLOAT, INT, IDENT, NEW, THIS, NULL}
+//Description: test de soustraction incorrecte
+//resultat: erreur ligne 5: pas de deuxieme terme dans divisio (mult_exp)
 {
-    int i = 1-;
+    int i = 1/;
 }

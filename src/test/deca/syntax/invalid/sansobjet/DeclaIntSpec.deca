@@ -1,6 +1,6 @@
-// DeclaIntF.deca:5:8: no viable alternative at input '1'
-// Description: teste declaration incorrect nombre
-// Resultat: erreur ligne 5: caractere speciaux  a la place d'in ident
+//DeclaIntSpec.deca:5:8: no viable alternative at input '!'
+//Description: teste declaration caractere special
+//Resultats: erreur ligne 5: caractere speciaux  a la place d'in ident (decla var)
 {
     int !;
 }

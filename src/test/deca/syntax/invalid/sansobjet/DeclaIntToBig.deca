@@ -1,0 +1,6 @@
+//Erreur de compilation
+//Description: teste declaration incorrect nombre
+//Resultats: erreur ligne 5:  int trop grand
+{
+    int i = 2147483648;
+}

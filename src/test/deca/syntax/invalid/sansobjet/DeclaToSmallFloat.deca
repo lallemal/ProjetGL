@@ -1,0 +1,6 @@
+//no viable alternative at input '1'
+//Description: teste declaration incorrect nombre
+//Resultat: erreur ligne 5: caractere speciaux  a la place d'in ident
+{
+    float i = 1.0E200;
+}

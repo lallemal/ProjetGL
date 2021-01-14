@@ -5,10 +5,15 @@ import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.tools.DecacInternalError;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.deca.tools.SymbolTable.Symbol;
+import fr.ensimag.ima.pseudocode.DVal;
+import fr.ensimag.ima.pseudocode.Label;
+import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.instructions.*;
 import org.apache.commons.lang.Validate;
 import org.apache.log4j.Logger;
 
 import java.io.PrintStream;
+
 
 /**
  * Deca Identifier
@@ -173,6 +178,37 @@ public class Identifier extends AbstractIdentifier {
         LOG.debug("verify Identifier Expr : end");
         return def.getType();
     }
+    
+    @Override
+    protected void codeGenPrint(DecacCompiler compiler, boolean printHex) {
+    	Type type = this.getType();
+    	if (type.isInt()) {
+    		compiler.addInstruction(new LOAD(this.getExpDefinition().getOperand(), Register.R1));
+    		compiler.addInstruction(new WINT());
+    	} else if (type.isFloat()) {
+    		if (printHex) {
+    			compiler.addInstruction(new LOAD(this.getExpDefinition().getOperand(), Register.R1));
+    			compiler.addInstruction(new WFLOATX());
+    		} else {
+    			compiler.addInstruction(new LOAD(this.getExpDefinition().getOperand(), Register.R1));
+    			compiler.addInstruction(new WFLOAT());
+    		}
+    	}
+    }
+    
+    @Override
+    protected DVal dval() {
+    	return this.getExpDefinition().getOperand();
+    }
+    
+    @Override
+    protected void codeGenInst(DecacCompiler compiler) {
+        codeExp(compiler, 2);
+    }
+    
+    protected void codeExp(DecacCompiler compiler, int n) {
+    	compiler.addInstruction(new LOAD(this.getExpDefinition().getOperand(), Register.getR(n)));
+    }
 
     /**
      * Implements non-terminal "type" of [SyntaxeContextuelle] in the 3 passes
@@ -186,6 +222,7 @@ public class Identifier extends AbstractIdentifier {
         if (!compiler.getEnv_types().get(name).getNature().equals("type")) {
             throw new ContextualError(ContextualError.IDENTIFIER_TYPE_NOTTYPE, getLocation());
         }
+        setDefinition(compiler.getEnv_types().get(name));
         return compiler.getEnv_types().get(name).getType();
     }
     
@@ -224,4 +261,15 @@ public class Identifier extends AbstractIdentifier {
         }
     }
 
+    @Override
+    protected void codeGenBranch(DecacCompiler compiler, boolean evaluate, Label label) {
+        codeExp(compiler, 0);
+        compiler.addInstruction(new CMP(0, Register.R0));
+        if (evaluate) {
+            compiler.addInstruction(new BNE(label));
+        } else {
+            compiler.addInstruction(new BEQ(label));
+        }
+
+    }
 }

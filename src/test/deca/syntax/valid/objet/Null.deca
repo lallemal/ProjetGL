@@ -1,0 +1,12 @@
+// Description : test null dans classe et main
+// Resultats : ok
+
+class Thing {
+
+    int i = null;
+
+}
+{
+    int j = null;
+}
+

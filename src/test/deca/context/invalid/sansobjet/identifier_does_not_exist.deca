@@ -1,3 +1,4 @@
+// Definition in env_exp does not exist with the name : y
 // Description : Affectation d'une variable avec un identifiant n'existant pas dans l'environnement
 // Resultat : Erreur ligne 6 : y n'existe dans l'environnement
 

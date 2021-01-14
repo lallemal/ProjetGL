@@ -1,11 +1,16 @@
 package fr.ensimag.deca.tree;
 
-import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
+import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.*;
+import fr.ensimag.ima.pseudocode.instructions.BRA;
+import fr.ensimag.ima.pseudocode.instructions.LOAD;
+import fr.ensimag.ima.pseudocode.instructions.STORE;
+
 import java.io.PrintStream;
 
 /**
@@ -28,9 +33,33 @@ public class BooleanLiteral extends AbstractExpr {
     @Override
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass) throws ContextualError {
-        return compiler.getBool();
+        setType(compiler.getBool());
+        return getType();
+    }
+          
+    @Override
+    protected DVal dval() {
+    	return new ImmediateInteger(value ? 1 : 0);
     }
 
+    @Override
+    protected void codeGenDecl(DecacCompiler compiler, DAddr address) {
+    	compiler.addInstruction(new LOAD((value ? 1 : 0), Register.getR(2)));
+    	compiler.addInstruction(new STORE(Register.getR(2), address));
+    }
+
+    @Override
+    protected void codeGenBranch(DecacCompiler compiler, boolean evaluate, Label label) {
+        if (value) {
+            if (evaluate) {
+                compiler.addInstruction(new BRA(label));
+            }
+        } else {
+            if (!evaluate) {
+                compiler.addInstruction(new BRA(label));
+            }
+        }
+    }
 
     @Override
     public void decompile(IndentPrintStream s) {

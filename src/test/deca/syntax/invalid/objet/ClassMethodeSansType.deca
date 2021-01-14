@@ -1,0 +1,10 @@
+// no viable alternative at input 'getI('
+// Description : méthode sans type
+// Resultat : erreur en ligne 7: la déclaration de méthode n'est pas reconnue
+
+class Thing {
+    
+    getI(){
+    }
+
+}

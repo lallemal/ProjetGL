@@ -1,0 +1,8 @@
+// Description : test déclaration d'une classe avec méthode sans body
+// Resultats : ok
+
+class Thing {
+    
+    int getI(){
+    }
+}

@@ -6,6 +6,7 @@ import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.DAddr;
 import org.apache.commons.lang.Validate;
 
 import java.io.PrintStream;
@@ -31,12 +32,17 @@ public class Initialization extends AbstractInitialization {
         Validate.notNull(expression);
         this.expression = expression;
     }
+    
+    @Override
+    protected void codeGenDecl(DecacCompiler compiler, DAddr address) {
+    	expression.codeGenDecl(compiler, address);
+    }
 
     @Override
     protected void verifyInitialization(DecacCompiler compiler, Type t,
             EnvironmentExp localEnv, ClassDefinition currentClass)
             throws ContextualError {
-        expression.verifyRValue(compiler, localEnv, currentClass, t);
+        setExpression(expression.verifyRValue(compiler, localEnv, currentClass, t));
     }
 
 

@@ -1,0 +1,15 @@
+// Description : test return dans main et classe
+// Resultats : ok
+
+class Thing {
+
+    int i;
+    
+    int getI(){
+        return i;
+    }
+}
+{
+    int i = 0;
+    return i;
+}

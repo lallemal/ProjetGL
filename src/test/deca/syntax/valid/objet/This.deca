@@ -1,0 +1,13 @@
+// Description : test this avec selection
+// Resultats : ok
+
+class Thing {
+
+    int i;
+    
+    int getI(){
+        this.i = i;
+    }
+}
+
+

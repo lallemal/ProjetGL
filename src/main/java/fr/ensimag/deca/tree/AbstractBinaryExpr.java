@@ -1,8 +1,9 @@
 package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.tools.IndentPrintStream;
-import java.io.PrintStream;
 import org.apache.commons.lang.Validate;
+
+import java.io.PrintStream;
 
 /**
  * Binary expressions.
@@ -42,7 +43,6 @@ public abstract class AbstractBinaryExpr extends AbstractExpr {
         this.rightOperand = rightOperand;
     }
 
-
     @Override
     public void decompile(IndentPrintStream s) {
         s.print("(");
@@ -65,5 +65,6 @@ public abstract class AbstractBinaryExpr extends AbstractExpr {
         leftOperand.prettyPrint(s, prefix, false);
         rightOperand.prettyPrint(s, prefix, true);
     }
+
 
 }

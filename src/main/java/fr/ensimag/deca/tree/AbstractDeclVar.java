@@ -30,4 +30,10 @@ public abstract class AbstractDeclVar extends Tree {
             EnvironmentExp localEnv, ClassDefinition currentClass)
             throws ContextualError;
     
+    /**
+     * Generate assembly code for the declaration.
+     * 
+     * @param compiler
+     */
+    protected abstract void codeGenDecl(DecacCompiler compiler);
 }

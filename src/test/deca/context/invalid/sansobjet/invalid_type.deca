@@ -1,3 +1,4 @@
+// Definition in env_types does not exist with the name : x
 // Description : Declaration d'une variable d'un type n'étant pas un type.
 // Resultat : Erreur ligne 6 : Le type n'est pas dans env_types puisqu'il n'est pas un type
 

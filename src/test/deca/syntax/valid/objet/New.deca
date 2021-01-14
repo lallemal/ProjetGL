@@ -1,0 +1,13 @@
+// Description : test new
+// Resultats : ok
+
+class Thing {
+
+    int i = new Objet();
+    
+}
+{
+    Thing i = new Thing();
+
+}
+

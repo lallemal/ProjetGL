@@ -6,6 +6,8 @@ import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.Label;
+import fr.ensimag.ima.pseudocode.instructions.BRA;
 import org.apache.commons.lang.Validate;
 
 import java.io.PrintStream;
@@ -42,7 +44,23 @@ public class IfThenElse extends AbstractInst {
 
     @Override
     protected void codeGenInst(DecacCompiler compiler) {
-        
+        compiler.addComment("If Else instruction");
+        String label = "if_";
+        String pos = getLocation().getLine() + "_" + getLocation().getPositionInLine();
+        Label sinonLabel = new Label(label + "Sinon." + pos);
+        Label finLabel = new Label(label + "Fin." + pos);
+        if (!elseBranch.isEmpty()) {
+            condition.codeGenBranch(compiler, false, sinonLabel);
+        } else {
+            condition.codeGenBranch(compiler, false, finLabel);
+        }
+        thenBranch.codeGenListInst(compiler);
+        compiler.addInstruction(new BRA(finLabel));
+        if (!elseBranch.isEmpty()) {
+            compiler.addLabel(sinonLabel);
+            elseBranch.codeGenListInst(compiler);
+        }
+        compiler.addLabel(finLabel);
     }
 
     @Override

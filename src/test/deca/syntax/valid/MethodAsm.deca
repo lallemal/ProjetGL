@@ -1,8 +1,0 @@
-//Test pour les méthode en assembleur
-
-class Thing {
-
-    int Methode1()
-    asm("Bla bla bla");
-
-}

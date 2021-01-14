@@ -285,10 +285,10 @@ public abstract class AbstractDecaLexer extends Lexer {
     /* Ajout de methode pour les debordements*/
     
     // nombre maximum entier signé positif sur 32 bits => un bit de signe 
-    //le maximum est donc 2^31 donc 2147483648 on va comparer les chaine de caractere
+    //le maximum est donc 2^31-1 donc 2147483647 on va comparer les chaine de caractere
     // des deux nombres
      void intCondition(String stringEntier) throws IllegalArgumentException{
-    	String maximum = "2147483648";
+    	String maximum = "2147483647";
     	
     	if (stringEntier.length() < 10) {
     		return;

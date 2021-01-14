@@ -1,5 +1,7 @@
 package fr.ensimag.deca;
 
+import fr.ensimag.deca.codegen.LabelError;
+
 import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.syntax.DecaLexer;
 import fr.ensimag.deca.syntax.DecaParser;
@@ -34,7 +36,24 @@ import java.io.*;
  * @date 01/01/2021
  */
 public class DecacCompiler {
+	
     private static final Logger LOG = Logger.getLogger(DecacCompiler.class);
+    
+    private LabelError labelError;
+    
+    public LabelError getLabelError() {
+    	return labelError;
+    }
+    
+    private int kGB = 1;
+    
+    public void incrementKGB() {
+    	kGB++;
+    }
+    
+    public int getKGB() {
+    	return kGB;
+    }
     
     /**
      * Portable newline character.
@@ -49,6 +68,14 @@ public class DecacCompiler {
         this.symbols = new SymbolTable();
         this.env_types = new EnvironmentType(null);
         createPredefTypes();
+        this.rmax = 15;
+        this.labelError = new LabelError();
+        
+    }
+    private int rmax;
+    
+    public int getRmax() {
+    	return rmax;
     }
 
     /**
@@ -178,7 +205,7 @@ public class DecacCompiler {
             PrintStream out, PrintStream err)
             throws DecacFatalError, LocationException {
         AbstractProgram prog = doLexingAndParsing(sourceName, err);
-
+        
         if (prog == null) {
             LOG.info("Parsing failed");
             return true;
@@ -192,6 +219,7 @@ public class DecacCompiler {
         }
 
         prog.verifyProgram(this);
+        prog.checkAllDecorations();
         assert(prog.checkAllDecorations());
 
         addComment("start main program");
@@ -213,7 +241,7 @@ public class DecacCompiler {
         LOG.info("Compilation of " + sourceName + " successful.");
         return false;
     }
-
+    
     /**
      * Build and call the lexer and parser to build the primitive abstract
      * syntax tree.
@@ -259,8 +287,6 @@ public class DecacCompiler {
         SymbolTable.Symbol boolSymbol = symbols.create("boolean");
         SymbolTable.Symbol floatSymbol =symbols.create("float");
         SymbolTable.Symbol intSymbol =symbols.create("int");
-        SymbolTable.Symbol stringSymbol =symbols.create("String");
-        SymbolTable.Symbol nullSymbol =symbols.create("null");
 
         // Creation of predef types
         try {
@@ -268,8 +294,6 @@ public class DecacCompiler {
             env_types.declare(boolSymbol, new TypeDefinition(new BooleanType(boolSymbol), Location.BUILTIN));
             env_types.declare(floatSymbol, new TypeDefinition(new FloatType(floatSymbol), Location.BUILTIN));
             env_types.declare(intSymbol, new TypeDefinition(new IntType(intSymbol), Location.BUILTIN));
-            env_types.declare(stringSymbol, new TypeDefinition(new StringType(stringSymbol), Location.BUILTIN));
-            env_types.declare(nullSymbol, new TypeDefinition(new NullType(nullSymbol), Location.BUILTIN));
         } catch (EnvironmentType.DoubleDefException e){
             LOG.fatal("Creation of Predefined Type in" + source.getName() + " failed", e);
             return true;
@@ -284,7 +308,7 @@ public class DecacCompiler {
 
     // TODO Check if not exist
     public Type getBuiltInType(String name) {
-        return  env_types.get(symbols.create("void")).getType();
+        return  env_types.get(symbols.create(name)).getType();
     }
 
     public Type getInt() {
@@ -300,9 +324,9 @@ public class DecacCompiler {
         return env_types.get(symbols.create("boolean")).getType();
     }
     public Type getNull() {
-        return env_types.get(symbols.create("null")).getType();
+        return new NullType(symbols.create("null"));
     }
     public Type getString() {
-        return env_types.get(symbols.create("String")).getType();
+        return new StringType(symbols.create("string"));
     }
 }

@@ -1,7 +1,0 @@
-//Field dans une classe sans nom
-
-class Thing {
-    
-    protected ;
-
-}

@@ -1,0 +1,7 @@
+// missing IDENT at ';'
+// Description : selection incomplète
+// Resultat : erreur en ligne 6: la sélection doit avoir deux membres
+
+{
+    this. ;
+}

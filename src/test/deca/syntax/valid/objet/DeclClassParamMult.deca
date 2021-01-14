@@ -1,0 +1,10 @@
+// Description : test déclaration d'une méthode avec multiple paramètres
+// Resultats : ok
+
+class Thing {
+
+    int getI(int i, int j, string char, float fifi){
+        print("cool");
+    }
+
+}

@@ -1,10 +1,14 @@
 package fr.ensimag.deca.tree;
 
-import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
+import fr.ensimag.deca.context.Type;
+import fr.ensimag.ima.pseudocode.DVal;
+import fr.ensimag.ima.pseudocode.Label;
+import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.instructions.CMP;
 
 /**
  *
@@ -31,15 +35,29 @@ public abstract class AbstractOpCmp extends AbstractBinaryExpr {
             }
         } else {
             if (type1.isInt() && type2.isFloat()) {
-                setLeftOperand(new ConvFloat(getLeftOperand()));
+                AbstractExpr conv = new ConvFloat(getLeftOperand());
+                conv.verifyExpr(compiler, localEnv, currentClass);
+                setLeftOperand(conv);
             }
             else if (type1.isFloat() && type2.isInt()) {
-                setRightOperand(new ConvFloat(getRightOperand()));
+                AbstractExpr conv = new ConvFloat(getRightOperand());
+                conv.verifyExpr(compiler, localEnv, currentClass);
+                setRightOperand(conv);
             }
         }
         setType(compiler.getBool());
         return compiler.getBool();
     }
 
-
+    @Override
+    protected void codeGenBranch(DecacCompiler compiler, boolean evaluate, Label label) {
+        DVal opG = getLeftOperand().dval();
+        getRightOperand().codeExp(compiler, 3);
+        if (opG == null) {
+            getLeftOperand().codeExp(compiler, 2);
+            compiler.addInstruction(new CMP(Register.getR(2), Register.getR(3)));
+        } else {
+            compiler.addInstruction(new CMP(opG, Register.getR(3)));
+        }
+    }
 }

@@ -36,7 +36,6 @@ PRINTLN : 'println' ;
 
 
 WS : (' ' | '\n' | '\t' | '\r') { skip(); };
-// Deca lexer rules sans objets
 
 // identificateurs
 fragment DIGIT : '0'..'9';
@@ -48,7 +47,7 @@ IF : 'if';
 ELSE : 'else';
 FALSE : 'false';
 TRUE : 'true';
-READINT : 'readint';
+READINT : 'readInt';
 READFLOAT : 'readFloat';
 PRINTLNX : 'printlnx';
 PRINTX : 'printx';
@@ -83,20 +82,26 @@ OR : '||';
 // que avec objet
 DOT : '.';
 
+// Litteraux flottants
+fragment NUM : DIGIT+;
+fragment DEC : NUM '.' NUM;
+fragment SIGN : '+' | '-';
+// prendre en compte si signe = ''
+fragment EXP :   ('E' | 'e') NUM | ('E' | 'e') SIGN NUM  ;
+fragment FLOATDEC : (DEC | DEC EXP) ('F' | 'f') | (DEC | DEC EXP);
+fragment DIGITHEX : '0'..'9' | 'A'..'F' | 'a'..'f';
+fragment NUMHEX : DIGITHEX+;
+// ici quatre expressions
+fragment FLOATHEX : ('0x' | '0X') NUMHEX '.' NUMHEX ('P' | 'p') SIGN NUM ('F' | 'f') |
+('0x' | '0X') NUMHEX '.' NUMHEX ('P' | 'p') SIGN NUM |
+('0x' | '0X') NUMHEX '.' NUMHEX ('P' | 'p') NUM ('F' | 'f') |
+('0x' | '0X') NUMHEX '.' NUMHEX ('P' | 'p') NUM ; 
+FLOAT : FLOATDEC | FLOATHEX;
+
+
 // litteraux entiers doit lever erreur si trop grand
 fragment POSITIVE_DIGIT : '1'..'9';
 INT : '0' | POSITIVE_DIGIT DIGIT* {intCondition(getText());};  
-
-// Litteraux flottants
-fragment NUM : DIGIT+;
-fragment SIGN : '+' | '-' | ' ';
-fragment EXP : ('E' | 'e') SIGN NUM;
-fragment DEC : NUM '.' NUM;
-fragment FLOATDEC : (DEC | DEC EXP) ('F' | 'f' | ' ');
-fragment DIGITHEX : '0'..'9' | 'A'..'F' | 'a'..'f';
-fragment NUMHEX : DIGITHEX+;
-fragment FLOATHEX : ('0x' | '0X') NUMHEX '.' NUMHEX ('P' | 'p') SIGN NUM ('F' | 'f' | ' ' );
-FLOAT : FLOATDEC | FLOATHEX;
 
 
 // mot reserve ne sont pas des ident donc le placer a la fin pour priorite

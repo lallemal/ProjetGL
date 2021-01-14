@@ -1,0 +1,18 @@
+// missing '}' at '{'
+// Description : main imbriqué dans une classe
+// Resultat : erreur en ligne 13: absence d'un } pour fermer la classe
+
+class Thing {
+    
+    protected int i = 0;
+    
+    int getI(){
+        return i;
+    }
+
+    {
+        print("Je suis un main, et je suis dans la class Thing");
+    }
+
+}
+

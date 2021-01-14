@@ -1,0 +1,12 @@
+{
+    int x;
+    int y = 2;
+    int z;
+	
+    x = 1;
+    z = x + y;
+    z = z + 1;
+    println(z);
+    
+    println((1 + x - 3) * z / y);
+}

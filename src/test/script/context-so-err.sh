@@ -22,8 +22,7 @@ PATH=./src/test/script/launchers:"$PATH"
 
 
 cd src/test/deca/context/invalid/sansobjet || exit 1
-nb=$(ls -l | wc -l)
-((nb=$nb-1))
+nb=$(ls -l *.deca | wc -l)
 echo "------- Démarrage des tests invalide ($nb)"
 for i in *.deca
 do
@@ -42,8 +41,7 @@ done
 cd ../../../../../.. || exit 1
 
 cd src/test/deca/context/valid/sansobjet || exit 1
-nb=$(ls -l | wc -l)
-((nb=$nb-1))
+nb=$(ls -l *.deca | wc -l)
 echo "------ Démarrage des tests valide ($nb)"
 for i in *.deca
 do

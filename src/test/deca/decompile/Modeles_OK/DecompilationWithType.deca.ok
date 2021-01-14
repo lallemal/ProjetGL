@@ -1,0 +1,6 @@
+[DecompilationWithType.deca]
+{
+	print(23);
+	print(0x1.1d70a4p1);
+	println("hello");
+}

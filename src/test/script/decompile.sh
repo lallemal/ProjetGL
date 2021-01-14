@@ -16,6 +16,8 @@ cd "$(dirname "$0")"/../../.. || exit 1
 PATH=./src/test/script/launchers:"$PATH"
 
 cd src/test/deca/decompile
+nb=$(ls -l *.deca | wc -l)
+echo "------ Démarrage des tests ($nb)"
 for i in *.deca
 do
   resultat=$(decac -p $i)

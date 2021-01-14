@@ -1,0 +1,6 @@
+//mismatched input ';' expecting {STRING,
+//Description: test de soustraction incorrecte
+//resultat: erreur ligne 5: pas de deuxieme terme dans divisio (mult_exp)
+{
+    int i = 1/;
+}

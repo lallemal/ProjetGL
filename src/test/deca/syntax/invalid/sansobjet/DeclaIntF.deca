@@ -1,0 +1,6 @@
+//DeclaIntF.deca:5:8: no viable alternative at input '1'
+//Description: teste declaration incorrect nombre
+//Resultats: erreur ligne 5: num a la place d'in ident (decla_car)
+{
+    int 1;
+}

@@ -1,5 +1,8 @@
 #! /bin/sh
 
+SupprimerComp(){
+    rm *.comp
+}
 # Auteur : gl40
 # Version initiale : 01/01/2021
 
@@ -16,6 +19,7 @@ cd "$(dirname "$0")"/../../.. || exit 1
 PATH=./src/test/script/launchers:"$PATH"
 
 cd src/test/deca/syntax/valid/sansobjet|| exit 1
+SupprimerComp
 nb=$(ls -l | wc -l)
 nb=$(($nb-1))
 echo "------- Démarrage des tests valide ($nb)"
@@ -32,6 +36,7 @@ do
         echo "Erreur detecte Echec inattendu"
         echo "Attendu ":
         echo $resultat
+        SupprimerComp
         exit 1
     fi    
     if diff $resultat $comparaison
@@ -42,6 +47,7 @@ do
         echo "Echec inattendu"
         echo "Attendu: "
         echo $resultat
+        SupprimerComp
         exit 1
     fi 
 
@@ -62,14 +68,17 @@ do
   if test_synt $i 2>&1 | grep -q -e "$error"
   then
      echo "Echec attendu pour test_synt" 
+     exit 1
   else
       #affiche la troisieme ligne de l'entet et 1 ere pour debug info
      resultat=$(head $i -n 3 | tail -1 | sed 's/\/\///')
      echo "Succes inattendu pour test_synt ,Attendu:"
      echo $resultat
      echo $error
+     SupprimerComp
+     exit 1
     fi
 done
-
+SupprimerComp
 
 

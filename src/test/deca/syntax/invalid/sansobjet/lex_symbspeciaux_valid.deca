@@ -1,3 +1,4 @@
-// Test des symboles speciaux
-//Resultat : un token par symboles
+//lex_symbspeciaux_valid.deca:4:0: no viable alternative at input '+'
+//Descritpion: Test des symboles speciaux
+//Resultats : un token par symboles
 + - < > <= >= ! = == != * % / && ||

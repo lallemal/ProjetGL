@@ -111,4 +111,10 @@ IDENT : (LETTRE | '$' | '_')(LETTRE | DIGIT | '$' | '_')*;
 fragment FILENAME : (LETTRE | DIGIT | '.' | '-' | '_')+;
 INCLUDE : '#include' (' ')* '"' FILENAME '"' {doInclude(getText());};
 
+// Litteraux extension
+LHOOK: '[';
+RHOOK: ']';
+ARRAY: '[' ((FLOAT) (COMMA FLOAT)+ | (INT) (COMMA INT)+ )? ']';
+
+
 

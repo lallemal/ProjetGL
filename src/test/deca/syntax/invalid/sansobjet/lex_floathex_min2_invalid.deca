@@ -1,5 +1,0 @@
-// test borne inferieur
-// invalid
-{
- float i = 0xAaf.bcP-200;
-}

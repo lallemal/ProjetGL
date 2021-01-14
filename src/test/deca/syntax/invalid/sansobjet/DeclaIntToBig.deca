@@ -1,6 +1,0 @@
-//Erreur compilation entier trop grand
-//Description: teste declaration incorrect nombre
-//Resultats: erreur ligne 5:  int trop grand
-{
-    int i = 2147483648;
-}

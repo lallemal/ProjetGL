@@ -313,7 +313,7 @@ public abstract class AbstractDecaLexer extends Lexer {
  	/* Fonction  associee si le float est un decimal*/
 
  	// valeur minimale = 1.4012985E-45
- 	// valeur maximale = 3.402 823 46 E38
+ 	// valeur maximale = 3.402 823 56 E38
  	void isDecimal(String stringdec){
  		// System.out.println("est une decimal");
  		if(stringdec.charAt(0) == '0') {
@@ -417,7 +417,7 @@ public abstract class AbstractDecaLexer extends Lexer {
  	}
 
  	void compareManthissemaxDec(String mantisse){
- 		String max =  "340282346";
+ 		String max =  "340282356";
  		int longueur = minimum(mantisse.length(),max.length());
 
  		for( int i = 0; i < longueur; i ++) {
@@ -650,7 +650,7 @@ public abstract class AbstractDecaLexer extends Lexer {
  		// caractere asci 0..9 de 48 à 57
  		//				   A..F de 65 a 70
  		//			       a..f de 97 a 102
- 		String mantissecomp = "1fffffe";
+ 		String mantissecomp = "17ffffff";
  		int lengthmin = minimum(mantisse.length(), mantissecomp.length());
  		for(int i = 0; i < lengthmin; i++ ){
  			int max = mantissecomp.charAt(i);

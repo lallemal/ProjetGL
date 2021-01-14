@@ -16,10 +16,14 @@ cd "$(dirname "$0")"/../../.. || exit 1
 PATH=./src/test/script/launchers:"$PATH"
 
 cd src/test/deca/syntax/valid/sansobjet|| exit 1
-nb=$(ls -l | wc -l)
-nb=$(($nb-1))
 
-echo "------- Démarrage des tests valide pour lexer($nb)"
+SupprimerCompa(){
+    for i in ../../soresultat/*.compa
+    do
+        rm $i
+    done
+}
+echo "------- Démarrage des tests valide pour lexer"
 echo "Test valides:"
 for i in *.deca
 do
@@ -34,6 +38,7 @@ do
         then
             echo "Erreur innatendu de test_lex"
             echo $erreur
+            SupprimerCompa
             exit 1
         fi
         if diff $comparaison $resultat
@@ -43,6 +48,7 @@ do
              echo "Echec sortie different de resultat"
              echo "Attendu: "
              echo $erreur
+             SupprimerCompa
              exit 1
         fi
     fi
@@ -73,11 +79,12 @@ do
              echo "Echec sortie different de resultat"
              echo "Attendu: "
              echo $resultat
-             #exit 1
+             SupprimerCompa
+             exit 1
         fi
     fi
 done
-# Test les lexer invalid (lexer et parser meme erreur erreur du lexeur
+# Test les lexer invalid (lexer et parser meme erreur erreur du lexeur)
 echo "------- Démarrage des tests invalid pour lexer"
 for i in *.deca
 do
@@ -87,13 +94,15 @@ do
         error=$(head $i -n 1 | sed 's/\/\///')
         if test_lex $i 2>&1 | grep -q -e "$error"
         then
-             echo "Echec attendu pour lex" 
+             echo "Echec attendu pour test_lex" 
         else
-           #affiche la troisieme ligne de l'entet et 1 ere pour debug info
+            #affiche la troisieme ligne de l'entet et 1 ere pour debug info
             resultat=$(head $i -n 3 | tail -1 | sed 's/\/\///')
             echo "Succes inattendu pour test_lex ,Attendu:"
             echo $resultat
             echo $error
-       fi
+            exit 1
+        fi
     fi   
 done
+

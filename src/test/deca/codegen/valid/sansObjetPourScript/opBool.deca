@@ -1,0 +1,21 @@
+{
+    boolean a = true;
+    boolean b = false;
+
+    if (!(a && b)) {
+        println(1);
+    }
+
+    if (a || b) {
+        println(1);
+    }
+
+    if (a) {
+        println(1);
+    }
+
+    if (!b) {
+        println(1);
+    }
+
+}

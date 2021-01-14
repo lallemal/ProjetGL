@@ -19,6 +19,7 @@ import org.antlr.v4.runtime.CommonTokenStream;
 import org.apache.log4j.Logger;
 
 import java.io.*;
+import java.util.concurrent.Callable;
 
 /**
  * Decac compiler instance.
@@ -35,7 +36,7 @@ import java.io.*;
  * @author gl40
  * @date 01/01/2021
  */
-public class DecacCompiler {
+public class DecacCompiler implements Callable<Boolean> {
 	
     private static final Logger LOG = Logger.getLogger(DecacCompiler.class);
     
@@ -157,6 +158,7 @@ public class DecacCompiler {
     public boolean compile() {
         // A FAIRE: calculer le nom du fichier .ass à partir du nom du
         // A FAIRE: fichier .deca.
+        rmax = compilerOptions.getrMax();
         String sourceFile = source.getAbsolutePath();
         int longueurSource = sourceFile.length();
         // on enleve le suffixe et on ajoute le nouveau
@@ -219,7 +221,10 @@ public class DecacCompiler {
         }
 
         prog.verifyProgram(this);
-        prog.checkAllDecorations();
+        if (compilerOptions.getVerif()) {
+            LOG.info("Stopping at verification");
+            return false;
+        }
         assert(prog.checkAllDecorations());
 
         addComment("start main program");
@@ -328,5 +333,12 @@ public class DecacCompiler {
     }
     public Type getString() {
         return new StringType(symbols.create("string"));
+    }
+
+
+
+    @Override
+    public Boolean call() throws Exception {
+        return this.compile();
     }
 }

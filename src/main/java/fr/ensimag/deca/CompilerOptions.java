@@ -81,6 +81,7 @@ public class CompilerOptions {
     					throw new CLIException("verification option is not compatible with parse option");
 
 					}
+    				break;
     			case "-n":
     				throw new UnsupportedOperationException("no check is not yet implemented");
     			case "-r":
@@ -196,7 +197,6 @@ public class CompilerOptions {
     private void ajouteFichier(File f) {
     	if(!sourceFiles.contains(f)) {
     		sourceFiles.add(f);
-    		System.out.println(getSourceFiles());
     	}
     }  
     

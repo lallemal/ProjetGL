@@ -1,4 +1,3 @@
-[IfThenElseCascade.deca]
 {
 	int i=2;
 	if (i == 0) {

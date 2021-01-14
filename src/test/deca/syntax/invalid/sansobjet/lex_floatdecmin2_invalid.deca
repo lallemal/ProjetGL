@@ -1,0 +1,3 @@
+//Test: arrondi vers 0 erreur de compilation
+// illagalargument expression ligne 3 arrondi vers 0
+1.4012984E-45

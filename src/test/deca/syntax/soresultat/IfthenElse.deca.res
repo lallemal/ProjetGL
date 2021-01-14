@@ -38,4 +38,4 @@
                     `> ListInst [List with 1 elements]
                        []> [17, 8] Print
                            `> ListExpr [List with 1 elements]
-                              []> [17, 14] StringLiteral ("OUAH")
+                              []> [17, 14] StringLiteral (OUAH)

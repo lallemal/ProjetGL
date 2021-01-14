@@ -1,8 +1,0 @@
-//Test une classe avec une méthode qui contient des instructions
-
-class Thing {
-   
-    int getI(){
-        print(i);
-    }
-}

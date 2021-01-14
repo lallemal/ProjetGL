@@ -1,0 +1,6 @@
+// Description : test this sans selection
+// Resultats : ok
+
+{
+    this ;
+}

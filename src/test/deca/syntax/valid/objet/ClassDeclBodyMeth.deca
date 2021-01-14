@@ -1,0 +1,13 @@
+// Description : Test la declaration simple d'une classe avec corps mais sans extension
+// Resultat : OK
+
+
+class Thing {
+    protected int i;
+
+    int getI(){
+        return i;
+    }
+
+}
+

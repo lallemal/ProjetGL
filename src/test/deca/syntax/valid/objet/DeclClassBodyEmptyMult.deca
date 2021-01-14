@@ -1,0 +1,14 @@
+// Description : test déclaration multiple de classes
+// Resultats : ok
+
+class Thing {
+    
+    int getI(){
+    }
+    
+    int getJ(){
+    }
+
+    int getW(){
+    }
+}

@@ -1,0 +1,16 @@
+// mismatched input 'class'
+// Description : classe imbriquée dans un main
+// Resultat : erreur en ligne 7: absence d'un crochet fermé pour fermer le main
+
+{
+    print("je suis dans le main");
+    
+    class Thing {
+        
+        protected int i = 0;
+        
+        int getI(){
+            print("je suis une classe dans un main");
+        }
+    }
+}

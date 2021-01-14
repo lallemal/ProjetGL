@@ -1,4 +1,3 @@
-[DeclVarInit.deca]
 {
 	int i=0;
 }

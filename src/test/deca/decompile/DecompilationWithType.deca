@@ -1,15 +1,15 @@
 // Description :
-//    test décompilation print et println
+//    test décompilation print et println avec différents type
 //
 // Resultats (en comparaison avec le résultat attendu 
 // disponible dans le fichier *.deca.ok dans le dossier Modeles_OK) :
 //    ok
 
-
 {
 
     print(23);
-    print(2.23 );
+    print(2.23);
+
     println("hello");
 
 }

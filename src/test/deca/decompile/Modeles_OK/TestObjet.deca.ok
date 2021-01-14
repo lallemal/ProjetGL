@@ -1,4 +1,3 @@
-[TestObjet.deca]
 class A {
 	PROTECTED int x;
 

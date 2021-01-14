@@ -1,4 +1,3 @@
-[MultPrintPrintln.deca]
 {
 	print("Hello");
 	println("Are");

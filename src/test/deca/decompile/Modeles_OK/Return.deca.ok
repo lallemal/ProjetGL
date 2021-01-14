@@ -1,4 +1,3 @@
-[Return.deca]
 class Thing {
 	PUBLIC int i;
 

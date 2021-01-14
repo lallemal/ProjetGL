@@ -1,4 +1,3 @@
-[DeclClassBodyMethodWithcontent.deca]
 class Thing {
 
 	int getI() {

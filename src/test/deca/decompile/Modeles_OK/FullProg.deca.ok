@@ -1,4 +1,3 @@
-[FullProg.deca]
 class Thing extends Objet {
 	PROTECTED int i;
 	PROTECTED int j=0;

@@ -1,0 +1,6 @@
+//Erreur de compilation: arrondi a zero et flottant non nulle
+//Description: test borne inferieur
+//Resultats: ligne 4: nombre trop petit 
+0x1.0p-128
+
+

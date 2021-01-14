@@ -1,4 +1,3 @@
-[ClassDeclExtensions.deca]
 class Thing extends Objet {
 
 }

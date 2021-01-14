@@ -1,4 +1,3 @@
-[ClassDeclBodyMeth.deca]
 class Thing {
 	PROTECTED int i;
 

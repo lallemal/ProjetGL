@@ -28,21 +28,22 @@ do
     then
         resultat=../../soresultat/"$i".resu
         comparaison=../../soresultat/"$i".compa
+        erreur=$(head $i -n 3 | tail -1 | sed 's/\/\///')
         # cree le fichier et regarde si il y a une erreur
-        if test_lex $i 2>&1 > $comparaison | grep -e -q "$i"
+        if test_lex $i 2>&1 > $comparaison | grep  -q "$i:"
         then
             echo "Erreur innatendu de test_lex"
-           # exit 1
+            echo $erreur
+            exit 1
         fi
         if diff $comparaison $resultat
         then
              echo "Succes pour test_lex attendu"
         else 
-        resultat=$(head $i -n 3 | tail -1 | sed 's/\/\///')
              echo "Echec sortie different de resultat"
              echo "Attendu: "
-             echo $resultat
-             #exit 1
+             echo $erreur
+             exit 1
         fi
     fi
 done
@@ -59,7 +60,7 @@ do
         resultat=../../soresultat/"$i".resu
         comparaison=../../soresultat/"$i".compa
         # cree le fichier et regarde si il y a une erreur
-        if test_lex $i 2>&1 > $comparaison | grep -e -q "$i"
+        if test_lex $i 2>&1 > $comparaison | grep -q "$i"
         then
             echo "Erreur innatendu de test_lex"
             #exit 1
@@ -76,7 +77,7 @@ do
         fi
     fi
 done
-# Test les lexer invalid (lexer et parser meme erreur) erreur du lexeur
+# Test les lexer invalid (lexer et parser meme erreur erreur du lexeur
 echo "------- Démarrage des tests invalid pour lexer"
 for i in *.deca
 do

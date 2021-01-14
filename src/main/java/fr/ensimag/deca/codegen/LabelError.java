@@ -16,6 +16,8 @@ public class LabelError {
 	private Label errorRINT;
 	private boolean errorReadFloat;
 	private Label errorRFLOAT;
+	private boolean errorConvFloat;
+	private Label errorFLOAT;
 	
 	public void setErrorDiv0(boolean b) {
 		errorDiv0 = b;
@@ -49,6 +51,14 @@ public class LabelError {
 		return errorRFLOAT;
 	}
 	
+	public void setErrorConvFloat(boolean b) {
+		errorConvFloat = b;
+	}
+	
+	public Label getLabelErrorFLOAT() {
+		return errorFLOAT;
+	}
+	
 	public LabelError() {
 		errorDiv0 = false;
 		div0 = new Label("division_par_zero");
@@ -58,6 +68,8 @@ public class LabelError {
 		errorRINT = new Label("error_read_int");
 		errorReadFloat = false;
 		errorRFLOAT = new Label("error_read_float");
+		errorConvFloat = false;
+		errorFLOAT = new Label("error_conv_float");
 	}
 	
 	public void codeGenLabelError(DecacCompiler compiler) {
@@ -72,6 +84,9 @@ public class LabelError {
 		}
 		if (errorReadFloat) {
 			addError(compiler, errorRFLOAT, "lecture flottant", "Erreur : un float est attendu");
+		}
+		if (errorConvFloat) {
+			addError(compiler, errorFLOAT, "conversion flottant", "Erreur : V[dval] non codable sur un flottant");
 		}
 	}
 	

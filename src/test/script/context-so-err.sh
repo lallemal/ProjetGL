@@ -33,8 +33,10 @@ do
   elif test_context $i 2>&1 | grep -q -e "$i:"
   then
     echo "Echec inattendu pour test_context"
+    exit 1
   else
     echo "Succès inattendu pour test_context"
+    exit 1
   fi
 
 done
@@ -48,6 +50,7 @@ do
   if test_context $i 2>&1 | grep -q -e "$i:"
   then
     echo "Echec inattendu pour test_context"
+    exit 1
   else
     echo "OK"
   fi

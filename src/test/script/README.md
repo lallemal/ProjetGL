@@ -23,7 +23,7 @@ fichier deca a tester dans valid/deca
 les fichiers valid/deca sont teste par comparaison de fichier (car output souvent long)
 les fichier invalid/deca par comparaison avec le message d'erreur attendu
 Test DecaLexer
-    commencer entete par lex
+    meme principe
 
 Test DecaParser
 # pour voir si l'arbre est correct parser/valid on stocke dans fichier et on compare avec .res 
@@ -32,6 +32,8 @@ script:
     parser-so-comp.sh: genere fichier .comp, si ok meme que .res
     si test ne passe pas, affiche le resultats attendu: ligne 3 de l'entete
 
+    lexer-so-res.sh
+    lexer-so-comp.sh
 
 
 

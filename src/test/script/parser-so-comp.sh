@@ -26,8 +26,14 @@ do
     # diff renvoi 0 si les fichiers sont identiques
     resultat=../../soresultat/"$i".res
     comparaison=../../soresultat/"$i".comp
-    #cree le fichier comparaison
-    test_synt $i 2>&1 > $comparaison
+    #cree le fichier comparaison et regarde pas d'erreur dedans
+    if test_synt $i 2>&1 > $comparaison | grep -e -q "$i"
+    then 
+        echo "Erreur detecte Echec inattendu"
+        echo "Attendu ":
+        echo $resultat
+        exit 1
+    fi    
     if diff $resultat $comparaison
     then
         echo "Succes pour test_synth attendu"

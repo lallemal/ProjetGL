@@ -6,6 +6,14 @@ import fr.ensimag.ima.pseudocode.instructions.ERROR;
 import fr.ensimag.ima.pseudocode.instructions.WNL;
 import fr.ensimag.ima.pseudocode.instructions.WSTR;
 
+/**
+ * 
+ * @author gl40
+ * Classe permettant la gestion des erreurs dans le code assembleur.
+ * Les booleens permettent de savoir si une erreur est envisageable (ie si une instruction a pu la provoquer)
+ * En consequence on cree un label en fin de fichier assembleur grace à la methode codeGenLabelError appelee par
+ * le compilateur.
+ */
 public class LabelError {
 
 	private boolean errorDiv0;

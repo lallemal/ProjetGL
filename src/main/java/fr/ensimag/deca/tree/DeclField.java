@@ -77,5 +77,11 @@ public class DeclField extends AbstractDeclField{
 
         LOG.debug("verify DeclField " + nom.getName().toString() + " for class " + currentClass.getType().getName().toString() + " : end");
     }
-    
+
+
+    @Override
+    protected void verifyDeclFieldBody(DecacCompiler compiler, ClassDefinition currentClass) throws ContextualError {
+        Type type = this.type.verifyType(compiler);
+        init.verifyInitialization(compiler, type, currentClass.getMembers(), currentClass);
+    }
 }

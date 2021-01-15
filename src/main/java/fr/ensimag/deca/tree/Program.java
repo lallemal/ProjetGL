@@ -44,7 +44,7 @@ public class Program extends AbstractProgram {
 
         // Passe 3
         // Descente vers classe inutile pour sans objet
-        // classes.verifyListClassBody(compiler);
+        classes.verifyListClassBody(compiler);
         // Pour Main
         main.verifyMain(compiler);
         // LOG.debug("verify program: end");

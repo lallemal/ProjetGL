@@ -6,8 +6,7 @@
 package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.DecacCompiler;
-import fr.ensimag.deca.context.ContextualError;
-import fr.ensimag.deca.context.Type;
+import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import org.apache.commons.lang.Validate;
 import org.apache.log4j.Logger;
@@ -59,5 +58,15 @@ public class DeclParam extends AbstractDeclParam{
         return type;
     }
 
-    
+    @Override
+    public void verifyDeclParamBody(DecacCompiler compiler, EnvironmentExp localExp, ClassDefinition currentClass) throws ContextualError {
+        Type type = this.type.verifyType(compiler);
+        try {
+            localExp.declare(this.name.getName(), new ParamDefinition(type, getLocation()));
+        } catch (EnvironmentExp.DoubleDefException e) {
+           throw new ContextualError(ContextualError.PARAM_ALREADY_ENV_METHOD, getLocation());
+        }
+    }
+
+
 }

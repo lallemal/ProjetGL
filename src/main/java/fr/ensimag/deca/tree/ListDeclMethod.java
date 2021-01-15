@@ -21,7 +21,12 @@ public class ListDeclMethod extends TreeList<AbstractDeclMethod>{
             dm.verifyDeclMethod(compiler, currentClass);
         }
     }
-    
+
+    public void verifyListDeclMethodBody(DecacCompiler compiler, ClassDefinition currentClass) throws ContextualError {
+        for(AbstractDeclMethod dm : getList()) {
+            dm.verifyDeclMethodBody(compiler, currentClass);
+        }
+    }
     @Override
     public void decompile(IndentPrintStream s) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

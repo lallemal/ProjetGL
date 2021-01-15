@@ -25,6 +25,7 @@ public class ContextualError extends LocationException {
     public static final String METHOD_RETURN_TYPE_NOT_SUBTYPE_SUPER_METHOD = "The type of return of this method is not the same as the one of the herited method"; // 2.7
     public static final String METHOD_ALREADY_DEFINED_ENV = "This method is already defined in this scope"; // 2.7 2.3
     public static final String PARAM_TYPE_VOID = "A parameter can not be void type"; // 2.9
+    public static final String PARAM_ALREADY_ENV_METHOD = "This parameter is already defined for this method";
 
 
     // Passe 3 Sans Objet

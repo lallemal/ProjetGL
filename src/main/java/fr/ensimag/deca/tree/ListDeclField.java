@@ -22,6 +22,12 @@ public class ListDeclField extends TreeList<AbstractDeclField>{
         }
     }
 
+    public void verifyListDeclFieldBody(DecacCompiler compiler, ClassDefinition currentClass) throws ContextualError {
+        for (AbstractDeclField df : getList()) {
+            df.verifyDeclFieldBody(compiler, currentClass);
+        }
+    }
+
     @Override
     public void decompile(IndentPrintStream s) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

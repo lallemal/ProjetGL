@@ -91,5 +91,15 @@ public class DeclMethod extends AbstractDeclMethod {
 
     }
 
-    
+    @Override
+    public void verifyDeclMethodBody(DecacCompiler compiler, ClassDefinition currentClass) throws ContextualError {
+        Type returnType = this.type.verifyType(compiler);
+        // The parent is the class Env which is the class of the method (for now)
+        EnvironmentExp envExpMethod = new EnvironmentExp(currentClass.getMembers());
+        this.param.verifyDeclMethodBody(compiler, envExpMethod, currentClass);
+        // TODO
+        // this.body.verifyMethodBody(compiler, envExpMethod, currentClass, returnType);
+    }
+
+
 }

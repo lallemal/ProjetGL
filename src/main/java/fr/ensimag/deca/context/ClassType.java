@@ -51,8 +51,7 @@ public class ClassType extends Type {
 
     @Override
     public boolean sameType(Type otherType) {
-        // TODO
-        throw new UnsupportedOperationException("not yet implemented");
+        return otherType.isClass();
     }
 
     /**

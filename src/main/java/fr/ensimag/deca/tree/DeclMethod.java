@@ -11,6 +11,14 @@ import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.DAddr;
+import fr.ensimag.ima.pseudocode.Label;
+import fr.ensimag.ima.pseudocode.LabelOperand;
+import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.RegisterOffset;
+import fr.ensimag.ima.pseudocode.instructions.LOAD;
+import fr.ensimag.ima.pseudocode.instructions.STORE;
+
 import java.io.PrintStream;
 
 /**
@@ -24,6 +32,12 @@ public class DeclMethod extends AbstractDeclMethod {
     private ListParam param;
     private AbstractMethodBody body;
     
+    public boolean equals(DeclMethod other) {
+    	boolean b1 = (type.getName().getName()).equals(other.getType().getName().getName());
+    	boolean b2 = param.equals(other.getListParam());
+    	return b1 && b2;
+    }
+    
     public DeclMethod(AbstractIdentifier type, AbstractIdentifier name, ListParam param, AbstractMethodBody body){
         assert(type != null);
         assert(name != null);
@@ -31,6 +45,35 @@ public class DeclMethod extends AbstractDeclMethod {
         this.name = name;
         this.param = param;
         this.body = body;
+    }
+    
+    public AbstractIdentifier getType() {
+    	return type;
+    }
+    
+    public AbstractIdentifier getName() {
+    	return name;
+    }
+    
+    public ListParam getListParam() {
+    	return param;
+    }
+    
+    @Override
+    public void codeGenDeclMethod(DecacCompiler compiler) {
+    	Label label = new Label(name.getName().getName());
+    	compiler.addLabel(label);
+    	compiler.addInstruction(new LOAD(new LabelOperand(label), Register.R0));
+    	compiler.addInstruction(new STORE(Register.R0, new RegisterOffset(compiler.getKGB(), Register.GB)));
+    	compiler.incrementKGB();
+    }
+    
+    @Override
+    public void codeGenDeclMethodOverride(DecacCompiler compiler, DAddr address) {
+    	Label label = new Label(name.getName().getName());
+    	compiler.addLabel(label);
+    	compiler.addInstruction(new LOAD(new LabelOperand(label), Register.R0));
+    	compiler.addInstruction(new STORE(Register.R0, address));
     }
 
     @Override

@@ -20,4 +20,8 @@ public abstract class AbstractDeclParam extends Tree {
             EnvironmentExp localEnv, ClassDefinition currentClass)
             throws ContextualError;
     
+    public abstract boolean equals(AbstractDeclParam other);
+    
+    public abstract AbstractIdentifier getType();
+    
 }

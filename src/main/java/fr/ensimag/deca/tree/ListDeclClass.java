@@ -43,6 +43,15 @@ public class ListDeclClass extends TreeList<AbstractDeclClass> {
     public void verifyListClassBody(DecacCompiler compiler) throws ContextualError {
         throw new UnsupportedOperationException("not yet implemented");
     }
+    
+    /**
+     * Step C
+     */
+    public void codeGenDeclClass(DecacCompiler compiler) {
+    	for (AbstractDeclClass i : getList()) {
+            i.codeGenDeclClass(compiler);
+        }
+    }
 
 
 }

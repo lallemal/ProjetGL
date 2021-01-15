@@ -4,6 +4,13 @@ import fr.ensimag.deca.context.ClassType;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.NullOperand;
+import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.RegisterOffset;
+import fr.ensimag.ima.pseudocode.instructions.LEA;
+import fr.ensimag.ima.pseudocode.instructions.LOAD;
+import fr.ensimag.ima.pseudocode.instructions.STORE;
+
 import java.io.PrintStream;
 
 /**
@@ -22,9 +29,33 @@ public class DeclClass extends AbstractDeclClass {
     
     public DeclClass(AbstractIdentifier ident, AbstractIdentifier parent, ListDeclField field, ListDeclMethod method){
         this.ident = ident;
-        this.parent = parent;
+        this.parent = parent; // null si classe Object
         this.field = field;
         this.method = method;
+    }
+    
+    @Override
+    public void codeGenDeclClass(DecacCompiler compiler) {
+    	if (compiler.getKGB() == 1) { //Premiere classe a initialiser : Object
+    		ident.getClassDefinition().setAddress(new RegisterOffset(compiler.getKGB(), Register.GB));
+    		compiler.addInstruction(new LOAD(new NullOperand(), Register.R0));
+    	} else {
+	    	ident.getClassDefinition().setAddress(new RegisterOffset(compiler.getKGB(), Register.GB));
+	    	compiler.addInstruction(new LEA(parent.getClassDefinition().getAddress(), Register.R0));    	
+    	}
+    	compiler.addInstruction(new STORE(Register.R0, new RegisterOffset(compiler.getKGB(), Register.GB)));
+    	compiler.incrementKGB();
+    	
+    	if (parent != null) {
+	    	for (AbstractDeclMethod i : parent.getClassDefinition().getMethods().getList()) {
+	    		ident.getClassDefinition().getMethods().add(i);
+	    	}
+    	}
+    	for (AbstractDeclMethod i : method.getList()) {
+    		ident.getClassDefinition().getMethods().add(i);
+    	} 
+    	ident.getClassDefinition().getMethods().codeGenListDeclMethod(compiler);
+    	
     }
 
     @Override

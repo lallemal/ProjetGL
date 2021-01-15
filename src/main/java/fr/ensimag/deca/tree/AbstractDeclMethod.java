@@ -10,6 +10,8 @@ import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.DAddr;
+
 import java.io.PrintStream;
 
 /**
@@ -22,4 +24,10 @@ public abstract class AbstractDeclMethod extends Tree{
             EnvironmentExp localEnv, ClassDefinition currentClass)
             throws ContextualError;
     
+    public abstract void codeGenDeclMethod(DecacCompiler compiler);
+    
+    public abstract void codeGenDeclMethodOverride(DecacCompiler compiler, DAddr address);
+    
+    public abstract AbstractIdentifier getName();
+
 }

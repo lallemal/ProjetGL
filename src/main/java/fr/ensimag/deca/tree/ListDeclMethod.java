@@ -12,6 +12,8 @@ import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import java.io.PrintStream;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -29,6 +31,23 @@ public class ListDeclMethod extends TreeList<AbstractDeclMethod>{
             c.decompile(s);
             s.println();
         }
+    }
+    
+    public void codeGenListDeclMethod(DecacCompiler compiler) {
+    	
+    	Map<String, AbstractDeclMethod> noms = new HashMap<String, AbstractDeclMethod> ();
+    	
+    	for (AbstractDeclMethod i : getList()) {
+    		if (noms.containsKey(i.getName().getName().getName())) {
+    			if (i.equals(noms.get(i.getName().getName().getName()))) {
+    				i.codeGenDeclMethodOverride(compiler, noms.get(i.getName().getName().getName()).getName().getMethodDefinition().getAddress());
+    			}
+    		} else {
+    			i.codeGenDeclMethod(compiler);
+    			noms.put(i.getName().getName().getName(), i);
+    		}
+    		
+    	}
     }
 
 }

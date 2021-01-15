@@ -1,0 +1,7 @@
+//Field dans une classe sans type
+
+class Thing {
+    
+    i = 0;
+
+}

@@ -1,0 +1,5 @@
+//Test of class declaration with body and without extension
+
+class Thing {
+    protected int i;
+}

@@ -1,0 +1,8 @@
+//méthode dans une classe sans type
+
+class Thing {
+    
+    getI(){
+    }
+
+}

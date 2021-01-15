@@ -1,0 +1,7 @@
+//Test declaration of class but with no real body in a method
+
+class Thing {
+    
+    int getI(){
+    }
+}

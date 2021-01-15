@@ -1,0 +1,14 @@
+//Test classe à l'intérieur d'un main
+
+{
+    print("je suis dans le main");
+    
+    class Thing {
+        
+        protected int i = 0;
+        
+        int getI(){
+            print("je suis une classe dans un main");
+        }
+    }
+}

@@ -1,0 +1,12 @@
+//test this
+
+class Thing {
+
+    int i;
+    
+    int getI(){
+        this.i = i;
+    }
+}
+
+

@@ -1,0 +1,12 @@
+//Test new
+
+class Thing {
+
+    int i;
+    
+}
+{
+    Thing i = new Thing();
+
+}
+

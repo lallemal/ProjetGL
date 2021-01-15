@@ -4,6 +4,7 @@ import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.deca.tools.SymbolTable;
+import org.apache.commons.lang.Validate;
 import org.apache.log4j.Logger;
 
 import java.io.PrintStream;
@@ -25,6 +26,7 @@ public class DeclClass extends AbstractDeclClass {
     
     
     public DeclClass(AbstractIdentifier ident, AbstractIdentifier parent, ListDeclField field, ListDeclMethod method){
+        Validate.notNull(ident);
         this.ident = ident;
         this.parent = parent;
         this.field = field;
@@ -37,7 +39,7 @@ public class DeclClass extends AbstractDeclClass {
     }
 
     @Override
-    protected void verifyClass(DecacCompiler compiler) throws ContextualError {
+    public void verifyClass(DecacCompiler compiler) throws ContextualError {
         SymbolTable.Symbol name = ident.getName();
         LOG.debug("Verify Class : start " + name.toString());
         if (parent == null) {

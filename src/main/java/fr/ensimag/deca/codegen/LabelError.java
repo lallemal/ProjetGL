@@ -18,6 +18,8 @@ public class LabelError {
 	private Label errorRFLOAT;
 	private boolean errorConvFloat;
 	private Label errorFLOAT;
+	private boolean errorPilePleine;
+	private Label pilePleine;
 	
 	public void setErrorDiv0(boolean b) {
 		errorDiv0 = b;
@@ -59,6 +61,14 @@ public class LabelError {
 		return errorFLOAT;
 	}
 	
+	public void setErrorPilePleine(boolean b) {
+		errorPilePleine = b;
+	}
+	
+	public Label getLabelPilePleine() {
+		return pilePleine;
+	}
+	
 	public LabelError() {
 		errorDiv0 = false;
 		div0 = new Label("division_par_zero");
@@ -70,6 +80,8 @@ public class LabelError {
 		errorRFLOAT = new Label("error_read_float");
 		errorConvFloat = false;
 		errorFLOAT = new Label("error_conv_float");
+		errorPilePleine = false;
+		pilePleine = new Label("pile_pleine");
 	}
 	
 	public void codeGenLabelError(DecacCompiler compiler) {
@@ -87,6 +99,9 @@ public class LabelError {
 		}
 		if (errorConvFloat) {
 			addError(compiler, errorFLOAT, "conversion flottant", "Erreur : V[dval] non codable sur un flottant");
+		}
+		if (errorPilePleine) {
+			addError(compiler, pilePleine, "debordement de pile", "Erreur : debordement de pile");
 		}
 	}
 	

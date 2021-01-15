@@ -37,7 +37,7 @@ public class Program extends AbstractProgram {
     public void verifyProgram(DecacCompiler compiler) throws ContextualError {
         LOG.debug("verify program: start");
         // Passe 1 et 2 : inutile pour sans-objet
-//        classes.verifyListClass(compiler);
+       classes.verifyListClass(compiler);
 //        classes.verifyListClassMembers(compiler);
 
         // Passe 3

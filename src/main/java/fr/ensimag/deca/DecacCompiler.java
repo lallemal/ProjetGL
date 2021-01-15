@@ -1,7 +1,6 @@
 package fr.ensimag.deca;
 
 import fr.ensimag.deca.codegen.LabelError;
-
 import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.syntax.DecaLexer;
 import fr.ensimag.deca.syntax.DecaParser;
@@ -290,8 +289,9 @@ public class DecacCompiler implements Callable<Boolean> {
         // Create and check existence of symbols for predef Types
         SymbolTable.Symbol voidSymbol = symbols.create("void");
         SymbolTable.Symbol boolSymbol = symbols.create("boolean");
-        SymbolTable.Symbol floatSymbol =symbols.create("float");
-        SymbolTable.Symbol intSymbol =symbols.create("int");
+        SymbolTable.Symbol floatSymbol = symbols.create("float");
+        SymbolTable.Symbol intSymbol = symbols.create("int");
+        SymbolTable.Symbol objectSymbol = symbols.create("Object");
 
         // Creation of predef types
         try {
@@ -299,8 +299,20 @@ public class DecacCompiler implements Callable<Boolean> {
             env_types.declare(boolSymbol, new TypeDefinition(new BooleanType(boolSymbol), Location.BUILTIN));
             env_types.declare(floatSymbol, new TypeDefinition(new FloatType(floatSymbol), Location.BUILTIN));
             env_types.declare(intSymbol, new TypeDefinition(new IntType(intSymbol), Location.BUILTIN));
+
+            Signature equalsSig = new Signature();
+            equalsSig.add(getBool());
+            ClassType objectClass = new ClassType(objectSymbol, Location.BUILTIN, null);
+            ClassDefinition objectDef = new ClassDefinition(objectClass, Location.BUILTIN, null);
+            objectDef.getMembers().declare(symbols.create("equals"), new MethodDefinition(objectClass, Location.BUILTIN, equalsSig, 0));
+            objectDef.setNumberOfMethods(1);
+            env_types.declare(objectSymbol, new ClassDefinition(objectClass, Location.BUILTIN, null));
+
         } catch (EnvironmentType.DoubleDefException e){
             LOG.fatal("Creation of Predefined Type in" + source.getName() + " failed", e);
+            return true;
+        } catch (EnvironmentExp.DoubleDefException f) {
+            LOG.fatal("Creation of equals method for Object in" + source.getName() + " faled", f);
             return true;
         }
         return false;

@@ -1,9 +1,11 @@
 package fr.ensimag.deca.tree;
 
-import fr.ensimag.deca.context.ClassType;
 import fr.ensimag.deca.DecacCompiler;
-import fr.ensimag.deca.context.ContextualError;
+import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.deca.tools.SymbolTable;
+import org.apache.log4j.Logger;
+
 import java.io.PrintStream;
 
 /**
@@ -18,6 +20,8 @@ public class DeclClass extends AbstractDeclClass {
     private AbstractIdentifier parent;
     private ListDeclField field;
     private ListDeclMethod method;
+
+    private final Logger LOG = Logger.getLogger(DeclClass.class);
     
     
     public DeclClass(AbstractIdentifier ident, AbstractIdentifier parent, ListDeclField field, ListDeclMethod method){
@@ -34,7 +38,28 @@ public class DeclClass extends AbstractDeclClass {
 
     @Override
     protected void verifyClass(DecacCompiler compiler) throws ContextualError {
-        throw new UnsupportedOperationException("not yet implemented");
+        SymbolTable.Symbol name = ident.getName();
+        LOG.debug("Verify Class : start " + name.toString());
+        if (parent == null) {
+            parent = new Identifier(compiler.getSymbols().create("Object"));
+        }
+
+        SymbolTable.Symbol parentName = parent.getName();
+        TypeDefinition parentType = compiler.getEnv_types().get(parentName);
+        if (parentType == null) {
+            throw new ContextualError(ContextualError.PARENT_CLASS_NOT_DECLARED, getLocation());
+        }
+        if (!parentType.getNature().equals("class")) {
+            throw new ContextualError(ContextualError.PARENT_CLASS_NOT_CLASS, getLocation());
+        }
+        ClassType newClassType = new ClassType(name, getLocation(), (ClassDefinition)parentType);
+        ClassDefinition newClassDef = new ClassDefinition(newClassType, getLocation(), (ClassDefinition) parentType);
+        try {
+            compiler.getEnv_types().declare(name, newClassDef);
+        } catch (EnvironmentType.DoubleDefException e) {
+            throw new ContextualError(ContextualError.CLASS_ALREADY_DEFINED, getLocation());
+        }
+        LOG.debug("Verify Class : end " + name.toString());
     }
 
     @Override
@@ -65,7 +90,10 @@ public class DeclClass extends AbstractDeclClass {
 
     @Override
     protected void iterChildren(TreeFunction f) {
-        throw new UnsupportedOperationException("Not yet supported");
+        ident.iter(f);
+        // parent.iter(f);
+        // field.iter(f);
+        // method.iter(f);
     }
 
 }

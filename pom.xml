@@ -256,20 +256,10 @@
                             <goal>exec</goal>
                         </goals>
                     </execution>
-                    <execution>
-                        <id>lexer-so-comp.sh</id>
-                        <configuration>
-                            <executable>./src/test/script/lexer-so-comp.sh</executable>
-                        </configuration>
-                        <phase>test</phase>
-                        <goals>
-                            <goal>exec</goal>
-                        </goals>
-                    </execution>
                      <execution>
                         <id>parser-so-comp.sh</id>
                         <configuration>
-                            <executable>./src/test/script/lexer-so-comp.sh</executable>
+                            <executable>./src/test/script/parser-so-comp.sh</executable>
                         </configuration>
                         <phase>test</phase>
                         <goals>

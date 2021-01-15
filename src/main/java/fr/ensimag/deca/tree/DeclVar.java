@@ -7,6 +7,8 @@ import fr.ensimag.deca.tools.SymbolTable;
 import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.RegisterOffset;
 import fr.ensimag.ima.pseudocode.instructions.ADDSP;
+import fr.ensimag.ima.pseudocode.instructions.BOV;
+import fr.ensimag.ima.pseudocode.instructions.TSTO;
 
 import org.apache.commons.lang.Validate;
 import org.apache.log4j.Logger;
@@ -62,6 +64,9 @@ public class DeclVar extends AbstractDeclVar {
     protected void codeGenDecl(DecacCompiler compiler) {
     	varName.getExpDefinition().setOperand(new RegisterOffset(compiler.getKGB(), Register.GB));
     	compiler.incrementKGB();
+    	compiler.getLabelError().setErrorPilePleine(true);
+    	compiler.addInstruction(new TSTO(1));
+    	compiler.addInstruction(new BOV(compiler.getLabelError().getLabelPilePleine()));
     	compiler.addInstruction(new ADDSP(1));
     	initialization.codeGenDecl(compiler, varName.getExpDefinition().getOperand());
     }

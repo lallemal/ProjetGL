@@ -1,0 +1,6 @@
+// Description : test null seul
+// Resultats : ok
+
+{
+    null ;
+}

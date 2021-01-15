@@ -26,8 +26,7 @@ public class Null extends AbstractExpr{
 
 	@Override
 	protected void prettyPrintChildren(PrintStream s, String prefix) {
-		// TODO Auto-generated method stub
-		
+		//nothing to do 
 	}
 
 	@Override

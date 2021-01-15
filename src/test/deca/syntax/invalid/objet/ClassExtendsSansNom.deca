@@ -1,0 +1,6 @@
+// missing IDENT at '{'
+// Description : extends sans nom d'extends
+// Resultat : erreur en ligne 5: extends à besoin d'un IDENT
+
+class Thing extends {
+}

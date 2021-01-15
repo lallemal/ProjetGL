@@ -13,6 +13,19 @@ import java.io.PrintStream;
  * @date 01/01/2021
  */
 public class DeclClass extends AbstractDeclClass {
+        
+    private AbstractIdentifier ident;
+    private AbstractIdentifier parent;
+    private ListDeclField field;
+    private ListDeclMethod method;
+    
+    
+    public DeclClass(AbstractIdentifier ident, AbstractIdentifier parent, ListDeclField field, ListDeclMethod method){
+        this.ident = ident;
+        this.parent = parent;
+        this.field = field;
+        this.method = method;
+    }
 
     @Override
     public void decompile(IndentPrintStream s) {
@@ -38,7 +51,16 @@ public class DeclClass extends AbstractDeclClass {
 
     @Override
     protected void prettyPrintChildren(PrintStream s, String prefix) {
-        throw new UnsupportedOperationException("Not yet supported");
+        ident.prettyPrint(s, prefix, false);
+        if (parent != null){
+            parent.prettyPrint(s, prefix, false);
+        }
+        if (field != null){
+            field.prettyPrintChildren(s, prefix);
+        }
+        if (method != null){
+            method.prettyPrintChildren(s, prefix);
+        }
     }
 
     @Override

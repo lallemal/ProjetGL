@@ -1,0 +1,6 @@
+// Description : test déclaration d'un field public
+// Resultats : ok
+
+class Thing {
+    int i;
+}

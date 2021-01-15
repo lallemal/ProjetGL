@@ -1,0 +1,5 @@
+// Description : Test la declaration simple d'une classe
+// Resultat : OK
+
+class Thing {
+}

@@ -1,0 +1,11 @@
+// no viable alternative at input 'int{'
+// Description : méthode sans nom et sans parenthèse
+// Resultat : erreur en ligne 8: la déclaration de méthode n'est pas reconnue
+
+
+class Thing {
+    
+    int {
+    }
+
+}

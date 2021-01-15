@@ -33,7 +33,8 @@ public class Selection extends AbstractLValue{
 
 	@Override
 	protected void prettyPrintChildren(PrintStream s, String prefix) {
-		// TODO Auto-generated method stub
+		left.prettyPrint(s, prefix, false);
+                right.prettyPrint(s, prefix, true);
 		
 	}
 

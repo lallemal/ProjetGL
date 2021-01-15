@@ -1,0 +1,11 @@
+// Description : test déclaration de classe multiple
+// Resultats : ok
+
+class Bla{
+}
+class Bli{
+}
+class Blo{
+}
+class Blu{
+}

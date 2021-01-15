@@ -1,0 +1,5 @@
+// Description : test déclaration d'une classe aavec extension
+// Resultats : ok
+
+class Thing extends Objet {
+}

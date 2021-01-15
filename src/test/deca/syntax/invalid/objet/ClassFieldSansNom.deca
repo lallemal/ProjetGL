@@ -1,0 +1,9 @@
+// mismatched input ';' expecting IDENT
+// Description : field sans nom 
+// Resultat : erreur en ligne 7: un field a besoin d'un IDENT
+
+class Thing {
+    
+    protected ;
+
+}

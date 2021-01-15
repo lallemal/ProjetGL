@@ -1,0 +1,6 @@
+// Description : test déclaration d'une classe avec body(field seulement) sans extension
+// Resultats : ok
+
+class Thing {
+    protected int i;
+}

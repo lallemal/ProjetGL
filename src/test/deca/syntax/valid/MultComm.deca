@@ -1,3 +1,4 @@
+//Valide pour le lexer, invalide pour le parser
 // Test sur les commentaires sur plusieurs lignes 
 // Résultat attendu: toutes les lignes de commentaires sont skip, seul les string sont pris en comptes
 

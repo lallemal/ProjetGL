@@ -11,7 +11,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <compileSource>1.8</compileSource>
-        <jacoco.skip>false</jacoco.skip>
+        <jacoco.skip>true</jacoco.skip>
     </properties>
 
     <dependencies>
@@ -256,6 +256,27 @@
                             <goal>exec</goal>
                         </goals>
                     </execution>
+                     <execution>
+                        <id>lexer-so-comp.sh</id>
+                        <configuration>
+                            <executable>./src/test/script/lexer-so-comp.sh</executable>
+                        </configuration>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                    </execution>
+ 
+                     <execution>
+                        <id>parser-so-comp.sh</id>
+                        <configuration>
+                            <executable>./src/test/script/parser-so-comp.sh</executable>
+                        </configuration>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                    </execution>
                     <execution>
                         <id>decompile</id>
                         <configuration>
@@ -270,6 +291,26 @@
                         <id>context-so-err</id>
                         <configuration>
                             <executable>./src/test/script/context-so-err.sh</executable>
+                        </configuration>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>gencode-so</id>
+                        <configuration>
+                            <executable>./src/test/script/gencode-so.sh</executable>
+                        </configuration>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>gencode-so-err</id>
+                        <configuration>
+                            <executable>./src/test/script/gencode-so-err.sh</executable>
                         </configuration>
                         <phase>test</phase>
                         <goals>

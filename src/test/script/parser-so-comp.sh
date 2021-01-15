@@ -1,5 +1,12 @@
 #! /bin/sh
 
+SupprimerComp(){
+    
+    for i in ../../soresultat/*.comp
+    do  
+        rm $i
+    done
+}
 # Auteur : gl40
 # Version initiale : 01/01/2021
 
@@ -32,6 +39,7 @@ do
         echo "Erreur detecte Echec inattendu"
         echo "Attendu ":
         echo $resultat
+        SupprimerComp
         exit 1
     fi    
     if diff $resultat $comparaison
@@ -42,6 +50,7 @@ do
         echo "Echec inattendu"
         echo "Attendu: "
         echo $resultat
+        SupprimerComp
         exit 1
     fi 
 
@@ -68,8 +77,10 @@ do
      echo "Succes inattendu pour test_synt ,Attendu:"
      echo $resultat
      echo $error
+     SupprimerComp
+     exit 1
     fi
 done
-
+SupprimerComp
 
 

@@ -1,0 +1,12 @@
+// Description : Tests with print, println, println x, and multiple expr
+// Resultat : fonctionnel
+
+{
+    float f = 0.5;
+    println("Le float est : ", f);
+    print("Le double du float est : (sans sauter à la ligne )", 2*f);
+    printlnx("Cette fois en hexa : ", f);
+    printx("En hexa sans sauter de ligne", f);
+    println();
+    println("", f, f, f, f);
+}

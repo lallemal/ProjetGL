@@ -103,6 +103,7 @@ decl_var[AbstractIdentifier t] returns[AbstractDeclVar tree]
       	$tree = new DeclVar($t, $i.tree, init);
       	setLocation($tree, $i.start);
         }
+      |
     ;
 
 list_inst returns[ListInst tree]
@@ -633,3 +634,5 @@ param returns[DeclParam tree]
             setLocation($tree, $type.start);
         }
     ;
+    
+/**** Array related rule  ****/

@@ -114,19 +114,22 @@ INCLUDE : '#include' (' ')* '"' FILENAME '"' {doInclude(getText());};
 // Litteraux extension
 LHOOK: '[';
 RHOOK: ']';
-LBRACE: '{';
-RBRACE: '}';
 
 // Déclarer un tableau \ex: int[] tab = new int[27]; 
+// DECL_ARRAY:((FLOAT) LHOOK (FLOAT)? RHOOK | (INT) LHOOK (INT)? RHOOK);
 
-DECL_ARRAY:((FLOAT) LHOOK (FLOAT)? RHOOK | (INT) LHOOK (INT)? RHOOK);
-
-// Accéder à un élément du tableau \ex tab[0]
-
-// À FAIRE DANS LE LEXER?
-
+fragment IDENT_WITHOUT_STRING: (IDENT ~('string')); 
 // Déclaration d'un tableau "a la main" \ex int[4] tab = { 1, 2, 2, 4 };
-ARRAY: LBRACE ((FLOAT) (COMMA FLOAT)+ | (INT) (COMMA INT)+ )? RBRACE;
+ARRAY: OBRACE ( (IDENT_WITHOUT_STRING) (COMMA IDENT_WITOUT_STRING)+ )? CBRACE;
+
+fragment ARRAY_INT: OBRACE ((INT) (COMMA INT)+ )? CBRACE;
+fragment ARRAY_FLOAT: OBRACE ((FLOAT) (COMMA FLOAT)+ )? CBRACE;
+fragment ARRAY_BOOLEAN: OBRACE ((BOOLEAN) (COMMA BOOLEAN)+ )? CBRACE;
+
+// MATRIX: OBRACE ((ARRAY_INT)+ | (ARRAY_FLOAT)+ | (ARRAY_BOOLEAN)+ ) CBRACE;
+
+MATRIX: OBRACE ARRAY ( COMMA ARRAY )* CBRACE;
+
 
 
 

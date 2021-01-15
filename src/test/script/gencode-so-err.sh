@@ -9,7 +9,7 @@ cd "$(dirname "$0")"/../../.. || exit 1
 
 PATH=./src/test/script/launchers:"$PATH"
 
-cd src/test/deca/codegen/valid/sansObjetPourScript || exit 1
+cd src/test/deca/codegen/invalid/sansObjetPourScript || exit 1
 rm -f ./*.ass 2>/dev/null
 nb=$(ls -l *.deca | wc -l)
 echo "------ Démarrage des tests ($nb)"

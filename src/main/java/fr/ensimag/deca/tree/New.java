@@ -19,6 +19,12 @@ public class New extends AbstractUnaryExpr{
 	protected String getOperatorName() {
 		return "new";
 	}
+        
+        @Override
+        public void decompile(IndentPrintStream s){
+            s.print("new ");
+            this.getOperand().decompile(s);
+        }
 
 	@Override
 	public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass)

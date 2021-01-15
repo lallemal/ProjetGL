@@ -1,0 +1,6 @@
+{
+	print("Hello");
+	println("Are");
+	print("You");
+	println("Ok?");
+}

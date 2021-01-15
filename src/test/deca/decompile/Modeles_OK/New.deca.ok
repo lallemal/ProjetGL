@@ -1,0 +1,7 @@
+class Thing {
+	PUBLIC int i=new Objet;
+
+}
+{
+	Thing i=new Thing;
+}

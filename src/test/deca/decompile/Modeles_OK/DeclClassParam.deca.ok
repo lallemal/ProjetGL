@@ -1,0 +1,7 @@
+class Thing {
+
+	int getI(int i) {
+		print("cool");
+	}
+
+}

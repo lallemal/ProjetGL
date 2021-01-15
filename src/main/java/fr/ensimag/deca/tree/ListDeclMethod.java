@@ -25,7 +25,10 @@ public class ListDeclMethod extends TreeList<AbstractDeclMethod>{
     
     @Override
     public void decompile(IndentPrintStream s) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        for (AbstractDeclMethod c : getList()) {
+            c.decompile(s);
+            s.println();
+        }
     }
 
 }

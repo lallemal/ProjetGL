@@ -1,0 +1,36 @@
+// Description :
+//    test décompilation d'un programme avec main + classe
+//
+// Resultats (en comparaison avec le résultat attendu 
+// disponible dans le fichier *.deca.ok dans le dossier Modeles_OK) :
+//    ok
+
+class Thing extends Objet{
+    protected int i, j=0;
+    float k;
+
+    int getI(){
+        print(i);
+    }
+    
+    void setplusK(int i, int j){
+        k = i + j;
+        print(k);
+    }
+}
+{
+    int x = 4;
+    int y = 0;
+    if (x < 5) {
+        while (x > 0) {
+            x = x - 1;
+            print(x);
+        }
+    }
+    else if (x > 6) {
+        println(x);
+    }
+    else {
+        print("OUAH");
+    }
+}

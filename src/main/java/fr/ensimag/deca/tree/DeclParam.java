@@ -35,7 +35,9 @@ public class DeclParam extends AbstractDeclParam{
 
     @Override
     public void decompile(IndentPrintStream s) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        type.decompile(s);
+        s.print(" ");
+        name.decompile(s);
     }
 
     @Override
@@ -46,7 +48,8 @@ public class DeclParam extends AbstractDeclParam{
 
     @Override
     protected void iterChildren(TreeFunction f) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        type.iter(f);
+        name.iter(f);
     }
 
     @Override

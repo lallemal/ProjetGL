@@ -311,6 +311,16 @@
                         <id>gencode-so-err</id>
                         <configuration>
                             <executable>./src/test/script/gencode-so-err.sh</executable>
+						</configuration>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>parser-objet</id>
+                        <configuration>
+                            <executable>./src/test/script/parser-objet.sh</executable>
                         </configuration>
                         <phase>test</phase>
                         <goals>

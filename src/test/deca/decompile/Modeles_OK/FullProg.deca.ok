@@ -1,0 +1,33 @@
+class Thing extends Objet {
+	PROTECTED int i;
+	PROTECTED int j=0;
+	PUBLIC float k;
+
+	int getI() {
+		print(i);
+	}
+
+	void setplusK(int i, int j) {
+		(k = (i + j));
+		print(k);
+	}
+
+}
+{
+	int x=4;
+	int y=0;
+	if (x < 5) {
+		while (x > 0) {
+			(x = (x - 1));
+			print(x);
+		}
+	}
+	else {
+		if (x > 6) {
+			println(x);
+		}
+		else {
+			print("OUAH");
+		}
+	}
+}

@@ -76,8 +76,4 @@ public class ClassDefinition extends TypeDefinition {
         this.superClass = superClass;
     }
 
-    @Override
-    public String getNature() {
-        return "class";
-    }
 }

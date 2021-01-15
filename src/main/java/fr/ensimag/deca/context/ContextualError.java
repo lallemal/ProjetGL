@@ -17,7 +17,14 @@ public class ContextualError extends LocationException {
     public static final String CLASS_ALREADY_DEFINED = "This class is already defined"; // 1.3
     public static final String CLASS_NOT_IN_ENV = "The class is not initialize in types"; // 2.3
     public static final String CLASS_NOT_CLASS = "The class is not of nature Class"; // 2.3
-
+    public static final String DECL_FIELD_VOID = "The type of a field to be declared can not be void"; // 2.5
+    public static final String FIELD_PARENT_NOT_FIELD =  "The field declared exists in parent class Environnement but is not a field there"; // 2.5
+    public static final String FIELD_ALREADY_DEFINED = "This field is already defined"; // 2.5 2.3
+    public static final String METHOD_SAME_IDENT_NOT_METHOD = "This method has the same identifier as a not method object in super class"; // 2.7
+    public static final String METHOD_REDEF_NOT_SAME_SIG = "The redefinition of this method has not the same signature as the method defined in the super class"; // 2.7
+    public static final String METHOD_RETURN_TYPE_NOT_SUBTYPE_SUPER_METHOD = "The type of return of this method is not the same as the one of the herited method"; // 2.7
+    public static final String METHOD_ALREADY_DEFINED_ENV = "This method is already defined in this scope"; // 2.7 2.3
+    public static final String PARAM_TYPE_VOID = "A parameter can not be void type"; // 2.9
 
 
     // Passe 3 Sans Objet

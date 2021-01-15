@@ -1,0 +1,14 @@
+// This method has the same identifier as a not method object in super class
+// Description : Test avec une méthode qui a le même nom qu'un champ dans sa classe mère
+// Resultat : erreur ligne 11;
+
+
+class A {
+    protected int methodName;
+}
+
+class B extends A {
+    void methodName(int x) {
+
+    }
+}

@@ -6,17 +6,12 @@
 package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.DecacCompiler;
-import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
-import fr.ensimag.deca.context.Definition;
-import fr.ensimag.deca.context.EnvironmentExp;
-import fr.ensimag.deca.context.ExpDefinition;
-import fr.ensimag.deca.context.FieldDefinition;
-import fr.ensimag.deca.context.MethodDefinition;
 import fr.ensimag.deca.context.Type;
-import fr.ensimag.deca.context.VariableDefinition;
 import fr.ensimag.deca.tools.IndentPrintStream;
-import fr.ensimag.deca.tools.SymbolTable;
+import org.apache.commons.lang.Validate;
+import org.apache.log4j.Logger;
+
 import java.io.PrintStream;
 
 /**
@@ -27,8 +22,12 @@ public class DeclParam extends AbstractDeclParam{
     
     private AbstractIdentifier type;
     private AbstractIdentifier name;
-    
+
+    private static final Logger LOG = Logger.getLogger(DeclParam.class);
+
     public DeclParam(AbstractIdentifier type, AbstractIdentifier name){
+        Validate.notNull(type);
+        Validate.notNull(type);
         this.type = type;
         this.name = name;
     }
@@ -50,8 +49,14 @@ public class DeclParam extends AbstractDeclParam{
     }
 
     @Override
-    protected void verifyDeclParam(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass) throws ContextualError {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    protected Type verifyDeclParam(DecacCompiler compiler) throws ContextualError {
+        LOG.debug("Verify Param " + name.getName() + " : start");
+        Type type = this.type.verifyType(compiler);
+        if (type.isVoid()) {
+            throw new ContextualError(ContextualError.PARAM_TYPE_VOID, getLocation());
+        }
+        LOG.debug("Verify Param " + name.getName() + " : end");
+        return type;
     }
 
     

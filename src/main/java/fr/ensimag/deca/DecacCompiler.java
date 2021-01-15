@@ -306,7 +306,7 @@ public class DecacCompiler implements Callable<Boolean> {
             ClassDefinition objectDef = new ClassDefinition(objectClass, Location.BUILTIN, null);
             objectDef.getMembers().declare(symbols.create("equals"), new MethodDefinition(objectClass, Location.BUILTIN, equalsSig, 0));
             objectDef.setNumberOfMethods(1);
-            env_types.declare(objectSymbol, new ClassDefinition(objectClass, Location.BUILTIN, null));
+            env_types.declare(objectSymbol, objectDef);
 
         } catch (EnvironmentType.DoubleDefException e){
             LOG.fatal("Creation of Predefined Type in" + source.getName() + " failed", e);

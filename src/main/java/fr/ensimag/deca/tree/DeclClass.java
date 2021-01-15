@@ -52,7 +52,7 @@ public class DeclClass extends AbstractDeclClass {
         if (parentType == null) {
             throw new ContextualError(ContextualError.PARENT_CLASS_NOT_DECLARED, getLocation());
         }
-        if (!parentType.getNature().equals("class")) {
+        if (!parentType.isClass()) {
             throw new ContextualError(ContextualError.PARENT_CLASS_NOT_CLASS, getLocation());
         }
         ClassType newClassType = new ClassType(name, getLocation(), (ClassDefinition)parentType);
@@ -69,6 +69,7 @@ public class DeclClass extends AbstractDeclClass {
     protected void verifyClassMembers(DecacCompiler compiler)
             throws ContextualError {
         SymbolTable.Symbol name = ident.getName();
+        LOG.debug("Verify Class Members : start " + name.toString());
         if (parent == null) {
             throw new DecacInternalError("Parent class is not set which is impossible at this state of the compilation checking");
         }
@@ -77,7 +78,7 @@ public class DeclClass extends AbstractDeclClass {
         if (classTypeDef == null) {
             throw new ContextualError(ContextualError.CLASS_NOT_IN_ENV, getLocation());
         }
-        if (!classTypeDef.getNature().equals("class")) {
+        if (!classTypeDef.isClass()) {
             throw new ContextualError(ContextualError.CLASS_NOT_CLASS, getLocation());
         }
         ClassDefinition classDef = (ClassDefinition) classTypeDef;
@@ -86,6 +87,7 @@ public class DeclClass extends AbstractDeclClass {
         method.verifyListDeclMethod(compiler, classDef);
 
 
+        LOG.debug("Verify Class Members : end " + name.toString());
     }
     
     @Override

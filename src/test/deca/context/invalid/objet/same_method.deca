@@ -1,0 +1,17 @@
+// The redefinition of this method has not the same signature as the method defined in the super class
+// Description : Test de definition d'une même méthode entre deux classes qui s'héritent mais dont les signatures sont différentes
+// Resultat : erreur ligne 14
+
+
+
+class A {
+    void blabla(int x, int y) {
+
+    }
+}
+
+class B extends A {
+    void blabla(int x) {
+
+    }
+}

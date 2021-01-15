@@ -66,7 +66,9 @@ public class DeclVar extends AbstractDeclVar {
     	compiler.incrementKGB();
     	compiler.getLabelError().setErrorPilePleine(true);
     	compiler.addInstruction(new TSTO(1));
-    	compiler.addInstruction(new BOV(compiler.getLabelError().getLabelPilePleine()));
+    	if (!compiler.getCompilerOptions().isNoCheck()) {
+    		compiler.addInstruction(new BOV(compiler.getLabelError().getLabelPilePleine()));
+    	}
     	compiler.addInstruction(new ADDSP(1));
     	initialization.codeGenDecl(compiler, varName.getExpDefinition().getOperand());
     }

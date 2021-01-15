@@ -67,7 +67,9 @@ public abstract class AbstractOpArith extends AbstractBinaryExpr {
                 e1.codeExp(compiler, n);
                 compiler.getLabelError().setErrorPilePleine(true);
             	compiler.addInstruction(new TSTO(1));
-            	compiler.addInstruction(new BOV(compiler.getLabelError().getLabelPilePleine()));
+            	if (!compiler.getCompilerOptions().isNoCheck()) {
+            		compiler.addInstruction(new BOV(compiler.getLabelError().getLabelPilePleine()));
+            	}
                 compiler.addInstruction(new PUSH(Register.getR(n)));
                 e2.codeExp(compiler, n);
                 compiler.addInstruction(new LOAD(Register.getR(n), Register.R0));

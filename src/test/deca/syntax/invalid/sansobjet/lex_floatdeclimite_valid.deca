@@ -1,5 +1,6 @@
-// Test limite flottant
-// un float par ligne
+// 
+//Description: test de reconnaissance de flotttant en decimale
+//Resultats: Un FLOAT par ligne
 14.012985E-46
 1.4012985E-45F
 1.4012985E-45

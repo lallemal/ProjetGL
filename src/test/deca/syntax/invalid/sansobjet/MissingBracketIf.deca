@@ -1,0 +1,9 @@
+//MissingBracketIf.deca:6:14: no viable alternative at input '{'
+//Description: test oubli d'une parenthèse fermante
+//Resultats: erreur ligne 6: il manque une parenthere fermante )
+{
+    int s = 1;
+    if (s == 2{
+
+    }
+}

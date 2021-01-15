@@ -1,5 +1,6 @@
-// Test: reconnaissance INT
-// sortie :4 Token INT le  dernier nombre est le cas limite
+//no viable alternative at input '0'
+//Description: reconnaissance INT
+//Resultats:4 Token INT le  dernier nombre est le cas limite
 
 0 12 100  434343  2147483647
 

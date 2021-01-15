@@ -1,0 +1,6 @@
+//DeclaMotReserve.deca:5:8: no viable alternative at input 'asm'
+//Description: teste declaration incorrect nombre
+//Resultats: erreur ligne 5: caractere speciaux  a la place d'in ident
+{
+    int asm;
+}

@@ -1,0 +1,6 @@
+//Erreur de compilation: arrondi a zero et flottant non nulle
+//Description: teste declaration nombre trop petit
+//Resultat: erreur ligne 5: nombre trop petit
+{
+    float f = 0x1.0p-128;
+}

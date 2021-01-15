@@ -17,6 +17,8 @@ for i in *.deca
 do
     decac ./$i || exit 1
 done
+#on met a part le test de debordement de pile car il necessite une execution de ima -p nnn
+decac ./debordementPile/pilePleine.deca || exit 1
 
 for i in *.ass
 do
@@ -32,4 +34,16 @@ do
         exit 1
   fi
 done
+#on met a part le test de debordement de pile car il necessite une execution de ima -p nnn
+resultat=$(ima -p 003 ./debordementPile/pilePleine.ass)
+if [ "$(cat ./debordementPile/Modeles_OK/pilePleine.ass.ok)" = "$resultat" ]; then
+    echo "pilePeine.ass OK"
+else
+    echo "pilePeine.ass KO ->"
+    echo "Résultat innatendu, le résultat:"
+    echo "$resultat"
+    echo "ce qui était attendu:"
+    echo "$(cat ./debordementPile/Modeles_OK/pilePleine.ass.ok)"
+    exit 1
+fi
 cd "$(dirname "$0")"/../../.. || exit 1

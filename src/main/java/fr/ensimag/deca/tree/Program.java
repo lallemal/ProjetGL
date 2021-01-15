@@ -36,9 +36,11 @@ public class Program extends AbstractProgram {
     @Override
     public void verifyProgram(DecacCompiler compiler) throws ContextualError {
         LOG.debug("verify program: start");
-        // Passe 1 et 2 : inutile pour sans-objet
-       classes.verifyListClass(compiler);
-//        classes.verifyListClassMembers(compiler);
+        // Passe 1 : Initialize classes & their definitions
+        classes.verifyListClass(compiler);
+
+        // Passe 2 :
+        classes.verifyListClassMembers(compiler);
 
         // Passe 3
         // Descente vers classe inutile pour sans objet

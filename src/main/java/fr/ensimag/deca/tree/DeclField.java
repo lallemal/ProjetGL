@@ -8,8 +8,9 @@ package fr.ensimag.deca.tree;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
-import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import org.apache.commons.lang.Validate;
+
 import java.io.PrintStream;
 
 /**
@@ -23,7 +24,11 @@ public class DeclField extends AbstractDeclField{
     private AbstractIdentifier nom;
     private AbstractInitialization init;
     
-    public DeclField(Visibility visib, AbstractIdentifier type, AbstractIdentifier nom, AbstractInitialization init){
+    public DeclField(Visibility visib, AbstractIdentifier type, AbstractIdentifier nom, AbstractInitialization init) {
+        Validate.notNull(visib);
+        Validate.notNull(type);
+        Validate.notNull(nom);
+        Validate.notNull(init);
         this.visib = visib;
         this.type = type;
         this.nom = nom;
@@ -49,8 +54,8 @@ public class DeclField extends AbstractDeclField{
     }
 
     @Override
-    protected void verifyDeclField(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass) throws ContextualError {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    protected void verifyDeclField(DecacCompiler compiler, ClassDefinition currentClass) throws ContextualError {
+        Type type =
     }
     
 }

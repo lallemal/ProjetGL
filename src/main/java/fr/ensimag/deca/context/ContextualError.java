@@ -15,6 +15,8 @@ public class ContextualError extends LocationException {
     public static final String PARENT_CLASS_NOT_DECLARED = "The parent class of this class was not declared before"; // 1.3
     public static final String PARENT_CLASS_NOT_CLASS = "The definition of the parent class is not a class identifier"; // 1.3
     public static final String CLASS_ALREADY_DEFINED = "This class is already defined"; // 1.3
+    public static final String CLASS_NOT_IN_ENV = "The class is not initialize in types"; // 2.3
+    public static final String CLASS_NOT_CLASS = "The class is not of nature Class"; // 2.3
 
 
 

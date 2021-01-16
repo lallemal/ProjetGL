@@ -256,6 +256,16 @@
                             <goal>exec</goal>
                         </goals>
                     </execution>
+                    <execution>
+                        <id>lex-hello</id>
+                        <configuration>
+                            <executable>./src/test/script/lex-hello.sh</executable>
+                        </configuration>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                    </execution>
                      <execution>
                         <id>lexer-so-comp.sh</id>
                         <configuration>

@@ -65,6 +65,7 @@ do
   if test_lex $i 2>&1 | grep -q -e "$i:"
   then
     echo "Echec inattendu pour test_lex"
+    exit 1
   else
     echo "OK"
   fi

@@ -73,7 +73,10 @@ list_decl returns[ListDeclVar tree]
     ;
 
 decl_var_set[ListDeclVar l]
-    : type list_decl_var[$l,$type.tree] SEMI
+    : type 
+    ( LHOOK (INT)? RHOOK // Délcaration d'un tableau
+    | LHOOK RHOOK LHOOK RHOOK) // Déclaration d'une matrice
+    list_decl_var[$l,$type.tree] SEMI
     ;
 
 list_decl_var[ListDeclVar l, AbstractIdentifier t]
@@ -103,9 +106,66 @@ decl_var[AbstractIdentifier t] returns[AbstractDeclVar tree]
       	$tree = new DeclVar($t, $i.tree, init);
       	setLocation($tree, $i.start);
         }
-      |
+      | e=decl_var_array[$t] {
+            assert($e.tree != null);
+            $tree = $e.tree;
+            setLocation($tree, $e.start);
+        }
+      | e=decl_var_matrix[$t] {
+            assert($e.tree != null);
+            $tree = $e.tree;
+            setLocation($tree, $e.start);
+        }
     ;
+decl_var_array[AbstractIdentifier t] returns[AbstractDeclVar tree]
+	@init   {
+            AbstractInitialization init;
+            AbastractInteger intMemory;
+        }
+    : i=ident LHOOK{
+    	//pas de setLocation pour NoInitialization car cest une feuille
+    	init = new NoInitialization();
+		intMemory = new NoInteger();
+        }
+      (INT {
+      	intMemory = new Integer(Integer.parseInt($INT.text));
+      }  	
+      )? RHOOK
+      (EQUALS e=expr {
+      	init = new Initialization($e.tree);
+      	setLocation(init, $e.start);
+      	
+        }
+      )? {
+      	$tree = new DeclVarArray($t, intMemory,  $i.tree, init);
+      	setLocation($tree, $i.start);
+        }
+	;
 
+decl_var_matrix[AbstractIdentifier t] returns[AbstractDeclVar tree] // Work in progress
+	@init   {
+            AbstractInitialization init;
+            AbastractInteger intMemory;
+        }
+    : i=ident LHOOK{
+    	//pas de setLocation pour NoInitialization car cest une feuille
+    	init = new NoInitialization();
+		intMemory = new NoInteger();
+        }
+      (INT {
+      	intMemory = new Integer(Integer.parseInt($INT.text));
+      }  	
+      )? RHOOK
+      (EQUALS e=expr {
+      	init = new Initialization($e.tree);
+      	setLocation(init, $e.start);
+      	
+        }
+      )? {
+      	$tree = new DeclVarArray($t, intMemory,  $i.tree, init);
+      	setLocation($tree, $i.start);
+        }
+	;
 list_inst returns[ListInst tree]
 @init {
 	$tree = new ListInst();
@@ -412,6 +472,9 @@ select_expr returns[AbstractExpr tree]
     ;
 
 primary_expr returns[AbstractExpr tree]
+@init{
+	AbstractInteger intMemory;
+}
     : ident {
             assert($ident.tree != null);
             $tree = $ident.tree;
@@ -437,9 +500,24 @@ primary_expr returns[AbstractExpr tree]
     | NEW ident OPARENT CPARENT {
             assert($ident.tree != null);
             $tree = new New($ident.tree);
-            setLocation($tree, $NEW);
+            setLocation($tree, $NEW); 
             
         }
+     | NEW ident LHOOK i1=INT RHOOK  LHOOK{ // Déclaration d'une matrice
+	    	assert($ident.tree != null);
+	    	intMemory = new NoInteger();
+	    }  (i2=INT {
+	    	intMemory = new Integer(Integer.parseInt($i2.text));
+
+	    })? RHOOK{
+	    	$tree = new NewMatrix($ident.tree,  Integer.parseInt($i1.text), intMemory);
+	    	setLocation($tree, $NEW); // Pas sur du $NEW
+	    }
+     | NEW ident LHOOK i1=INT RHOOK  { // Déclaration d'un tableau 
+    	assert($ident.tree != null);
+    	$tree = new NewMatrix($ident.tree, Integer.parseInt($INT.text));
+    	setLocation($tree, $NEW); // Pas sur du $NEW
+    }
     | cast=OPARENT type CPARENT OPARENT expr CPARENT {
             assert($type.tree != null);
             assert($expr.tree != null);

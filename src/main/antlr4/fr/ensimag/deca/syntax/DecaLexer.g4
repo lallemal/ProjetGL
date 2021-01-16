@@ -119,12 +119,12 @@ RHOOK: ']';
 // Déclarer un tableau \ex: int[] tab = new int[27]; 
 // DECL_ARRAY:((FLOAT) LHOOK (FLOAT)? RHOOK | (INT) LHOOK (INT)? RHOOK);
 
-fragment IDENT_WITHOUT_STRING: (IDENT ~('string')); 
+// fragment IDENT_WITHOUT_STRING: (IDENT ~('string')); 
 // Déclaration d'un tableau "a la main" \ex int[4] tab = { 1, 2, 2, 4 };
-ARRAY: OBRACE ( (IDENT_WITHOUT_STRING) (COMMA IDENT_WITHOUT_STRING)+ )? CBRACE;
+ARRAY: OBRACE ( (IDENT) (COMMA IDENT)+ )? CBRACE;
 
-fragment ARRAY_INT: OBRACE ((INT) (COMMA INT)+ )? CBRACE;
-fragment ARRAY_FLOAT: OBRACE ((FLOAT) (COMMA FLOAT)+ )? CBRACE;
+// fragment ARRAY_INT: OBRACE ((INT) (COMMA INT)+ )? CBRACE;
+// fragment ARRAY_FLOAT: OBRACE ((FLOAT) (COMMA FLOAT)+ )? CBRACE;
 
 
 // MATRIX: OBRACE ((ARRAY_INT)+ | (ARRAY_FLOAT)+ | (ARRAY_BOOLEAN)+ ) CBRACE;

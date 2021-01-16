@@ -98,7 +98,7 @@ public class DeclClass extends AbstractDeclClass {
         if (classType == null) {
             throw new ContextualError(ContextualError.CLASS_NOT_IN_ENV, getLocation());
         }
-        if (classType.isClass()) {
+        if (!classType.isClass()) {
             throw new ContextualError(ContextualError.CLASS_NOT_CLASS, getLocation());
         }
         ClassDefinition classDef = (ClassDefinition) classType;

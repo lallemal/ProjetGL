@@ -44,7 +44,7 @@ cd ../../../../../.. || exit 1
 
 cd src/test/deca/context/valid/sansobjet || exit 1
 nb=$(ls -l *.deca | wc -l)
-echo "------ Démarrage des tests valide ($nb)"
+echo "------ Démarrage des tests valide ($((nb +1)))"
 for i in *.deca
 do
   if test_context $i 2>&1 | grep -q -e "$i:"
@@ -56,4 +56,16 @@ do
   fi
 
 done
+
+cd ../../../../../.. || exit 1
+
+cd src/test/deca/decompile/Test_include || exit 1
+
+ if test_context Include.deca 2>&1 | grep -q -e "Include.deca:"
+  then
+    echo "Echec inattendu pour test_context"
+  else
+    echo "OK"
+  fi
+
 cd "$(dirname "$0")"/../../../.. || exit 1

@@ -17,7 +17,7 @@ PATH=./src/test/script/launchers:"$PATH"
 
 cd src/test/deca/decompile
 nb=$(ls -l *.deca | wc -l)
-echo "------ Démarrage des tests ($nb)"
+echo "------ Démarrage des tests ($((nb +1)))"
 for i in *.deca
 do
   resultat=$(decac -p $i)

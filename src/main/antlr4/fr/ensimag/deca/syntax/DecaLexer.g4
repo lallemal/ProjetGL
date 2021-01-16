@@ -56,7 +56,7 @@ WHILE : 'while';
 
 // mot reserve deca avec objet a decommenter pour l'ajouter
 RETURN : 'return'; 
-//INSTANCEOF : instanceof; 
+INSTANCEOF : 'instanceof'; 
 NEW : 'new';
 THIS : 'this';
 NULL : 'null';
@@ -124,7 +124,7 @@ ARRAY: OBRACE ( (IDENT_WITHOUT_STRING) (COMMA IDENT_WITOUT_STRING)+ )? CBRACE;
 
 fragment ARRAY_INT: OBRACE ((INT) (COMMA INT)+ )? CBRACE;
 fragment ARRAY_FLOAT: OBRACE ((FLOAT) (COMMA FLOAT)+ )? CBRACE;
-fragment ARRAY_BOOLEAN: OBRACE ((BOOLEAN) (COMMA BOOLEAN)+ )? CBRACE;
+
 
 // MATRIX: OBRACE ((ARRAY_INT)+ | (ARRAY_FLOAT)+ | (ARRAY_BOOLEAN)+ ) CBRACE;
 

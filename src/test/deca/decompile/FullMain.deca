@@ -9,8 +9,7 @@
 
     int i = 0, j = 1;
     float k;
-    string h = "hello";
-    bool b = true;
+    boolean b = true;
     int a = readInt();
     k = readFloat();
 

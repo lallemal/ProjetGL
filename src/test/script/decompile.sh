@@ -31,5 +31,15 @@ do
         exit 1
   fi
 done
+ resultat=$(decac -p Test_include/Include.deca)
+  if [ "$(less Modeles_OK/Include.deca.ok)" = "$resultat" ]; then
+        echo "Test_include/Include.deca ok"
+  else
+        echo "Résultat innatendu, le résultat:"
+        echo "$resultat"
+        echo "ce qui était attendu:"
+        echo "$(less Modeles_OK/Include.deca.ok)"
+        exit 1
+  fi
 cd "$(dirname "$0")"/../../.. || exit 1
 echo "Pour plus de détails: decac -p fichier_à_étudier"

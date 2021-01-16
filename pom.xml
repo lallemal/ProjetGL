@@ -298,6 +298,16 @@
                         </goals>
                     </execution>
                     <execution>
+                        <id>Redecompile</id>
+                        <configuration>
+                            <executable>./src/test/script/Redecompile.sh</executable>
+                        </configuration>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                    </execution>
+                    <execution>
                         <id>context-so-err</id>
                         <configuration>
                             <executable>./src/test/script/context-so-err.sh</executable>

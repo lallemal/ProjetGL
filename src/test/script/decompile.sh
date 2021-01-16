@@ -30,9 +30,10 @@ resultat=$(decac -p Test_include/Include.deca)
   fi
 for i in *.deca
 do
+#si on atteind le fichier ZZRes_inter.deca(voir Redecompile.sh) c'est que tout les fichiers précédants ont passés le test
   if [ "$i" = "ZZRes_inter.deca" ]
   then
-    exit 1S
+    echo "Les tests de décompilation sont terminés."
   else
      resultat=$(decac -p $i)
     if [ "$(less Modeles_OK/$i.ok)" = "$resultat" ]; then

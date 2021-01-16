@@ -142,27 +142,15 @@ decl_var_array[AbstractIdentifier t] returns[AbstractDeclVar tree]
         }
 	;
 
-decl_var_matrix[AbstractIdentifier t] returns[AbstractDeclVar tree] // Work in progress
+decl_var_matrix[AbstractIdentifier t] returns[AbstractDeclVar tree] 
 	@init   {
             AbstractInitialization init;
             AbastractInteger intMemory;
         }
-    : i=ident LHOOK{
-    	//pas de setLocation pour NoInitialization car cest une feuille
-    	init = new NoInitialization();
-		intMemory = new NoInteger();
-        }
-      (INT {
-      	intMemory = new Integer(Integer.parseInt($INT.text));
-      }  	
-      )? RHOOK
-      (EQUALS e=expr {
+    : i=ident LHOOK RHOOK LHOOK RHOOK EQUALS e=expr{
       	init = new Initialization($e.tree);
       	setLocation(init, $e.start);
-      	
-        }
-      )? {
-      	$tree = new DeclVarArray($t, intMemory,  $i.tree, init);
+      	$tree = new DeclVarMatrix($t,  $i.tree, init);
       	setLocation($tree, $i.start);
         }
 	;
@@ -518,6 +506,14 @@ primary_expr returns[AbstractExpr tree]
     	$tree = new NewMatrix($ident.tree, Integer.parseInt($INT.text));
     	setLocation($tree, $NEW); // Pas sur du $NEW
     }
+    | l=list_element{ // Definition de array explicite 
+    	assert($l.tree != null);
+    	$tree = $l.tree;
+    }
+    | l=list_array{ // Definition de matrice explicite
+    	assert($l.tree != null);
+    	$tree = $l.tree;
+    }
     | cast=OPARENT type CPARENT OPARENT expr CPARENT {
             assert($type.tree != null);
             assert($expr.tree != null);
@@ -528,6 +524,42 @@ primary_expr returns[AbstractExpr tree]
             assert($literal.tree != null);
             $tree = $literal.tree;
         }
+    ;
+
+list_element returns[ListExpr tree]
+@init   {
+
+	$tree = new ListExpr();
+        }
+    : OBRACE((ident{
+			$tree.add($ident.tree);
+			setLocation($tree, $ident.start);
+		}
+	) ( COMMA ident{
+		$tree.add($ident.tree)
+		setLocation($tree, $ident.start);
+	}
+		
+	)*)?CBRACE
+    ;
+
+
+list_array returns[ListExpr tree]
+@init   {
+
+	$tree = new ListArray();
+        }
+    : OBRACE((
+    	e=list_element{
+    		$tree.add($e.tree);
+    		setLocation($tree, $e.start);
+    	}
+	) ( COMMA e=list_element{
+		$tree.add($e.tree)
+		setLocation($tree, $e.start);
+	}
+		
+	)*)?CBRACE
     ;
 
 type returns[AbstractIdentifier tree]

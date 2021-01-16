@@ -21,7 +21,7 @@ import java.io.PrintStream;
 public abstract class AbstractDeclMethod extends Tree{
     
     protected abstract void verifyDeclMethod(DecacCompiler compiler,
-            EnvironmentExp localEnv, ClassDefinition currentClass)
+      ClassDefinition currentClass)
             throws ContextualError;
     
     public abstract void codeGenDeclMethod(DecacCompiler compiler);
@@ -30,4 +30,5 @@ public abstract class AbstractDeclMethod extends Tree{
     
     public abstract AbstractIdentifier getName();
 
+    public abstract void verifyDeclMethodBody(DecacCompiler compiler, ClassDefinition currentClass) throws ContextualError;
 }

@@ -225,8 +225,21 @@ public class Identifier extends AbstractIdentifier {
         setDefinition(compiler.getEnv_types().get(name));
         return compiler.getEnv_types().get(name).getType();
     }
-    
-    
+
+    @Override
+    public Type verifyMethod(DecacCompiler compiler, EnvironmentExp localEnv) throws ContextualError {
+        ExpDefinition def = localEnv.get(this.name);
+        if (def == null) {
+            throw new ContextualError(ContextualError.IDENTIFIER_TYPE_UNDEFINED, getLocation());
+        }
+        if (!def.isMethod()) {
+            throw new ContextualError(ContextualError.IDENTIFIER_NOT_METHOD, getLocation());
+        }
+        setDefinition(def);
+        return def.getType();
+    }
+
+
     private Definition definition;
 
 

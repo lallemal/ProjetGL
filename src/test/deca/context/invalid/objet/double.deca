@@ -1,0 +1,11 @@
+// This class is already defined
+// Description : Test avec redéfinition de classe
+// Resultat : erreur ligne 9
+
+
+class A {
+
+}
+class A {
+
+}

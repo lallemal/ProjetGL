@@ -9,11 +9,11 @@ import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
-import fr.ensimag.deca.context.Type;
+import fr.ensimag.deca.context.Signature;
 import fr.ensimag.deca.tools.IndentPrintStream;
+
 import java.io.PrintStream;
 import java.util.Iterator;
-
 
 
 /**
@@ -22,8 +22,12 @@ import java.util.Iterator;
  */
 public class ListParam extends TreeList<AbstractDeclParam> {
     
-    public void verifyListDeclField(DecacCompiler compiler) throws ContextualError {
-        throw new UnsupportedOperationException("not yet implemented");
+    public Signature verifyDeclMethod(DecacCompiler compiler) throws ContextualError {
+        Signature sig = new Signature();
+        for (AbstractDeclParam p : getList()) {
+            sig.add(p.verifyDeclParam(compiler));
+        }
+        return sig;
     }
 
     public boolean equals(ListParam other) {
@@ -41,6 +45,13 @@ public class ListParam extends TreeList<AbstractDeclParam> {
     	return this.size() == other.size();
     } 
     
+    public void verifyDeclMethodBody(DecacCompiler compiler, EnvironmentExp localExp, ClassDefinition currentClass)
+        throws ContextualError {
+        for (AbstractDeclParam p : getList()) {
+            p.verifyDeclParamBody(compiler, localExp, currentClass);
+        }
+    }
+
     @Override
     public void decompile(IndentPrintStream s) {
         int j = 0;

@@ -1,0 +1,9 @@
+// The parent class of this class was not declared before
+// Description : Test avec une classe étendant une classe n'était pas définie
+// Résultat : erreur ligne 7
+
+
+
+class A extends B {
+
+}

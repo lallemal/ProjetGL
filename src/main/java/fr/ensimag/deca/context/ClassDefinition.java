@@ -96,5 +96,5 @@ public class ClassDefinition extends TypeDefinition {
         this.superClass = superClass;
         this.methods = new ListDeclMethod();
     }
-    
+
 }

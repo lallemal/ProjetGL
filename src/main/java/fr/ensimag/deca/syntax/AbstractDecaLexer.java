@@ -614,7 +614,7 @@ public abstract class AbstractDecaLexer extends Lexer {
  	void compareExposantHex(int exposant, String mantisse) {
  		//System.out.println("exposant= " + exposant + " mantisse= "+ mantisse);
  		if(exposant < -126) {
- 			throw new InvalidFloatBig(this,getInputStream());
+ 			throw new InvalidFloatSmall(this,getInputStream());
  		}
  		// si l'exposant == 126 OK
  		//if(exposant == -126) {  

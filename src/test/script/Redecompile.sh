@@ -18,12 +18,25 @@ PATH=./src/test/script/launchers:"$PATH"
 cd src/test/deca/decompile
 nb=$(ls -l *.deca | wc -l)
 echo "------ Démarrage des tests ($((nb +1)))"
+ decac -p Test_include/Include.deca > ZZRes_inter.deca || exit 1
+    resultat=$(decac -p ./ZZRes_inter.deca)
+  if [ "$(less Modeles_OK/Include.deca.ok)" = "$resultat" ]; then
+        echo "Test_include/Include.deca ok"
+  else
+        echo "Résultat innatendu, le résultat:"
+        echo "$resultat"
+        echo "ce qui était attendu:"
+        echo "$(less Modeles_OK/Include.deca.ok)"
+        exit 1
+  fi
+
 for i in *.deca
 do
- #si on atteind le fichier ZZRes_inter.deca(voir Redecompile.sh) c'est que tout les fichiers précédants ont passés le test
+ #si on atteind le fichier intermédiaire(placé en dernier) on a fini tous les tests donc on peut le supprimet
   if [ "$i" = "ZZRes_inter.deca" ]
   then
-    echo "Les tests de décompilation sont terminés."
+    rm "ZZRes_inter.deca"
+    
   else
         #ZZRes_inter.deca nous sert de fichier intermédiaire, entre les deux commandes decac -p
         decac -p $i > ZZRes_inter.deca || exit 1
@@ -40,15 +53,4 @@ do
   fi
 done
 
-    decac -p Test_include/Include.deca > ZZRes_inter.deca || exit 1
-    resultat=$(decac -p ./ZZRes_inter.deca)
-  if [ "$(less Modeles_OK/Include.deca.ok)" = "$resultat" ]; then
-        echo "Test_include/Include.deca ok"
-  else
-        echo "Résultat innatendu, le résultat:"
-        echo "$resultat"
-        echo "ce qui était attendu:"
-        echo "$(less Modeles_OK/Include.deca.ok)"
-        exit 1
-  fi
 cd "$(dirname "$0")"/../../.. || exit 1

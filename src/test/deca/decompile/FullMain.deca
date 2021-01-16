@@ -9,6 +9,7 @@
     int i = 0, j = 1;
     float k;
     string h = "hello";
+    bool b = true;
 
     print(23);
     printx(2.23);
@@ -18,17 +19,21 @@
     if ( i == 0){
         print("ok!");
     }
-    else if (j == 1){
+    else if (j < 1 && !b ){
         if (k != 0){
         }
     }
     else{
-        i = i + 1;
+        i = i - 1;
+        k = -3.0;
     }
 
-    while ( i != 5){
+    while ( i > 5){
         i = i + 1;
-        while (i != 1 && j != 2){
+        i = i*i;
+        i = i/j;
+        j = j%i;
+        while (i >= 1 && j <= 2){
         }
     }
 

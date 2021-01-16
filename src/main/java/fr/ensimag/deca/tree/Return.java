@@ -19,7 +19,7 @@ import java.io.PrintStream;
  * @author louise
  */
 public class Return extends AbstractInst {
-    AbstractExpr operand;
+    private final AbstractExpr operand;
     
     public Return(AbstractExpr operand) {
         this.operand = operand;

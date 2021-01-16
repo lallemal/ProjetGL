@@ -91,6 +91,7 @@ public class DeclClass extends AbstractDeclClass {
         LOG.debug("Verify Class : start " + name.toString());
         if (parent == null) {
             parent = new Identifier(compiler.getSymbols().create("Object"));
+            parent.setDefinition(compiler.getEnv_types().get(parent.getName()));
         }
 
         SymbolTable.Symbol parentName = parent.getName();

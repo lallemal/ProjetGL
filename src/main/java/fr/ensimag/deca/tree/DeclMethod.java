@@ -98,7 +98,7 @@ public class DeclMethod extends AbstractDeclMethod {
         EnvironmentExp envExpMethod = new EnvironmentExp(currentClass.getMembers());
         this.param.verifyDeclMethodBody(compiler, envExpMethod, currentClass);
         // TODO
-        // this.body.verifyMethodBody(compiler, envExpMethod, currentClass, returnType);
+        this.body.verifyMethodBody(compiler, envExpMethod, currentClass, returnType);
     }
 
 

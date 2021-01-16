@@ -44,4 +44,17 @@ public class TypeOp {
         }
         return false;
     }
+
+
+    static public boolean assignComp(DecacCompiler compiler, Type type1, Type type2) {
+        if (type1.isFloat() && type2.isInt()) {
+            return true;
+        }
+        return subType(compiler, type1, type2);
+    }
+
+
+    static public boolean castComp(DecacCompiler compiler, Type type1, Type type2) {
+        return   (!type1.isVoid()) && (assignComp(compiler, type1, type2) || assignComp(compiler, type2, type1));
+    }
 }

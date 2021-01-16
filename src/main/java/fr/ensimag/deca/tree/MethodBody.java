@@ -45,7 +45,8 @@ public class MethodBody extends AbstractMethodBody {
 
     @Override
     public void verifyMethodBody(DecacCompiler compiler, EnvironmentExp envExpMethod, ClassDefinition currentClass, Type returnType) throws ContextualError {
-
+        var.verifyListDeclVariable(compiler, envExpMethod, currentClass);
+        inst.verifyListInst(compiler, envExpMethod, currentClass, returnType);
 
     }
 }

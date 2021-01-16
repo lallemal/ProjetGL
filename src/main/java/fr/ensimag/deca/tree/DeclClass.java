@@ -62,6 +62,8 @@ public class DeclClass extends AbstractDeclClass {
         } catch (EnvironmentType.DoubleDefException e) {
             throw new ContextualError(ContextualError.CLASS_ALREADY_DEFINED, getLocation());
         }
+        // setting a definition for a ident of class
+        ident.setDefinition(newClassDef);
         LOG.debug("Verify Class : end " + name.toString());
     }
 

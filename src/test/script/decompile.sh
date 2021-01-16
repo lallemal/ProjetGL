@@ -17,21 +17,8 @@ PATH=./src/test/script/launchers:"$PATH"
 
 cd src/test/deca/decompile
 nb=$(ls -l *.deca | wc -l)
-echo "------ Démarrage des tests ($((nb +1)))"
-for i in *.deca
-do
-  resultat=$(decac -p $i)
-  if [ "$(less Modeles_OK/$i.ok)" = "$resultat" ]; then
-        echo "$i ok"
-  else
-        echo "Résultat innatendu, le résultat:"
-        echo "$resultat"
-        echo "ce qui était attendu:"
-        echo "$(less Modeles_OK/$i.ok)"
-        exit 1
-  fi
-done
- resultat=$(decac -p Test_include/Include.deca)
+echo "------ Démarrage des tests ($nb)"
+resultat=$(decac -p Test_include/Include.deca)
   if [ "$(less Modeles_OK/Include.deca.ok)" = "$resultat" ]; then
         echo "Test_include/Include.deca ok"
   else
@@ -41,5 +28,24 @@ done
         echo "$(less Modeles_OK/Include.deca.ok)"
         exit 1
   fi
+for i in *.deca
+do
+  if [ "$i" = "ZZRes_inter.deca" ]
+  then
+    exit 1S
+  else
+     resultat=$(decac -p $i)
+    if [ "$(less Modeles_OK/$i.ok)" = "$resultat" ]; then
+         echo "$i ok"
+     else
+        echo "Résultat innatendu, le résultat:"
+        echo "$resultat"
+        echo "ce qui était attendu:"
+        echo "$(less Modeles_OK/$i.ok)"
+        exit 1
+    fi
+  fi
+done
+ 
 cd "$(dirname "$0")"/../../.. || exit 1
 echo "Pour plus de détails: decac -p fichier_à_étudier"

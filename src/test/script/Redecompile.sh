@@ -20,18 +20,26 @@ nb=$(ls -l *.deca | wc -l)
 echo "------ Démarrage des tests ($((nb +1)))"
 for i in *.deca
 do
-  resultat=$(decac -p $i < decac -p)
-  if [ "$(less Modeles_OK/$i.ok)" = "$resultat" ]; then
-        echo "$i ok"
+  if [ "$i" = "ZZRes_inter.deca" ]
+  then
+    exit 1
   else
-        echo "Résultat innatendu, le résultat:"
-        echo "$resultat"
-        echo "ce qui était attendu:"
-        echo "$(less Modeles_OK/$i.ok)"
-        exit 1
+        decac -p $i > ZZRes_inter.deca || exit 1
+        resultat=$(decac -p ./ZZRes_inter.deca)
+    if [ "$(less Modeles_OK/$i.ok)" = "$resultat" ]; then
+            echo "$i ok"
+    else
+            echo "Résultat innatendu, le résultat:"
+            echo "$resultat"
+            echo "ce qui était attendu:"
+            echo "$(less Modeles_OK/$i.ok)"
+            exit 1
+    fi
   fi
 done
-resultat=$(decac -p Test_include/Include.deca < decac -p)
+
+    decac -p Test_include/Include.deca > ZZRes_inter.deca || exit 1
+    resultat=$(decac -p ./ZZRes_inter.deca)
   if [ "$(less Modeles_OK/Include.deca.ok)" = "$resultat" ]; then
         echo "Test_include/Include.deca ok"
   else

@@ -34,6 +34,7 @@ do
         exit 1
   fi
 done
+
 #on met a part le test de debordement de pile car il necessite une execution de ima -p nnn
 resultat=$(ima -p 003 ./debordementPile/pilePleine.ass)
 if [ "$(cat ./debordementPile/Modeles_OK/pilePleine.ass.ok)" = "$resultat" ]; then
@@ -46,4 +47,23 @@ else
     echo "$(cat ./debordementPile/Modeles_OK/pilePleine.ass.ok)"
     exit 1
 fi
+
+cd ../../../../../.. || exit 1
+
+#Test sur un include
+
+decac ./src/test/deca/decompile/Test_include/Include.deca || exit 1
+resultat=$(ima ./src/test/deca/decompile/Test_include/Include.ass)
+
+    if [ "$(cat ./src/test/deca/codegen/valid/sansObjetPourScript/Modeles_OK/Include.ass.ok)" = "$resultat" ]; then
+        echo "Include.ass OK"
+    else
+        echo "Include.ass KO ->"
+        echo "Résultat innatendu, le résultat:"
+        echo "$resultat"
+        echo "ce qui était attendu:"
+        echo "$(cat ./src/test/deca/codegen/valid/sansObjetPourScript/Modeles_OK/Include.ass.ok)"
+        exit 1
+  fi
+
 cd "$(dirname "$0")"/../../.. || exit 1

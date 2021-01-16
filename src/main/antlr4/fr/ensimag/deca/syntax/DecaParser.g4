@@ -426,20 +426,24 @@ primary_expr returns[AbstractExpr tree]
         }
     | READINT OPARENT CPARENT {
     		$tree = new ReadInt();
+    		setLocation($tree, $READINT);
     		
         }
     | READFLOAT OPARENT CPARENT {
     		$tree = new ReadFloat();
+    		setLocation($tree, $READFLOAT);
         }
     | NEW ident OPARENT CPARENT {
             assert($ident.tree != null);
             $tree = new New($ident.tree);
+            setLocation($tree, $NEW);
             
         }
     | cast=OPARENT type CPARENT OPARENT expr CPARENT {
             assert($type.tree != null);
             assert($expr.tree != null);
             $tree = new Cast($type.tree, $expr.tree);
+            setLocation($tree, $OPARENT);
         }
     | literal {
             assert($literal.tree != null);

@@ -1,0 +1,6 @@
+//DeclaToBigInt1.deca:5:22: Erreur de compilation: Int arrondi a l'infini
+//Description: teste debordement de flottant
+//Resultats: erreur ligne 5: arrondi a l'infini
+{
+    int t = 2147483648000000;
+}

@@ -19,6 +19,7 @@ import org.apache.commons.lang.Validate;
 import org.apache.log4j.Logger;
 
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.tools.DecacInternalError;
 import fr.ensimag.deca.tree.LocationException;
 
 /**
@@ -287,7 +288,7 @@ public abstract class AbstractDecaLexer extends Lexer {
     // nombre maximum entier signé positif sur 32 bits => un bit de signe 
     //le maximum est donc 2^31-1 donc 2147483647 on va comparer les chaine de caractere
     // des deux nombres
-     void intCondition(String stringentier) throws IllegalArgumentException{
+     void intCondition(String stringentier) throws DecaRecognitionException{
     	
     	String maximum = "2147483647";
     	
@@ -295,7 +296,7 @@ public abstract class AbstractDecaLexer extends Lexer {
     		return;
     	}
     	if (stringentier.length() >10) {
-    		System.err.println("Erreur de compilation: entier trop grand");
+    		  throw new InvalidInt(this, getInputStream());
     	}
     	// chaine de meme longueur
     	for (int i = 0;i< maximum.length();i++) {
@@ -303,7 +304,7 @@ public abstract class AbstractDecaLexer extends Lexer {
     		int max =maximum.charAt(i);
     		int entier = stringentier.charAt(i);
     		if(max < entier) {
-    			System.err.println("Erreur de compilation: entier trop grand");
+    			  throw new InvalidInt(this, getInputStream());
     		}
     	}
     	return;
@@ -313,8 +314,8 @@ public abstract class AbstractDecaLexer extends Lexer {
  	/* Fonction  associee si le float est un decimal*/
 
  	// valeur minimale = 1.4012985E-45
- 	// valeur maximale = 3.402 823 56 E38
- 	void isDecimal(String stringdec){
+ 	// valeur maximale = 3,402 823 5 × 10E38.
+ 	void isDecimal(String stringdec)throws DecaRecognitionException{
  		// System.out.println("est une decimal");
  		if(stringdec.charAt(0) == '0') {
  			beginZeroDec(stringdec);
@@ -326,7 +327,7 @@ public abstract class AbstractDecaLexer extends Lexer {
  	}
 
 
- 	void beginZeroDec(String stringzero){
+ 	void beginZeroDec(String stringzero)throws DecaRecognitionException{
  		//System.out.println("dec commence par 0"); 
  		boolean debutmantisse = false;
  		int exposant = -1;
@@ -409,7 +410,7 @@ public abstract class AbstractDecaLexer extends Lexer {
  			int mininum = min.charAt(i);
  			int mantissei = mantisse.charAt(i);
  			if (mantissei < mininum) {
- 				System.err.println("Erreur de compilation: arrondi a zero et flottant non nul");
+    		  throw new InvalidFloatSmall(this, getInputStream());
  			}
  		}
  		// mantisse plus longue donc >= min donc pas d'erreur de debordement
@@ -417,27 +418,27 @@ public abstract class AbstractDecaLexer extends Lexer {
  	}
 
  	void compareManthissemaxDec(String mantisse){
- 		String max =  "340282356";
+ 		String max =  "34028235";
  		int longueur = minimum(mantisse.length(),max.length());
 
  		for( int i = 0; i < longueur; i ++) {
  			int maximum =max.charAt(i);
  			int mantissei = mantisse.charAt(i);
  			if(maximum < mantissei) {
- 				System.err.println("Erreur de compilation: arrondi a l infini");
+ 				throw new InvalidFloatBig(this, getInputStream());
  			}
  		}
  		// mantisse plus longue mais que avec des 0 a la fin donc egaux sinon erreur
  		if (mantisse.length() > max.length()) {
  			for (int j = max.length(); j < mantisse.length(); j++ ) {
  				if(mantisse.charAt(j) != '0') {
- 					System.err.println("Erreur de compilation: arrondi a l infini");
+ 					throw new InvalidFloatBig(this, getInputStream());
  				}
  			}
  		}
  	}
 
- 	void exposantFlottantDec(String mantisse, int exposant, String charexposant) throws IllegalArgumentException{
+ 	void exposantFlottantDec(String mantisse, int exposant, String charexposant){
  		int expofinal = exposant;
  		char signe = '+';
  		String exposantsupp = "";
@@ -471,11 +472,11 @@ public abstract class AbstractDecaLexer extends Lexer {
  		}
  	}
 
- 	void compareExposantDec(int exposant, String mantisse) throws IllegalArgumentException{
+ 	void compareExposantDec(int exposant, String mantisse){
  		//System.out.println("exposant =" + exposant + " mantisse =" + mantisse );
  		if (exposant< -45) {
+ 			throw new InvalidFloatSmall(this, getInputStream());
 
- 			System.err.println("Erreur de compilation: arrondi a zero et flottant non nul");
  		}
 
  		// cas limite il faut comparer mantisse
@@ -486,7 +487,7 @@ public abstract class AbstractDecaLexer extends Lexer {
  			compareManthissemaxDec(mantisse); 
  		}
  		if (exposant> 38) {
- 			System.err.println("Erreur de compilation: arrondi a l infini");
+ 			throw new InvalidFloatBig(this, getInputStream());
  		}
  	}
 
@@ -513,7 +514,6 @@ public abstract class AbstractDecaLexer extends Lexer {
  	// ex: 10.23p1 = 1.023p5 
 
  	void isHexadecimal(String stringhex){
- 		//System.out.println("est un hexadecimal");
  		if(stringhex.charAt(2) == '0') {
  			// on skip 0x0.
  			beginZeroHex(stringhex.substring(4));
@@ -555,8 +555,6 @@ public abstract class AbstractDecaLexer extends Lexer {
 
  	void beginNonZeroHex(String s) {
 
- 		//System.out.println("hex ne commence pas par 0");
- 		//System.out.println(s);
  		// ajoute exposant en plus exemple: 100.0 = 1.0 E2
  		boolean findot = false;
  		String mantisse = "";
@@ -616,7 +614,7 @@ public abstract class AbstractDecaLexer extends Lexer {
  	void compareExposantHex(int exposant, String mantisse) {
  		//System.out.println("exposant= " + exposant + " mantisse= "+ mantisse);
  		if(exposant < -126) {
- 			System.err.println("Erreur de compilation: arrondi a zero et flottant non nulle");
+ 			throw new InvalidFloatBig(this,getInputStream());
  		}
  		// si l'exposant == 126 OK
  		//if(exposant == -126) {  
@@ -628,7 +626,7 @@ public abstract class AbstractDecaLexer extends Lexer {
  		}
 
  		if (exposant >127) {
- 			System.err.println("Erreur de compilation: arrondi a l infini");
+ 			throw new InvalidFloatBig(this,getInputStream());
  		}
 
  	}
@@ -650,13 +648,13 @@ public abstract class AbstractDecaLexer extends Lexer {
  		// caractere asci 0..9 de 48 à 57
  		//				   A..F de 65 a 70
  		//			       a..f de 97 a 102
- 		String mantissecomp = "17ffffff";
+ 		String mantissecomp = "17fffff";
  		int lengthmin = minimum(mantisse.length(), mantissecomp.length());
  		for(int i = 0; i < lengthmin; i++ ){
  			int max = mantissecomp.charAt(i);
  			int mantissen = mantisse.charAt(i);
  			if(max < mantissen) {
- 				System.err.println("Erreur de compilation: arrondi a l infini");
+ 				throw new InvalidFloatBig(this, getInputStream());
  			}
  		}
  		// si la longueur de la mantisse est la plus eleve et meme valeur verifier nombre apres
@@ -664,7 +662,7 @@ public abstract class AbstractDecaLexer extends Lexer {
  		if(mantisse.length() > lengthmin) {
  			for( int j = lengthmin; j < mantisse.length(); j++) {
  				if (mantisse.charAt(j) != '0') {
- 					System.err.println("Erreur de compilation: arrondi a l infini");
+ 					throw new InvalidFloatBig(this, getInputStream());
  				}
  			}
  		}

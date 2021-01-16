@@ -1,0 +1,9 @@
+// Description : test déclaration méthode body
+// Resultats : ok
+
+class Thing {
+   
+    int getI(){
+        print(i);
+    }
+}

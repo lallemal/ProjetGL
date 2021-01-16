@@ -1,0 +1,10 @@
+// no viable alternative at input 'i='
+// Description : field sans type 
+// Resultat : erreur en ligne 8: ce n'est pas un field si il n'y a pas de type
+
+
+class Thing {
+    
+    i = 0;
+
+}

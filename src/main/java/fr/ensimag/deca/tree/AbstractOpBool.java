@@ -34,6 +34,12 @@ public abstract class AbstractOpBool extends AbstractBinaryExpr {
     }
 
 
+    /**
+     * This method evaluates the expression of boolean operations and put it in register n if available.
+     * It is conceptually the same as a IfThenElse code with thenBranch which LOAD Rn at true and elseBranch which LOAD Rn at false.
+     * @param compiler      The compiler to add Instruction
+     * @param n             The index of free minimal Register index.
+     */
     @Override
     protected void codeExp(DecacCompiler compiler, int n) {
         String label = "boolOp_";

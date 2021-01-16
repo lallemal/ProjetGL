@@ -6,7 +6,6 @@ import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
-import fr.ensimag.ima.pseudocode.ImmediateString;
 import fr.ensimag.ima.pseudocode.instructions.WSTR;
 import org.apache.commons.lang.Validate;
 
@@ -29,7 +28,7 @@ public class StringLiteral extends AbstractStringLiteral {
 
     public StringLiteral(String value) {
         Validate.notNull(value);
-        this.value = value;
+        this.value = value.substring(value.indexOf("\"") + 1, value.lastIndexOf("\""));
     }
 
     @Override
@@ -40,12 +39,12 @@ public class StringLiteral extends AbstractStringLiteral {
 
     @Override
     protected void codeGenPrint(DecacCompiler compiler, boolean printHex) {
-        compiler.addInstruction(new WSTR(new ImmediateString(value)));
+        compiler.addInstruction(new WSTR(value));
     }
 
     @Override
     public void decompile(IndentPrintStream s) {
-        s.print(value);
+        s.print("\"" + value + "\"");
     }
 
     @Override

@@ -1,4 +1,9 @@
-// Test for no init in a delcaration of variable
+// Description :
+//    test décompilation main, variable sans init
+//
+// Resultats (en comparaison avec le résultat attendu 
+// disponible dans le fichier *.deca.ok dans le dossier Modeles_OK) :
+//    ok
 
 
 {

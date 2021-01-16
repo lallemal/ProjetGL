@@ -57,6 +57,7 @@ WHILE : 'while';
 // mot reserve deca avec objet a decommenter pour l'ajouter
 RETURN : 'return'; 
 INSTANCEOF : 'instanceof'; 
+
 NEW : 'new';
 THIS : 'this';
 NULL : 'null';
@@ -120,7 +121,7 @@ RHOOK: ']';
 
 fragment IDENT_WITHOUT_STRING: (IDENT ~('string')); 
 // Déclaration d'un tableau "a la main" \ex int[4] tab = { 1, 2, 2, 4 };
-ARRAY: OBRACE ( (IDENT_WITHOUT_STRING) (COMMA IDENT_WITOUT_STRING)+ )? CBRACE;
+ARRAY: OBRACE ( (IDENT_WITHOUT_STRING) (COMMA IDENT_WITHOUT_STRING)+ )? CBRACE;
 
 fragment ARRAY_INT: OBRACE ((INT) (COMMA INT)+ )? CBRACE;
 fragment ARRAY_FLOAT: OBRACE ((FLOAT) (COMMA FLOAT)+ )? CBRACE;

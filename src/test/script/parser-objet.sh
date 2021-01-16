@@ -15,20 +15,16 @@ cd "$(dirname "$0")"/../../.. || exit 1
 
 PATH=./src/test/script/launchers:"$PATH"
 
-cd src/test/deca/syntax/valid/ || exit 1
+cd src/test/deca/syntax/valid/objet/ || exit 1
 
-echo "Test valides:"
+nb=$(ls -l | wc -l)
+echo "------- Démarrage des tests valide $(($nb-1))"
+
 for i in *.deca
 do
   if test_synt $i 2>&1 | grep -q -e "$i:"
   then
-    resultat=$(sed -n 1p $i)
-    if [ "$(less ValideLexerInvalidParser.test)" = "$resultat" ]
-    then 
-         echo "OK (valide pour le lexer mais pas pour le parser)"
-    else
-        echo "Echec inattendu pour test_synt pour $i"
-    fi
+    echo "Echec inattendu pour test_synt pour $i"
   else
     echo "OK"
   fi
@@ -36,17 +32,22 @@ do
 done
 cd "$(dirname "$0")"/../../.. || exit 1
 
-cd src/test/deca/syntax/invalid/ || exit 1
+cd src/test/deca/syntax/invalid/objet/ || exit 1
 
-echo "Test invalides:"
+nb=$(ls -l | wc -l)
+echo "------- Démarrage des tests invalide $(($nb-1))"
+
 for i in *.deca
 do
-  if test_synt $i 2>&1 | grep -q -e "$i:"
+  error=$(head $i -n 1 | sed 's/\/\///')
+  if test_synt $i 2>&1 | grep -q -e "$error"
   then
     echo "Echec attendu pour test_synt"
+  elif test_synt $i 2>&1 | grep -q -e "$i:"
+  then
+    echo "Echec inattendu pour test_synt dans $i"
   else
-    echo "Erreur non detectee par test_synt pour $i"
-    exit 1
+    echo "Succès inattendu pour test_synt dans $i"
   fi
 done
 

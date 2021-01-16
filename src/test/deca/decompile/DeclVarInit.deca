@@ -1,4 +1,9 @@
-// Test with initialization of var
+// Description :
+//    test décompilation main, variable init
+//
+// Resultats (en comparaison avec le résultat attendu 
+// disponible dans le fichier *.deca.ok dans le dossier Modeles_OK) :
+//    ok
 
 {
     int i = 0;

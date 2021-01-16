@@ -1,0 +1,7 @@
+// extraneous input 'extends' expecting IDENT
+// Description : classe sans nom
+// Resultat : erreur en ligne 6: une déclaration de classe a besoin d'un nom
+
+
+class extends Objets{
+}

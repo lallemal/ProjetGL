@@ -1,0 +1,10 @@
+// Description : test déclaration d'une méthode avec paramètre
+// Resultats : ok
+
+class Thing {
+
+    int getI(int i){
+        print("cool");
+    }
+
+}

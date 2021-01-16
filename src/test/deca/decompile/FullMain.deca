@@ -6,10 +6,13 @@
 //    ok
 
 {
+
     int i = 0, j = 1;
     float k;
     string h = "hello";
     bool b = true;
+    int a = readInt();
+    k = readFloat();
 
     print(23);
     printx(2.23);
@@ -24,16 +27,16 @@
         }
     }
     else{
-        i = i - 1;
+        i = (i - 1);
         k = -3.0;
     }
 
     while ( i > 5){
-        i = i + 1;
+        i = (i + 1);
         i = i*i;
         i = i/j;
         j = j%i;
-        while (i >= 1 && j <= 2){
+        while (i >= 1 || j <= 2){
         }
     }
 

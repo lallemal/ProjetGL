@@ -12,7 +12,7 @@ PATH=./src/test/script/launchers:"$PATH"
 cd src/test/deca/codegen/invalid/sansObjetPourScript || exit 1
 rm -f ./*.ass 2>/dev/null
 nb=$(ls -l *.deca | wc -l)
-echo "------ Démarrage des tests ($nb)"
+echo "------ Démarrage des tests ($((nb+2)))"
 for i in *.deca
 do
     decac ./$i || exit 1

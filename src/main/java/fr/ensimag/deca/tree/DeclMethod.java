@@ -81,7 +81,9 @@ public class DeclMethod extends AbstractDeclMethod {
             }
         }
         try {
-            classExp.declare(name.getName(), new MethodDefinition(type, getLocation(), sig, currentClass.getNumberOfMethods()));
+            MethodDefinition methodDefinition = new MethodDefinition(type, getLocation(), sig, currentClass.getNumberOfMethods());
+            classExp.declare(name.getName(), methodDefinition);
+            name.setDefinition(methodDefinition);
             currentClass.incNumberOfMethods();
         } catch (EnvironmentExp.DoubleDefException e) {
             throw new ContextualError(ContextualError.METHOD_ALREADY_DEFINED_ENV, getLocation());

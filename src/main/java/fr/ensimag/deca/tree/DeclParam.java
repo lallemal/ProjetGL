@@ -62,7 +62,9 @@ public class DeclParam extends AbstractDeclParam{
     public void verifyDeclParamBody(DecacCompiler compiler, EnvironmentExp localExp, ClassDefinition currentClass) throws ContextualError {
         Type type = this.type.verifyType(compiler);
         try {
-            localExp.declare(this.name.getName(), new ParamDefinition(type, getLocation()));
+            ParamDefinition paramDefinition = new ParamDefinition(type, getLocation());
+            localExp.declare(this.name.getName(), paramDefinition);
+            name.setDefinition(paramDefinition);
         } catch (EnvironmentExp.DoubleDefException e) {
            throw new ContextualError(ContextualError.PARAM_ALREADY_ENV_METHOD, getLocation());
         }

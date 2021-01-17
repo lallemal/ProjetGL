@@ -1,0 +1,9 @@
+// Description :
+//    test décompilation include
+//
+// Resultats (en comparaison avec le résultat attendu 
+// disponible dans le fichier *.deca.ok dans le dossier Modeles_OK) :
+//    ok
+
+#include "Include_first.deca"
+#include "Include_second.deca"

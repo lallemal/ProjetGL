@@ -1,0 +1,7 @@
+//DeclFlHexMin2.deca:5:25: Erreur de compilation: flottant arrondi 0
+//Description: teste creation folttant infini
+//Resultats: erreur ligne 5: arrondi a infini
+{
+    float t = 0xF1.0p-131;
+
+}

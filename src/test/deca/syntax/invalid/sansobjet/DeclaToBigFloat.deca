@@ -1,0 +1,6 @@
+//DeclaToBigFloat.deca:5:21: Erreur de compilation: flottant arrondi a l'infini
+//Description: teste creation folttant infini
+//Resultats: erreur ligne 5: arrondi a infini
+{
+    float t = 10.2e40;
+}

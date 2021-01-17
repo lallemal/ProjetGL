@@ -31,8 +31,7 @@ public class NoInitialization extends AbstractInitialization {
 
     @Override
     protected void codeGenDecl(DecacCompiler compiler, DAddr address) {
-    	compiler.addInstruction(new LOAD(0, Register.getR(2))); //Pour linstant en sans objet cest ok mais apres ca peut etre #null
-    	compiler.addInstruction(new STORE(Register.getR(2), address));
+    	//nothing to do
     }
     
     /**

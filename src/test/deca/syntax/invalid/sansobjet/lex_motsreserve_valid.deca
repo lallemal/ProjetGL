@@ -1,5 +1,6 @@
-// Test mots reserve
-// Resultat: il ne faut pas que ce soit des IDENT
+//no viable alternative at input 'asm'
+//Description: teste si les tokens en sortie sont des mots reserve
+//Resultat: il ne faut pas que ce soit des IDENT
 asm
 extends
 if

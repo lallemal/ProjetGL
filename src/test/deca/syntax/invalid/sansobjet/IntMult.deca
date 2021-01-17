@@ -1,0 +1,6 @@
+//IntMult.deca:5:12: extraneous input '*'
+//Description: test produit incorrecte
+//Resultats: erreur ligne 5: pas d'expression a gauche (mult_int)
+{
+    int i = * 1;
+}

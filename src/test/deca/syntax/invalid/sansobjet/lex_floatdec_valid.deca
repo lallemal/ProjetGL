@@ -1,5 +1,6 @@
-// Test reconnaissance flottant ecrit en decimale
-// Attendu:  pas d'erreur a chaque ligne est reconnu un flottant
+//no viable alternative at input '1.0'
+//Description: Test reconnaissance flottant ecrit en decimale
+//Resultats:  pas d'erreur a chaque ligne est reconnu un flottant
 
 1.0 
 10.1 

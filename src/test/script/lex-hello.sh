@@ -58,16 +58,15 @@ else
     exit 1
 fi
 
-cd src/test/deca/syntax/valid/ || exit 1
 
-for i in *.deca
+for i in src/test/deca/syntax/valid/*.deca
 do
   if test_lex $i 2>&1 | grep -q -e "$i:"
   then
     echo "Echec inattendu pour test_lex"
+    exit 1
   else
     echo "OK"
   fi
 
 done
-cd "$(dirname "$0")"/../../.. || exit 1

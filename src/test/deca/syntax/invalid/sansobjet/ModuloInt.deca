@@ -1,0 +1,6 @@
+//ModuloInt.deca:5:14: mismatched input ';' 
+//Description: test modulo incorrecte
+//Resultats: erreur ligne 6: manque une expression a droite (multexp)
+{
+    int i = 1%;
+}

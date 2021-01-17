@@ -1,5 +1,5 @@
 class Thing {
-	PROTECTED int i;
+	protected int i;
 
 	int getI() {
 		return i;

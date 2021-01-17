@@ -1,4 +1,4 @@
 class Thing {
-	PROTECTED int i;
+	protected int i;
 
 }

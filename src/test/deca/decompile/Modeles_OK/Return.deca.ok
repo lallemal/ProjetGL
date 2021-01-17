@@ -1,5 +1,5 @@
 class Thing {
-	PUBLIC int i;
+	int i;
 
 	int getI() {
 		return i;

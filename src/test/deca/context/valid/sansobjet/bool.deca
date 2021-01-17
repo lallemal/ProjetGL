@@ -1,0 +1,17 @@
+// Description : Opération booléen
+// resultat ok
+
+{
+    boolean x = true;
+    boolean y = false;
+    int a = 5, b = 3;
+    x = x && y;
+    y = x || y;
+    y = !y;
+    x = a < b;
+    x = a <= b;
+    x = a > b;
+    x = a >= b;
+    y = a == b;
+    y = a !=b;
+}

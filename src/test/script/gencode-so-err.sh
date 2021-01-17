@@ -12,7 +12,7 @@ PATH=./src/test/script/launchers:"$PATH"
 cd src/test/deca/codegen/invalid/sansObjetPourScript || exit 1
 rm -f ./*.ass 2>/dev/null
 nb=$(ls -l *.deca | wc -l)
-echo "------ Démarrage des tests ($((nb+2)))"
+echo "------ Démarrage des tests ($((nb+4)))"
 for i in *.deca
 do
     decac ./$i || exit 1
@@ -47,6 +47,29 @@ else
     echo "$(cat ./debordementPile/Modeles_OK/pilePleine.ass.ok)"
     exit 1
 fi
+
+#on met a part le test de nocheck car il necessite une execution de decac -n
+cd ./noCheck
+for i in *.deca
+do
+    decac -n ./$i || exit 1
+done
+
+for i in *.ass
+do
+    resultat=$(ima -p 005 ./$i)
+    if [ "$(cat Modeles_OK/$i.ok)" = "$resultat" ]; then
+        echo "$i OK"
+    else
+        echo "$i KO ->"
+        echo "Résultat innatendu, le résultat:"
+        echo "$resultat"
+        echo "ce qui était attendu:"
+        echo "$(cat Modeles_OK/$i.ok)"
+        exit 1
+    fi
+done
+cd ../
 
 cd ../../../../../.. || exit 1
 

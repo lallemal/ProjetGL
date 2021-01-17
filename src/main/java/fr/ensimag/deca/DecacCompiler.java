@@ -350,8 +350,10 @@ public class DecacCompiler implements Callable<Boolean> {
 
     public DeclClass initObject() {
         ClassDefinition objectDef = (ClassDefinition)env_types.get(symbols.create("Object"));
+        MethodDefinition equalDef = (MethodDefinition) objectDef.getMembers().get(symbols.create("equals"));
         Identifier objectIdent = new Identifier(symbols.create("Object"));
         objectIdent.setLocation(Location.BUILTIN);
+        objectIdent.setDefinition(objectDef);
         ListDeclField objectField = new ListDeclField();
         objectField.setLocation(Location.BUILTIN);
         ListDeclMethod objectMethod = new ListDeclMethod();
@@ -359,15 +361,19 @@ public class DecacCompiler implements Callable<Boolean> {
 
         Identifier booleanIdent = new Identifier(symbols.create("boolean"));
         booleanIdent.setLocation(Location.BUILTIN);
+        booleanIdent.setDefinition(env_types.get(symbols.create("boolean")));
         Identifier equalsIdent = new Identifier(symbols.create("equals"));
         equalsIdent.setLocation(Location.BUILTIN);
+        equalsIdent.setDefinition(equalDef);
 
         ListParam listParamEquals = new ListParam();
         listParamEquals.setLocation(Location.BUILTIN);
         Identifier typeParamIdent = new Identifier(symbols.create("Object"));
         typeParamIdent.setLocation(Location.BUILTIN);
+        typeParamIdent.setDefinition(objectDef);
         Identifier nameParamIdent = new Identifier(symbols.create("other"));
         nameParamIdent.setLocation(Location.BUILTIN);
+        nameParamIdent.setDefinition(objectDef);
         DeclParam paramObject = new DeclParam(typeParamIdent, nameParamIdent);
         listParamEquals.add(paramObject);
 
@@ -377,6 +383,7 @@ public class DecacCompiler implements Callable<Boolean> {
         thisBody.setLocation(Location.BUILTIN);
         Identifier otherBody = new Identifier(symbols.create("other"));
         otherBody.setLocation(Location.BUILTIN);
+        otherBody.setDefinition(objectDef);
         Equals equalBody = new Equals(thisBody, otherBody);
         equalBody.setLocation(Location.BUILTIN);
         listInst.add(equalBody);

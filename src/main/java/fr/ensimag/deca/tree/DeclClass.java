@@ -47,8 +47,9 @@ public class DeclClass extends AbstractDeclClass {
     		compiler.addInstruction(new LOAD(new NullOperand(), Register.R0));
     	} else {
 	    	ident.getClassDefinition().setAddress(new RegisterOffset(compiler.getKGB(), Register.GB));
-	    	compiler.addInstruction(new LEA(parent.getClassDefinition().getAddress(), Register.R0));    	
+	    	compiler.addInstruction(new LEA(parent.getClassDefinition().getAddress(), Register.R0));    
     	}
+    	
     	compiler.addInstruction(new STORE(Register.R0, new RegisterOffset(compiler.getKGB(), Register.GB)));
     	compiler.incrementKGB();
     	

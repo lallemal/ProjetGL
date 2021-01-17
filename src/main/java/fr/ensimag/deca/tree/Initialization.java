@@ -45,7 +45,6 @@ public class Initialization extends AbstractInitialization {
         setExpression(expression.verifyRValue(compiler, localEnv, currentClass, t));
     }
 
-
     @Override
     public void decompile(IndentPrintStream s) {
         s.print("=");

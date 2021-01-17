@@ -15,29 +15,28 @@ cd "$(dirname "$0")"/../../.. || exit 1
 
 PATH=./src/test/script/launchers:"$PATH"
 
-cd src/test/deca/decompile
-nb=$(ls -l *.deca | wc -l)
-echo "------ Démarrage des tests ($nb)"
-resultat=$(decac -p Test_include/Include.deca)
-  if [ "$(less Modeles_OK/Include.deca.ok)" = "$resultat" ]; then
-        echo "Test_include/Include.deca ok"
+nb=$(ls -l src/test/deca/decompile/*.deca | wc -l)
+echo "------ Démarrage des tests ($((nb+1)))"
+resultat=$(decac -p src/test/deca/decompile/Test_include/Include.deca)
+  if [ "$(less src/test/deca/decompile/Include.deca.ok)" = "$resultat" ]; then
+        echo "OK"
   else
         echo "Résultat innatendu, le résultat:"
         echo "$resultat"
         echo "ce qui était attendu:"
-        echo "$(less Modeles_OK/Include.deca.ok)"
+        echo "$(less src/test/deca/decompile/Include.deca.ok)"
         exit 1
   fi
-for i in *.deca
+for i in src/test/deca/decompile/*.deca
 do
     resultat=$(decac -p $i)
-    if [ "$(less Modeles_OK/$i.ok)" = "$resultat" ]; then
-         echo "$i ok"
+    if [ "$(less $i.ok)" = "$resultat" ]; then
+         echo "OK"
      else
         echo "Résultat innatendu, le résultat:"
         echo "$resultat"
         echo "ce qui était attendu:"
-        echo "$(less Modeles_OK/$i.ok)"
+        echo "$(less $i.ok)"
         exit 1
     fi
   

@@ -92,7 +92,7 @@ public abstract class AbstractExpr extends AbstractInst {
             throws ContextualError {
         LOG.debug("verify AbstractExpr RValue : start");
         Type type2 = verifyExpr(compiler, localEnv, currentClass);
-        if (!expectedType.isFloat() && !type2.isInt()) {
+        if (!expectedType.isFloat() || !type2.isInt()) {
             if (!TypeOp.subType(compiler, expectedType, type2)) {
                 throw new ContextualError(ContextualError.ASSIGN_NOT_COMPATIBLE + " (" + expectedType.toString() + "," + type2.toString() + ")", getLocation());
             }

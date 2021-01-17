@@ -6,9 +6,7 @@ import fr.ensimag.deca.syntax.DecaLexer;
 import fr.ensimag.deca.syntax.DecaParser;
 import fr.ensimag.deca.tools.DecacInternalError;
 import fr.ensimag.deca.tools.SymbolTable;
-import fr.ensimag.deca.tree.AbstractProgram;
-import fr.ensimag.deca.tree.Location;
-import fr.ensimag.deca.tree.LocationException;
+import fr.ensimag.deca.tree.*;
 import fr.ensimag.ima.pseudocode.AbstractLine;
 import fr.ensimag.ima.pseudocode.IMAProgram;
 import fr.ensimag.ima.pseudocode.Instruction;
@@ -219,6 +217,7 @@ public class DecacCompiler implements Callable<Boolean> {
             return false;
         }
 
+        initObject();
         prog.verifyProgram(this);
         if (compilerOptions.getVerif()) {
             LOG.info("Stopping at verification");
@@ -347,7 +346,59 @@ public class DecacCompiler implements Callable<Boolean> {
         return new StringType(symbols.create("string"));
     }
 
+    private DeclClass object;
 
+    public DeclClass initObject() {
+        ClassDefinition objectDef = (ClassDefinition)env_types.get(symbols.create("Object"));
+        Identifier objectIdent = new Identifier(symbols.create("Object"));
+        objectIdent.setLocation(Location.BUILTIN);
+        ListDeclField objectField = new ListDeclField();
+        objectField.setLocation(Location.BUILTIN);
+        ListDeclMethod objectMethod = new ListDeclMethod();
+        objectMethod.setLocation(Location.BUILTIN);
+
+        Identifier booleanIdent = new Identifier(symbols.create("boolean"));
+        booleanIdent.setLocation(Location.BUILTIN);
+        Identifier equalsIdent = new Identifier(symbols.create("equals"));
+        equalsIdent.setLocation(Location.BUILTIN);
+
+        ListParam listParamEquals = new ListParam();
+        listParamEquals.setLocation(Location.BUILTIN);
+        Identifier typeParamIdent = new Identifier(symbols.create("Object"));
+        typeParamIdent.setLocation(Location.BUILTIN);
+        Identifier nameParamIdent = new Identifier(symbols.create("other"));
+        nameParamIdent.setLocation(Location.BUILTIN);
+        DeclParam paramObject = new DeclParam(typeParamIdent, nameParamIdent);
+        listParamEquals.add(paramObject);
+
+        ListInst listInst = new ListInst();
+        listInst.setLocation(Location.BUILTIN);
+        This thisBody = new This();
+        thisBody.setLocation(Location.BUILTIN);
+        Identifier otherBody = new Identifier(symbols.create("other"));
+        otherBody.setLocation(Location.BUILTIN);
+        Equals equalBody = new Equals(thisBody, otherBody);
+        equalBody.setLocation(Location.BUILTIN);
+        listInst.add(equalBody);
+        ListDeclVar listDeclVar = new ListDeclVar();
+        listDeclVar.setLocation(Location.BUILTIN);
+
+        MethodBody equalBodyMethod = new MethodBody(listDeclVar, listInst);
+        equalBodyMethod.setLocation(Location.BUILTIN);
+
+        DeclMethod equalMethod = new DeclMethod(booleanIdent, equalsIdent, listParamEquals, equalBodyMethod);
+        equalMethod.setLocation(Location.BUILTIN);
+        objectMethod.add(equalMethod);
+        object = new DeclClass(objectIdent, null, objectField, objectMethod);
+        object.setLocation(Location.BUILTIN);
+
+        objectIdent.setDefinition(env_types.get(symbols.create("Object")));
+        return object;
+    }
+
+    public DeclClass getObject() {
+        return object;
+    }
 
     @Override
     public Boolean call() throws Exception {

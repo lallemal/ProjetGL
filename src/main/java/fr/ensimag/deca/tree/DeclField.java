@@ -69,7 +69,9 @@ public class DeclField extends AbstractDeclField{
             throw new ContextualError(ContextualError.FIELD_PARENT_NOT_FIELD, getLocation());
         }
         try {
-            classEnv.declare(name, new FieldDefinition(type, getLocation(), visib, currentClass, currentClass.getNumberOfFields()));
+            FieldDefinition fieldDef = new FieldDefinition(type, getLocation(), visib, currentClass, currentClass.getNumberOfFields());
+            classEnv.declare(name, fieldDef);
+            nom.setDefinition(fieldDef);
             currentClass.incNumberOfFields();
         } catch (EnvironmentExp.DoubleDefException e) {
             throw new ContextualError(ContextualError.FIELD_ALREADY_DEFINED, getLocation());

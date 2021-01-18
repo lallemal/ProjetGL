@@ -1,0 +1,6 @@
+//DeclaHexBig.deca:5:31: Erreur de compilation: flottant arrondi a l'infini
+//Description: teste creation folttant infini
+//Resultats: erreur ligne 5: arrondi a infini
+{
+    float t = 0x0.017fffff1P227;
+}

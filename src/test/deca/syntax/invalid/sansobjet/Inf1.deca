@@ -1,0 +1,6 @@
+//Inf1.deca:5:10: mismatched input ';' expecting {STRING,
+//Description:  inf sans droite
+//Resultat: Erreur ligne 5
+{
+    12 <  ;
+}

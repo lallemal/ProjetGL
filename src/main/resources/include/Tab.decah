@@ -3,8 +3,210 @@
 
 class AbstractTab{
     int size;
-    int get
-    
+    int getSize(){
+        return size;
+    }
 }
+
+class TabInt extends AbstractTab{
+
+    int[] tab;
+    
+    // modifier TabInt modifie aussi le tableau si declare explicitement
+    void setInit(int[] tab, int size){
+        this.size = size;
+        this.tab = tab;
+    }
+    // cree une copie
+    void setInitCopy(int[] tab, int size){
+        this.tab = new int[size];
+        int i = 0;
+        while(i < size){
+            this.tab[i] = tab[i];
+        }
+        this.size = size;
+    }
+
+    void add(int valeur, int indice){
+        if (indice > valeur){
+            return ;
+        }
+        this.size = this.size + 1;
+        int i = 0;
+        int[] tabnew = new tab[size];
+        while (i < indice){
+            tabnew[i] = this.tab[i];
+            i = i + 1;
+        }
+        // i est a l'indice 
+        tabnew[i] = valeur;
+        while(i < size){
+            tabnew[i+1] = this.tab[i];
+        }
+        this.tab = tabnew;
+
+        return;
+    }
+
+    void addFirst(int valeur){
+        this.add(valeur, 0);
+    }
+    void addLast(int valeur){
+        this.add(valeur, size);
+    }
+    
+    int getCase(int indice){
+        return this.tab[indice];
+    }
+    
+    // supprime la case i du tableau
+    void delete(int indice){
+        if (indice >= size){
+            return 
+        }
+        this.size = this.size - 1;
+        int[] tabnew = new int[size];
+        int i = 0;
+        while (i <indice){
+            tabnew[i] = this.tab[i];
+            i = i + 1;
+        }
+        while (i < size){
+            tabnew[i] = this.tab[i+1];
+            i = i + 1;
+        }
+    }
+
+    void deleteFirst(){
+        this.delete(0);
+    }
+    void deleteLast(){
+        this.deleteLast(this.size - 1);
+    }
+    
+    // somme terme a terme
+    void sumTab(TabInt tab){
+        if (this.size !=tab.size ){
+            return;
+        }
+        int i = 0;
+        while (i < size){
+            this.tab[i] = this.tab[i] + tab[i];
+        }
+    }
+ 
+    // multiplie terme a terme
+    void multTab(TabInt tab){
+        if (this.size !=tab.size ){
+            return;
+        }
+        int i = 0;
+        while (i < size){
+            this.tab[i] = this.tab[i] * tab[i];
+        }
+    }
+}
+
+class TabFloat extends AbstractTab{
+
+    float[] tab;
+    
+    // modifier TabInt modifie aussi le tableau si declare explicitement
+    void setInit(float[] tab, int size){
+        this.size = size;
+        this.tab = tab;
+    }
+    // cree une copie
+    void setInitCopy(float[] tab, int size){
+        this.tab = new float[size];
+        int i = 0;
+        while(i < size){
+            this.tab[i] = tab[i];
+        }
+        this.size = size;
+    }
+
+    void add(float valeur, int indice){
+        if (indice > valeur){
+            return ;
+        }
+        this.size = this.size + 1;
+        int i = 0;
+        float[] tabnew = new tab[size];
+        while (i < indice){
+            tabnew[i] = this.tab[i];
+            i = i + 1;
+        }
+        // i est a l'indice 
+        tabnew[i] = valeur;
+        while(i < size){
+            tabnew[i+1] = this.tab[i];
+        }
+        this.tab = tabnew;
+
+        return;
+    }
+
+    void addFirst(float valeur){
+        this.add(valeur, 0);
+    }
+    void addLast(float valeur){
+        this.add(valeur, size);
+    }
+    
+    float getCase(float indice){
+        return this.tab[indice];
+    }
+    
+    // supprime la case i du tableau
+    void delete(float indice){
+        if (indice >= size){
+            return 
+        }
+        this.size = this.size - 1;
+        float[] tabnew = new float[size];
+        int i = 0;
+        while (i <indice){
+            tabnew[i] = this.tab[i];
+            i = i + 1;
+        }
+        while (i < size){
+            tabnew[i] = this.tab[i+1];
+            i = i + 1;
+        }
+    }
+
+    void deleteFirst(){
+        this.delete(0);
+    }
+    void deleteLast(){
+        this.deleteLast(this.size - 1);
+    }
+    
+    // somme terme a terme
+    void sumTab(TabInt tab){
+        if (this.size !=tab.size ){
+            return;
+        }
+        int i = 0;
+        while (i < size){
+            this.tab[i] = this.tab[i] + tab[i];
+        }
+    }
+ 
+    // multiplie terme a terme
+    void multTab(TabInt tab){
+        if (this.size !=tab.size ){
+            return;
+        }
+        int i = 0;
+        while (i < size){
+            this.tab[i] = this.tab[i] * tab[i];
+        }
+    }
+
+}
+
+
 
 

@@ -33,10 +33,10 @@ public class Selection extends AbstractLValue{
 			return fieldType;
 		}
 		// 3.66
-		if (currentClass == null || !TypeOp.subType(compiler, typeClass2, currentClass.getType())) {
+		if (currentClass == null || !TypeOp.subType(compiler, currentClass.getType(), typeClass2)) {
 			throw new ContextualError(ContextualError.CLASS_NOT_SUBCLASS_PROTECTED, getLocation());
 		}
-		if  (!TypeOp.subType(compiler, currentClass.getType(), fieldDef.getContainingClass().getType())) {
+		if  (!TypeOp.subType(compiler, fieldDef.getContainingClass().getType(), currentClass.getType())) {
 			throw new ContextualError(ContextualError.FIELD_NOT_OVERCLASS_PROTECTED, getLocation());
         }
 		return fieldType;

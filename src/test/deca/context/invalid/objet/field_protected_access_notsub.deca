@@ -1,4 +1,6 @@
-
+// The selected class is not a subclass of the class where the selection was made
+// Description : Try to access a protected field outside a subclass
+// Result : error line 12
 
 class A {
     protected int x;

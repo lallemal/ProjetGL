@@ -52,9 +52,9 @@ public class ContextualError extends LocationException {
     public static final String SELECTION_CLASS_TYPE_UNDEFINED = "This class is not defined";
     public static final String SELECTION_CLASS_TYPE_NOT_CLASS = "The type of the selected object is not a class";
     public static final String CLASS_NOT_SUBCLASS_PROTECTED = "The selected class is not a subclass of the class where the selection was made";
-    public static final String FIELD_NOT_OVERCLASS_PROTECTED = "The class is not a subclass of the one which own this field";
+    public static final String FIELD_NOT_OVERCLASS_PROTECTED = "The type of the object selected is not a subtype of the current class";
     public static final String RETURN_VOID = "The returnType can not be of type void";
-    public static final String INSTANCE_OF_IMPOSSIBLE = "The operation InstanceOf can not be applied to those operands";
+    public static final String INSTANCE_OF_IMPOSSIBLE = "The operation InstanceOf can not be applied to those operands"; // TODO
     public static final String IDENTIFIER_NOT_METHOD = "This identifier does not correspond to a method in this scope"; // 3.72
     public static final String SIG_LIST_EXPR_NOT_MATCH = "The signature of this method does not match the number of parameters given"; // 3.74
 

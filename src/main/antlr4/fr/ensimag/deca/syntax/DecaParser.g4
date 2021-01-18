@@ -200,9 +200,11 @@ list_expr returns[ListExpr tree]
 @init   {
 
 	$tree = new ListExpr();
+
         }
     : (e1=expr {
     	$tree.add($e1.tree);
+    	setLocation($tree, $e1.start);
         }
        (COMMA e2=expr {
        	$tree.add($e2.tree);
@@ -402,6 +404,7 @@ select_expr returns[AbstractExpr tree]
             // we matched "e1.i(args)"
             assert($args.tree != null);
             $tree = new MethodCall($e1.tree, $i.tree, $args.tree);
+            setLocation($args.tree, $args.start);
             setLocation($tree, $e1.start);
         }
         | /* epsilon */ {

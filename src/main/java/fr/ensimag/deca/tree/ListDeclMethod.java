@@ -44,8 +44,9 @@ public class ListDeclMethod extends TreeList<AbstractDeclMethod>{
     	
     	for (AbstractDeclMethod i : getList()) {
     		if (noms.containsKey(i.getName().getName().getName())) {
-    			if (i.equals(noms.get(i.getName().getName().getName()))) {
+    			if (i.equals(noms.get(i.getName().getName().getName()))) { // Override
     				i.codeGenDeclMethodOverride(compiler, noms.get(i.getName().getName().getName()).getName().getMethodDefinition().getAddress());
+    				// On ecrase la methode mere par la methode fille
     			}
     		} else {
     			i.codeGenDeclMethod(compiler);

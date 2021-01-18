@@ -53,13 +53,16 @@ public class Program extends AbstractProgram {
     @Override
     public void codeGenProgram(DecacCompiler compiler) {
         // A FAIRE: compléter ce squelette très rudimentaire de code
-    	compiler.addComment("Class declaration");
-    	System.out.println("Coucou0");
-    	System.out.println(classes.size());
+    	compiler.addComment("----------------------------------------------");
+		compiler.addComment("	Construction des tables des methodes");
+		compiler.addComment("----------------------------------------------");
         classes.codeGenDeclClass(compiler);
-        compiler.addComment("Main program");
+        compiler.addComment("----------------------------------------------");
+		compiler.addComment("		Main program ");
+		compiler.addComment("----------------------------------------------");
         main.codeGenMain(compiler);
         compiler.addInstruction(new HALT());
+        compiler.getLabelClass().codeGenLabelClass(compiler, classes);
         compiler.getLabelError().codeGenLabelError(compiler);
     }
 

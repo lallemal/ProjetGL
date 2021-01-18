@@ -172,6 +172,10 @@ public abstract class AbstractExpr extends AbstractInst {
     	this.codeExp(compiler, 2);
     	compiler.addInstruction(new STORE(Register.getR(2), address));
     }
+    
+    protected void codeGenField(DecacCompiler compiler) {
+    	this.codeExp(compiler, 0);
+    }
 
     @Override
     protected void codeGenInst(DecacCompiler compiler) {

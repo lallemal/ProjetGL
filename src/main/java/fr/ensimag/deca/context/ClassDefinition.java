@@ -77,7 +77,7 @@ public class ClassDefinition extends TypeDefinition {
     }
     
     public DAddr getAddress() {
-    	return this.getAddress();
+    	return address;
     }
 
     public EnvironmentExp getMembers() {

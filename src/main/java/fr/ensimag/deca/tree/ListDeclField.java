@@ -9,6 +9,7 @@ import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.instructions.RTS;
 
 /**
  *
@@ -26,6 +27,15 @@ public class ListDeclField extends TreeList<AbstractDeclField>{
         for (AbstractDeclField df : getList()) {
             df.verifyDeclFieldBody(compiler, currentClass);
         }
+    }
+    
+    public void codeGenField(DecacCompiler compiler) {
+    	int j = 1;
+    	for (AbstractDeclField i : getList()) {
+    		i.codeGenField(compiler, j);
+    		j++;
+    	}
+    	compiler.addInstruction(new RTS());
     }
 
     @Override

@@ -37,6 +37,11 @@ public class Initialization extends AbstractInitialization {
     protected void codeGenDecl(DecacCompiler compiler, DAddr address) {
     	expression.codeGenDecl(compiler, address);
     }
+    
+    @Override
+    protected void codeGenField(DecacCompiler compiler, AbstractIdentifier type) {
+    	expression.codeGenField(compiler);
+    }
 
     @Override
     protected void verifyInitialization(DecacCompiler compiler, Type t,

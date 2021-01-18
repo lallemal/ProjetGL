@@ -9,6 +9,11 @@ import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.deca.tools.SymbolTable;
+import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.RegisterOffset;
+import fr.ensimag.ima.pseudocode.instructions.LOAD;
+import fr.ensimag.ima.pseudocode.instructions.STORE;
+
 import org.apache.commons.lang.Validate;
 import org.apache.log4j.Logger;
 
@@ -36,6 +41,12 @@ public class DeclField extends AbstractDeclField{
         this.type = type;
         this.name = nom;
         this.init = init;
+    }
+    
+    public void codeGenField(DecacCompiler compiler, int i) {
+    	init.codeGenField(compiler, type);
+    	compiler.addInstruction(new LOAD(new RegisterOffset(-2, Register.LB), Register.R1)); // Peut surement etre factorise dans ListDeclField
+    	compiler.addInstruction(new STORE(Register.R0, new RegisterOffset(i, Register.R1)));
     }
     
     @Override

@@ -34,6 +34,21 @@ public class NoInitialization extends AbstractInitialization {
     	//nothing to do
     }
     
+    @Override
+    protected void codeGenField(DecacCompiler compiler, AbstractIdentifier type) {
+    	switch (type.getName().getName()) {
+    	case "int":
+    	case "boolean":
+    		compiler.addInstruction(new LOAD(0, Register.R0));
+    		break;
+    	case "float":
+    		compiler.addInstruction(new LOAD((float) 0.0, Register.R0));
+    		break;
+    	default: // add an error ?
+    		break;
+    	}
+    }
+    
     /**
      * Node contains no real information, nothing to check.
      */

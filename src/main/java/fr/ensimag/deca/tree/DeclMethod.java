@@ -62,8 +62,7 @@ public class DeclMethod extends AbstractDeclMethod {
     
     @Override
     public void codeGenDeclMethod(DecacCompiler compiler) {
-    	Label label = new Label(name.getName().getName());
-    	compiler.addLabel(label);
+    	Label label = name.getMethodDefinition().getLabel();
     	compiler.addInstruction(new LOAD(new LabelOperand(label), Register.R0));
     	compiler.addInstruction(new STORE(Register.R0, new RegisterOffset(compiler.getKGB(), Register.GB)));
     	compiler.incrementKGB();
@@ -71,8 +70,7 @@ public class DeclMethod extends AbstractDeclMethod {
     
     @Override
     public void codeGenDeclMethodOverride(DecacCompiler compiler, DAddr address) {
-    	Label label = new Label(name.getName().getName());
-    	compiler.addLabel(label);
+    	Label label = name.getMethodDefinition().getLabel();
     	compiler.addInstruction(new LOAD(new LabelOperand(label), Register.R0));
     	compiler.addInstruction(new STORE(Register.R0, address));
     }

@@ -33,5 +33,9 @@ public abstract class AbstractDeclClass extends Tree {
             throws ContextualError;
     
     public abstract void codeGenDeclClass(DecacCompiler compiler);
+    
+    public abstract AbstractIdentifier getIdent();
+    
+    public abstract ListDeclField getField();
 
 }

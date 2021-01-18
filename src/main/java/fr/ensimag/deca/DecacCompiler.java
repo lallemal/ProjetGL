@@ -1,5 +1,6 @@
 package fr.ensimag.deca;
 
+import fr.ensimag.deca.codegen.LabelClass;
 import fr.ensimag.deca.codegen.LabelError;
 import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.syntax.DecaLexer;
@@ -11,6 +12,9 @@ import fr.ensimag.ima.pseudocode.AbstractLine;
 import fr.ensimag.ima.pseudocode.IMAProgram;
 import fr.ensimag.ima.pseudocode.Instruction;
 import fr.ensimag.ima.pseudocode.Label;
+import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.RegisterOffset;
+
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.apache.log4j.Logger;
@@ -38,9 +42,14 @@ public class DecacCompiler implements Callable<Boolean> {
     private static final Logger LOG = Logger.getLogger(DecacCompiler.class);
     
     private LabelError labelError;
+    private LabelClass labelClass;
     
     public LabelError getLabelError() {
     	return labelError;
+    }
+    
+    public LabelClass getLabelClass() {
+    	return labelClass;
     }
     
     private int kGB = 1;
@@ -68,6 +77,7 @@ public class DecacCompiler implements Callable<Boolean> {
         createPredefTypes();
         this.rmax = 15;
         this.labelError = new LabelError();
+        this.labelClass = new LabelClass();
         
     }
     private int rmax;
@@ -351,6 +361,7 @@ public class DecacCompiler implements Callable<Boolean> {
     public DeclClass initObject() {
         ClassDefinition objectDef = (ClassDefinition)env_types.get(symbols.create("Object"));
         MethodDefinition equalDef = (MethodDefinition) objectDef.getMembers().get(symbols.create("equals"));
+        equalDef.setLabel(new Label("code.Object.equals"));
         Identifier objectIdent = new Identifier(symbols.create("Object"));
         objectIdent.setLocation(Location.BUILTIN);
         objectIdent.setDefinition(objectDef);
@@ -396,6 +407,8 @@ public class DecacCompiler implements Callable<Boolean> {
         DeclMethod equalMethod = new DeclMethod(booleanIdent, equalsIdent, listParamEquals, equalBodyMethod);
         equalMethod.setLocation(Location.BUILTIN);
         objectMethod.add(equalMethod);
+        objectDef.setMethods(objectMethod);
+        objectDef.setAddress(new RegisterOffset(1, Register.GB));
         object = new DeclClass(objectIdent, null, objectField, objectMethod);
         object.setLocation(Location.BUILTIN);
 

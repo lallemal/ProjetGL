@@ -4,6 +4,7 @@ import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.tools.DecacInternalError;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.Label;
 import fr.ensimag.ima.pseudocode.NullOperand;
 import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.RegisterOffset;
@@ -40,27 +41,46 @@ public class DeclClass extends AbstractDeclClass {
         this.method = method;
     }
     
+    public AbstractIdentifier getIdent() {
+    	return ident;
+    }
+    
+    public ListDeclMethod getMethod() {
+    	return method;
+    }
+    
+    public ListDeclField getField() {
+    	return field;
+    }
+    
     @Override
     public void codeGenDeclClass(DecacCompiler compiler) {
-    	if (compiler.getKGB() == 1) { //Premiere classe a initialiser : Object
-    		ident.getClassDefinition().setAddress(new RegisterOffset(compiler.getKGB(), Register.GB));
-    		compiler.addInstruction(new LOAD(new NullOperand(), Register.R0));
-    	} else {
-	    	ident.getClassDefinition().setAddress(new RegisterOffset(compiler.getKGB(), Register.GB));
-	    	compiler.addInstruction(new LEA(parent.getClassDefinition().getAddress(), Register.R0));    
-    	}
     	
+    	if (compiler.getKGB() == 1) { //Premiere classe a initialiser : Object
+    		DeclClass object = compiler.getObject();
+    		compiler.addComment("Construction de la table des methodes de Object");
+    		compiler.addInstruction(new LOAD(new NullOperand(), Register.R0));
+    		compiler.addInstruction(new STORE(Register.R0, new RegisterOffset(compiler.getKGB(), Register.GB)));
+        	compiler.incrementKGB();
+        	object.getMethod().codeGenListDeclMethod(compiler);
+        	
+    	}
+    	ident.getClassDefinition().setAddress(new RegisterOffset(compiler.getKGB(), Register.GB));
+    	compiler.addComment("Construction de la table des methodes de " + ident.getName().getName());
+    	compiler.addInstruction(new LEA(parent.getClassDefinition().getAddress(), Register.R0));   
     	compiler.addInstruction(new STORE(Register.R0, new RegisterOffset(compiler.getKGB(), Register.GB)));
     	compiler.incrementKGB();
     	
-    	if (parent != null) {
-	    	for (AbstractDeclMethod i : parent.getClassDefinition().getMethods().getList()) {
-	    		ident.getClassDefinition().getMethods().add(i);
-	    	}
-    	}
+    	for (AbstractDeclMethod i : parent.getClassDefinition().getMethods().getList()) {
+	    	ident.getClassDefinition().getMethods().add(i);
+	    }
+    	System.out.println(ident.getClassDefinition().getMethods().size());
     	for (AbstractDeclMethod i : method.getList()) {
     		ident.getClassDefinition().getMethods().add(i);
-    	} 
+    		Label label = new Label("code."+ident.getName().getName()+"."+i.getName().getName().getName());
+    		i.getName().getMethodDefinition().setLabel(label);
+    	}
+    	
     	ident.getClassDefinition().getMethods().codeGenListDeclMethod(compiler);
     	
     }

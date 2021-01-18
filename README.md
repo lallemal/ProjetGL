@@ -4,7 +4,8 @@
 
 Le compilateur fonctionne comme spécifié dans la documentation [Decac] : 
 
-`decac [[-p | -v] [-n] [-r X] [-d]* [-P] [-w] <fichier deca>...] | [-b]
+```
+decac [[-p | -v] [-n] [-r X] [-d]* [-P] [-w] <fichier deca>...] | [-b]
 . -b (banner) : affiche une bannière indiquant le nom de l’équipe
 . -p (parse) : arrête decac après l’étape de construction de
 l’arbre, et affiche la décompilation de ce dernier
@@ -24,7 +25,8 @@ l’option plusieurs fois pour avoir plus de
 traces.
 . -P (parallel) : s’il y a plusieurs fichiers sources,
 lance la compilation des fichiers en
-parallèle (pour accélérer la compilation)`
+parallèle (pour accélérer la compilation)
+```
 
 Un lancement de `decac` sans argument permet d'avoir l'aide liée au compilateur.
 

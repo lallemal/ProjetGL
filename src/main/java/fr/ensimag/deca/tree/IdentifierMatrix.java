@@ -15,13 +15,16 @@ import fr.ensimag.deca.context.VariableDefinition;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.deca.tools.SymbolTable.Symbol;
 
-public class IdentifierArray extends AbstractIdentifier{
-	final private AbstractIdentifier varName;
-	final private int length;
+public class IdentifierMatrix extends AbstractIdentifier {
+
+	AbstractIdentifier varName;
+	final private int line;
+	final private int column;
 	
-	public IdentifierArray(AbstractIdentifier varName, int length) {
+	public IdentifierMatrix(AbstractIdentifier varName, int line, int column) {
 		this.varName = varName;
-		this.length = length;
+		this.line = line;
+		this.column = column;
 	}
 	@Override
 	public ClassDefinition getClassDefinition() {
@@ -68,7 +71,7 @@ public class IdentifierArray extends AbstractIdentifier{
 	@Override
 	public void setDefinition(Definition definition) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -87,19 +90,19 @@ public class IdentifierArray extends AbstractIdentifier{
 	@Override
 	public void decompile(IndentPrintStream s) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	protected void prettyPrintChildren(PrintStream s, String prefix) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	protected void iterChildren(TreeFunction f) {
 		// TODO Auto-generated method stub
-		
+
 	}
 	@Override
 	public Type verifyMethod(DecacCompiler compiler, EnvironmentExp localEnv) throws ContextualError {

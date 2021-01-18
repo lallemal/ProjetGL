@@ -17,7 +17,6 @@ options {
     // between the lexer and parser and will build the
     // lexer before the parser. It will also rebuild the
     // parser if the lexer changes.
-    //
     tokenVocab = DecaLexer;
 
 }
@@ -74,8 +73,8 @@ list_decl returns[ListDeclVar tree]
 
 decl_var_set[ListDeclVar l]
     : type 
-    ( LHOOK (INT)? RHOOK // Délcaration d'un tableau
-    | LHOOK RHOOK LHOOK RHOOK) // Déclaration d'une matrice
+    ( LHOOK (INT) RHOOK // Délcaration d'un tableau
+    | (LHOOK RHOOK)+) // Déclaration d'une matrice
     list_decl_var[$l,$type.tree] SEMI
     ;
 
@@ -90,6 +89,7 @@ list_decl_var[ListDeclVar l, AbstractIdentifier t]
 
 decl_var[AbstractIdentifier t] returns[AbstractDeclVar tree]
 @init   {
+
             AbstractInitialization init;
         }
     : i=ident {
@@ -106,56 +106,71 @@ decl_var[AbstractIdentifier t] returns[AbstractDeclVar tree]
       	$tree = new DeclVar($t, $i.tree, init);
       	setLocation($tree, $i.start);
         }
-      | e=decl_var_array[$t] {
-            assert($e.tree != null);
-            $tree = $e.tree;
-            setLocation($tree, $e.start);
-        }
-      | e=decl_var_matrix[$t] {
-            assert($e.tree != null);
-            $tree = $e.tree;
-            setLocation($tree, $e.start);
-        }
-    ;
-decl_var_array[AbstractIdentifier t] returns[AbstractDeclVar tree]
-	@init   {
-            AbstractInitialization init;
-            AbastractInteger intMemory;
-        }
-    : i=ident LHOOK{
-    	//pas de setLocation pour NoInitialization car cest une feuille
-    	init = new NoInitialization();
-		intMemory = new NoInteger();
-        }
-      (INT {
-      	intMemory = new Integer(Integer.parseInt($INT.text));
-      }  	
-      )? RHOOK
-      (EQUALS e=expr {
-      	init = new Initialization($e.tree);
-      	setLocation(init, $e.start);
+      | LHOOK  e1=expr RHOOK i1=ident {
+            assert($e1.tree != null);
+            assert($i1.tree != null);
+            init = new NoInitialization();
+        } (EQUALS e2=expr {
+      		init = new Initialization($e2.tree);
+      		setLocation(init, $e2.start);
       	
         }
       )? {
-      	$tree = new DeclVarArray($t, intMemory,  $i.tree, init);
-      	setLocation($tree, $i.start);
+      	$tree = new DeclVarArray($t, $e1.tree, $i1.tree, init);
+      	setLocation($tree, $i1.start);
         }
-	;
+      | (LHOOK RHOOK)+ i2=ident e3=expr{
+            assert($e3.tree != null);
+            assert($i2.tree != null);
+            init = new Initialization($e3.tree);
+      		setLocation(init, $e3.start);
+      		$tree = new DeclVarMatrix($t, $i2.tree, (Initialization)init);
 
-decl_var_matrix[AbstractIdentifier t] returns[AbstractDeclVar tree] 
-	@init   {
-            AbstractInitialization init;
-            AbastractInteger intMemory;
         }
-    : i=ident LHOOK RHOOK LHOOK RHOOK EQUALS e=expr{
-      	init = new Initialization($e.tree);
-      	setLocation(init, $e.start);
-      	$tree = new DeclVarMatrix($t,  $i.tree, init);
-      	setLocation($tree, $i.start);
-        }
-	;
+    ;
+    
+//decl_var_array[AbstractIdentifier t] returns[AbstractDeclVar tree]
+//	@init   {
+//
+//            AbstractInitialization init;
+//            AbstractInteger intMemory;
+//        }
+//    : i=ident LHOOK{
+//    	//pas de setLocation pour NoInitialization car cest une feuille
+//    	init = new NoInitialization();
+//		intMemory = new NoInteger();
+//        }
+//      (INT {
+//      	intMemory = new HasInteger(Integer.parseInt($INT.text));
+//      }  	
+//      )? RHOOK
+//      (EQUALS e=expr {
+//      	init = new Initialization($e.tree);
+//      	setLocation(init, $e.start);
+//      	
+//        }
+//      )? {
+//      	$tree = new DeclVarArray($t, intMemory,  $i.tree, init);
+//      	setLocation($tree, $i.start);
+//        }
+//	;
+//
+//decl_var_matrix[AbstractIdentifier t] returns[AbstractDeclVar tree] 
+//	@init   {
+//
+//            Initialization init;
+//            AbstractInteger intMemory;
+//        }
+//    : i=ident LHOOK RHOOK LHOOK RHOOK EQUALS e=expr{
+//      	init = new Initialization($e.tree);
+//      	setLocation(init, $e.start);
+//      	$tree = new DeclVarMatrix($t,  $i.tree, init);
+//      	setLocation($tree, $i.start);
+//        }
+//	;
 list_inst returns[ListInst tree]
 @init {
+
 	$tree = new ListInst();
 }
     : (inst {
@@ -257,6 +272,28 @@ list_expr returns[ListExpr tree]
        	$tree.add($e2.tree);
         }
        )* )?
+//     | l1=list_element{ // Definition de array explicite 
+//    	assert($l1.tree != null);
+//    	$tree = $l1.tree;
+//    }
+//    | l2=list_array{ // Definition de matrice explicite
+//    	assert($l2.tree != null);
+//    	$tree = $l2.tree;
+//    }
+    ;
+    
+list_hook_expr returns[ListExpr tree]
+@init   {
+
+	$tree = new ListExpr();
+        }
+    : (LHOOK e1=expr {
+    	$tree.add($e1.tree);
+        } RHOOK
+       (LHOOK e2=expr {
+       	$tree.add($e2.tree);
+        }
+       RHOOK)*)?
     ;
 
 expr returns[AbstractExpr tree]
@@ -453,6 +490,12 @@ select_expr returns[AbstractExpr tree]
             $tree = new MethodCall($e1.tree, $i.tree, $args.tree);
             setLocation($tree, $e1.start);
         }
+        | i1=ident l=list_hook_expr {
+        	assert($i1.tree != null);
+        	assert($l.tree != null);
+        	$tree = new ArraySelection($i1.tree, $l.tree);
+        	setLocation($tree, $i1.start);
+        }
         | /* epsilon */ {
             // we matched "e.i"
         }
@@ -461,6 +504,7 @@ select_expr returns[AbstractExpr tree]
 
 primary_expr returns[AbstractExpr tree]
 @init{
+	AbstractIdentifier identifier;
 	AbstractInteger intMemory;
 }
     : ident {
@@ -485,35 +529,16 @@ primary_expr returns[AbstractExpr tree]
     		$tree = new ReadFloat();
     		setLocation($tree, $READFLOAT);
         }
-    | NEW ident OPARENT CPARENT {
-            assert($ident.tree != null);
-            $tree = new New($ident.tree);
-            setLocation($tree, $NEW); 
-            
+    | OBRACE l=list_expr CBRACE{
+    	assert($l.tree != null);
+    	$tree = new ArrayLiteral($l.tree);
+    	setLocation($tree, $l.start);
+    }
+       | n=new_object {
+            assert($n.tree != null);
+            $tree = $n.tree;
         }
-     | NEW ident LHOOK i1=INT RHOOK  LHOOK{ // Déclaration d'une matrice
-	    	assert($ident.tree != null);
-	    	intMemory = new NoInteger();
-	    }  (i2=INT {
-	    	intMemory = new Integer(Integer.parseInt($i2.text));
-
-	    })? RHOOK{
-	    	$tree = new NewMatrix($ident.tree,  Integer.parseInt($i1.text), intMemory);
-	    	setLocation($tree, $NEW); // Pas sur du $NEW
-	    }
-     | NEW ident LHOOK i1=INT RHOOK  { // Déclaration d'un tableau 
-    	assert($ident.tree != null);
-    	$tree = new NewMatrix($ident.tree, Integer.parseInt($INT.text));
-    	setLocation($tree, $NEW); // Pas sur du $NEW
-    }
-    | l=list_element{ // Definition de array explicite 
-    	assert($l.tree != null);
-    	$tree = $l.tree;
-    }
-    | l=list_array{ // Definition de matrice explicite
-    	assert($l.tree != null);
-    	$tree = $l.tree;
-    }
+    
     | cast=OPARENT type CPARENT OPARENT expr CPARENT {
             assert($type.tree != null);
             assert($expr.tree != null);
@@ -526,41 +551,42 @@ primary_expr returns[AbstractExpr tree]
         }
     ;
 
-list_element returns[ListExpr tree]
-@init   {
-
-	$tree = new ListExpr();
+new_object returns[AbstractExpr tree]
+	: NEW ident OPARENT CPARENT {
+            assert($ident.tree != null); 
+            $tree = new New($ident.tree);
+            setLocation($tree, $NEW); 
         }
-    : OBRACE((ident{
-			$tree.add($ident.tree);
-			setLocation($tree, $ident.start);
-		}
-	) ( COMMA ident{
-		$tree.add($ident.tree)
-		setLocation($tree, $ident.start);
-	}
-		
-	)*)?CBRACE
-    ;
+       | NEW i=ident  l=list_hook_expr {
+       		assert($i.tree != null);
+       		assert($l.tree != null);
+       		$tree = new NewArray($i.tree, $l.tree);
+       };
 
-
-list_array returns[ListExpr tree]
-@init   {
-
-	$tree = new ListArray();
-        }
-    : OBRACE((
-    	e=list_element{
-    		$tree.add($e.tree);
-    		setLocation($tree, $e.start);
-    	}
-	) ( COMMA e=list_element{
-		$tree.add($e.tree)
-		setLocation($tree, $e.start);
-	}
-		
-	)*)?CBRACE
-    ;
+//list_element returns[ListExpr tree]
+//@init   {
+//	$tree = new ListExpr();
+//        }
+//    : OBRACE e=list_expr CBRACE{
+//			$tree = $e.tree;
+//		}
+//    ;
+//
+//
+//list_array returns[ListListExpr tree]
+//@init   {
+//	$tree = new ListListExpr();
+//        }
+//    : OBRACE((
+//    	e=list_element{
+//    		$tree.add($e.tree);
+//    	}
+//	) ( COMMA l=list_element{
+//		$tree.add($l.tree);
+//	}
+//		
+//	)*)?CBRACE
+//    ;
 
 type returns[AbstractIdentifier tree]
     : ident {
@@ -748,5 +774,3 @@ param returns[DeclParam tree]
             setLocation($tree, $type.start);
         }
     ;
-    
-/**** Array related rule  ****/

@@ -121,7 +121,7 @@ RHOOK: ']';
 
 // fragment IDENT_WITHOUT_STRING: (IDENT ~('string')); 
 // Déclaration d'un tableau "a la main" \ex int[4] tab = { 1, 2, 2, 4 };
-ARRAY: OBRACE ( (IDENT) (COMMA IDENT)+ )? CBRACE;
+// ARRAY: OBRACE ( (IDENT) (COMMA IDENT)+ )? CBRACE;
 
 // fragment ARRAY_INT: OBRACE ((INT) (COMMA INT)+ )? CBRACE;
 // fragment ARRAY_FLOAT: OBRACE ((FLOAT) (COMMA FLOAT)+ )? CBRACE;
@@ -129,7 +129,7 @@ ARRAY: OBRACE ( (IDENT) (COMMA IDENT)+ )? CBRACE;
 
 // MATRIX: OBRACE ((ARRAY_INT)+ | (ARRAY_FLOAT)+ | (ARRAY_BOOLEAN)+ ) CBRACE;
 
-MATRIX: OBRACE ARRAY ( COMMA ARRAY )* CBRACE;
+// MATRIX: OBRACE ARRAY ( COMMA ARRAY )* CBRACE;
 
 
 

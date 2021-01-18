@@ -1,15 +1,12 @@
 package fr.ensimag.deca;
 
 import fr.ensimag.deca.codegen.LabelError;
-
 import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.syntax.DecaLexer;
 import fr.ensimag.deca.syntax.DecaParser;
 import fr.ensimag.deca.tools.DecacInternalError;
 import fr.ensimag.deca.tools.SymbolTable;
-import fr.ensimag.deca.tree.AbstractProgram;
-import fr.ensimag.deca.tree.Location;
-import fr.ensimag.deca.tree.LocationException;
+import fr.ensimag.deca.tree.*;
 import fr.ensimag.ima.pseudocode.AbstractLine;
 import fr.ensimag.ima.pseudocode.IMAProgram;
 import fr.ensimag.ima.pseudocode.Instruction;
@@ -220,6 +217,7 @@ public class DecacCompiler implements Callable<Boolean> {
             return false;
         }
 
+        initObject();
         prog.verifyProgram(this);
         if (compilerOptions.getVerif()) {
             LOG.info("Stopping at verification");
@@ -290,8 +288,9 @@ public class DecacCompiler implements Callable<Boolean> {
         // Create and check existence of symbols for predef Types
         SymbolTable.Symbol voidSymbol = symbols.create("void");
         SymbolTable.Symbol boolSymbol = symbols.create("boolean");
-        SymbolTable.Symbol floatSymbol =symbols.create("float");
-        SymbolTable.Symbol intSymbol =symbols.create("int");
+        SymbolTable.Symbol floatSymbol = symbols.create("float");
+        SymbolTable.Symbol intSymbol = symbols.create("int");
+        SymbolTable.Symbol objectSymbol = symbols.create("Object");
 
         // Creation of predef types
         try {
@@ -299,8 +298,20 @@ public class DecacCompiler implements Callable<Boolean> {
             env_types.declare(boolSymbol, new TypeDefinition(new BooleanType(boolSymbol), Location.BUILTIN));
             env_types.declare(floatSymbol, new TypeDefinition(new FloatType(floatSymbol), Location.BUILTIN));
             env_types.declare(intSymbol, new TypeDefinition(new IntType(intSymbol), Location.BUILTIN));
+
+            Signature equalsSig = new Signature();
+            equalsSig.add(getBool());
+            ClassType objectClass = new ClassType(objectSymbol, Location.BUILTIN, null);
+            ClassDefinition objectDef = new ClassDefinition(objectClass, Location.BUILTIN, null);
+            objectDef.getMembers().declare(symbols.create("equals"), new MethodDefinition(objectClass, Location.BUILTIN, equalsSig, 0));
+            objectDef.setNumberOfMethods(1);
+            env_types.declare(objectSymbol, objectDef);
+
         } catch (EnvironmentType.DoubleDefException e){
             LOG.fatal("Creation of Predefined Type in" + source.getName() + " failed", e);
+            return true;
+        } catch (EnvironmentExp.DoubleDefException f) {
+            LOG.fatal("Creation of equals method for Object in" + source.getName() + " faled", f);
             return true;
         }
         return false;
@@ -335,7 +346,66 @@ public class DecacCompiler implements Callable<Boolean> {
         return new StringType(symbols.create("string"));
     }
 
+    private DeclClass object;
 
+    public DeclClass initObject() {
+        ClassDefinition objectDef = (ClassDefinition)env_types.get(symbols.create("Object"));
+        MethodDefinition equalDef = (MethodDefinition) objectDef.getMembers().get(symbols.create("equals"));
+        Identifier objectIdent = new Identifier(symbols.create("Object"));
+        objectIdent.setLocation(Location.BUILTIN);
+        objectIdent.setDefinition(objectDef);
+        ListDeclField objectField = new ListDeclField();
+        objectField.setLocation(Location.BUILTIN);
+        ListDeclMethod objectMethod = new ListDeclMethod();
+        objectMethod.setLocation(Location.BUILTIN);
+
+        Identifier booleanIdent = new Identifier(symbols.create("boolean"));
+        booleanIdent.setLocation(Location.BUILTIN);
+        booleanIdent.setDefinition(env_types.get(symbols.create("boolean")));
+        Identifier equalsIdent = new Identifier(symbols.create("equals"));
+        equalsIdent.setLocation(Location.BUILTIN);
+        equalsIdent.setDefinition(equalDef);
+
+        ListParam listParamEquals = new ListParam();
+        listParamEquals.setLocation(Location.BUILTIN);
+        Identifier typeParamIdent = new Identifier(symbols.create("Object"));
+        typeParamIdent.setLocation(Location.BUILTIN);
+        typeParamIdent.setDefinition(objectDef);
+        Identifier nameParamIdent = new Identifier(symbols.create("other"));
+        nameParamIdent.setLocation(Location.BUILTIN);
+        nameParamIdent.setDefinition(objectDef);
+        DeclParam paramObject = new DeclParam(typeParamIdent, nameParamIdent);
+        listParamEquals.add(paramObject);
+
+        ListInst listInst = new ListInst();
+        listInst.setLocation(Location.BUILTIN);
+        This thisBody = new This();
+        thisBody.setLocation(Location.BUILTIN);
+        Identifier otherBody = new Identifier(symbols.create("other"));
+        otherBody.setLocation(Location.BUILTIN);
+        otherBody.setDefinition(objectDef);
+        Equals equalBody = new Equals(thisBody, otherBody);
+        equalBody.setLocation(Location.BUILTIN);
+        listInst.add(equalBody);
+        ListDeclVar listDeclVar = new ListDeclVar();
+        listDeclVar.setLocation(Location.BUILTIN);
+
+        MethodBody equalBodyMethod = new MethodBody(listDeclVar, listInst);
+        equalBodyMethod.setLocation(Location.BUILTIN);
+
+        DeclMethod equalMethod = new DeclMethod(booleanIdent, equalsIdent, listParamEquals, equalBodyMethod);
+        equalMethod.setLocation(Location.BUILTIN);
+        objectMethod.add(equalMethod);
+        object = new DeclClass(objectIdent, null, objectField, objectMethod);
+        object.setLocation(Location.BUILTIN);
+
+        objectIdent.setDefinition(env_types.get(symbols.create("Object")));
+        return object;
+    }
+
+    public DeclClass getObject() {
+        return object;
+    }
 
     @Override
     public Boolean call() throws Exception {

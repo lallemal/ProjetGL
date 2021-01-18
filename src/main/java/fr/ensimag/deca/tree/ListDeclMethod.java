@@ -8,10 +8,7 @@ package fr.ensimag.deca.tree;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
-import fr.ensimag.deca.context.EnvironmentExp;
-import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
-import java.io.PrintStream;
 
 /**
  *
@@ -19,10 +16,17 @@ import java.io.PrintStream;
  */
 public class ListDeclMethod extends TreeList<AbstractDeclMethod>{
 
-    public void verifyListDeclMethod(DecacCompiler compiler) throws ContextualError {
-        throw new UnsupportedOperationException("not yet implemented");
+    public void verifyListDeclMethod(DecacCompiler compiler, ClassDefinition currentClass) throws ContextualError {
+        for(AbstractDeclMethod dm : getList()) {
+            dm.verifyDeclMethod(compiler, currentClass);
+        }
     }
-    
+
+    public void verifyListDeclMethodBody(DecacCompiler compiler, ClassDefinition currentClass) throws ContextualError {
+        for(AbstractDeclMethod dm : getList()) {
+            dm.verifyDeclMethodBody(compiler, currentClass);
+        }
+    }
     @Override
     public void decompile(IndentPrintStream s) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

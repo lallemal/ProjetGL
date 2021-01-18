@@ -9,6 +9,7 @@ import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
+import fr.ensimag.deca.context.Type;
 
 /**
  *
@@ -16,8 +17,9 @@ import fr.ensimag.deca.context.EnvironmentExp;
  */
 public abstract class AbstractDeclParam extends Tree {
     
-    protected abstract void verifyDeclParam(DecacCompiler compiler,
-            EnvironmentExp localEnv, ClassDefinition currentClass)
+    protected abstract Type verifyDeclParam(DecacCompiler compiler)
             throws ContextualError;
-    
+
+    public abstract void verifyDeclParamBody(DecacCompiler compiler, EnvironmentExp localExp, ClassDefinition currentClass)
+            throws  ContextualError;
 }

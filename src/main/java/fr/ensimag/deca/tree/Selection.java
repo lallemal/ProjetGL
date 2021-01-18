@@ -1,28 +1,45 @@
 package fr.ensimag.deca.tree;
 
-import java.io.PrintStream;
-
 import fr.ensimag.deca.DecacCompiler;
-import fr.ensimag.deca.context.ClassDefinition;
-import fr.ensimag.deca.context.ContextualError;
-import fr.ensimag.deca.context.EnvironmentExp;
-import fr.ensimag.deca.context.Type;
+import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import org.apache.commons.lang.Validate;
+
+import java.io.PrintStream;
 
 public class Selection extends AbstractLValue{
 
-	private AbstractExpr left;
-	private AbstractExpr right;
+	private AbstractExpr expr;
+	private AbstractIdentifier ident;
 	
-	public Selection(AbstractExpr left, AbstractExpr right) {
-		this.left = left;
-		this.right = right;
+	public Selection(AbstractExpr left, AbstractIdentifier right) {
+		Validate.notNull(left);
+		Validate.notNull(right);
+		this.expr = left;
+		this.ident = right;
 	}
 	@Override
 	public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass)
 			throws ContextualError {
-		// TODO Auto-generated method stub
-		return null;
+	    Type typeClass2 = expr.verifyExpr(compiler, localEnv, currentClass);
+	    if (!typeClass2.isClass()) {
+	    	throw new ContextualError(ContextualError.SELECTION_EXPR_NOT_CLASS, getLocation());
+		}
+	    EnvironmentExp classExp2 = ((ClassDefinition) compiler.getEnv_types().get(typeClass2.getName())).getMembers();
+		Type fieldType = ident.verifyExpr(compiler, classExp2, currentClass);
+		FieldDefinition fieldDef = ident.getFieldDefinition();
+		// 3.65
+		if (fieldDef.getVisibility() == Visibility.PUBLIC) {
+			return fieldType;
+		}
+		// 3.66
+		if (!TypeOp.subType(compiler, typeClass2, currentClass.getType())) {
+			throw new ContextualError(ContextualError.CLASS_NOT_SUBCLASS_PROTECTED, getLocation());
+		}
+		if  (!TypeOp.subType(compiler, currentClass.getType(), fieldDef.getContainingClass().getType())) {
+			throw new ContextualError(ContextualError.FIELD_NOT_OVERCLASS_PROTECTED, getLocation());
+        }
+		return fieldType;
 	}
 
 	@Override
@@ -33,8 +50,8 @@ public class Selection extends AbstractLValue{
 
 	@Override
 	protected void prettyPrintChildren(PrintStream s, String prefix) {
-		left.prettyPrint(s, prefix, false);
-                right.prettyPrint(s, prefix, true);
+		expr.prettyPrint(s, prefix, false);
+		ident.prettyPrint(s, prefix, true);
 		
 	}
 

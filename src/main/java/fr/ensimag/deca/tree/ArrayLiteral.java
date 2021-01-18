@@ -1,47 +1,45 @@
 package fr.ensimag.deca.tree;
 
+import java.io.PrintStream;
+
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
-import org.apache.commons.lang.Validate;
 
-import java.io.PrintStream;
+public class ArrayLiteral extends AbstractExpr{
 
-public class New extends AbstractExpr {
-
-	private final AbstractIdentifier ident;
+	final private ListExpr elements;
 	
-	public New(AbstractIdentifier operand) {
-		Validate.notNull(operand);
-	    this.ident = operand;
+	public ArrayLiteral(ListExpr elements) {
+		this.elements = elements;
 	}
-
-
+	
 	@Override
 	public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass)
 			throws ContextualError {
-		Type type = ident.verifyType(compiler);
-		if (!type.isClass()) {
-			throw new ContextualError(ContextualError.TYPE_NOT_CLASS, getLocation());
-		}
-		return type;
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
 	public void decompile(IndentPrintStream s) {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	protected void prettyPrintChildren(PrintStream s, String prefix) {
-		ident.prettyPrint(s, prefix, true);
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	protected void iterChildren(TreeFunction f) {
-		ident.iter(f);
+		// TODO Auto-generated method stub
+		
 	}
+
 }

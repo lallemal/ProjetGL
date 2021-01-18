@@ -107,7 +107,14 @@ public abstract class AbstractExpr extends AbstractInst {
                 floatNew.verifyExpr(compiler, localEnv, currentClass);
                 LOG.debug("verify AbstractExpr Rvalue : end");
                 return floatNew;
+
             }
+        }
+        else {
+            AbstractExpr floatNew = new ConvFloat(this);
+            floatNew.verifyExpr(compiler, localEnv, currentClass);
+            LOG.debug("verify AbstractExpr Rvalue : end");
+            return floatNew;
         }
         LOG.debug("verify AbstractExpr Rvalue : end");
         return this;

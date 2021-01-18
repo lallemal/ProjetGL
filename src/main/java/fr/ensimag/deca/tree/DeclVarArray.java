@@ -12,9 +12,9 @@ public class DeclVarArray extends AbstractDeclVar{
     final private AbstractIdentifier type;
     final private AbstractIdentifier varName;
     final private AbstractInitialization initialization;
-    final private AbstractInteger length;
+    final private AbstractExpr length;
     
-	public DeclVarArray(AbstractIdentifier type, AbstractInteger length, AbstractIdentifier varName, AbstractInitialization initialization) {
+	public DeclVarArray(AbstractIdentifier type, AbstractExpr length, AbstractIdentifier varName, AbstractInitialization initialization) {
 		this.type = type;
 		this.length = length;
 		this.varName = varName;

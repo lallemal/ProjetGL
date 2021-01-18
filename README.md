@@ -4,6 +4,9 @@
 
 Le compilateur fonctionne comme spécifié dans la documentation [Decac] : 
 
+Il compile les programmes conformes au déca sans limitation autre que l'objet : les classes ne peuvent pas être 
+déclarées ou instanciées, les fonctionnalités de `new` `cast` `instanceof` `return` ne sont pas fournies. 
+
 ```
 decac [[-p | -v] [-n] [-r X] [-d]* [-P] [-w] <fichier deca>...] | [-b]
 . -b (banner) : affiche une bannière indiquant le nom de l’équipe

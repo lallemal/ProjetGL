@@ -461,6 +461,7 @@ select_expr returns[AbstractExpr tree]
 
 primary_expr returns[AbstractExpr tree]
 @init{
+	AbstractIdentifier identifier;
 	AbstractInteger intMemory;
 }
     : ident {
@@ -485,6 +486,13 @@ primary_expr returns[AbstractExpr tree]
     		$tree = new ReadFloat();
     		setLocation($tree, $READFLOAT);
         }
+    | ident LHOOK i1=INT RHOOK{
+    	identifier = new IdentifierArray(ident, Integer.parseInt($i1.text)); // Accès à un élément d'un tableau
+    }( LHOOK i2=INT RHOOK{
+    	identifier = new IdentifierMatrix(ident, Integer.parseInt($i2.text), Integer.parseInt($i1.text)), // Accès à un élément de la matrice
+	})?{
+    	setLocation($tree, $ident.start);
+    }
     | NEW ident OPARENT CPARENT {
             assert($ident.tree != null);
             $tree = new New($ident.tree);
@@ -501,7 +509,7 @@ primary_expr returns[AbstractExpr tree]
 	    	$tree = new NewMatrix($ident.tree,  Integer.parseInt($i1.text), intMemory);
 	    	setLocation($tree, $NEW); // Pas sur du $NEW
 	    }
-     | NEW ident LHOOK i1=INT RHOOK  { // Déclaration d'un tableau 
+     | NEW ident LHOOK INT RHOOK  { // Déclaration d'un tableau 
     	assert($ident.tree != null);
     	$tree = new NewMatrix($ident.tree, Integer.parseInt($INT.text));
     	setLocation($tree, $NEW); // Pas sur du $NEW

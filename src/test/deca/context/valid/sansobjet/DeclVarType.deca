@@ -1,0 +1,13 @@
+// Description :
+//    test décompilation déclaration multiple de variable de type multiples
+//
+// Resultats (en comparaison avec le résultat attendu 
+// disponible dans le fichier *.deca.ok dans le dossier Modeles_OK) :
+//    ok
+
+{
+    int x = 2;
+    float y = 2.5 ;
+    boolean bool = false;
+
+}

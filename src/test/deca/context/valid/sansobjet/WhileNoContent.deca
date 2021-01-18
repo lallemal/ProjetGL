@@ -1,0 +1,13 @@
+// Description :
+//    test décompilation while sans contenu
+//
+// Resultats (en comparaison avec le résultat attendu 
+// disponible dans le fichier *.deca.ok dans le dossier Modeles_OK) :
+//    ok
+
+
+{
+    int i = 0;
+    while ( i != 0){
+    }
+}

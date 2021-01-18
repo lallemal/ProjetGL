@@ -62,7 +62,7 @@ done
 
 
 nb=$(ls -l $VALID_CODEGEN/*.deca | wc -l)
-echo "------ Démarrage des tests valide de codegen ($nb)"
+echo "------ Démarrage des tests valide de codegen (devant aussi être valide normalement) ($nb)"
 for i in "$VALID_CODEGEN"/*.deca
 do
   if test_context $i 2>&1 | grep -q -e "$i:"
@@ -76,20 +76,6 @@ do
 done
 
 
-
-nb=$(ls -l $VALID_DECOMPILE/*.deca | wc -l)
-echo "------ Démarrage des tests valide de decompile ($nb)"
-for i in "$VALID_DECOMPILE"/*.deca
-do
-  if test_context $i 2>&1 | grep -q -e "$i:"
-  then
-    echo "Echec inattendu pour test_context : $i"
-    exit 1
-  else
-    echo "OK"
-  fi
-
-done
 
 
 

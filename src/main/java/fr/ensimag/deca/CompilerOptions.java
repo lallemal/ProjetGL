@@ -60,8 +60,7 @@ public class CompilerOptions {
 
     
     public void parseArgs(String[] args) throws CLIException {
-        // A FAIRE : parcourir args pour positionner les options correctement.
-    	
+
     	// pas d'arguments, affiche les commandes disponibles
     	if (args.length == 0) {
     		return;
@@ -148,7 +147,6 @@ public class CompilerOptions {
             logger.info("Java assertions disabled");
         }
         
-        //throw new UnsupportedOperationException("not yet implemented");
     }
 
     protected void displayUsage() {
@@ -175,7 +173,6 @@ public class CompilerOptions {
     	System.out.println("                     lance la compilation des fichiers en");
     	System.out.println("                     parallèle (pour accélérer la compilation)");
     	
-        //throw new UnsupportedOperationException("not yet implemented");
     }
     
    // test si nom de fichier valide ou pas

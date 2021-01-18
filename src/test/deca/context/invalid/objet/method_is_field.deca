@@ -1,0 +1,12 @@
+// This method has the same identifier as a not method object in super class
+// Description : A child class has a method of the same name as a field in the parent class.
+// Resultat : Error ligne 11;
+
+
+class A {
+    int a;
+}
+
+class B extends A {
+    void a() {}
+}

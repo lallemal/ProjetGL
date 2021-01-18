@@ -11,27 +11,27 @@ import fr.ensimag.deca.tree.LocationException;
  */
 public class ContextualError extends LocationException {
     private static final long serialVersionUID = -8122514996569278575L;
+    // For all passes
+    public static final String IDENTIFIER_EXP_UNDEFINED = "Definition in env_exp does not exist with the name :"; // 0.1
+    public static final String IDENTIFIER_TYPE_UNDEFINED = "Definition in env_types does not exist with the name :"; // 0.2
+    public static final String IDENTIFIER_TYPE_NOTTYPE = "The definition of this identifier is not a type type";  // 0.2
     // Passe 1
     public static final String PARENT_CLASS_NOT_DECLARED = "The parent class of this class was not declared before"; // 1.3
     public static final String PARENT_CLASS_NOT_CLASS = "The definition of the parent class is not a class identifier"; // 1.3
     public static final String CLASS_ALREADY_DEFINED = "This class is already defined"; // 1.3
+    // Passe 2
     public static final String CLASS_NOT_IN_ENV = "The class is not initialize in types"; // 2.3
     public static final String CLASS_NOT_CLASS = "The class is not of nature Class"; // 2.3
     public static final String DECL_FIELD_VOID = "The type of a field to be declared can not be void"; // 2.5
     public static final String FIELD_PARENT_NOT_FIELD =  "The field declared exists in parent class Environnement but is not a field there"; // 2.5
-    public static final String FIELD_ALREADY_DEFINED = "This field is already defined"; // 2.5 2.3
+    public static final String FIELD_ALREADY_DEFINED = "This field is already defined in this scope"; // 2.5 2.3
     public static final String METHOD_SAME_IDENT_NOT_METHOD = "This method has the same identifier as a not method object in super class"; // 2.7
     public static final String METHOD_REDEF_NOT_SAME_SIG = "The redefinition of this method has not the same signature as the method defined in the super class"; // 2.7
     public static final String METHOD_RETURN_TYPE_NOT_SUBTYPE_SUPER_METHOD = "The type of return of this method is not the same as the one of the herited method"; // 2.7
     public static final String METHOD_ALREADY_DEFINED_ENV = "This method is already defined in this scope"; // 2.7 2.3
     public static final String PARAM_TYPE_VOID = "A parameter can not be void type"; // 2.9
     public static final String PARAM_ALREADY_ENV_METHOD = "This parameter is already defined for this method";
-
-
     // Passe 3 Sans Objet
-    public static final String IDENTIFIER_EXP_UNDEFINED = "Definition in env_exp does not exist with the name :"; // 0.1
-    public static final String IDENTIFIER_TYPE_UNDEFINED = "Definition in env_types does not exist with the name :"; // 0.2
-    public static final String IDENTIFIER_TYPE_NOTTYPE = "The definition of this identifier is not a type type";  // 0.2
     public static final String DECL_VAR_VOID = "The type of a variable to be declared can not be void"; // 3.17 Can not be tested without class
     public static final String ASSIGN_NOT_COMPATIBLE = "The type of the variable and its assignation are not compatible"; // 3.28
     public static final String EXPR_CONDITION_NOT_BOOLEAN = "The ReturnType of the expression evaluated by the condition is not boolean"; // 3.29
@@ -41,6 +41,7 @@ public class ContextualError extends LocationException {
     public static final String LVALUE_IDENT_TYPE = "The nature of the left member is not of type field, parameters of variables"; // 3.67-3.69
     public static final String DEFINITION_ALREADY_IN_ENV = "The Definition of this Symbol is already in the environment"; // 3.17
     public static final String CONV_FLOAT_OPERAND_NOT_INT = "The conversion to a float can only be from an int"; // How to test this one ?
+    // Passe 3 Objet
     public static final String CAST_INCOMPATIBLE = "This type is not compatible with the casted type";
     public static final String TYPE_NOT_CLASS = "The type of the object to be instantiated is not a class";
     public static final String THIS_NOT_CLASS = "The type of the object pointed by this is not a class";

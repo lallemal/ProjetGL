@@ -2,25 +2,22 @@ package fr.ensimag.deca.tree;
 
 import java.io.PrintStream;
 
-
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
-import fr.ensimag.ima.pseudocode.DAddr;
 
-public class NewArray extends AbstractExpr{
+public class ArraySelection extends AbstractLValue{
 
 	final private AbstractIdentifier type;
-	final private ListExpr memory;
-	
-	public NewArray(AbstractIdentifier type, ListExpr memory) {
+	final private ListExpr memory; 
+	public ArraySelection(AbstractIdentifier type, ListExpr memory) {
 		this.type = type;
 		this.memory = memory;
 	}
-
+	
 	@Override
 	public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass)
 			throws ContextualError {
@@ -46,5 +43,4 @@ public class NewArray extends AbstractExpr{
 		
 	}
 
-	
 }

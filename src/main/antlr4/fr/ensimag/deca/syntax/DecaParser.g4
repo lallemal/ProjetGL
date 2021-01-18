@@ -124,7 +124,7 @@ decl_var[AbstractIdentifier t] returns[AbstractDeclVar tree]
             assert($i2.tree != null);
             init = new Initialization($e3.tree);
       		setLocation(init, $e3.start);
-      		$tree = new DeclVarMatrix($t, $i2.tree, init);
+      		$tree = new DeclVarMatrix($t, $i2.tree, $e3.tree, init);
 
         }
     ;

@@ -13,12 +13,14 @@ import fr.ensimag.deca.tools.IndentPrintStream;
 public class DeclVarMatrix extends AbstractDeclVar {
 
 	final private AbstractIdentifier type;
-    final private AbstractIdentifier varName;
+	final private AbstractIdentifier varName;
+    final private ListExpr memory;
     final private Initialization initialization;
 
-    public DeclVarMatrix(AbstractIdentifier type, AbstractIdentifier varName, Initialization initialization) {
+    public DeclVarMatrix(AbstractIdentifier type, AbstractIdentifier varName, ListExpr memory, Initialization initialization) {
         this.type = type;
         this.varName = varName;
+        this.memory = memory;
         this.initialization = initialization;
     }
     

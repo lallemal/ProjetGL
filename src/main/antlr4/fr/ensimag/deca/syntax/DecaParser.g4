@@ -90,6 +90,7 @@ list_decl_var[ListDeclVar l, AbstractIdentifier t]
 
 decl_var[AbstractIdentifier t] returns[AbstractDeclVar tree]
 @init   {
+
             AbstractInitialization init;
         }
     : i=ident {
@@ -119,6 +120,7 @@ decl_var[AbstractIdentifier t] returns[AbstractDeclVar tree]
     ;
 decl_var_array[AbstractIdentifier t] returns[AbstractDeclVar tree]
 	@init   {
+
             AbstractInitialization init;
             AbastractInteger intMemory;
         }
@@ -144,6 +146,7 @@ decl_var_array[AbstractIdentifier t] returns[AbstractDeclVar tree]
 
 decl_var_matrix[AbstractIdentifier t] returns[AbstractDeclVar tree] 
 	@init   {
+
             AbstractInitialization init;
             AbastractInteger intMemory;
         }
@@ -156,6 +159,7 @@ decl_var_matrix[AbstractIdentifier t] returns[AbstractDeclVar tree]
 	;
 list_inst returns[ListInst tree]
 @init {
+
 	$tree = new ListInst();
 }
     : (inst {
@@ -511,7 +515,7 @@ primary_expr returns[AbstractExpr tree]
 	    }
      | NEW ident LHOOK INT RHOOK  { // Déclaration d'un tableau 
     	assert($ident.tree != null);
-    	$tree = new NewMatrix($ident.tree, Integer.parseInt($INT.text));
+    	$tree = new NewArray($ident.tree, Integer.parseInt($INT.text));
     	setLocation($tree, $NEW); // Pas sur du $NEW
     }
     | l=list_element{ // Definition de array explicite 
@@ -536,7 +540,6 @@ primary_expr returns[AbstractExpr tree]
 
 list_element returns[ListExpr tree]
 @init   {
-
 	$tree = new ListExpr();
         }
     : OBRACE((ident{

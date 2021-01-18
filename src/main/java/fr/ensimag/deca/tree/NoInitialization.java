@@ -7,6 +7,7 @@ import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.DAddr;
+import fr.ensimag.ima.pseudocode.NullOperand;
 import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
 import fr.ensimag.ima.pseudocode.instructions.STORE;
@@ -44,7 +45,8 @@ public class NoInitialization extends AbstractInitialization {
     	case "float":
     		compiler.addInstruction(new LOAD((float) 0.0, Register.R0));
     		break;
-    	default: // add an error ?
+    	default:
+    		compiler.addInstruction(new LOAD(new NullOperand(), Register.R0));
     		break;
     	}
     }

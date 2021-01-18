@@ -58,6 +58,11 @@ public class DecacCompiler implements Callable<Boolean> {
     	kGB++;
     }
     
+    public void decrementKGB() {
+    	kGB--;
+    	assert(kGB > 0);
+    }
+    
     public int getKGB() {
     	return kGB;
     }

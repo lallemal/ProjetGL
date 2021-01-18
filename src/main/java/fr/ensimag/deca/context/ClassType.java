@@ -2,6 +2,7 @@ package fr.ensimag.deca.context;
 
 import fr.ensimag.deca.tools.SymbolTable.Symbol;
 import fr.ensimag.deca.tree.Location;
+import fr.ensimag.ima.pseudocode.Label;
 
 /**
  * Type defined by a class.
@@ -12,7 +13,7 @@ import fr.ensimag.deca.tree.Location;
 public class ClassType extends Type {
     
     protected ClassDefinition definition;
-    
+        
     public ClassDefinition getDefinition() {
         return this.definition;
     }

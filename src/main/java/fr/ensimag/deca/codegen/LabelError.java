@@ -28,6 +28,10 @@ public class LabelError {
 	private Label errorFLOAT;
 	private boolean errorPilePleine;
 	private Label pilePleine;
+	private boolean errorTasPlein;
+	private Label tasPlein;
+	private boolean errorDereferencementNull;
+	private Label dereferencementNull;
 	
 	public void setErrorDiv0(boolean b) {
 		errorDiv0 = b;
@@ -77,6 +81,22 @@ public class LabelError {
 		return pilePleine;
 	}
 	
+	public void setErrorTasPlein(boolean b) {
+		errorTasPlein = b;
+	}
+	
+	public Label getLabelTasPlein() {
+		return tasPlein;
+	}
+	
+	public void setErrorDereferencementNull(boolean b) {
+		errorDereferencementNull = b;
+	}
+	
+	public Label getLabelDereferencementNull() {
+		return dereferencementNull;
+	}
+	
 	public LabelError() {
 		errorDiv0 = false;
 		div0 = new Label("division_par_zero");
@@ -90,6 +110,10 @@ public class LabelError {
 		errorFLOAT = new Label("error_conv_float");
 		errorPilePleine = false;
 		pilePleine = new Label("pile_pleine");
+		errorTasPlein = false;
+		tasPlein = new Label("tas_plein");
+		errorDereferencementNull = false;
+		dereferencementNull = new Label("dereferencement_null");
 	}
 	
 	public void codeGenLabelError(DecacCompiler compiler) {
@@ -110,6 +134,12 @@ public class LabelError {
 		}
 		if (errorPilePleine) {
 			addError(compiler, pilePleine, "debordement de pile", "Erreur : debordement de pile");
+		}
+		if (errorTasPlein) {
+			addError(compiler, tasPlein, "debordement de tas", "Erreur : tas plein");
+		}
+		if (errorDereferencementNull) {
+			addError(compiler, dereferencementNull, "dereferencement de null", "Erreur : dereferencement de null");
 		}
 	}
 	

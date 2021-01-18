@@ -11,6 +11,9 @@ import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.InlinePortion;
+import fr.ensimag.ima.pseudocode.Label;
+
 import java.io.PrintStream;
 
 /**
@@ -23,6 +26,15 @@ public class MethodAsmBody extends AbstractMethodBody {
     
     public MethodAsmBody(StringLiteral cont){
         this.cont = cont;
+    }
+    
+    public ListDeclVar getVar() {
+    	return new ListDeclVar();
+    }
+    
+    @Override
+    public void codeGenBody(DecacCompiler compiler, Label labelFin) {
+    	compiler.add(new InlinePortion(cont.getValue()));
     }
     
     @Override

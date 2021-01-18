@@ -43,10 +43,10 @@ public class DeclField extends AbstractDeclField{
         this.init = init;
     }
     
-    public void codeGenField(DecacCompiler compiler, int i) {
+    public void codeGenField(DecacCompiler compiler) {
     	init.codeGenField(compiler, type);
     	compiler.addInstruction(new LOAD(new RegisterOffset(-2, Register.LB), Register.R1)); // Peut surement etre factorise dans ListDeclField
-    	compiler.addInstruction(new STORE(Register.R0, new RegisterOffset(i, Register.R1)));
+    	compiler.addInstruction(new STORE(Register.R0, new RegisterOffset(name.getFieldDefinition().getIndex()+1, Register.R1)));
     }
     
     @Override

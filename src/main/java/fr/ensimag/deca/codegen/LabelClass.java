@@ -3,6 +3,7 @@ package fr.ensimag.deca.codegen;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.tree.AbstractDeclClass;
 import fr.ensimag.deca.tree.ListDeclClass;
+import fr.ensimag.ima.pseudocode.Label;
 
 public class LabelClass {
 	
@@ -22,7 +23,11 @@ public class LabelClass {
 		String className = i.getIdent().getName().getName();
 		addClassTitle(compiler, className);
 		compiler.addComment("---------- Initialisation des champs de "+className);
-		i.getField().codeGenField(compiler);		
+		Label labelInit = new Label("init."+className);
+		i.getIdent().getClassDefinition().setLabelInit(labelInit);
+		compiler.addLabel(labelInit);
+		i.getField().codeGenField(compiler);
+		i.getMethod().codeGenListMethod(compiler, className);
 	}
 	
 }

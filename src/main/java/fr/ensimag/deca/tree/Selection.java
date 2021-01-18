@@ -12,6 +12,12 @@ public class Selection extends AbstractLValue{
 	private AbstractExpr expr;
 	private AbstractIdentifier ident;
 	
+	@Override
+	public void codeExp(DecacCompiler compiler, int n) {
+		expr.codeExp(compiler, n);
+		
+	}
+	
 	public Selection(AbstractExpr left, AbstractIdentifier right) {
 		Validate.notNull(left);
 		Validate.notNull(right);

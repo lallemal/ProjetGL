@@ -42,6 +42,15 @@ public class ClassDefinition extends TypeDefinition {
 
     private int numberOfFields = 0;
     private int numberOfMethods = 0;
+    private Label labelInit;
+    
+    public void setLabelInit(Label label) {
+    	labelInit = label;
+    }
+    
+    public Label getLabelInit() {
+    	return labelInit;
+    }
     
     @Override
     public boolean isClass() {

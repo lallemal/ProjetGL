@@ -37,5 +37,7 @@ public abstract class AbstractDeclClass extends Tree {
     public abstract AbstractIdentifier getIdent();
     
     public abstract ListDeclField getField();
+    
+    public abstract ListDeclMethod getMethod();
 
 }

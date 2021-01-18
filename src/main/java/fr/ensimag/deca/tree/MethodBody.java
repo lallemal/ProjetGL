@@ -11,6 +11,8 @@ import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.Label;
+
 import java.io.PrintStream;
 
 /**
@@ -26,6 +28,17 @@ public class MethodBody extends AbstractMethodBody {
         this.var = var;
         this.inst = inst;
     }
+    
+    public ListDeclVar getVar() {
+    	return var;
+    }
+    
+    @Override
+    public void codeGenBody(DecacCompiler compiler, Label labelFin) {
+    	var.codeGenListDecl(compiler);
+    	inst.codeGenListInst(compiler, labelFin);
+    }
+    
     @Override
     public void decompile(IndentPrintStream s) {
         var.decompile(s);

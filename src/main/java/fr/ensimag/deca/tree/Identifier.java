@@ -8,6 +8,7 @@ import fr.ensimag.deca.tools.SymbolTable.Symbol;
 import fr.ensimag.ima.pseudocode.DVal;
 import fr.ensimag.ima.pseudocode.Label;
 import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.RegisterOffset;
 import fr.ensimag.ima.pseudocode.instructions.*;
 import org.apache.commons.lang.Validate;
 import org.apache.log4j.Logger;
@@ -207,7 +208,13 @@ public class Identifier extends AbstractIdentifier {
     }
     
     protected void codeExp(DecacCompiler compiler, int n) {
-    	compiler.addInstruction(new LOAD(this.getExpDefinition().getOperand(), Register.getR(n)));
+    	ExpDefinition def = this.getExpDefinition();
+    	if (def.getNature().equals("variable")) {
+    		compiler.addInstruction(new LOAD(this.getExpDefinition().getOperand(), Register.getR(n)));
+    	} else if (def.getNature().equals("field")) {
+    		compiler.addInstruction(new LOAD(new RegisterOffset(-2, Register.LB), Register.getR(n)));
+    		compiler.addInstruction(new LOAD(new RegisterOffset(1, Register.getR(n)), Register.getR(n)));
+    	}
     }
 
     /**

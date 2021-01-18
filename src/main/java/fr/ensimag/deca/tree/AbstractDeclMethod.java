@@ -31,4 +31,6 @@ public abstract class AbstractDeclMethod extends Tree{
     public abstract AbstractIdentifier getName();
 
     public abstract void verifyDeclMethodBody(DecacCompiler compiler, ClassDefinition currentClass) throws ContextualError;
+    
+    public abstract void codeGenMethod(DecacCompiler compiler, String className);
 }

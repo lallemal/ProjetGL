@@ -13,8 +13,13 @@ import fr.ensimag.ima.pseudocode.Label;
 import fr.ensimag.ima.pseudocode.LabelOperand;
 import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.RegisterOffset;
+import fr.ensimag.ima.pseudocode.instructions.ERROR;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
+import fr.ensimag.ima.pseudocode.instructions.RTS;
 import fr.ensimag.ima.pseudocode.instructions.STORE;
+import fr.ensimag.ima.pseudocode.instructions.WNL;
+import fr.ensimag.ima.pseudocode.instructions.WSTR;
+
 import org.apache.commons.lang.Validate;
 import org.apache.log4j.Logger;
 
@@ -73,6 +78,30 @@ public class DeclMethod extends AbstractDeclMethod {
     	Label label = name.getMethodDefinition().getLabel();
     	compiler.addInstruction(new LOAD(new LabelOperand(label), Register.R0));
     	compiler.addInstruction(new STORE(Register.R0, address));
+    }
+    
+    public void codeGenMethod(DecacCompiler compiler, String className) {
+    	compiler.addComment("---------- Initialisation de la methode de "+name.getName().getName());
+    	
+    	compiler.addComment("sauvegarde des registres");
+    	
+    	
+    	compiler.addComment("instructions");
+    	Label labelFin = new Label("fin."+className+"."+name.getName().getName());
+    	body.codeGenBody(compiler, labelFin);
+    	// Fin : on verifie quil y a eu return si ce nest pas une void fonction
+    	if (!type.getName().getName().equals("void")) {
+    		compiler.addInstruction(new WSTR("Erreur : sortie de la methode "+className+"."+name.getName().getName()+" sans return"));
+    		compiler.addInstruction(new WNL());
+    		compiler.addInstruction(new ERROR());
+    	}
+    	
+    	compiler.addLabel(labelFin);
+    	for (AbstractDeclVar i : body.getVar().getList()) {
+    		compiler.decrementKGB();
+    	}
+    	
+    	compiler.addInstruction(new RTS());
     }
 
     @Override

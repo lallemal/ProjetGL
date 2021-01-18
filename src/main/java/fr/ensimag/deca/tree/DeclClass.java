@@ -90,7 +90,7 @@ public class DeclClass extends AbstractDeclClass {
     public void verifyClass(DecacCompiler compiler) throws ContextualError {
         SymbolTable.Symbol name = ident.getName();
         LOG.debug("Verify Class : start " + name.toString());
-        if (parent == null) {
+        if (!ident.getName().toString().equals("Object") && parent == null) {
             parent = new Identifier(compiler.getSymbols().create("Object"));
             parent.setDefinition(compiler.getEnv_types().get(parent.getName()));
         }
@@ -120,7 +120,7 @@ public class DeclClass extends AbstractDeclClass {
             throws ContextualError {
         SymbolTable.Symbol name = ident.getName();
         LOG.debug("Verify Class Members : start " + name.toString());
-        if (parent == null) {
+        if (!name.toString().equals("Object") &&   parent == null) {
             throw new DecacInternalError("Parent class is not set which is impossible at this state of the compilation checking");
         }
         // Check if super is in env type

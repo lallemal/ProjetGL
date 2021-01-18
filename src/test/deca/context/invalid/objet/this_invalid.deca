@@ -1,0 +1,7 @@
+// The class pointed by this can not be Object class
+// Description : Try to use this outside of an class
+// Result : Error line 6
+
+{
+    int x = this;
+}

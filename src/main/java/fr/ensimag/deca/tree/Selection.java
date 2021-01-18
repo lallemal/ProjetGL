@@ -33,7 +33,7 @@ public class Selection extends AbstractLValue{
 			return fieldType;
 		}
 		// 3.66
-		if (!TypeOp.subType(compiler, typeClass2, currentClass.getType())) {
+		if (currentClass == null || !TypeOp.subType(compiler, typeClass2, currentClass.getType())) {
 			throw new ContextualError(ContextualError.CLASS_NOT_SUBCLASS_PROTECTED, getLocation());
 		}
 		if  (!TypeOp.subType(compiler, currentClass.getType(), fieldDef.getContainingClass().getType())) {

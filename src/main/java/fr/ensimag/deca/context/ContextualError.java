@@ -31,6 +31,7 @@ public class ContextualError extends LocationException {
     public static final String METHOD_ALREADY_DEFINED_ENV = "This method is already defined in this scope"; // 2.7 2.3
     public static final String PARAM_TYPE_VOID = "A parameter can not be void type"; // 2.9
     public static final String PARAM_ALREADY_ENV_METHOD = "This parameter is already defined for this method";
+
     // Passe 3 Sans Objet
     public static final String DECL_VAR_VOID = "The type of a variable to be declared can not be void"; // 3.17 Can not be tested without class
     public static final String ASSIGN_NOT_COMPATIBLE = "The type of the variable and its assignation are not compatible"; // 3.28
@@ -42,7 +43,7 @@ public class ContextualError extends LocationException {
     public static final String DEFINITION_ALREADY_IN_ENV = "The Definition of this Symbol is already in the environment"; // 3.17
     public static final String CONV_FLOAT_OPERAND_NOT_INT = "The conversion to a float can only be from an int"; // How to test this one ?
     // Passe 3 Objet
-    public static final String CAST_INCOMPATIBLE = "This type is not compatible with the casted type";
+    public static final String CAST_INCOMPATIBLE = "This type is not compatible with the casted type"; // TODO
     public static final String TYPE_NOT_CLASS = "The type of the object to be instantiated is not a class";
     public static final String THIS_NOT_CLASS = "The type of the object pointed by this is not a class";
     public static final String THIS_CLASS_NULL = "The class pointed by this can not be Object class";

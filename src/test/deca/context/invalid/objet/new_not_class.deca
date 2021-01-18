@@ -1,0 +1,11 @@
+// The type of the object to be instantiated is not a class
+// Description : Try to instantied a identifier with a type which is not a class
+// Result : erreur ligne 10
+
+
+class A {}
+
+{
+    A x;
+    x = new int();
+}

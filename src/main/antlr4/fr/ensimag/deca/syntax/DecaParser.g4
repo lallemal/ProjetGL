@@ -73,8 +73,8 @@ list_decl returns[ListDeclVar tree]
 
 decl_var_set[ListDeclVar l]
     : type 
-    ( LHOOK (INT)? RHOOK // Délcaration d'un tableau
-    | LHOOK RHOOK LHOOK RHOOK) // Déclaration d'une matrice
+    ( LHOOK (INT) RHOOK // Délcaration d'un tableau
+    | (LHOOK RHOOK)+) // Déclaration d'une matrice
     list_decl_var[$l,$type.tree] SEMI
     ;
 
@@ -117,7 +117,7 @@ decl_var[AbstractIdentifier t] returns[AbstractDeclVar tree]
         }
       )? {
       	$tree = new DeclVarArray($t, $e1.tree, $i1.tree, init);
-      	setLocation($tree, $i.start);
+      	setLocation($tree, $i1.start);
         }
       | (LHOOK RHOOK)+ i2=ident e3=expr{
             assert($e3.tree != null);
@@ -293,7 +293,7 @@ list_hook_expr returns[ListExpr tree]
        (LHOOK e2=expr {
        	$tree.add($e2.tree);
         }
-       )* RHOOK)?
+       RHOOK)*)?
     ;
 
 expr returns[AbstractExpr tree]
@@ -563,30 +563,30 @@ new_object returns[AbstractExpr tree]
        		$tree = new NewArray($i.tree, $l.tree);
        };
 
-list_element returns[ListExpr tree]
-@init   {
-	$tree = new ListExpr();
-        }
-    : OBRACE e=list_expr CBRACE{
-			$tree = $e.tree;
-		}
-    ;
-
-
-list_array returns[ListListExpr tree]
-@init   {
-	$tree = new ListListExpr();
-        }
-    : OBRACE((
-    	e=list_element{
-    		$tree.add($e.tree);
-    	}
-	) ( COMMA l=list_element{
-		$tree.add($l.tree);
-	}
-		
-	)*)?CBRACE
-    ;
+//list_element returns[ListExpr tree]
+//@init   {
+//	$tree = new ListExpr();
+//        }
+//    : OBRACE e=list_expr CBRACE{
+//			$tree = $e.tree;
+//		}
+//    ;
+//
+//
+//list_array returns[ListListExpr tree]
+//@init   {
+//	$tree = new ListListExpr();
+//        }
+//    : OBRACE((
+//    	e=list_element{
+//    		$tree.add($e.tree);
+//    	}
+//	) ( COMMA l=list_element{
+//		$tree.add($l.tree);
+//	}
+//		
+//	)*)?CBRACE
+//    ;
 
 type returns[AbstractIdentifier tree]
     : ident {

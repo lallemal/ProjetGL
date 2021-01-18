@@ -6,10 +6,12 @@
 package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.DecacCompiler;
-import fr.ensimag.deca.context.ClassDefinition;
-import fr.ensimag.deca.context.ContextualError;
-import fr.ensimag.deca.context.EnvironmentExp;
+import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.deca.tools.SymbolTable;
+import org.apache.commons.lang.Validate;
+import org.apache.log4j.Logger;
+
 import java.io.PrintStream;
 
 /**
@@ -22,8 +24,14 @@ public class DeclField extends AbstractDeclField{
     private AbstractIdentifier type;
     private AbstractIdentifier nom;
     private AbstractInitialization init;
+
+    private static final Logger LOG = Logger.getLogger(DeclField.class);
     
-    public DeclField(Visibility visib, AbstractIdentifier type, AbstractIdentifier nom, AbstractInitialization init){
+    public DeclField(Visibility visib, AbstractIdentifier type, AbstractIdentifier nom, AbstractInitialization init) {
+        Validate.notNull(visib);
+        Validate.notNull(type);
+        Validate.notNull(nom);
+        Validate.notNull(init);
         this.visib = visib;
         this.type = type;
         this.nom = nom;
@@ -49,8 +57,33 @@ public class DeclField extends AbstractDeclField{
     }
 
     @Override
-    protected void verifyDeclField(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass) throws ContextualError {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    protected void verifyDeclField(DecacCompiler compiler, ClassDefinition currentClass) throws ContextualError {
+        LOG.debug("verify DeclField " + nom.getName().toString() + " for class " + currentClass.getType().getName().toString() + " : start");
+        Type type = this.type.verifyType(compiler);
+        if (type.isVoid()) {
+            throw new ContextualError(ContextualError.DECL_FIELD_VOID, getLocation());
+        }
+        SymbolTable.Symbol name = nom.getName();
+        EnvironmentExp classEnv = currentClass.getMembers();
+        if (classEnv.get(name) != null && !classEnv.get(name).isField()) {
+            throw new ContextualError(ContextualError.FIELD_PARENT_NOT_FIELD, getLocation());
+        }
+        try {
+            FieldDefinition fieldDef = new FieldDefinition(type, getLocation(), visib, currentClass, currentClass.getNumberOfFields());
+            classEnv.declare(name, fieldDef);
+            nom.setDefinition(fieldDef);
+            currentClass.incNumberOfFields();
+        } catch (EnvironmentExp.DoubleDefException e) {
+            throw new ContextualError(ContextualError.FIELD_ALREADY_DEFINED, getLocation());
+        }
+
+        LOG.debug("verify DeclField " + nom.getName().toString() + " for class " + currentClass.getType().getName().toString() + " : end");
     }
-    
+
+
+    @Override
+    protected void verifyDeclFieldBody(DecacCompiler compiler, ClassDefinition currentClass) throws ContextualError {
+        Type type = this.type.verifyType(compiler);
+        init.verifyInitialization(compiler, type, currentClass.getMembers(), currentClass);
+    }
 }

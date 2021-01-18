@@ -1,0 +1,9 @@
+// The definition of the parent class is not a class identifier
+// Description : Test avec une classe qui étend un objet qui n'est pas une classe : ici un type
+// Resultat : Erreur ligne 7
+
+
+
+class A extends int {
+
+}

@@ -3,3 +3,48 @@
 class Tab{
     
 }
+
+
+class MatriceInt{
+    int[][] mat;
+    int nbl;
+    int nbc;
+    init(int lignes, int colonnes, int[][] tab){
+        mat = tab;
+        nbl = lignes;
+        nbc = colonnes;
+         
+    }
+
+    void setligne(int i){
+        nbl = i;
+    }
+
+    void setcolonne(int j){
+        nbc = j;
+    }
+
+    int getLignes(){
+        return nbl;
+    }
+        
+    int getColonnes(){
+        return nbc;
+
+    }
+     
+    transpose(){
+        int[][] mattranspose;
+            
+    }
+
+}
+
+
+class ArrayInt extends MatriceInt{
+    
+}
+
+
+
+

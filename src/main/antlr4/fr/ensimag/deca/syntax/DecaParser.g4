@@ -107,15 +107,15 @@ decl_var[AbstractIdentifier t] returns[AbstractDeclVar tree]
       	$tree = new DeclVar($t, $i.tree, init);
       	setLocation($tree, $i.start);
         }
-      | e=decl_var_array[$t] {
-            assert($e.tree != null);
-            $tree = $e.tree;
-            setLocation($tree, $e.start);
+      | e1=decl_var_array[$t] {
+            assert($e1.tree != null);
+            $tree = $e1.tree;
+            setLocation($tree, $e1.start);
         }
-      | e=decl_var_matrix[$t] {
-            assert($e.tree != null);
-            $tree = $e.tree;
-            setLocation($tree, $e.start);
+      | e2=decl_var_matrix[$t] {
+            assert($e2.tree != null);
+            $tree = $e2.tree;
+            setLocation($tree, $e2.start);
         }
     ;
 decl_var_array[AbstractIdentifier t] returns[AbstractDeclVar tree]
@@ -518,13 +518,13 @@ primary_expr returns[AbstractExpr tree]
     	$tree = new NewArray($ident.tree, Integer.parseInt($INT.text));
     	setLocation($tree, $NEW); // Pas sur du $NEW
     }
-    | l=list_element{ // Definition de array explicite 
-    	assert($l.tree != null);
-    	$tree = $l.tree;
+    | l1=list_element{ // Definition de array explicite 
+    	assert($l1.tree != null);
+    	$tree = $l1.tree;
     }
-    | l=list_array{ // Definition de matrice explicite
-    	assert($l.tree != null);
-    	$tree = $l.tree;
+    | l2=list_array{ // Definition de matrice explicite
+    	assert($l2.tree != null);
+    	$tree = $l2.tree;
     }
     | cast=OPARENT type CPARENT OPARENT expr CPARENT {
             assert($type.tree != null);
@@ -557,7 +557,6 @@ list_element returns[ListExpr tree]
 
 list_array returns[ListExpr tree]
 @init   {
-
 	$tree = new ListArray();
         }
     : OBRACE((
@@ -565,9 +564,9 @@ list_array returns[ListExpr tree]
     		$tree.add($e.tree);
     		setLocation($tree, $e.start);
     	}
-	) ( COMMA e=list_element{
-		$tree.add($e.tree)
-		setLocation($tree, $e.start);
+	) ( COMMA l=list_element{
+		$tree.add($l.tree)
+		setLocation($tree, $l.start);
 	}
 		
 	)*)?CBRACE
@@ -759,5 +758,3 @@ param returns[DeclParam tree]
             setLocation($tree, $type.start);
         }
     ;
-    
-/**** Array related rule  ****/

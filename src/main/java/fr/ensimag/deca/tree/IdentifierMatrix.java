@@ -104,5 +104,10 @@ public class IdentifierMatrix extends AbstractIdentifier {
 		// TODO Auto-generated method stub
 
 	}
+	@Override
+	public Type verifyMethod(DecacCompiler compiler, EnvironmentExp localEnv) throws ContextualError {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

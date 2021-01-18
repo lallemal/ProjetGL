@@ -70,7 +70,7 @@ public class IntLiteral extends AbstractExpr {
 
     @Override
     public void decompile(IndentPrintStream s) {
-        s.print(HasInteger.toString(value));
+        s.print(Integer.toString(value));
     }
 
     @Override

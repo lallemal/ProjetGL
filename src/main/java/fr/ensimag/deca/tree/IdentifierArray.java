@@ -17,9 +17,9 @@ import fr.ensimag.deca.tools.SymbolTable.Symbol;
 
 public class IdentifierArray extends AbstractIdentifier{
 	final private AbstractIdentifier varName;
-	final private HasInteger length;
+	final private int length;
 	
-	public IdentifierArray(AbstractIdentifier varName, HasInteger length) {
+	public IdentifierArray(AbstractIdentifier varName, int length) {
 		this.varName = varName;
 		this.length = length;
 	}
@@ -100,6 +100,11 @@ public class IdentifierArray extends AbstractIdentifier{
 	protected void iterChildren(TreeFunction f) {
 		// TODO Auto-generated method stub
 		
+	}
+	@Override
+	public Type verifyMethod(DecacCompiler compiler, EnvironmentExp localEnv) throws ContextualError {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

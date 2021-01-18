@@ -538,35 +538,28 @@ primary_expr returns[AbstractExpr tree]
         }
     ;
 
+
+
 list_element returns[ListExpr tree]
 @init   {
 	$tree = new ListExpr();
         }
-    : OBRACE((ident{
-			$tree.add($ident.tree);
-			setLocation($tree, $ident.start);
+    : OBRACE e=list_expr CBRACE{
+			$tree = $e.tree;
 		}
-	) ( COMMA ident{
-		$tree.add($ident.tree);
-		setLocation($tree, $ident.start);
-	}
-		
-	)*)?CBRACE
     ;
 
 
-list_array returns[ListExpr tree]
+list_array returns[ListListExpr tree]
 @init   {
-	$tree = new ListArray();
+	$tree = new ListListExpr();
         }
     : OBRACE((
     	e=list_element{
     		$tree.add($e.tree);
-    		setLocation($tree, $e.start);
     	}
 	) ( COMMA l=list_element{
 		$tree.add($l.tree);
-		setLocation($tree, $l.start);
 	}
 		
 	)*)?CBRACE

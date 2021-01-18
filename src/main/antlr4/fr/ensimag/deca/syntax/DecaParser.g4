@@ -122,7 +122,7 @@ decl_var_array[AbstractIdentifier t] returns[AbstractDeclVar tree]
 	@init   {
 
             AbstractInitialization init;
-            AbastractInteger intMemory;
+            AbstractInteger intMemory;
         }
     : i=ident LHOOK{
     	//pas de setLocation pour NoInitialization car cest une feuille
@@ -130,7 +130,7 @@ decl_var_array[AbstractIdentifier t] returns[AbstractDeclVar tree]
 		intMemory = new NoInteger();
         }
       (INT {
-      	intMemory = new Integer(Integer.parseInt($INT.text));
+      	intMemory = new HasInteger(Integer.parseInt($INT.text));
       }  	
       )? RHOOK
       (EQUALS e=expr {
@@ -147,8 +147,8 @@ decl_var_array[AbstractIdentifier t] returns[AbstractDeclVar tree]
 decl_var_matrix[AbstractIdentifier t] returns[AbstractDeclVar tree] 
 	@init   {
 
-            AbstractInitialization init;
-            AbastractInteger intMemory;
+            Initialization init;
+            AbstractInteger intMemory;
         }
     : i=ident LHOOK RHOOK LHOOK RHOOK EQUALS e=expr{
       	init = new Initialization($e.tree);
@@ -491,9 +491,9 @@ primary_expr returns[AbstractExpr tree]
     		setLocation($tree, $READFLOAT);
         }
     | ident LHOOK i1=INT RHOOK{
-    	identifier = new IdentifierArray(ident, Integer.parseInt($i1.text)); // Accès à un élément d'un tableau
+    	identifier = new IdentifierArray($ident.tree, Integer.parseInt($i1.text)); // Accès à un élément d'un tableau
     }( LHOOK i2=INT RHOOK{
-    	identifier = new IdentifierMatrix(ident, Integer.parseInt($i2.text), Integer.parseInt($i1.text)), // Accès à un élément de la matrice
+    	identifier = new IdentifierMatrix($ident.tree, Integer.parseInt($i2.text), Integer.parseInt($i1.text)); // Accès à un élément de la matrice
 	})?{
     	setLocation($tree, $ident.start);
     }
@@ -507,7 +507,7 @@ primary_expr returns[AbstractExpr tree]
 	    	assert($ident.tree != null);
 	    	intMemory = new NoInteger();
 	    }  (i2=INT {
-	    	intMemory = new Integer(Integer.parseInt($i2.text));
+	    	intMemory = new HasInteger(Integer.parseInt($i2.text));
 
 	    })? RHOOK{
 	    	$tree = new NewMatrix($ident.tree,  Integer.parseInt($i1.text), intMemory);
@@ -547,7 +547,7 @@ list_element returns[ListExpr tree]
 			setLocation($tree, $ident.start);
 		}
 	) ( COMMA ident{
-		$tree.add($ident.tree)
+		$tree.add($ident.tree);
 		setLocation($tree, $ident.start);
 	}
 		
@@ -565,7 +565,7 @@ list_array returns[ListExpr tree]
     		setLocation($tree, $e.start);
     	}
 	) ( COMMA l=list_element{
-		$tree.add($l.tree)
+		$tree.add($l.tree);
 		setLocation($tree, $l.start);
 	}
 		

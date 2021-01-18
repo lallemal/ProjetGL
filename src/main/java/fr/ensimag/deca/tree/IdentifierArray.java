@@ -17,9 +17,9 @@ import fr.ensimag.deca.tools.SymbolTable.Symbol;
 
 public class IdentifierArray extends AbstractIdentifier{
 	final private AbstractIdentifier varName;
-	final private Integer length;
+	final private HasInteger length;
 	
-	public IdentifierArray(AbstractIdentifier varName, Integer length) {
+	public IdentifierArray(AbstractIdentifier varName, HasInteger length) {
 		this.varName = varName;
 		this.length = length;
 	}

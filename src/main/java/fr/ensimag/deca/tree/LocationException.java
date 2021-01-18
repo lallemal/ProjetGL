@@ -21,7 +21,7 @@ public class LocationException extends Exception {
             line = "<unknown>";
             column = "";
         } else {
-            line = Integer.toString(loc.getLine());
+            line = HasInteger.toString(loc.getLine());
             column = ":" + loc.getPositionInLine();
         }
         s.println(location.getFilename() + ":" + line + column + ": " + getMessage());

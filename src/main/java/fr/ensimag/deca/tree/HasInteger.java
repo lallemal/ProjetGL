@@ -1,9 +1,9 @@
 package fr.ensimag.deca.tree;
 
-public class Integer extends AbstractInteger{
+public class HasInteger extends AbstractInteger{
 	final private int integer;
 	
-	public Integer(int integer) {
+	public HasInteger(int integer) {
 		this.integer = integer;
 	}
 }

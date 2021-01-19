@@ -33,7 +33,8 @@ public class ArraySelection extends AbstractLValue{
 
 	@Override
 	protected void prettyPrintChildren(PrintStream s, String prefix) {
-		// TODO Auto-generated method stub
+        type.prettyPrint(s, prefix, false);
+        memory.prettyPrint(s, prefix, false);
 		
 	}
 

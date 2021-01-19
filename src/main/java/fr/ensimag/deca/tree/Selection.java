@@ -50,9 +50,9 @@ public class Selection extends AbstractLValue{
 
 	@Override
 	public void decompile(IndentPrintStream s) {
-		this.expr.decompile(s);
+		expr.decompile(s);
                 s.print(".");
-                this.ident.decompile(s);
+                ident.decompile(s);
 		
 	}
 
@@ -65,8 +65,8 @@ public class Selection extends AbstractLValue{
 
 	@Override
 	protected void iterChildren(TreeFunction f) {
-		this.expr.iter(f);
-                this.ident.iter(f);
+		expr.iter(f);
+                ident.iter(f);
 		
 	}
 

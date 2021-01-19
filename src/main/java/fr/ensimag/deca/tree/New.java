@@ -43,11 +43,6 @@ public class New extends AbstractExpr {
 		compiler.addInstruction(new BSR(ident.getClassDefinition().getLabelInit()));
 		compiler.addInstruction(new POP(Register.getR(n)));
 	}
-	
-	@Override
-    protected void codeGenInst(DecacCompiler compiler) {
-        //nothing to do
-    }
 
 	@Override
 	public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass)
@@ -61,7 +56,7 @@ public class New extends AbstractExpr {
 
 	@Override
 	public void decompile(IndentPrintStream s) {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		s.print("new " + ident.decompile() +"()");
 	}
 
 	@Override

@@ -22,6 +22,7 @@ import java.io.PrintStream;
  *
  * @author louise
  */
+
 public class Return extends AbstractInst {
     private final AbstractExpr operand;
     
@@ -62,7 +63,6 @@ public class Return extends AbstractInst {
     }
 
     @Override
-
     protected void prettyPrintChildren(PrintStream s, String prefix) {
         operand.prettyPrint(s, prefix, true);
     }

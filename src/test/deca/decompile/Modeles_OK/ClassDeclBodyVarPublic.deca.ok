@@ -1,4 +1,4 @@
 class Thing {
-	PUBLIC int i;
+	int i;
 
 }

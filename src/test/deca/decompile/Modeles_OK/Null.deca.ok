@@ -1,7 +1,7 @@
 class Thing {
-	PUBLIC int i= null ;
+	int i=null;
 
 }
 {
-	int j= null ;
+	int j=null;
 }

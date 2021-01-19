@@ -51,7 +51,9 @@ public class DeclField extends AbstractDeclField{
     
     @Override
     public void decompile(IndentPrintStream s) {
-        s.print(visib + " ");
+        if (visib.equals(Visibility.PROTECTED)){
+            s.print("protected ");
+        }
         type.decompile(s);
         s.print(" ");
         name.decompile(s);
@@ -94,7 +96,7 @@ public class DeclField extends AbstractDeclField{
             throw new ContextualError(ContextualError.FIELD_ALREADY_DEFINED, getLocation());
         }
 
-        LOG.debug("verify DeclField " + nom.getName().toString() + " for class " + currentClass.getType().getName().toString() + " : end");
+        LOG.debug("verify DeclField " + name.getName().toString() + " for class " + currentClass.getType().getName().toString() + " : end");
     }
 
 

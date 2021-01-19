@@ -34,19 +34,25 @@ public class InstanceOf extends AbstractExpr{
 
 	@Override
 	public void decompile(IndentPrintStream s) {
-		// TODO Auto-generated method stub
+                s.print("(");
+		expr.decompile(s);
+                s.print(" instanceof ");
+                ident.decompile(s);
+                s.print(")");
 		
 	}
 
 	@Override
 	protected void prettyPrintChildren(PrintStream s, String prefix) {
-		// TODO Auto-generated method stub
+		expr.prettyPrint(s, prefix, false);
+                ident.prettyPrint(s, prefix, true);
 		
 	}
 
 	@Override
 	protected void iterChildren(TreeFunction f) {
-		// TODO Auto-generated method stub
+		expr.iter(f);
+                ident.iter(f);
 		
 	}
 

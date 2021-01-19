@@ -32,16 +32,22 @@ public class Cast extends AbstractExpr{
 
 	@Override
 	public void decompile(IndentPrintStream s) {
-
+                s.print("(");
+                ident.decompile(s);
+                s.print(")(");
+                expression.decompile(s);
+                s.print(")");
 	}
 
 	@Override
 	protected void prettyPrintChildren(PrintStream s, String prefix) {
-
+                ident.prettyPrint(s, prefix, false);
+                expression.prettyPrint(s, prefix, true);
 	}
 
 	@Override
 	protected void iterChildren(TreeFunction f) {
-
+                ident.iter(f);
+                expression.iter(f);
 	}
 }

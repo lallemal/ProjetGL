@@ -1,11 +1,11 @@
 // Description :
-//    test décompilation déclaration d'une classe avec field multiples
+//    test décompilation cast
 //
 // Resultats (en comparaison avec le résultat attendu 
 // disponible dans le fichier *.deca.ok dans le dossier Modeles_OK) :
 //    ok
 
-class Thing {
-    protected int i = 0, j = 1;
-    protected float k;
+{
+    float a;
+    a = (int)(a);
 }

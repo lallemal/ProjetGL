@@ -11,8 +11,10 @@ import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.DAddr;
 import fr.ensimag.ima.pseudocode.Label;
 import fr.ensimag.ima.pseudocode.LabelOperand;
+import fr.ensimag.ima.pseudocode.Line;
 import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.RegisterOffset;
+import fr.ensimag.ima.pseudocode.instructions.BOV;
 import fr.ensimag.ima.pseudocode.instructions.ERROR;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
 import fr.ensimag.ima.pseudocode.instructions.POP;
@@ -20,6 +22,7 @@ import fr.ensimag.ima.pseudocode.instructions.PUSH;
 import fr.ensimag.ima.pseudocode.instructions.RTS;
 import fr.ensimag.ima.pseudocode.instructions.STORE;
 import fr.ensimag.ima.pseudocode.instructions.SUBSP;
+import fr.ensimag.ima.pseudocode.instructions.TSTO;
 import fr.ensimag.ima.pseudocode.instructions.WNL;
 import fr.ensimag.ima.pseudocode.instructions.WSTR;
 
@@ -88,7 +91,6 @@ public class DeclMethod extends AbstractDeclMethod {
     	
     	compiler.addComment("---------- Initialisation de la methode de "+name.getName().getName());
     	compiler.addLabel(name.getMethodDefinition().getLabel());
-    	compiler.addComment("sauvegarde des registres");
     	compiler.setAux(true);
     	compiler.cleanProgramAux();
     	
@@ -98,6 +100,9 @@ public class DeclMethod extends AbstractDeclMethod {
     	for (int i=n; i>0; i--) {
     		compiler.addInstructionFirst(new PUSH(Register.getR(i+1)));
     	}
+    	compiler.addFirst(new Line("sauvegarde des registres"));
+    	compiler.addInstructionFirst(new BOV(compiler.getLabelError().getLabelPilePleine()));
+    	compiler.addInstructionFirst(new TSTO(n));
     	// Fin : on verifie quil y a eu return si ce nest pas une void fonction
     	if (!type.getName().getName().equals("void")) {
     		compiler.addInstruction(new WSTR("Erreur : sortie de la methode "+className+"."+name.getName().getName()+" sans return"));

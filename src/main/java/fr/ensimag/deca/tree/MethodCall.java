@@ -63,7 +63,9 @@ public class MethodCall extends AbstractExpr{
 			compiler.addInstruction(new CMP(new NullOperand(), Register.getR(n)));
 			compiler.addInstruction(new BEQ(compiler.getLabelError().getLabelDereferencementNull()));
 			compiler.addInstruction(new LOAD(new RegisterOffset(0, Register.getR(n)), Register.getR(n)));
+			compiler.incrementKSP(2);
 			compiler.addInstruction(new BSR(new RegisterOffset(ident.getMethodDefinition().getIndex()+1, Register.getR(n))));
+			compiler.decrementKSP(2);
 			compiler.addInstruction(new SUBSP(nbParam+1));
 			compiler.decrementKSP(nbParam+1);
 		}

@@ -12,8 +12,8 @@ import fr.ensimag.deca.tree.LocationException;
 public class ContextualError extends LocationException {
     private static final long serialVersionUID = -8122514996569278575L;
     // For all passes
-    public static final String IDENTIFIER_EXP_UNDEFINED = "Definition in env_exp does not exist with the name :"; // 0.1
-    public static final String IDENTIFIER_TYPE_UNDEFINED = "Definition in env_types does not exist with the name :"; // 0.2
+    public static final String IDENTIFIER_EXP_UNDEFINED = "This identifier is not declared in this scope"; // 0.1
+    public static final String IDENTIFIER_TYPE_UNDEFINED = "This type is not defined."; // 0.2
     public static final String IDENTIFIER_TYPE_NOTTYPE = "The definition of this identifier is not a type type";  // 0.2
     // Passe 1
     public static final String PARENT_CLASS_NOT_DECLARED = "The parent class of this class was not declared before"; // 1.3

@@ -48,6 +48,7 @@ public class MethodCall extends AbstractExpr{
 			compiler.getLabelError().setErrorPilePleine(true);
 			compiler.addInstruction(new TSTO(nbParam+1));
 			compiler.addInstruction(new BOV(compiler.getLabelError().getLabelPilePleine()));
+			compiler.incrementKSP(nbParam+1);
 			compiler.addInstruction(new ADDSP(nbParam+1));
 			compiler.addInstruction(new LOAD(a.getExpDefinition().getOperand(), Register.getR(n)));
 			compiler.addInstruction(new STORE(Register.getR(n), new RegisterOffset(0, Register.SP)));
@@ -64,6 +65,7 @@ public class MethodCall extends AbstractExpr{
 			compiler.addInstruction(new LOAD(new RegisterOffset(0, Register.getR(n)), Register.getR(n)));
 			compiler.addInstruction(new BSR(new RegisterOffset(ident.getMethodDefinition().getIndex()+1, Register.getR(n))));
 			compiler.addInstruction(new SUBSP(nbParam+1));
+			compiler.decrementKSP(nbParam+1);
 		}
 		compiler.addInstruction(new LOAD(Register.R0, Register.getR(n)));
 	}

@@ -72,6 +72,15 @@ public class ClassDefinition extends TypeDefinition {
     private final ClassDefinition superClass; 
     private DAddr address;
     private ListDeclMethod methods;
+    private boolean isClassObject = false;
+    
+    public void setIsClassObject(boolean b) {
+    	isClassObject = b;
+    }
+    
+    public boolean getIsClassObject() {
+    	return isClassObject;
+    }
     
     public void setMethods(ListDeclMethod methods) {
     	this.methods = methods;

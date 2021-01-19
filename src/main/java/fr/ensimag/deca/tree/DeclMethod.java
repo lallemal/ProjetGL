@@ -9,13 +9,10 @@ import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.DAddr;
-import fr.ensimag.ima.pseudocode.IMAProgram;
 import fr.ensimag.ima.pseudocode.Label;
 import fr.ensimag.ima.pseudocode.LabelOperand;
 import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.RegisterOffset;
-import fr.ensimag.ima.pseudocode.instructions.ADDSP;
-import fr.ensimag.ima.pseudocode.instructions.BOV;
 import fr.ensimag.ima.pseudocode.instructions.ERROR;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
 import fr.ensimag.ima.pseudocode.instructions.POP;
@@ -23,7 +20,6 @@ import fr.ensimag.ima.pseudocode.instructions.PUSH;
 import fr.ensimag.ima.pseudocode.instructions.RTS;
 import fr.ensimag.ima.pseudocode.instructions.STORE;
 import fr.ensimag.ima.pseudocode.instructions.SUBSP;
-import fr.ensimag.ima.pseudocode.instructions.TSTO;
 import fr.ensimag.ima.pseudocode.instructions.WNL;
 import fr.ensimag.ima.pseudocode.instructions.WSTR;
 
@@ -78,12 +74,7 @@ public class DeclMethod extends AbstractDeclMethod {
     	compiler.addInstruction(new LOAD(new LabelOperand(label), Register.R0));
     	compiler.addInstruction(new STORE(Register.R0, new RegisterOffset(compiler.getKGB(), Register.GB)));
     	compiler.incrementKGB();
-    	compiler.getLabelError().setErrorPilePleine(true);
-    	compiler.addInstruction(new TSTO(1));
-    	if (!compiler.getCompilerOptions().isNoCheck()) {
-    		compiler.addInstruction(new BOV(compiler.getLabelError().getLabelPilePleine()));
-    	}
-    	compiler.addInstruction(new ADDSP(1));
+    	compiler.incrementKSP();
     }
     
     @Override

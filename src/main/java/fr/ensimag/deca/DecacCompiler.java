@@ -84,6 +84,8 @@ public class DecacCompiler implements Callable<Boolean> {
         this.rmax = 15;
         this.labelError = new LabelError();
         this.labelClass = new LabelClass();
+        this.registreUsed = new boolean[16];
+        this.resetRegistreUsed();
         
     }
     private int rmax;
@@ -220,7 +222,6 @@ public class DecacCompiler implements Callable<Boolean> {
     private boolean[] registreUsed;
     
     public void resetRegistreUsed() {
-    	this.registreUsed = new boolean[16];
     	for (int i = 0; i<16; i++) {
     		registreUsed[i] = false;
     	}

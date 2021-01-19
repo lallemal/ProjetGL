@@ -20,6 +20,11 @@ public class This extends AbstractExpr {
     protected void codeExp(DecacCompiler compiler, int n) {
     	compiler.addInstruction(new LOAD(new RegisterOffset(-2, Register.LB), Register.getR(n)));
 	}
+    
+    @Override
+    public boolean isThis() {
+    	return true;
+    }
 
 	@Override
 	public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass)

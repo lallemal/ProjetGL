@@ -3,6 +3,19 @@ package fr.ensimag.deca.tree;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.NullOperand;
+import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.RegisterOffset;
+import fr.ensimag.ima.pseudocode.instructions.ADDSP;
+import fr.ensimag.ima.pseudocode.instructions.BEQ;
+import fr.ensimag.ima.pseudocode.instructions.BOV;
+import fr.ensimag.ima.pseudocode.instructions.BSR;
+import fr.ensimag.ima.pseudocode.instructions.CMP;
+import fr.ensimag.ima.pseudocode.instructions.LOAD;
+import fr.ensimag.ima.pseudocode.instructions.STORE;
+import fr.ensimag.ima.pseudocode.instructions.SUBSP;
+import fr.ensimag.ima.pseudocode.instructions.TSTO;
+
 import org.apache.commons.lang.Validate;
 
 import java.io.PrintStream;
@@ -20,6 +33,39 @@ public class MethodCall extends AbstractExpr{
 		this.expr = expr;
 		this.ident = ident;
 		this.listExpr = listExpr;
+	}
+	
+	@Override
+    protected void codeGenInst(DecacCompiler compiler) {
+		codeExp(compiler, 2);
+    }
+	
+	@Override
+	protected void codeExp(DecacCompiler compiler, int n) {
+		if (expr.isIdentifier()) {
+			Identifier a = (Identifier) expr;
+			int nbParam = ident.getMethodDefinition().getSignature().size();
+			compiler.getLabelError().setErrorPilePleine(true);
+			compiler.addInstruction(new TSTO(nbParam+1));
+			compiler.addInstruction(new BOV(compiler.getLabelError().getLabelPilePleine()));
+			compiler.addInstruction(new ADDSP(nbParam+1));
+			compiler.addInstruction(new LOAD(a.getExpDefinition().getOperand(), Register.getR(n)));
+			compiler.addInstruction(new STORE(Register.getR(n), new RegisterOffset(0, Register.SP)));
+			int index = 1;
+			for (AbstractExpr e : listExpr.getList()) {
+				e.codeExp(compiler, n);
+				compiler.addInstruction(new STORE(Register.getR(n), new RegisterOffset(-index, Register.SP)));
+				index++;
+			}
+			compiler.getLabelError().setErrorDereferencementNull(true);
+			compiler.addInstruction(new LOAD(new RegisterOffset(0, Register.SP), Register.getR(n)));
+			compiler.addInstruction(new CMP(new NullOperand(), Register.getR(n)));
+			compiler.addInstruction(new BEQ(compiler.getLabelError().getLabelDereferencementNull()));
+			compiler.addInstruction(new LOAD(new RegisterOffset(0, Register.getR(n)), Register.getR(n)));
+			compiler.addInstruction(new BSR(new RegisterOffset(ident.getMethodDefinition().getIndex()+1, Register.getR(n))));
+			compiler.addInstruction(new SUBSP(nbParam+1));
+		}
+		compiler.addInstruction(new LOAD(Register.R0, Register.getR(n)));
 	}
 	
 	@Override

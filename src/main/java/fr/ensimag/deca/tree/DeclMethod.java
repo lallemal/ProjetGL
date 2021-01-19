@@ -169,7 +169,13 @@ public class DeclMethod extends AbstractDeclMethod {
             }
         }
         try {
-            MethodDefinition methodDefinition = new MethodDefinition(type, getLocation(), sig, currentClass.getNumberOfMethods());
+        	// On a changé l'index de methode pour quil designe sa place dans la table des methodes
+        	MethodDefinition methodDefinition;
+        	if (currentClass.getSuperClass() != null) {
+        		methodDefinition = new MethodDefinition(type, getLocation(), sig, currentClass.getSuperClass().getNumberOfMethods()+currentClass.getNumberOfMethods());
+        	} else {
+        		methodDefinition = new MethodDefinition(type, getLocation(), sig, currentClass.getNumberOfMethods());
+        	}
             classExp.declare(name.getName(), methodDefinition);
             name.setDefinition(methodDefinition);
             currentClass.incNumberOfMethods();

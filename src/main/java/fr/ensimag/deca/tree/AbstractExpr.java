@@ -199,6 +199,22 @@ public abstract class AbstractExpr extends AbstractInst {
     protected void codeGenBranch(DecacCompiler compiler, boolean evaluate, Label label) {
         // Nothing to do for most of expression
     }
+    
+    public boolean isIdentifier() {
+    	return false;
+    }
+    
+    public boolean isSelection() {
+    	return false;
+    }
+    
+    public boolean isThis() {
+    	return false;
+    }
+    
+    public boolean isNew() {
+    	return false;
+    }
 
     @Override
     protected void decompileInst(IndentPrintStream s) {

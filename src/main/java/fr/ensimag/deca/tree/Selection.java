@@ -20,6 +20,14 @@ public class Selection extends AbstractLValue{
 	private AbstractExpr expr;
 	private AbstractIdentifier ident;
 	
+	public AbstractExpr getExpr() {
+		return expr;
+	}
+	
+	public AbstractIdentifier getIdent() {
+		return ident;
+	}
+	
 	@Override
 	public void codeExp(DecacCompiler compiler, int n) {
 		compiler.getLabelError().setErrorDereferencementNull(true);
@@ -29,6 +37,11 @@ public class Selection extends AbstractLValue{
 		int offset = ident.getFieldDefinition().getIndex() + 1;
 		compiler.addInstruction(new LOAD(new RegisterOffset(offset, Register.getR(n)), Register.getR(n)));
 	}
+	
+	@Override
+	public boolean isSelection() {
+	    	return true;
+	    }
 	
 	public Selection(AbstractExpr left, AbstractIdentifier right) {
 		Validate.notNull(left);

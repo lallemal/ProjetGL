@@ -219,6 +219,11 @@ public class Identifier extends AbstractIdentifier {
     		compiler.addInstruction(new LOAD(this.getExpDefinition().getOperand(), Register.getR(n)));
     	}
     }
+    
+    @Override
+    public boolean isIdentifier() {
+    	return true;
+    }
 
     /**
      * Implements non-terminal "type" of [SyntaxeContextuelle] in the 3 passes

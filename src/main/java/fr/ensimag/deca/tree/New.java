@@ -43,6 +43,11 @@ public class New extends AbstractExpr {
 		compiler.addInstruction(new BSR(ident.getClassDefinition().getLabelInit()));
 		compiler.addInstruction(new POP(Register.getR(n)));
 	}
+	
+	@Override
+    public boolean isNew() {
+    	return true;
+    }
 
 	@Override
 	public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass)

@@ -37,5 +37,5 @@ public abstract class AbstractInitialization extends Tree {
         this.dimension = dimension;
     }
 
-    private ListExpr dimension;
+    private ListExpr dimension = new ListExpr();
 }

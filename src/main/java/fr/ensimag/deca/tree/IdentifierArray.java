@@ -70,6 +70,7 @@ public class IdentifierArray extends AbstractIdentifier{
 	    ArrayType arrayType = new ArrayType(compiler.getSymbols().create(varName.getName().toString()+"_"+length), baseType, length);
 		TypeDefinition typeDef = new TypeDefinition(arrayType, Location.BUILTIN);
 		setDefinition(typeDef);
+		setType(arrayType);
 	    return arrayType;
 	}
 

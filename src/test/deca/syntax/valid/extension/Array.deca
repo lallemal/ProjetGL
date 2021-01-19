@@ -1,7 +1,11 @@
 
 class A{
+    int[] x;
 
 	int[] mergeSort(int[][][] tab){
+	    x = new int[4];
+	    x[4] = 2;
+	    return x;
         
     }
 }

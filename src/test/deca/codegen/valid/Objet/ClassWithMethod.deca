@@ -1,0 +1,14 @@
+// Description :
+//    Test génération de code pour une classe avec une méthode
+//
+// Resultats decac:
+// Resultat ima: Rien
+
+// PLUTOT OK
+
+class A{
+    
+    void PrintHey(){
+        print("hey");
+    }
+}

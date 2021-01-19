@@ -36,6 +36,11 @@ public class BooleanLiteral extends AbstractExpr {
         setType(compiler.getBool());
         return getType();
     }
+    
+    @Override
+    protected void codeExp(DecacCompiler compiler, int n) {
+    	compiler.addInstruction(new LOAD(this.dval(), Register.getR(n)));
+    }
           
     @Override
     protected DVal dval() {

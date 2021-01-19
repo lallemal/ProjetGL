@@ -34,6 +34,7 @@ public class ConvFloat extends AbstractUnaryExpr {
     
     @Override
     protected void codeGenInst(DecacCompiler compiler) {
+    	compiler.setRegistreUsed(2);
     	codeExp(compiler, 2);
     }
     

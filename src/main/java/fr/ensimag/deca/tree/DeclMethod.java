@@ -9,12 +9,11 @@ import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.DAddr;
-import fr.ensimag.ima.pseudocode.IMAProgram;
 import fr.ensimag.ima.pseudocode.Label;
 import fr.ensimag.ima.pseudocode.LabelOperand;
+import fr.ensimag.ima.pseudocode.Line;
 import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.RegisterOffset;
-import fr.ensimag.ima.pseudocode.instructions.ADDSP;
 import fr.ensimag.ima.pseudocode.instructions.BOV;
 import fr.ensimag.ima.pseudocode.instructions.ERROR;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
@@ -78,12 +77,7 @@ public class DeclMethod extends AbstractDeclMethod {
     	compiler.addInstruction(new LOAD(new LabelOperand(label), Register.R0));
     	compiler.addInstruction(new STORE(Register.R0, new RegisterOffset(compiler.getKGB(), Register.GB)));
     	compiler.incrementKGB();
-    	compiler.getLabelError().setErrorPilePleine(true);
-    	compiler.addInstruction(new TSTO(1));
-    	if (!compiler.getCompilerOptions().isNoCheck()) {
-    		compiler.addInstruction(new BOV(compiler.getLabelError().getLabelPilePleine()));
-    	}
-    	compiler.addInstruction(new ADDSP(1));
+    	compiler.incrementKSP();
     }
     
     @Override
@@ -97,7 +91,6 @@ public class DeclMethod extends AbstractDeclMethod {
     	
     	compiler.addComment("---------- Initialisation de la methode de "+name.getName().getName());
     	compiler.addLabel(name.getMethodDefinition().getLabel());
-    	compiler.addComment("sauvegarde des registres");
     	compiler.setAux(true);
     	compiler.cleanProgramAux();
     	
@@ -107,6 +100,9 @@ public class DeclMethod extends AbstractDeclMethod {
     	for (int i=n; i>0; i--) {
     		compiler.addInstructionFirst(new PUSH(Register.getR(i+1)));
     	}
+    	compiler.addFirst(new Line("sauvegarde des registres"));
+    	compiler.addInstructionFirst(new BOV(compiler.getLabelError().getLabelPilePleine()));
+    	compiler.addInstructionFirst(new TSTO(n));
     	// Fin : on verifie quil y a eu return si ce nest pas une void fonction
     	if (!type.getName().getName().equals("void")) {
     		compiler.addInstruction(new WSTR("Erreur : sortie de la methode "+className+"."+name.getName().getName()+" sans return"));

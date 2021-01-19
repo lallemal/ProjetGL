@@ -54,6 +54,38 @@ public class DecacCompiler implements Callable<Boolean> {
     }
     
     private int kGB = 1;
+    private int kSP = 1;
+    private int maxSP = 1;
+    
+    public int getMaxSP() {
+    	return maxSP;
+    }
+    
+    public void incrementKSP() {
+    	kSP++;
+    	if (kSP > maxSP) {
+    		maxSP = kSP;
+    	}
+    }
+    
+    public void incrementKSP(int n) {
+    	kSP = kSP + n;
+    	if (kSP > maxSP) {
+    		maxSP = kSP;
+    	}
+    }
+    
+    public void decrementKSP() {
+    	kSP--;
+    	assert(kSP > 0);
+    }
+    
+    public void decrementKSP(int n) {
+    	kSP = kSP - n;
+    	if (kSP > maxSP) {
+    		maxSP = kSP;
+    	}
+    }
     
     public void incrementKGB() {
     	kGB++;
@@ -331,9 +363,8 @@ public class DecacCompiler implements Callable<Boolean> {
         }
         assert(prog.checkAllDecorations());
 
-        addComment("start main program");
         prog.codeGenProgram(this);
-        addComment("end main program");
+        addComment("end of program");
         LOG.debug("Generated assembly code:" + nl + program.display());
         LOG.info("Output file assembly file is: " + destName);
 
@@ -456,6 +487,7 @@ public class DecacCompiler implements Callable<Boolean> {
 
     public DeclClass initObject() {
         ClassDefinition objectDef = (ClassDefinition)env_types.get(symbols.create("Object"));
+        objectDef.setIsClassObject(true);
         MethodDefinition equalDef = (MethodDefinition) objectDef.getMembers().get(symbols.create("equals"));
         equalDef.setLabel(new Label("code.Object.equals"));
         Identifier objectIdent = new Identifier(symbols.create("Object"));

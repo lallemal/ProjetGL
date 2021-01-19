@@ -39,8 +39,12 @@ public class New extends AbstractExpr {
 		compiler.addInstruction(new BOV(compiler.getLabelError().getLabelTasPlein()));
 		compiler.addInstruction(new LEA(ident.getClassDefinition().getAddress(), Register.R0));
 		compiler.addInstruction(new STORE(Register.R0, new RegisterOffset(0, Register.getR(n))));
+		compiler.incrementKSP();
 		compiler.addInstruction(new PUSH(Register.getR(n)));
+		compiler.incrementKSP(2);
 		compiler.addInstruction(new BSR(ident.getClassDefinition().getLabelInit()));
+		compiler.decrementKSP(2);
+		compiler.decrementKSP();
 		compiler.addInstruction(new POP(Register.getR(n)));
 	}
 	

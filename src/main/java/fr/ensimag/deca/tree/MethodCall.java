@@ -33,6 +33,7 @@ public class MethodCall extends AbstractExpr{
 		Type methodType = ident.verifyMethod(compiler, classDef.getMembers());
 		Signature sig = ident.getMethodDefinition().getSignature();
 		listExpr.verifyRvalueStar(compiler, localEnv, currentClass, sig);
+		setType(methodType);
 		return methodType;
 	}
 

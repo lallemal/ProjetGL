@@ -1,0 +1,18 @@
+class A {
+
+    int x;
+    int y = 1;
+
+    int getX() {
+        int z = 1;
+        return x;
+    }
+
+    void test() {}
+}
+
+{
+    int x;
+    x = (new A()).y;
+    println(x);
+}

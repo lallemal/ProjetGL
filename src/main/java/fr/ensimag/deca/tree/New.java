@@ -27,6 +27,7 @@ public class New extends AbstractExpr {
 		if (!type.isClass()) {
 			throw new ContextualError(ContextualError.TYPE_NOT_CLASS, getLocation());
 		}
+		setType(type);
 		return type;
 	}
 

@@ -24,6 +24,6 @@ public abstract class AbstractDeclParam extends Tree {
     
     public abstract AbstractIdentifier getType();
 
-    public abstract void verifyDeclParamBody(DecacCompiler compiler, EnvironmentExp localExp, ClassDefinition currentClass)
+    public abstract void verifyDeclParamBody(DecacCompiler compiler, EnvironmentExp localExp, ClassDefinition currentClass, int index)
             throws  ContextualError;
 }

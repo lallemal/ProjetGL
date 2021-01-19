@@ -8,6 +8,9 @@ import fr.ensimag.ima.pseudocode.Label;
 public class LabelClass {
 	
 	public void codeGenLabelClass(DecacCompiler compiler, ListDeclClass classes) {
+		if (classes.size() > 0) {
+			codeGenLabelDeclClass(compiler, compiler.getObject());
+		}
 		for (AbstractDeclClass i : classes.getList()) {
             codeGenLabelDeclClass(compiler, i);
         }
@@ -23,8 +26,7 @@ public class LabelClass {
 		String className = i.getIdent().getName().getName();
 		addClassTitle(compiler, className);
 		compiler.addComment("---------- Initialisation des champs de "+className);
-		Label labelInit = new Label("init."+className);
-		i.getIdent().getClassDefinition().setLabelInit(labelInit);
+		Label labelInit = i.getIdent().getClassDefinition().getLabelInit();
 		compiler.addLabel(labelInit);
 		i.getField().codeGenField(compiler);
 		i.getMethod().codeGenListMethod(compiler, className);

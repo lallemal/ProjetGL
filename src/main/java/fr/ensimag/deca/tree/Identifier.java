@@ -209,11 +209,14 @@ public class Identifier extends AbstractIdentifier {
     
     protected void codeExp(DecacCompiler compiler, int n) {
     	ExpDefinition def = this.getExpDefinition();
-    	if (def.getNature().equals("variable")) {
+    	if (def.isField()) {
+	    	compiler.addInstruction(new LOAD(new RegisterOffset(-2, Register.LB), Register.getR(n)));
+			compiler.addInstruction(new LOAD(new RegisterOffset(1, Register.getR(n)), Register.getR(n)));
+    	} else if (def.isParam()) {
+    		int index = ((ParamDefinition) def).getIndex();
+    		compiler.addInstruction(new LOAD(new RegisterOffset(-(3+index), Register.LB), Register.getR(n)));
+    	} else {
     		compiler.addInstruction(new LOAD(this.getExpDefinition().getOperand(), Register.getR(n)));
-    	} else if (def.getNature().equals("field")) {
-    		compiler.addInstruction(new LOAD(new RegisterOffset(-2, Register.LB), Register.getR(n)));
-    		compiler.addInstruction(new LOAD(new RegisterOffset(1, Register.getR(n)), Register.getR(n)));
     	}
     }
 

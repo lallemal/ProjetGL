@@ -3,8 +3,12 @@ package fr.ensimag.deca.tree;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.LabelOperand;
+import fr.ensimag.ima.pseudocode.NullOperand;
 import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.RegisterOffset;
+import fr.ensimag.ima.pseudocode.instructions.BEQ;
+import fr.ensimag.ima.pseudocode.instructions.CMP;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
 
 import org.apache.commons.lang.Validate;
@@ -18,7 +22,10 @@ public class Selection extends AbstractLValue{
 	
 	@Override
 	public void codeExp(DecacCompiler compiler, int n) {
+		compiler.getLabelError().setErrorDereferencementNull(true);
 		expr.codeExp(compiler, n);
+		compiler.addInstruction(new CMP(new NullOperand(), Register.getR(n)));
+		compiler.addInstruction(new BEQ(compiler.getLabelError().getLabelDereferencementNull()));
 		int offset = ident.getFieldDefinition().getIndex() + 1;
 		compiler.addInstruction(new LOAD(new RegisterOffset(offset, Register.getR(n)), Register.getR(n)));
 	}

@@ -82,9 +82,8 @@ public class DeclMethod extends AbstractDeclMethod {
     
     public void codeGenMethod(DecacCompiler compiler, String className) {
     	compiler.addComment("---------- Initialisation de la methode de "+name.getName().getName());
-    	
+    	compiler.addLabel(name.getMethodDefinition().getLabel());
     	compiler.addComment("sauvegarde des registres");
-    	
     	
     	compiler.addComment("instructions");
     	Label labelFin = new Label("fin."+className+"."+name.getName().getName());

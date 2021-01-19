@@ -58,13 +58,14 @@ public class DeclClass extends AbstractDeclClass {
     	
     	if (compiler.getKGB() == 1) { //Premiere classe a initialiser : Object
     		DeclClass object = compiler.getObject();
+    		object.getIdent().getClassDefinition().setLabelInit(new Label("init.Object"));
     		compiler.addComment("Construction de la table des methodes de Object");
     		compiler.addInstruction(new LOAD(new NullOperand(), Register.R0));
     		compiler.addInstruction(new STORE(Register.R0, new RegisterOffset(compiler.getKGB(), Register.GB)));
         	compiler.incrementKGB();
-        	object.getMethod().codeGenListDeclMethod(compiler);
-        	
+        	object.getMethod().codeGenListDeclMethod(compiler);        	
     	}
+    	ident.getClassDefinition().setLabelInit(new Label("init."+ident.getName().getName()));
     	ident.getClassDefinition().setAddress(new RegisterOffset(compiler.getKGB(), Register.GB));
     	compiler.addComment("Construction de la table des methodes de " + ident.getName().getName());
     	compiler.addInstruction(new LEA(parent.getClassDefinition().getAddress(), Register.R0));   

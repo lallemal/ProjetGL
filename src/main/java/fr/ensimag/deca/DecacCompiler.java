@@ -399,10 +399,12 @@ public class DecacCompiler implements Callable<Boolean> {
         thisBody.setLocation(Location.BUILTIN);
         Identifier otherBody = new Identifier(symbols.create("other"));
         otherBody.setLocation(Location.BUILTIN);
-        otherBody.setDefinition(objectDef);
+        otherBody.setDefinition(new ParamDefinition(objectDef.getType(), Location.BUILTIN, 0));
         Equals equalBody = new Equals(thisBody, otherBody);
         equalBody.setLocation(Location.BUILTIN);
-        listInst.add(equalBody);
+        Return returnBody = new Return(equalBody);
+        returnBody.setLocation(Location.BUILTIN);
+        listInst.add(returnBody);
         ListDeclVar listDeclVar = new ListDeclVar();
         listDeclVar.setLocation(Location.BUILTIN);
 

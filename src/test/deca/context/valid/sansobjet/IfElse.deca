@@ -1,0 +1,16 @@
+// Description :
+//    test décompilation if et else
+//
+// Resultats (en comparaison avec le résultat attendu 
+// disponible dans le fichier *.deca.ok dans le dossier Modeles_OK) :
+//    ok
+
+{
+    int i = 0;
+    if ( i == 0){
+        print("ok!");
+    }
+    else{
+        print("pas ok!");
+    }
+}

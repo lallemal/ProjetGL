@@ -1,0 +1,66 @@
+class AbstractMatrice {
+     int nbl;
+     int nbc;
+     int getNbl(){
+         return nbl;
+     }
+     int getNbc(){
+         return nbc;
+     }
+}
+
+class MatriceInt extends AbstractMatrice{
+
+    int[][] mat;
+    void Init(int[][] mat, int nbl, nbc){
+        this.mat = mat;
+        this.nbl = nbl;
+        this.nbc = nbc;
+    }
+
+    int getCase(int i, int j){
+        return this.math[i][j];
+    }
+    
+    MatriceInt transpose(){
+        int[][] transpose = new int[nbl][nbc];
+        int i = 0;
+        int j = 0;
+        while(i < nbl){
+            while(j < nbc){
+                transpose[j][i] = mat[i][j];
+                j = j + 1;
+            }
+        i = i + 1;
+        }
+        
+        return transpose;
+    } 
+        
+    MatriceInt prodMat(MatriceInt m){
+        if (this.mat.getNbc != m.getNbl){
+            return null;
+        }
+        int i = 0;
+        int j = 0;
+
+    }
+    void print(){
+
+        // TO dO
+    }  
+    
+
+}
+
+
+class MatriceFloat extends AbstractMatrice{
+
+
+}
+
+
+
+
+
+

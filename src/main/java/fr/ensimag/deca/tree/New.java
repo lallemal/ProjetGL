@@ -32,20 +32,22 @@ public class New extends AbstractExpr {
 	}
 	
 	@Override
-	protected void codeGenDecl(DecacCompiler compiler, DAddr address) {
+	protected void codeExp(DecacCompiler compiler, int n) {
 		compiler.getLabelError().setErrorTasPlein(true);
 		int nbField = ident.getClassDefinition().getNumberOfFields() + 1; 	
-		compiler.addInstruction(new NEW(new ImmediateInteger(nbField), Register.getR(2)));
+		compiler.addInstruction(new NEW(new ImmediateInteger(nbField), Register.getR(n)));
 		compiler.addInstruction(new BOV(compiler.getLabelError().getLabelTasPlein()));
 		compiler.addInstruction(new LEA(ident.getClassDefinition().getAddress(), Register.R0));
 		compiler.addInstruction(new STORE(Register.R0, new RegisterOffset(0, Register.getR(2))));
-		compiler.addInstruction(new PUSH(Register.getR(2)));
+		compiler.addInstruction(new PUSH(Register.getR(n)));
 		compiler.addInstruction(new BSR(ident.getClassDefinition().getLabelInit()));
-		compiler.addInstruction(new POP(Register.getR(2)));
-		compiler.addInstruction(new STORE(Register.getR(2), new RegisterOffset(compiler.getKGB(), Register.GB)));
-		ident.getExpDefinition().setOperand(new RegisterOffset(compiler.getKGB(), Register.GB));
-		compiler.incrementKGB();
+		compiler.addInstruction(new POP(Register.getR(n)));
 	}
+	
+	@Override
+    protected void codeGenInst(DecacCompiler compiler) {
+        //nothing to do
+    }
 
 	@Override
 	public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass)

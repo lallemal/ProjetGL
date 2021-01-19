@@ -74,7 +74,6 @@ public class DeclClass extends AbstractDeclClass {
     	for (AbstractDeclMethod i : parent.getClassDefinition().getMethods().getList()) {
 	    	ident.getClassDefinition().getMethods().add(i);
 	    }
-    	System.out.println(ident.getClassDefinition().getMethods().size());
     	for (AbstractDeclMethod i : method.getList()) {
     		ident.getClassDefinition().getMethods().add(i);
     		Label label = new Label("code."+ident.getName().getName()+"."+i.getName().getName().getName());

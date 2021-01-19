@@ -28,7 +28,7 @@ public class TypeOp {
             TypeDefinition classExpDef = compiler.getEnv_types().get(classType1.getName());
             ClassDefinition classDef = (ClassDefinition) classExpDef;
             ClassDefinition superDef = classDef.getSuperClass();
-            if (subType(compiler, superDef.getType(), type2)) {
+            if (superDef != null && subType(compiler, superDef.getType(), type2)) {
                 return true;
             }
         }

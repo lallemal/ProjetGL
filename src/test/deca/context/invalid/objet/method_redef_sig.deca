@@ -1,0 +1,11 @@
+// The redefinition of this method has not the same signature as the method defined in the super class
+// Description : Test with a redefinition of a method in the child class which has not the same signature
+
+class A {
+    void method() {}
+}
+
+
+class B extends A {
+    void method(int x) {}
+}

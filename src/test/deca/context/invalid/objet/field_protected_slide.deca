@@ -1,0 +1,23 @@
+// The type of the object selected is not a subtype of the current class
+// Description : try to do a trick and get the protected field with a public method in a subclass
+// Result : error line 12
+
+
+class A {
+    protected int x;
+}
+
+class B extends A {
+    int getX(A a) {
+        return a.x;
+    }
+}
+
+
+class X {
+    void m() {
+        A a = new A();
+        B b = new B();
+        println(b.getX(a));
+    }
+}

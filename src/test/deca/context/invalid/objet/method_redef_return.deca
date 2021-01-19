@@ -1,0 +1,12 @@
+// The type of return of this method is not the same as the one of the herited method
+// Description : Test with a child class which has a method redefined but not with the same return Type.
+// Resultat : Error ligne 9
+
+
+class A {
+    void method() {}
+}
+
+class B extends A {
+    int method() {}
+}

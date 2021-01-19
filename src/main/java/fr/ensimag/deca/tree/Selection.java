@@ -41,6 +41,7 @@ public class Selection extends AbstractLValue{
 		FieldDefinition fieldDef = ident.getFieldDefinition();
 		// 3.65
 		if (fieldDef.getVisibility() == Visibility.PUBLIC) {
+		    setType(fieldType);
 			return fieldType;
 		}
 		// 3.66
@@ -50,6 +51,7 @@ public class Selection extends AbstractLValue{
 		if  (!TypeOp.subType(compiler, fieldDef.getContainingClass().getType(), currentClass.getType())) {
 			throw new ContextualError(ContextualError.FIELD_NOT_OVERCLASS_PROTECTED, getLocation());
         }
+		setType(fieldType);
 		return fieldType;
 	}
 
@@ -70,9 +72,9 @@ public class Selection extends AbstractLValue{
 
 	@Override
 	protected void iterChildren(TreeFunction f) {
-		expr.iter(f);
-                ident.iter(f);
-		
+	    expr.iter(f);
+	    ident.iter(f);
+
 	}
 
 }

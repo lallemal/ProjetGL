@@ -310,7 +310,7 @@ list_hook_empty_expr returns[ListExpr tree]
        	(e2=expr{
        	$tree.add($e2.tree);
         })?
-       )*)?
+       RHOOK)*)?
     ;
 
 expr returns[AbstractExpr tree]

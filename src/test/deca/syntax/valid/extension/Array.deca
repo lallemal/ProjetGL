@@ -1,5 +1,10 @@
 
 
 {
-        int[] x = new INT[2];
+        int[] x = new int[2];
+        int[4] y;
+        int[][] mat = new int[4][5];
+        int[][][][] bigMat = new int[3][2][1][2];
+        int[][][] bigMat2 = new int[3][3][];
+        int[][] semiEmptyMat ={ {1, 2, 3}, {4, 5, 6}};
 }

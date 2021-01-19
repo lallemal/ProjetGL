@@ -43,7 +43,9 @@ public class DeclVarMatrix extends AbstractDeclVar {
 
 	@Override
 	protected void prettyPrintChildren(PrintStream s, String prefix) {
-		// TODO Auto-generated method stub
+        type.prettyPrint(s, prefix, false);
+        varName.prettyPrint(s, prefix, false);
+        initialization.prettyPrint(s, prefix, true);
 
 	}
 

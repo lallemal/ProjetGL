@@ -32,8 +32,8 @@ public class ArrayLiteral extends AbstractExpr{
 
 	@Override
 	protected void prettyPrintChildren(PrintStream s, String prefix) {
-		// TODO Auto-generated method stub
 		
+		elements.prettyPrint(s, prefix, false);
 	}
 
 	@Override

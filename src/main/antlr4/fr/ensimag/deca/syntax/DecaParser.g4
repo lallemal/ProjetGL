@@ -118,7 +118,7 @@ decl_var[AbstractIdentifier t] returns[AbstractDeclVar tree]
       	$tree = new DeclVarArray($t, $e1.tree, $i1.tree, init);
       	setLocation($tree, $e1.start);
         }
-      | (LHOOK RHOOK)+ i2=ident e3=expr{
+      | (LHOOK RHOOK)+ i2=ident EQUALS e3=expr{
             assert($e3.tree != null);
             assert($i2.tree != null);
             init = new Initialization($e3.tree);
@@ -290,10 +290,27 @@ list_hook_expr returns[ListExpr tree]
     : (LHOOK e1=expr {
     	$tree.add($e1.tree);
         } RHOOK
-       (LHOOK e2=expr {
+       (LHOOK e2=expr RHOOK{
        	$tree.add($e2.tree);
         }
-       RHOOK)*)?
+       )*)?
+    ;
+    
+    
+list_hook_empty_expr returns[ListExpr tree]
+@init   {
+
+	$tree = new ListExpr();
+        }
+    : (LHOOK e1=expr {
+    	$tree.add($e1.tree);
+        } RHOOK
+       (LHOOK 
+       	
+       	(e2=expr{
+       	$tree.add($e2.tree);
+        })?
+       )*)?
     ;
 
 expr returns[AbstractExpr tree]
@@ -557,7 +574,7 @@ new_object returns[AbstractExpr tree]
             $tree = new New($ident.tree);
             setLocation($tree, $NEW); 
         }
-       | NEW i=ident  l=list_hook_expr {
+       | NEW i=ident  l=list_hook_empty_expr {
        		assert($i.tree != null);
        		assert($l.tree != null);
        		$tree = new NewArray($i.tree, $l.tree);

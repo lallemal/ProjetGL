@@ -1,0 +1,13 @@
+// Description :
+//    Test génération de code pour une classe vide dont n'est pas Object mais déjà défini
+//
+// Resultats decac:
+// Resultat ima: Rien
+
+// PROBLEME AVEC DECAC: Identifier A has no attached Definition
+// DANS IDENTIFIER.CHECKDEOCRATION(LIGNE 31)
+
+class A{
+}
+class B extends A{
+}

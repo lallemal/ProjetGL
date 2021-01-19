@@ -1,0 +1,10 @@
+// Description :
+//    Test génération de code pour une classe vide dont le parent est Objet seulement
+//
+// Resultats decac:
+// Resultat ima: Rien
+
+//PLUTOT OK
+
+class A{
+}

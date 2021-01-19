@@ -1,0 +1,23 @@
+// Description :
+//    Test génération de code selection sur un new directement + Return 
+//
+// Resultats decac:
+// Resultat ima: 1
+
+// PROBLEME IMA:   ** IMA ** ERREUR ** Ligne 38 : 
+//  WINT avec R1 adresse code
+
+
+class A{
+    
+    int x = 1;
+
+    int getX(){
+        return x;
+    }
+}
+{
+    print("mon résultat est:", (new A()).getX());
+    
+}
+

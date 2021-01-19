@@ -1,0 +1,17 @@
+// Description :
+//    Test génération de code avec intervention de null
+//
+// Resultats decac:
+// Resultats ima:
+
+// PROBLEME:java.lang.NullPointerException
+//	at fr.ensimag.deca.context.TypeOp.subType(TypeOp.java:23)
+
+
+class A{
+    int x;
+}
+{
+    A a;
+    a = null;
+}

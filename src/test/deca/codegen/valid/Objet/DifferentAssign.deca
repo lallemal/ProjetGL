@@ -1,0 +1,43 @@
+// Description :
+//    Test génération de code assign de différents types
+//
+// Resultats decac:
+// Resultat ima: 
+
+// PROBLEME DECAC: DifferentAssign.deca:28:6: no viable alternative at input 'a' SI LA PARTIE AVEC NEW A().X EST AVANT LE A a = NEW A()????
+
+
+
+class A{
+ 
+    int x = 1;
+
+    int getX(){
+        return x;
+    }
+    
+    void setX(int x){
+        //Assign Selection This
+        this.x = x;
+    }
+
+}
+{
+    //Assign Identifier
+    int y = 1;
+    
+    //Assign Selection Identifier
+    A a = new A();
+    a.x = 3;
+
+    println("Assign Identifier ", y);
+    println("Assign Selection Identifier " , a.x);
+
+    a.setX(4);
+    println("Assign Selection This ", a.x);
+
+    //Assign Selection New
+    (new A()).x = 2;
+    
+}
+

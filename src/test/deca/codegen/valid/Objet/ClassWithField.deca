@@ -1,0 +1,13 @@
+// Description :
+//    Test génération de code pour une classe vide avec des fields
+//
+// Resultats decac:
+// Resultat ima: Rien
+
+// PLUTOT OK
+
+class A{
+    int a;
+    protected float b;
+    protected boolean bool;
+}

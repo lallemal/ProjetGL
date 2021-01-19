@@ -31,11 +31,18 @@ public class ArraySelection extends AbstractLValue{
 			}
 		}
 		ArrayType arrayType = (ArrayType) typeToCheck;
-		if (memory.size() != arrayType.getDimension()) {
+		if (memory.size() > arrayType.getDimension()) {
 			throw new ContextualError(ContextualError.ARRAY_SELECTION_MATCH_TYPE, getLocation());
 		}
-		setType(arrayType.getBaseType());
-		return arrayType.getBaseType();
+		if (memory.size() == arrayType.getDimension()) {
+			setType(arrayType.getBaseType());
+			return arrayType.getBaseType();
+		} else {
+			int diff = arrayType.getDimension() - memory.size();
+			ArrayType newType = new ArrayType(compiler.getSymbols().create(arrayType.getBaseType().toString()+"_"+diff), arrayType.getBaseType(), diff);
+			setType(newType);
+			return newType;
+		}
 	}
 
 	@Override

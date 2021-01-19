@@ -62,7 +62,7 @@ public class ContextualError extends LocationException {
     public static final String ARRAY_LITERAL_EMPTY = "Array Literal can not be empty";
     public static final String ARRAY_SELECTION_NOT = "The selection in a index can not be in a not Array object";
     public static final String ARRAY_INDEX_NOT_INT = "The index of selection has to be an integer";
-    public static final String ARRAY_SELECTION_MATCH_TYPE = "The dimension of the selection does not match the type";
+    public static final String ARRAY_SELECTION_MATCH_TYPE = "The dimension of the selection is greater than the dimension of the object";
     public static final String ARRAY_DIM_GIVEN = "The dimension of an array has to be give with an integer or nothing";
     public static final String ARRAY_NO_THEN = "It is impossible to give dimension if the previous index dimension was empty";
 

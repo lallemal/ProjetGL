@@ -105,29 +105,27 @@ decl_var[AbstractIdentifier t] returns[AbstractDeclVar tree]
       )? {
       	$tree = new DeclVar($t, $i.tree, init);
       	setLocation($tree, $i.start);
-        }
-      | LHOOK  e1=expr RHOOK i1=ident {
-            assert($e1.tree != null);
-            assert($i1.tree != null);
-            init = new NoInitialization();
-        } (EQUALS e2=expr {
-      		init = new Initialization($e2.tree);
-      		setLocation(init, $e2.start);
-        }
-      )? {
-      	$tree = new DeclVarArray($t, $e1.tree, $i1.tree, init);
-      	setLocation($tree, $e1.start);
-        }
-      | (LHOOK RHOOK)+ i2=ident EQUALS e3=expr{
-            assert($e3.tree != null);
-            assert($i2.tree != null);
-            init = new Initialization($e3.tree);
-      		setLocation(init, $e3.start);
-      		$tree = new DeclVarMatrix($t, $i2.tree, (Initialization)init);
-      		setLocation($tree, $i2.start);
-
-        }
-    ;
+        };
+//      | (LHOOK  RHOOK)+ i1=ident {
+//            assert($i1.tree != null);
+//            init = new NoInitialization();
+//        } (EQUALS e2=expr {
+//      		init = new Initialization($e2.tree);
+//      		setLocation(init, $e2.start);
+//        }
+//      )? {
+//      	$tree = new DeclVarArray($t, $i1.tree, init);
+//      	setLocation($tree, );
+//        }
+//      | (LHOOK RHOOK)+ i2=ident EQUALS e3=expr{
+//            assert($e3.tree != null);
+//            assert($i2.tree != null);
+//            init = new Initialization($e3.tree);
+//      		setLocation(init, $e3.start);
+//      		$tree = new DeclVarMatrix($t, $i2.tree, (Initialization)init);
+//      		setLocation($tree, $i2.start);
+//
+//        }
     
 //decl_var_array[AbstractIdentifier t] returns[AbstractDeclVar tree]
 //	@init   {
@@ -293,7 +291,7 @@ list_hook_expr returns[ListExpr tree]
        (LHOOK e2=expr RHOOK{
        	$tree.add($e2.tree);
         }
-       )*)?
+       )*)
     ;
     
     
@@ -511,12 +509,7 @@ select_expr returns[AbstractExpr tree]
             $tree = new MethodCall($e1.tree, $i.tree, $args.tree);
             setLocation($tree, $e1.start);
         }
-        | i1=ident l=list_hook_expr {
-        	assert($i1.tree != null);
-        	assert($l.tree != null);
-        	$tree = new ArraySelection($i1.tree, $l.tree);
-        	setLocation($tree, $i1.start);
-        }
+        
         | /* epsilon */ {
             // we matched "e.i"
         }
@@ -566,6 +559,12 @@ primary_expr returns[AbstractExpr tree]
             $tree = new Cast($type.tree, $expr.tree);
             setLocation($tree, $OPARENT);
         }
+     |i1=ident l1=list_hook_expr {
+        	assert($i1.tree != null);
+        	assert($l1.tree != null);
+        	$tree = new ArraySelection($i1.tree, $l1.tree);
+        	setLocation($tree, $i1.start);
+        }
     | literal {
             assert($literal.tree != null);
             $tree = $literal.tree;
@@ -610,9 +609,22 @@ new_object returns[AbstractExpr tree]
 //    ;
 
 type returns[AbstractIdentifier tree]
-    : ident {
+	@init{
+		AbstractIdentifier iden;
+		int i = 0;
+	}
+    : ident	{
+    		iden = $ident.tree;
             assert($ident.tree != null);
-            $tree = $ident.tree;
+            
+        }(LHOOK RHOOK{
+        	i++;
+        })*
+        {
+        	if(i > 0){
+        		iden = new IdentifierArray($ident.tree, i);
+        	}
+        	$tree = iden;
         }
     ;
 

@@ -33,8 +33,9 @@ public class MethodAsmBody extends AbstractMethodBody {
     }
     
     @Override
-    public void codeGenBody(DecacCompiler compiler, Label labelFin) {
+    public int codeGenBody(DecacCompiler compiler, Label labelFin) {
     	compiler.add(new InlinePortion(cont.getValue()));
+    	return 0;
     }
     
     @Override

@@ -8,9 +8,12 @@ import fr.ensimag.ima.pseudocode.Label;
 import fr.ensimag.ima.pseudocode.NullOperand;
 import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.RegisterOffset;
+import fr.ensimag.ima.pseudocode.instructions.ADDSP;
+import fr.ensimag.ima.pseudocode.instructions.BOV;
 import fr.ensimag.ima.pseudocode.instructions.LEA;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
 import fr.ensimag.ima.pseudocode.instructions.STORE;
+import fr.ensimag.ima.pseudocode.instructions.TSTO;
 import fr.ensimag.deca.tools.SymbolTable;
 import org.apache.commons.lang.Validate;
 import org.apache.log4j.Logger;
@@ -63,6 +66,12 @@ public class DeclClass extends AbstractDeclClass {
     		compiler.addInstruction(new LOAD(new NullOperand(), Register.R0));
     		compiler.addInstruction(new STORE(Register.R0, new RegisterOffset(compiler.getKGB(), Register.GB)));
         	compiler.incrementKGB();
+        	compiler.getLabelError().setErrorPilePleine(true);
+        	compiler.addInstruction(new TSTO(1));
+        	if (!compiler.getCompilerOptions().isNoCheck()) {
+        		compiler.addInstruction(new BOV(compiler.getLabelError().getLabelPilePleine()));
+        	}
+        	compiler.addInstruction(new ADDSP(1));
         	object.getMethod().codeGenListDeclMethod(compiler);        	
     	}
     	ident.getClassDefinition().setLabelInit(new Label("init."+ident.getName().getName()));
@@ -71,6 +80,12 @@ public class DeclClass extends AbstractDeclClass {
     	compiler.addInstruction(new LEA(parent.getClassDefinition().getAddress(), Register.R0));   
     	compiler.addInstruction(new STORE(Register.R0, new RegisterOffset(compiler.getKGB(), Register.GB)));
     	compiler.incrementKGB();
+    	compiler.getLabelError().setErrorPilePleine(true);
+    	compiler.addInstruction(new TSTO(1));
+    	if (!compiler.getCompilerOptions().isNoCheck()) {
+    		compiler.addInstruction(new BOV(compiler.getLabelError().getLabelPilePleine()));
+    	}
+    	compiler.addInstruction(new ADDSP(1));
     	
     	for (AbstractDeclMethod i : parent.getClassDefinition().getMethods().getList()) {
 	    	ident.getClassDefinition().getMethods().add(i);

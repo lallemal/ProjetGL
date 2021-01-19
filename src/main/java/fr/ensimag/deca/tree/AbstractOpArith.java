@@ -61,6 +61,7 @@ public abstract class AbstractOpArith extends AbstractBinaryExpr {
         } else {
             if (compiler.getRmax() > n) {
                 e1.codeExp(compiler, n);
+                compiler.setRegistreUsed(n+1);
                 e2.codeExp(compiler, n+1);
                 this.mnemo(compiler, Register.getR(n+1), n);
             } else {
@@ -81,6 +82,7 @@ public abstract class AbstractOpArith extends AbstractBinaryExpr {
 
     @Override
     protected void codeGenInst(DecacCompiler compiler) {
+    	compiler.setRegistreUsed(2);
         this.codeExp(compiler, 2);
     }
 

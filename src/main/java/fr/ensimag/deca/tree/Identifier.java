@@ -204,6 +204,7 @@ public class Identifier extends AbstractIdentifier {
     
     @Override
     protected void codeGenInst(DecacCompiler compiler) {
+    	compiler.setRegistreUsed(2);
         codeExp(compiler, 2);
     }
     

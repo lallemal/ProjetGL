@@ -34,9 +34,15 @@ public class MethodBody extends AbstractMethodBody {
     }
     
     @Override
-    public void codeGenBody(DecacCompiler compiler, Label labelFin) {
+    public int codeGenBody(DecacCompiler compiler, Label labelFin) {
+    	compiler.resetRegistreUsed();
     	var.codeGenListDecl(compiler);
     	inst.codeGenListInst(compiler, labelFin);
+    	if (compiler.nbRegistreUsed() == 0) {
+    		return ((var.size()>0)?1:0);
+    	} else {
+    		return compiler.nbRegistreUsed();
+    	}
     }
     
     @Override

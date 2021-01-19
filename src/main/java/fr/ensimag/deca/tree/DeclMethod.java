@@ -9,14 +9,21 @@ import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.DAddr;
+import fr.ensimag.ima.pseudocode.IMAProgram;
 import fr.ensimag.ima.pseudocode.Label;
 import fr.ensimag.ima.pseudocode.LabelOperand;
 import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.RegisterOffset;
+import fr.ensimag.ima.pseudocode.instructions.ADDSP;
+import fr.ensimag.ima.pseudocode.instructions.BOV;
 import fr.ensimag.ima.pseudocode.instructions.ERROR;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
+import fr.ensimag.ima.pseudocode.instructions.POP;
+import fr.ensimag.ima.pseudocode.instructions.PUSH;
 import fr.ensimag.ima.pseudocode.instructions.RTS;
 import fr.ensimag.ima.pseudocode.instructions.STORE;
+import fr.ensimag.ima.pseudocode.instructions.SUBSP;
+import fr.ensimag.ima.pseudocode.instructions.TSTO;
 import fr.ensimag.ima.pseudocode.instructions.WNL;
 import fr.ensimag.ima.pseudocode.instructions.WSTR;
 
@@ -71,6 +78,12 @@ public class DeclMethod extends AbstractDeclMethod {
     	compiler.addInstruction(new LOAD(new LabelOperand(label), Register.R0));
     	compiler.addInstruction(new STORE(Register.R0, new RegisterOffset(compiler.getKGB(), Register.GB)));
     	compiler.incrementKGB();
+    	compiler.getLabelError().setErrorPilePleine(true);
+    	compiler.addInstruction(new TSTO(1));
+    	if (!compiler.getCompilerOptions().isNoCheck()) {
+    		compiler.addInstruction(new BOV(compiler.getLabelError().getLabelPilePleine()));
+    	}
+    	compiler.addInstruction(new ADDSP(1));
     }
     
     @Override
@@ -81,13 +94,19 @@ public class DeclMethod extends AbstractDeclMethod {
     }
     
     public void codeGenMethod(DecacCompiler compiler, String className) {
+    	
     	compiler.addComment("---------- Initialisation de la methode de "+name.getName().getName());
     	compiler.addLabel(name.getMethodDefinition().getLabel());
     	compiler.addComment("sauvegarde des registres");
+    	compiler.setAux(true);
+    	compiler.cleanProgramAux();
     	
     	compiler.addComment("instructions");
     	Label labelFin = new Label("fin."+className+"."+name.getName().getName());
-    	body.codeGenBody(compiler, labelFin);
+    	int n = body.codeGenBody(compiler, labelFin);
+    	for (int i=n; i>0; i--) {
+    		compiler.addInstructionFirst(new PUSH(Register.getR(i+1)));
+    	}
     	// Fin : on verifie quil y a eu return si ce nest pas une void fonction
     	if (!type.getName().getName().equals("void")) {
     		compiler.addInstruction(new WSTR("Erreur : sortie de la methode "+className+"."+name.getName().getName()+" sans return"));
@@ -96,11 +115,17 @@ public class DeclMethod extends AbstractDeclMethod {
     	}
     	
     	compiler.addLabel(labelFin);
-    	for (AbstractDeclVar i : body.getVar().getList()) {
+    	for (AbstractDeclVar i : body.getVar().getList()) { // On enleve les variables locales de la methodes
     		compiler.decrementKGB();
+    		compiler.addInstruction(new SUBSP(1));
     	}
     	
+    	for (int i=0; i<n; i++) {
+    		compiler.addInstruction(new POP(Register.getR(i+2)));
+    	}
     	compiler.addInstruction(new RTS());
+    	compiler.setAux(false);
+    	compiler.append(compiler.getProgramAux());
     }
 
     @Override

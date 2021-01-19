@@ -22,7 +22,7 @@ public abstract class AbstractMethodBody extends Tree {
                                           ClassDefinition currentClass, Type returnType)
             throws ContextualError;
     
-    public abstract void codeGenBody(DecacCompiler compiler, Label labelFin);
+    public abstract int codeGenBody(DecacCompiler compiler, Label labelFin);
     
     public abstract ListDeclVar getVar();
 }

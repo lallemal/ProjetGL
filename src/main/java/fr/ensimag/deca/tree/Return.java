@@ -45,6 +45,7 @@ public class Return extends AbstractInst {
     }
     
     public void codeGenInst(DecacCompiler compiler, Label labelFin) {
+    	compiler.setRegistreUsed(2);
     	operand.codeExp(compiler, 2);
     	compiler.addInstruction(new LOAD(Register.getR(2), Register.R0));
         compiler.addInstruction(new BRA(labelFin));

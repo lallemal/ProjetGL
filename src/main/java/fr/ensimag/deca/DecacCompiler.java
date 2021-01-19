@@ -12,6 +12,7 @@ import fr.ensimag.ima.pseudocode.AbstractLine;
 import fr.ensimag.ima.pseudocode.IMAProgram;
 import fr.ensimag.ima.pseudocode.Instruction;
 import fr.ensimag.ima.pseudocode.Label;
+import fr.ensimag.ima.pseudocode.Line;
 import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.RegisterOffset;
 
@@ -111,14 +112,34 @@ public class DecacCompiler implements Callable<Boolean> {
      * fr.ensimag.ima.pseudocode.IMAProgram#add(fr.ensimag.ima.pseudocode.AbstractLine)
      */
     public void add(AbstractLine line) {
-        program.add(line);
+    	if (aux) {
+    		programAux.add(line);
+    	} else {
+    		program.add(line);
+    	}
+    }
+    
+    /**
+     * @see
+     * fr.ensimag.ima.pseudocode.IMAProgram#addFirst(fr.ensimag.ima.pseudocode.AbstractLine)
+     */
+    public void addFirst(Line line) {
+    	if (aux) {
+    		programAux.addFirst(line);
+    	} else {
+    		program.addFirst(line);
+    	}
     }
 
     /**
      * @see fr.ensimag.ima.pseudocode.IMAProgram#addComment(java.lang.String)
      */
     public void addComment(String comment) {
-        program.addComment(comment);
+    	if (aux) {
+    		programAux.addComment(comment);
+    	} else {
+    		program.addComment(comment);
+    	}
     }
 
     /**
@@ -126,7 +147,11 @@ public class DecacCompiler implements Callable<Boolean> {
      * fr.ensimag.ima.pseudocode.IMAProgram#addLabel(fr.ensimag.ima.pseudocode.Label)
      */
     public void addLabel(Label label) {
-        program.addLabel(label);
+    	if (aux) {
+    		programAux.addLabel(label);
+    	} else {
+    		program.addLabel(label);
+    	}
     }
 
     /**
@@ -134,8 +159,25 @@ public class DecacCompiler implements Callable<Boolean> {
      * fr.ensimag.ima.pseudocode.IMAProgram#addInstruction(fr.ensimag.ima.pseudocode.Instruction)
      */
     public void addInstruction(Instruction instruction) {
-        program.addInstruction(instruction);
+    	if (aux) {
+    		programAux.addInstruction(instruction);
+    	} else {
+    		program.addInstruction(instruction);
+    	}
     }
+    
+    /**
+    * @see
+    * fr.ensimag.ima.pseudocode.IMAProgram#addFirstInstruction(fr.ensimag.ima.pseudocode.Instruction,
+    * java.lang.String)
+    */
+    public void addInstructionFirst(Instruction instruction) {
+    	if (aux) {
+    		programAux.addFirst(new Line(instruction));
+   		} else {
+   			program.addFirst(new Line(instruction));
+   		}
+   }
 
     /**
      * @see
@@ -143,7 +185,20 @@ public class DecacCompiler implements Callable<Boolean> {
      * java.lang.String)
      */
     public void addInstruction(Instruction instruction, String comment) {
-        program.addInstruction(instruction, comment);
+    	if (aux) {
+    		programAux.addInstruction(instruction, comment);
+   		} else {
+   			program.addInstruction(instruction, comment);
+   		}
+    }
+    
+    /**
+     * @see
+     * fr.ensimag.ima.pseudocode.IMAProgram#append(fr.ensimag.ima.pseudocode.Instruction,
+     * java.lang.String)
+     */
+    public void append(IMAProgram p) {
+        program.append(p);
     }
     
     /**
@@ -160,7 +215,42 @@ public class DecacCompiler implements Callable<Boolean> {
      * The main program. Every instruction generated will eventually end up here.
      */
     private final IMAProgram program = new IMAProgram();
- 
+    private IMAProgram programAux;
+    private boolean aux = false;
+    private boolean[] registreUsed;
+    
+    public void resetRegistreUsed() {
+    	this.registreUsed = new boolean[16];
+    	for (int i = 0; i<16; i++) {
+    		registreUsed[i] = false;
+    	}
+    }
+    
+    public void setRegistreUsed(int n) {
+    	this.registreUsed[n] = true;
+    }
+    
+    public int nbRegistreUsed() {
+    	int cp = 0;
+    	for (int i = 0; i<16; i++) {
+    		if (registreUsed[i]) {
+    			cp++;
+    		}
+    	}
+    	return cp;
+    }
+    
+    public void setAux(boolean b) {
+    	this.aux = b;
+    }
+    
+    public void cleanProgramAux() {
+    	programAux = new IMAProgram();
+    }
+    
+    public IMAProgram getProgramAux() {
+    	return programAux;
+    }
 
     /**
      * Run the compiler (parse source file, generate code)

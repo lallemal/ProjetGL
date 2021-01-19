@@ -44,17 +44,17 @@ public class Assign extends AbstractBinaryExpr {
     
     @Override
     protected void codeGenInst(DecacCompiler compiler) {
+    	compiler.setRegistreUsed(2);
+    	AbstractExpr e = this.getRightOperand(); 
+        e.codeExp(compiler, 2);
     	if (this.getLeftOperand().isIdentifier()) {
 	        Identifier x = (Identifier) this.getLeftOperand();
-	        AbstractExpr e = this.getRightOperand(); 
-	        e.codeExp(compiler, 2);
 	        compiler.addInstruction(new STORE(Register.getR(2), x.getExpDefinition().getOperand()));
     	} else if (this.getLeftOperand().isSelection()) {
     		Selection select = (Selection) this.getLeftOperand();
-    		AbstractExpr e = this.getRightOperand(); 
-	        e.codeExp(compiler, 2);
 	        int index = select.getIdent().getFieldDefinition().getIndex()+1;
 	        if (select.getExpr().isThis()) {
+	        	compiler.setRegistreUsed(3);
 	        	compiler.addInstruction(new LOAD(new RegisterOffset(-2, Register.LB), Register.getR(3)));
 	        	compiler.addInstruction(new CMP(new NullOperand(), Register.getR(3)));
 	        	compiler.addInstruction(new BEQ(compiler.getLabelError().getLabelDereferencementNull()));
@@ -65,6 +65,7 @@ public class Assign extends AbstractBinaryExpr {
 	        }
 	        else if (select.getExpr().isIdentifier()) {
 	        	Identifier a = (Identifier) select.getExpr();
+	        	compiler.setRegistreUsed(2);
 	        	compiler.addInstruction(new LOAD(a.getExpDefinition().getOperand(), Register.getR(3)));
 	        	compiler.addInstruction(new STORE(Register.getR(2), new RegisterOffset(index, Register.getR(3))));
 	        }

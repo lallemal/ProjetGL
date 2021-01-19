@@ -212,7 +212,7 @@ public class Identifier extends AbstractIdentifier {
     	ExpDefinition def = this.getExpDefinition();
     	if (def.isField()) {
 	    	compiler.addInstruction(new LOAD(new RegisterOffset(-2, Register.LB), Register.getR(n)));
-			compiler.addInstruction(new LOAD(new RegisterOffset(1, Register.getR(n)), Register.getR(n)));
+			compiler.addInstruction(new LOAD(new RegisterOffset( ((FieldDefinition) def).getIndex()+1, Register.getR(n)), Register.getR(n)));
     	} else if (def.isParam()) {
     		int index = ((ParamDefinition) def).getIndex();
     		compiler.addInstruction(new LOAD(new RegisterOffset(-(3+index), Register.LB), Register.getR(n)));

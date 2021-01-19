@@ -73,8 +73,8 @@ list_decl returns[ListDeclVar tree]
 
 decl_var_set[ListDeclVar l]
     : type 
-    ( LHOOK (INT) RHOOK // Délcaration d'un tableau
-    | (LHOOK RHOOK)+) // Déclaration d'une matrice
+//    ( LHOOK (INT) RHOOK // Délcaration d'un tableau
+//    | (LHOOK RHOOK)+)? // Déclaration d'une matrice
     list_decl_var[$l,$type.tree] SEMI
     ;
 
@@ -117,7 +117,7 @@ decl_var[AbstractIdentifier t] returns[AbstractDeclVar tree]
         }
       )? {
       	$tree = new DeclVarArray($t, $e1.tree, $i1.tree, init);
-      	setLocation($tree, $i1.start);
+      	setLocation($tree, $e1.start);
         }
       | (LHOOK RHOOK)+ i2=ident e3=expr{
             assert($e3.tree != null);
@@ -125,6 +125,7 @@ decl_var[AbstractIdentifier t] returns[AbstractDeclVar tree]
             init = new Initialization($e3.tree);
       		setLocation(init, $e3.start);
       		$tree = new DeclVarMatrix($t, $i2.tree, (Initialization)init);
+      		setLocation($tree, $i2.start);
 
         }
     ;

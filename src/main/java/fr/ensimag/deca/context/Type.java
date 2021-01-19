@@ -67,6 +67,7 @@ public abstract class Type {
     }
 
     public boolean isArray() {return false;}
+    public boolean isNoType() {return false;}
 
     /**
      * Returns the same object, as type ClassType, if possible. Throws

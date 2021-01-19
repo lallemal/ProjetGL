@@ -26,7 +26,21 @@ public class NewArray extends AbstractExpr{
 	    if (type.isVoid()) {
 	    	throw new ContextualError(ContextualError.ARRAY_NEW_VOID, getLocation());
 		}
+	    boolean stop = false;
+		for (int i = 0; i < memory.size(); i++) {
+		    Type otherType = memory.getList().get(i).verifyExpr(compiler, localEnv, currentClass);
+			if (!stop && otherType.isNoType()) {
+				stop = true;
+			}
+			if (stop && !otherType.isNoType()) {
+				throw new ContextualError(ContextualError.ARRAY_NO_THEN, getLocation());
+			}
+			if (!type.isNoType() && !type.isInt()) {
+				throw new ContextualError(ContextualError.ARRAY_DIM_GIVEN, getLocation());
+			}
+		}
 	    ArrayType arrayType = new ArrayType(compiler.getSymbols().create(type.toString() + "_" + memory.size()), type, memory.size());
+	    setType(arrayType);
 	    return arrayType;
 	}
 

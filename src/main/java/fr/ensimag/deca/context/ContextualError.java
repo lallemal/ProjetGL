@@ -56,7 +56,7 @@ public class ContextualError extends LocationException {
     public static final String IDENTIFIER_NOT_METHOD = "This identifier does not correspond to a method in this scope"; // 3.72
     public static final String SIG_LIST_EXPR_NOT_MATCH = "The signature of this method does not match the number of parameters given"; // 3.74
 
-
+    public static final String ARRAY_DIM_NULL = "This array is of null dimension : can be a base type";
     public ContextualError(String message, Location location) {
         super(message, location);
     }

@@ -33,6 +33,10 @@ public class Assign extends AbstractBinaryExpr {
         // TODO LeftOperand is lvalue 3.64 certainly lvalue class has to be completed
         Type type = getLeftOperand().verifyExpr(compiler, localEnv, currentClass);
         setRightOperand(getRightOperand().verifyRValue(compiler, localEnv, currentClass, type));
+        if (type.isArray()) {
+            getLeftOperand().setDimension(getRightOperand().getDimension());
+        }
+
         setType(type);
         return type;
     }

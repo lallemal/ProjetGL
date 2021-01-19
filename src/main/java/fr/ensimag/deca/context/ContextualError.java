@@ -57,6 +57,10 @@ public class ContextualError extends LocationException {
     public static final String SIG_LIST_EXPR_NOT_MATCH = "The signature of this method does not match the number of parameters given"; // 3.74
 
     public static final String ARRAY_DIM_NULL = "This array is of null dimension : can be a base type";
+    public static final String ARRAY_NEW_VOID = "The base Type of this array can not be void";
+    public static final String ARRAY_LITERAL_NOT_SAME = "Elements of array literal are not all of the same type";
+    public static final String ARRAY_LITERAL_EMPTY = "Array Literal can not be empty";
+
     public ContextualError(String message, Location location) {
         super(message, location);
     }

@@ -23,6 +23,8 @@ public class Initialization extends AbstractInitialization {
 
     private AbstractExpr expression;
 
+
+
     public void setExpression(AbstractExpr expression) {
         Validate.notNull(expression);
         this.expression = expression;
@@ -43,6 +45,7 @@ public class Initialization extends AbstractInitialization {
             EnvironmentExp localEnv, ClassDefinition currentClass)
             throws ContextualError {
         setExpression(expression.verifyRValue(compiler, localEnv, currentClass, t));
+        setDimension(expression.getDimension());
     }
 
 

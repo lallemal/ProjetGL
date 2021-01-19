@@ -38,4 +38,9 @@ public class ArrayType extends Type {
         ArrayType otherTypeArray = (ArrayType) otherType;
         return otherTypeArray.getBaseType().sameType(baseType) && otherTypeArray.getDimension() == dimension;
     }
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }

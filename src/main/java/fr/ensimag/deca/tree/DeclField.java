@@ -85,5 +85,10 @@ public class DeclField extends AbstractDeclField{
     protected void verifyDeclFieldBody(DecacCompiler compiler, ClassDefinition currentClass) throws ContextualError {
         Type type = this.type.verifyType(compiler);
         init.verifyInitialization(compiler, type, currentClass.getMembers(), currentClass);
+        if (type.isArray() && nom.getDefinition().isField()) {
+            FieldDefinition def = (FieldDefinition) nom.getDefinition();
+            def.setDimensions(init.getDimension());
+
+        }
     }
 }

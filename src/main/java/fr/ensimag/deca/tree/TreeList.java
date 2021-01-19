@@ -1,11 +1,12 @@
 package fr.ensimag.deca.tree;
 
+import org.apache.commons.lang.Validate;
+
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-import org.apache.commons.lang.Validate;
 
 /**
  *
@@ -25,6 +26,11 @@ public abstract class TreeList<TreeType extends Tree> extends Tree {
     public void add(TreeType i) {
         Validate.notNull(i);
         list.add(i);
+    }
+
+    public void addFirst(TreeType i) {
+        Validate.notNull(i);
+        list.add(0, i);
     }
 
     /**

@@ -33,7 +33,6 @@ public abstract class AbstractExpr extends AbstractInst {
     boolean isImplicit() {
         return false;
     }
-
     /**
      * Get the type decoration associated to this expression (i.e. the type computed by contextual verification).
      */
@@ -46,6 +45,17 @@ public abstract class AbstractExpr extends AbstractInst {
         this.type = type;
     }
     private Type type;
+
+    public ListExpr getDimension() {
+        return dimension;
+    }
+
+    public void setDimension(ListExpr dimension) {
+        Validate.notNull(dimension);
+        this.dimension = dimension;
+    }
+
+    private ListExpr dimension = new ListExpr();
 
     @Override
     protected void checkDecoration() {

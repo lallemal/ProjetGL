@@ -625,6 +625,7 @@ type returns[AbstractIdentifier tree]
         		iden = new IdentifierArray($ident.tree, i);
         	}
         	$tree = iden;
+        	setLocation($tree, $ident.start);
         }
     ;
 

@@ -10,6 +10,8 @@ import java.io.PrintStream;
 public class IdentifierArray extends AbstractIdentifier{
 	final private AbstractIdentifier varName;
 	final private int length;
+
+	private Definition definition;
 	
 	public IdentifierArray(AbstractIdentifier varName, int length) {
 		this.varName = varName;
@@ -23,8 +25,7 @@ public class IdentifierArray extends AbstractIdentifier{
 
 	@Override
 	public Definition getDefinition() {
-		// TODO Auto-generated method stub
-		return null;
+	    return definition;
 	}
 
 	@Override
@@ -41,7 +42,7 @@ public class IdentifierArray extends AbstractIdentifier{
 
 	@Override
 	public Symbol getName() {
-		// TODO Auto-generated method stub
+	    // TODO
 		return null;
 	}
 
@@ -65,7 +66,11 @@ public class IdentifierArray extends AbstractIdentifier{
 
 	@Override
 	public Type verifyType(DecacCompiler compiler) throws ContextualError {
-		return null;
+	    Type baseType = varName.verifyType(compiler);
+	    ArrayType arrayType = new ArrayType(compiler.getSymbols().create(varName.getName().toString()+"_"+length), baseType, length);
+		TypeDefinition typeDef = new TypeDefinition(arrayType, Location.BUILTIN);
+		setDefinition(typeDef);
+	    return arrayType;
 	}
 
 	@Override

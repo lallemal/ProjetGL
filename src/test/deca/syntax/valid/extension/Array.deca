@@ -6,6 +6,8 @@ class A{
     }
 }
 {
+		A[] objTab = new A[3];
+
         int[] x = new int[2+2];
         int[][] mat = new int[4][5];
         int[][][][] bigMat = new int[3][2][1][2];
@@ -19,7 +21,7 @@ class A{
         bigMat[0][0][0][1] = 2 * bigMat[0][0][0][0];
         println(bigMat[0][0][0][1]);
         
-        
+ 		A[0] = new A();
         bigMat = new int[4][3][2][1];
         
        

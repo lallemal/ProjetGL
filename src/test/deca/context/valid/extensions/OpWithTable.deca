@@ -1,0 +1,61 @@
+class Puiss {
+    int x;
+    int n;
+    void init(int x, int n) {
+        this.x = x;
+        this.n = n;
+    }
+
+    int puiss() {
+        int a = 1;
+        int b = this.n;
+        while (b > 0) {
+            a = a * this.x;
+            b = b - 1;
+        }
+        return a;
+    }
+
+}
+
+
+class Add {
+    void add(int[] a, int[] b, int n) {
+        int i = 0;
+        while (i < n) {
+            a[i] = a[i] + b[i];
+            i = i + 1;
+        }
+    }
+}
+
+
+
+{
+    int n = 10;
+    int[] x = new int[n];
+    int i = 0;
+    int sum = 0;
+    Puiss puiss = new Puiss();
+    Add addClass = new Add();
+    while (i < n) {
+        x[i] = i;
+        i = i +1;
+    }
+
+    i = 0;
+    while (i < n) {
+        sum = sum + x[i];
+        x[i] = sum;
+        i = i + 1;
+    }
+
+    x[0] = x[0] / x[1];
+    x[3] = x[2] - x[1];
+    x[4] = x[3] % x[2];
+    puiss.init(x[4], x[5]);
+    x[6] = puiss.puiss();
+
+    addClass.add(x, x, n);
+
+}

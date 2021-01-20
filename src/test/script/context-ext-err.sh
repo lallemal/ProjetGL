@@ -15,7 +15,7 @@ cd "$(dirname "$0")"/../../.. || exit 1
 
 PATH=./src/test/script/launchers:"$PATH"
 INVALID_CONTEXT=src/test/deca/context/invalid/extension
-VALID_CONTEXT=src/test/deca/context/valid/extension
+VALID_CONTEXT=src/test/deca/context/valid/extensions
 VALID_CODEGEN=src/test/deca/codegen/valid/extension
 
 # /!\ test valide lexicalement, mais invalide pour l'étape A.

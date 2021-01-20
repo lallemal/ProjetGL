@@ -2,4 +2,12 @@
 
 {
     float[] x = new float[4];
+    float[][] u = new float[4][3];
+    float[][] v = new float[4][];
+    int[][][][] w;
+    int i = 0;
+    while (i < 4) {
+        v[i] = new float[i];
+        i = i + 1;
+    }
 }

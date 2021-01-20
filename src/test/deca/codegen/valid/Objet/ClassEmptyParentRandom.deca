@@ -4,8 +4,7 @@
 // Resultats decac:
 // Resultat ima: Rien
 
-// PROBLEME AVEC DECAC: Identifier A has no attached Definition
-// DANS IDENTIFIER.CHECKDEOCRATION(LIGNE 31)
+// PLUTOT OK
 
 class A{
 }

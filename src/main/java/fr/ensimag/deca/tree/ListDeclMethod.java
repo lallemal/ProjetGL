@@ -45,9 +45,9 @@ public class ListDeclMethod extends TreeList<AbstractDeclMethod>{
     	
     	for (AbstractDeclMethod i : getList()) {
     		if (noms.containsKey(i.getName().getName().getName())) {
-    			Signature sig1 = i.getName().getMethodDefinition().getSignature();
-    			Signature sig2 = (noms.get(i.getName().getName().getName())).getName().getMethodDefinition().getSignature();
-    			if (sig1.sameSignature(sig2)) {
+    			Signature sig_fille = i.getName().getMethodDefinition().getSignature();
+    			Signature sig_mere = (noms.get(i.getName().getName().getName())).getName().getMethodDefinition().getSignature();
+    			if (sig_fille.sameSignature(sig_mere)) {
     				i.codeGenDeclMethodOverride(compiler, noms.get(i.getName().getName().getName()).getName().getMethodDefinition().getAddress());
     				// On ecrase la methode mere par la methode fille
     			}

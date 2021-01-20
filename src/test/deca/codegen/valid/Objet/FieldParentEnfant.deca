@@ -6,11 +6,12 @@
 // attribut de la mère: 1
 // attribut de la fille: O
 
-
+// PLUTOT OK
 
 class A{
 
     int x = 1;
+    int a;
     
     int getX(){
         return x;
@@ -19,6 +20,7 @@ class A{
 }
 class B extends A{
     int y = 0;
+
 
     int getY(){
         return y;

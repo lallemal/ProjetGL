@@ -4,6 +4,8 @@
 // Resultats decac:
 // Resultat ima: 
 
+// PLUTOT OK
+
 class A{
  
     int x = 1;

@@ -4,8 +4,7 @@
 // Resultats decac:
 // Resultat ima: 
 
-// PROBLEME DECAC: DifferentAssign.deca:28:6: no viable alternative at input 'a' SI LA PARTIE AVEC NEW A().X EST AVANT LE A a = NEW A()????
-
+// PLUTOT OK
 
 
 class A{

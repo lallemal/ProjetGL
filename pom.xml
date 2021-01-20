@@ -348,9 +348,9 @@
                         </goals>
                     </execution>
                     <execution>
-                        <id>CodeGen-Objet</id>
+                        <id>codegen-objet</id>
                         <configuration>
-                            <executable>./src/test/script/CodeGen-Objet.sh</executable>
+                            <executable>./src/test/script/codegen-objet.sh</executable>
                         </configuration>
                         <phase>test</phase>
                         <goals>

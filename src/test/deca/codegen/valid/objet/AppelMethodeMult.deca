@@ -1,0 +1,24 @@
+// Description :
+//    Test génération de code pour un appel multiple de méthode à la chaîne
+//
+// Resultats decac:
+// Resultat ima: 2
+
+
+class A{
+    
+    int i = 2;
+    
+    int getI(){
+        return i;
+    }
+
+    void setI(int j){
+        this.i = j;
+    }
+}
+{
+    A a = new A();
+    a.setI(a.getI());
+    println(a.getI());
+}

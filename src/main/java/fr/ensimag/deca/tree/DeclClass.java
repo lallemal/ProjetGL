@@ -125,6 +125,7 @@ public class DeclClass extends AbstractDeclClass {
         if (!parentType.isClass()) {
             throw new ContextualError(ContextualError.PARENT_CLASS_NOT_CLASS, getLocation());
         }
+        parent.setDefinition(parentType);
         ClassType newClassType = new ClassType(name, getLocation(), (ClassDefinition)parentType);
         ClassDefinition newClassDef = new ClassDefinition(newClassType, getLocation(), (ClassDefinition) parentType);
         try {

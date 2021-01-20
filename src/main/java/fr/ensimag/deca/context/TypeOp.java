@@ -28,7 +28,7 @@ public class TypeOp {
             TypeDefinition classExpDef = compiler.getEnv_types().get(classType1.getName());
             ClassDefinition classDef = (ClassDefinition) classExpDef;
             ClassDefinition superDef = classDef.getSuperClass();
-            if (subType(compiler, superDef.getType(), type2)) {
+            if (superDef != null && subType(compiler, superDef.getType(), type2)) {
                 return true;
             }
         }
@@ -56,5 +56,30 @@ public class TypeOp {
 
     static public boolean castComp(DecacCompiler compiler, Type type1, Type type2) {
         return   (!type1.isVoid()) && (assignComp(compiler, type1, type2) || assignComp(compiler, type2, type1));
+    }
+
+    static public Type possibleParent;
+    static public boolean hasParent(DecacCompiler compiler, Type type1, Type type2) {
+        if (subType(compiler, type1, type2)) {
+            possibleParent = type2;
+            return true;
+        }
+        if (subType(compiler, type2, type1)) {
+            possibleParent = type1;
+            return true;
+        }
+        if (type1.isClass() && type2.isClass()) {
+            ClassType classType1 = (ClassType) type1;
+            ClassType classType2 = (ClassType) type2;
+            ClassDefinition parent = classType1.getDefinition().getSuperClass();
+            while (parent != null) {
+                if (classType2.isSubClassOf(parent.getType())) {
+                    possibleParent =  parent.getType();
+                    return true;
+                }
+                parent = parent.getSuperClass();
+            }
+        }
+        return false;
     }
 }

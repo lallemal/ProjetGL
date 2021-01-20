@@ -50,6 +50,7 @@ public class ArrayLiteral extends AbstractExpr{
 		    return (emptyArrayType);
 		}
 		Type type = elements.getList().get(0).verifyExpr(compiler, localEnv, currentClass);
+		Type returnType = type;
 		int dim = 0;
 		ListExpr dimension = elements.getList().get(0).getDimension();
 		if (type.isArray()) {
@@ -57,8 +58,10 @@ public class ArrayLiteral extends AbstractExpr{
 		}
 		for (int i = 1; i < elements.size(); i++) {
 			Type otherType = elements.getList().get(i).verifyExpr(compiler,localEnv, currentClass);
-		    if (!type.sameType(otherType)) {
+		    if (!TypeOp.hasParent(compiler, type, otherType)) {
 		    	throw new ContextualError(ContextualError.ARRAY_LITERAL_NOT_SAME, getLocation());
+			} else {
+				returnType = TypeOp.possibleParent;
 			}
 		    if (!sameListDim(dimension, elements.getList().get(i).getDimension())) {
 		    	throw new ContextualError(ContextualError.ARRAY_LITERAL_NOT_SAME, getLocation());
@@ -66,7 +69,6 @@ public class ArrayLiteral extends AbstractExpr{
 		}
 		dimension.addFirst(new IntLiteral(elements.size()));
 		setDimension(dimension);
-		Type returnType = type;
 		if (type.isArray()) {
 			ArrayType arrayType = (ArrayType) type;
 			returnType = arrayType.getBaseType();

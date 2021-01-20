@@ -48,16 +48,12 @@ public class ListDeclMethod extends TreeList<AbstractDeclMethod>{
     			Signature sig_fille = i.getName().getMethodDefinition().getSignature();
     			Signature sig_mere = (noms.get(i.getName().getName().getName())).getName().getMethodDefinition().getSignature();
     			if (sig_fille.sameSignature(sig_mere)) {
+    				int indexMom = noms.get(i.getName().getName().getName()).getName().getMethodDefinition().getIndex();
+    				i.getName().getMethodDefinition().setIndex(indexMom);
     				i.codeGenDeclMethodOverride(compiler, noms.get(i.getName().getName().getName()).getName().getMethodDefinition().getAddress());
     				// On ecrase la methode mere par la methode fille
     			}
-    				
-    			/*
-    			 * premiere methode ..
-    			if (i.equals(noms.get(i.getName().getName().getName()))) { // Override
-    				i.codeGenDeclMethodOverride(compiler, noms.get(i.getName().getName().getName()).getName().getMethodDefinition().getAddress());
-    				// On ecrase la methode mere par la methode fille
-    			}*/
+    			
     		} else {
     			i.codeGenDeclMethod(compiler);
     			noms.put(i.getName().getName().getName(), i);

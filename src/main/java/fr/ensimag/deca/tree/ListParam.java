@@ -29,21 +29,6 @@ public class ListParam extends TreeList<AbstractDeclParam> {
         }
         return sig;
     }
-
-    public boolean equals(ListParam other) {
-    	Iterator i = this.iterator();
-    	Iterator j = other.iterator();
-
-    	while (i.hasNext() && j.hasNext()) {
-    		AbstractDeclParam pi = (AbstractDeclParam) i.next();
-    		AbstractDeclParam pj = (AbstractDeclParam) j.next();
-    		if (!(pi.equals(pj))) {
-    			return false;
-    		}
-    	}
-    		
-    	return this.size() == other.size();
-    } 
     
     public void verifyDeclMethodBody(DecacCompiler compiler, EnvironmentExp localExp, ClassDefinition currentClass)
         throws ContextualError {

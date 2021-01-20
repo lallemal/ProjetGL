@@ -45,12 +45,6 @@ public class DeclMethod extends AbstractDeclMethod {
 
     private static final Logger LOG = Logger.getLogger(DeclMethod.class);
     
-    public boolean equals(DeclMethod other) {
-    	boolean b1 = (type.getName().getName()).equals(other.getType().getName().getName());
-    	boolean b2 = param.equals(other.getListParam());
-    	return b1 && b2;
-    }
-    
     public DeclMethod(AbstractIdentifier type, AbstractIdentifier name, ListParam param, AbstractMethodBody body){
         Validate.notNull(type);
         Validate.notNull(name);

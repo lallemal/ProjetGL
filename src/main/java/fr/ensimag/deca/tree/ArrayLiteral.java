@@ -3,6 +3,7 @@ package fr.ensimag.deca.tree;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.deca.tools.SymbolTable;
 
 import java.io.PrintStream;
 
@@ -43,7 +44,10 @@ public class ArrayLiteral extends AbstractExpr{
 	public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass)
 			throws ContextualError {
 		if (elements.getList().size() == 0) {
-		    throw new ContextualError(ContextualError.ARRAY_LITERAL_EMPTY, getLocation());
+			SymbolTable.Symbol empty = compiler.getSymbols().create("emptyArray");
+		    ArrayType emptyArrayType = new ArrayType(empty, new NoType(empty), -1);
+		    setType(emptyArrayType);
+		    return (emptyArrayType);
 		}
 		Type type = elements.getList().get(0).verifyExpr(compiler, localEnv, currentClass);
 		int dim = 0;
@@ -88,6 +92,20 @@ public class ArrayLiteral extends AbstractExpr{
 	protected void iterChildren(TreeFunction f) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public void convFloat(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass) throws ContextualError {
+		for (int i = 0; i < elements.size(); i++) {
+			AbstractExpr expr = elements.getList().get(i);
+			Type type = expr.verifyExpr(compiler, localEnv, currentClass);
+			if (type.isInt()) {
+				elements.getList().set(i, new ConvFloat(expr));
+				elements.getList().get(i).verifyExpr(compiler, localEnv, currentClass);
+			} else {
+				ArrayLiteral sous = (ArrayLiteral) expr;
+				sous.convFloat(compiler, localEnv, currentClass);
+			}
+		}
 	}
 
 }

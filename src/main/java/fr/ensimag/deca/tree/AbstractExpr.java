@@ -104,6 +104,24 @@ public abstract class AbstractExpr extends AbstractInst {
         Type type2 = verifyExpr(compiler, localEnv, currentClass);
         if (!expectedType.isFloat() || !type2.isInt()) {
             if (!TypeOp.subType(compiler, expectedType, type2)) {
+                if (expectedType.isArray() && type2.isArray()) {
+                    ArrayType arrayType1 = (ArrayType) expectedType;
+                    ArrayType arrayType2 = (ArrayType) type2;
+                    if (arrayType2.getBaseType().isNoType() && arrayType2.getDimension() == -1) {
+                        LOG.debug("verify AbstractExpr Rvalue : end");
+                        return this;
+                    }
+                    /*if (arrayType1.getDimension() == arrayType2.getDimension() && arrayType1.getBaseType().isFloat() && arrayType2.getBaseType().isInt()) {
+                        if (this instanceof ArrayLiteral) {
+                            ArrayLiteral thisLiteral = (ArrayLiteral) this;
+                            thisLiteral.convFloat(compiler, localEnv, currentClass);
+                            verifyExpr(compiler, localEnv, currentClass);
+                            LOG.debug("verify AbstractExpr Rvalue : end");
+                            return this;
+                        }
+                    }*/
+                    throw new ContextualError(ContextualError.ASSIGN_NOT_COMPATIBLE + " (" + expectedType.toString() + "," + type2.toString() + ")", getLocation());
+                }
                 throw new ContextualError(ContextualError.ASSIGN_NOT_COMPATIBLE + " (" + expectedType.toString() + "," + type2.toString() + ")", getLocation());
             }
         }

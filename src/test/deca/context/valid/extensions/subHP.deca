@@ -11,4 +11,5 @@ class VifDOr extends HarryPotter{
 {
     HarryPotter[] albusPersevalWulfricBrianDumblerdore = { new Nimbus2000(), new VifDOr() };
     Nimbus2000[] essai2 = {new Nimbus2000(), new Nimbus2000()};
-    }
+
+}

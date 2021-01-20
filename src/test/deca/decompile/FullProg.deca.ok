@@ -31,8 +31,7 @@ class Thing extends Objet {
 		print("ok!");
 	}
 	else {
-		if ((j < 1) && (!b)
-		) {
+		if ((j < 1) && (!b)) {
 			if (k != 0) {
 			}
 			else {
@@ -40,8 +39,7 @@ class Thing extends Objet {
 		}
 		else {
 			(i = (i - 1));
-			(k = (-0x1.8p1)
-			);
+			(k = (-0x1.8p1));
 		}
 	}
 	while (i > 5) {

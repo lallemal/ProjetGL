@@ -34,8 +34,8 @@ public class New extends AbstractExpr {
 	@Override
 	protected void codeExp(DecacCompiler compiler, int n) {
 		compiler.getLabelError().setErrorTasPlein(true);
-		int nbField = ident.getClassDefinition().getNumberOfFields() + 1; 	
-		compiler.addInstruction(new NEW(new ImmediateInteger(nbField), Register.getR(n)));
+		int nbField = ident.getClassDefinition().getNumberOfFields(); 	
+		compiler.addInstruction(new NEW(new ImmediateInteger(nbField+1), Register.getR(n)));
 		compiler.addInstruction(new BOV(compiler.getLabelError().getLabelTasPlein()));
 		compiler.addInstruction(new LEA(ident.getClassDefinition().getAddress(), Register.R0));
 		compiler.addInstruction(new STORE(Register.R0, new RegisterOffset(0, Register.getR(n))));

@@ -23,11 +23,16 @@ class A{
 
 }
 {
+    int y;
+    A a = new A();
+
+    //Assign Selection New
+    (new A()).x = 2;
+    
     //Assign Identifier
-    int y = 1;
+    y = 1;
     
     //Assign Selection Identifier
-    A a = new A();
     a.x = 3;
 
     println("Assign Identifier ", y);
@@ -36,8 +41,6 @@ class A{
     a.setX(4);
     println("Assign Selection This ", a.x);
 
-    //Assign Selection New
-    (new A()).x = 2;
     
 }
 

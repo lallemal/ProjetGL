@@ -42,33 +42,30 @@ public class MethodCall extends AbstractExpr{
 	
 	@Override
 	protected void codeExp(DecacCompiler compiler, int n) {
-		if (expr.isIdentifier()) {
-			Identifier a = (Identifier) expr;
-			int nbParam = ident.getMethodDefinition().getSignature().size();
-			compiler.getLabelError().setErrorPilePleine(true);
-			compiler.addInstruction(new TSTO(nbParam+1));
-			compiler.addInstruction(new BOV(compiler.getLabelError().getLabelPilePleine()));
-			compiler.incrementKSP(nbParam+1);
-			compiler.addInstruction(new ADDSP(nbParam+1));
-			compiler.addInstruction(new LOAD(a.getExpDefinition().getOperand(), Register.getR(n)));
-			compiler.addInstruction(new STORE(Register.getR(n), new RegisterOffset(0, Register.SP)));
-			int index = 1;
-			for (AbstractExpr e : listExpr.getList()) {
-				e.codeExp(compiler, n);
-				compiler.addInstruction(new STORE(Register.getR(n), new RegisterOffset(-index, Register.SP)));
-				index++;
-			}
-			compiler.getLabelError().setErrorDereferencementNull(true);
-			compiler.addInstruction(new LOAD(new RegisterOffset(0, Register.SP), Register.getR(n)));
-			compiler.addInstruction(new CMP(new NullOperand(), Register.getR(n)));
-			compiler.addInstruction(new BEQ(compiler.getLabelError().getLabelDereferencementNull()));
-			compiler.addInstruction(new LOAD(new RegisterOffset(0, Register.getR(n)), Register.getR(n)));
-			compiler.incrementKSP(2);
-			compiler.addInstruction(new BSR(new RegisterOffset(ident.getMethodDefinition().getIndex()+1, Register.getR(n))));
-			compiler.decrementKSP(2);
-			compiler.addInstruction(new SUBSP(nbParam+1));
-			compiler.decrementKSP(nbParam+1);
+		int nbParam = ident.getMethodDefinition().getSignature().size();
+		compiler.getLabelError().setErrorPilePleine(true);
+		compiler.addInstruction(new TSTO(nbParam+1));
+		compiler.addInstruction(new BOV(compiler.getLabelError().getLabelPilePleine()));
+		compiler.incrementKSP(nbParam+1);
+		compiler.addInstruction(new ADDSP(nbParam+1));
+		expr.codeExp(compiler, n);
+		compiler.addInstruction(new STORE(Register.getR(n), new RegisterOffset(0, Register.SP)));
+		int index = 1;
+		for (AbstractExpr e : listExpr.getList()) {
+			e.codeExp(compiler, n);
+			compiler.addInstruction(new STORE(Register.getR(n), new RegisterOffset(-index, Register.SP)));
+			index++;
 		}
+		compiler.getLabelError().setErrorDereferencementNull(true);
+		compiler.addInstruction(new LOAD(new RegisterOffset(0, Register.SP), Register.getR(n)));
+		compiler.addInstruction(new CMP(new NullOperand(), Register.getR(n)));
+		compiler.addInstruction(new BEQ(compiler.getLabelError().getLabelDereferencementNull()));
+		compiler.addInstruction(new LOAD(new RegisterOffset(0, Register.getR(n)), Register.getR(n)));
+		compiler.incrementKSP(2);
+		compiler.addInstruction(new BSR(new RegisterOffset(ident.getMethodDefinition().getIndex()+1, Register.getR(n))));
+		compiler.decrementKSP(2);
+		compiler.addInstruction(new SUBSP(nbParam+1));
+		compiler.decrementKSP(nbParam+1);
 		compiler.addInstruction(new LOAD(Register.R0, Register.getR(n)));
 	}
 	

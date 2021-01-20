@@ -8,6 +8,7 @@ package fr.ensimag.deca.tree;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
+import fr.ensimag.deca.context.Signature;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import java.io.PrintStream;
 import java.util.HashMap;
@@ -44,10 +45,19 @@ public class ListDeclMethod extends TreeList<AbstractDeclMethod>{
     	
     	for (AbstractDeclMethod i : getList()) {
     		if (noms.containsKey(i.getName().getName().getName())) {
-    			if (i.equals(noms.get(i.getName().getName().getName()))) { // Override
+    			Signature sig1 = i.getName().getMethodDefinition().getSignature();
+    			Signature sig2 = (noms.get(i.getName().getName().getName())).getName().getMethodDefinition().getSignature();
+    			if (sig1.sameSignature(sig2)) {
     				i.codeGenDeclMethodOverride(compiler, noms.get(i.getName().getName().getName()).getName().getMethodDefinition().getAddress());
     				// On ecrase la methode mere par la methode fille
     			}
+    				
+    			/*
+    			 * premiere methode ..
+    			if (i.equals(noms.get(i.getName().getName().getName()))) { // Override
+    				i.codeGenDeclMethodOverride(compiler, noms.get(i.getName().getName().getName()).getName().getMethodDefinition().getAddress());
+    				// On ecrase la methode mere par la methode fille
+    			}*/
     		} else {
     			i.codeGenDeclMethod(compiler);
     			noms.put(i.getName().getName().getName(), i);

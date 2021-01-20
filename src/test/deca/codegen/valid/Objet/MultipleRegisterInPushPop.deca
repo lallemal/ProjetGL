@@ -13,17 +13,19 @@ class A{
     int x = 1;
 
     int TestMultipleRegister(){
-        int a, b, c, d, e, f;
-	a = 1;
-	b = 2;
-	c = 3;
-	d = 4;
-	e = 5;
-	f = 6;
-        return a*f*b/(c*a*b) + b * (c*b*a*d*e) /(e*(d*a*b)*a);
+        int a, b, c, d, e, f, g;
+	    a = 1;
+	    b = 2;
+	    c = 3;
+	    d = 4;
+	    e = 5;
+	    f = 6;
+        g = a*f*b/(c*a*b) + b * (c*b*a*d*e) /(e*(d*a*b)*a);
+        return g;
     }
 }
 {
-    print((new A()).TestMultipleRegister());
+    A a = new A();
+    print(a.TestMultipleRegister());
     
 }

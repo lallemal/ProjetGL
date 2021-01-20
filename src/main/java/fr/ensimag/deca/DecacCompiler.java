@@ -91,13 +91,39 @@ public class DecacCompiler implements Callable<Boolean> {
     	kGB++;
     }
     
+    public void incrementKGB(int n) {
+    	kGB = kGB + n;
+    }
+    
     public void decrementKGB() {
     	kGB--;
     	assert(kGB > 0);
     }
     
+
+    public void decrementKGB(int n) {
+    	kGB = kGB - n;
+    	assert(kGB > 0);
+    }
+    
     public int getKGB() {
     	return kGB;
+    }
+    
+    public int getKSP() {
+    	return kSP;
+    }
+    
+    public void setKGB(int x) {
+    	kGB = x;
+    }
+    
+    public void setKSP(int x) {
+    	kSP = x;
+    }
+    
+    public void setMaxSP(int x) {
+    	maxSP = x;
     }
     
     /**
@@ -512,7 +538,7 @@ public class DecacCompiler implements Callable<Boolean> {
         typeParamIdent.setDefinition(objectDef);
         Identifier nameParamIdent = new Identifier(symbols.create("other"));
         nameParamIdent.setLocation(Location.BUILTIN);
-        nameParamIdent.setDefinition(objectDef);
+        nameParamIdent.setDefinition(new ParamDefinition(objectDef.getType(), Location.BUILTIN, 0));
         DeclParam paramObject = new DeclParam(typeParamIdent, nameParamIdent);
         listParamEquals.add(paramObject);
 

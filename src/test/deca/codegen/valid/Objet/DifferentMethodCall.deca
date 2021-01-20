@@ -22,9 +22,9 @@ class A{
 {
     A a = new A();
     //method call Identifier
-    print(a.getX());
+    println(a.getX());
     
     //method call new
-    print((new A()).getX());
+    println((new A()).getX());
     
 }

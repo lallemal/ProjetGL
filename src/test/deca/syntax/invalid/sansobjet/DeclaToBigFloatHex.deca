@@ -1,6 +1,0 @@
-//Erreur de compilation: arrondi a l infini
-//Description: teste creation folttant converti a l infini
-//Resultats: erreur ligne 5: arrondi a l'infini
-{
-    float t = 0x1.FFFFFFp127;
-}

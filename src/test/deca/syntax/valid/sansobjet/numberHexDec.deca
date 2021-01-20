@@ -1,0 +1,12 @@
+
+//Description: Test nombre hexa et decimal
+//Resultats: OK
+
+{
+    float f = 0.3232E12f;
+    float t = 0.00e12F;
+    float u = 1.23e3;
+    float v = 0x0.010p+12;
+    float w = 0X0.000P1f;
+    float x = 0xAF.1P21F;
+}

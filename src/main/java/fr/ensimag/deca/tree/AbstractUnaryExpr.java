@@ -29,7 +29,7 @@ public abstract class AbstractUnaryExpr extends AbstractExpr {
         s.print("(" );
         s.print(getOperatorName());
         operand.decompile(s);
-        s.println(")");
+        s.print(")");
     }
 
     @Override

@@ -18,9 +18,9 @@ COMMENT : (('/*' .*? '*/') | ('//' .*? '\n')) { skip(); } ;
 fragment LETTRE : 'a'..'z' | 'A'..'Z' ;
 fragment SPECIALS : '!' | '?' | ',' | ';' ;
 fragment STRING_CAR : ~('"' | '\\' | '\n' ) ;
-STRING : '"' (STRING_CAR | '\\' )*? '"';
-MULTI_LINE_STRING : '"' (STRING_CAR | '\n' | '\\' )*? '"'; 
 
+STRING : '"' (STRING_CAR | '\\\\' | '\\"' )*? '"';
+MULTI_LINE_STRING : '"' (STRING_CAR | '\n' | '\\' )*? '"'; 
 // caractere speciaux
 OBRACE : '{' ;
 CBRACE : '}' ; 

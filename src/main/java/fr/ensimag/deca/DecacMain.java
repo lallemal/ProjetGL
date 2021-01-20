@@ -39,14 +39,12 @@ public class DecacMain {
         }
         if (options.getPrintBanner()) {
         	System.out.println("groupe 8 gl40");
-            //throw new UnsupportedOperationException("decac -b not yet implemented");
         	// sort après affichage de la banniere
         	System.exit(0);
         }
         
         if (options.getSourceFiles().isEmpty()) {
         	options.displayUsage();
-            //throw new UnsupportedOperationException("decac without argument not yet implemented");
         }
         if (options.getParallel()) {
             ExecutorService executor = Executors.newFixedThreadPool(java.lang.Runtime.getRuntime().availableProcessors());
@@ -68,10 +66,6 @@ public class DecacMain {
                     error = true;
                 }
             }
-            // A FAIRE : instancier DecacCompiler pour chaque fichier à
-            // compiler, et lancer l'exécution des méthodes compile() de chaque
-            // instance en parallèle. Il est conseillé d'utiliser
-            // java.util.concurrent de la bibliothèque standard Java.
         } else {
             for (File source : options.getSourceFiles()) {
                 DecacCompiler compiler = new DecacCompiler(options, source);

@@ -21,7 +21,6 @@ class Truc {
     }
 
     void printF() {
-        // printB();
         if (b) {
             println("f vaut : ", this.f);
         } else {
@@ -33,18 +32,10 @@ class Truc {
 {
 
     Truc objet = new Truc();
-    boolean t = true;
-    boolean f = false;
 
-    if (1 > 0) {
-        println("ok");
-    } else {
-        println("ok");
-    }
-
-    println(this.a);
+    objet.printB();
     objet.printF();
-    objet.setB(t);
+    objet.setB(true);
     objet.printB();
     objet.printF();
 

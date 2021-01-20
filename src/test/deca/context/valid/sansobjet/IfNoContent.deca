@@ -1,0 +1,12 @@
+// Description :
+//    test décompilation if sans contenu et sans else
+//
+// Resultats (en comparaison avec le résultat attendu 
+// disponible dans le fichier *.deca.ok dans le dossier Modeles_OK) :
+//    ok
+
+
+{
+    if (0 == 0){
+    }
+}

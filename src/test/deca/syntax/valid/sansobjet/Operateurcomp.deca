@@ -1,0 +1,45 @@
+// Description : Programme en sans objet avec variable, if elseif else, >, <, minus, et print, while.
+// Resultat : OK
+
+{
+    int x,y,z = 1;
+    if(x == 32 - 1){
+
+    }
+    if(32 == x-1){
+
+    }
+    if(x != 32+1){
+
+    }
+    if(32 != x+1){
+
+    }
+    if(x >= 32-10){
+
+    }
+    if(32 >= x+10){
+
+    }
+    if(x <= 32-12){
+
+    }
+    if(32 <= x+23){
+
+    }
+    if(32 < x+1){
+
+    }
+    if (32 > x - 1){
+        
+    }
+    if (32 || x + 1){
+        
+    }
+    if (32 && 1 + 1){
+
+    }
+
+
+}
+

@@ -85,6 +85,9 @@ public class DeclMethod extends AbstractDeclMethod {
     
     public void codeGenMethod(DecacCompiler compiler, String className) {
     	
+    	compiler.addComment("---------- Initialisation de la methode de "+name.getName().getName());
+    	compiler.addLabel(name.getMethodDefinition().getLabel());
+    	
     	if (body.isAsmBody()) {
     		body.codeGenBody(compiler, new Label(""));
     		return;
@@ -105,8 +108,6 @@ public class DeclMethod extends AbstractDeclMethod {
     	compiler.setAux(false);
     	// -----
     	
-    	compiler.addComment("---------- Initialisation de la methode de "+name.getName().getName());
-    	compiler.addLabel(name.getMethodDefinition().getLabel());
     	if (n+body.getVar().size() > 0) {
     		compiler.getLabelError().setErrorPilePleine(true);
     		compiler.addInstruction(new TSTO(n+body.getVar().size()));

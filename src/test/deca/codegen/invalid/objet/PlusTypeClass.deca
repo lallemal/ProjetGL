@@ -1,0 +1,11 @@
+// At least one of the members of this operation is not compatible with this operator
+// Description : Incompatibilité du plus entre deux types différents (non entier, float)
+// Resultat : Echec ligne 7 : int et true ne peuvent être additionné.
+
+class A{
+    int x = 5;
+
+    void Test(){
+        x = x + true;
+    }
+}

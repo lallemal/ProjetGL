@@ -4,9 +4,6 @@
 // Resultats decac:
 // Resultats ima:
 
-// PROBLEME:java.lang.NullPointerException
-//	at fr.ensimag.deca.context.TypeOp.subType(TypeOp.java:23)
-
 
 class A{
     int x;

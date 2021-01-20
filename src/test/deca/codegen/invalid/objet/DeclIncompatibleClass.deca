@@ -1,0 +1,8 @@
+// This type is not defined. string
+// Description : Assignation incompatible.
+// Resultat : Echec en ligne 7 : un string ne peut pas être initialisé ni mis en tant que variable
+
+class A{
+    int x = 4;
+    string y = "blabl";
+}

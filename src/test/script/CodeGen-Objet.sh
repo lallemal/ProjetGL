@@ -40,8 +40,8 @@ done
 cd "$(dirname "$0")"/../../.. || exit 1
 
 nb=$(ls -l src/test/deca/codegen/invalid/objet/*.deca | wc -l)
-echo "------- Démarrage des tests invalide ($nb)"
-for i in src/test/deca/codegen/invalid/objet//*.deca
+echo "------- Démarrage des tests invalide deca $((nb))"
+for i in src/test/deca/codegen/invalid/objet/*.deca
 do
   error=$(head $i -n 1 | sed 's/\/\///')
   if decac $i 2>&1 | grep -q -e "$error"
@@ -57,3 +57,26 @@ do
   fi
 
 done
+
+nb=$(ls -l src/test/deca/codegen/invalid/objet/Error/*.deca | wc -l)
+echo "------- Démarrage des tests invalide ima $((nb))"
+for i in src/test/deca/codegen/invalid/objet/Error/*.deca
+do
+    decac $i
+done
+for i in src/test/deca/codegen/invalid/objet/Error/*.ass
+do
+  resultat=$(ima $i)
+  if [ "$(less $i.ok)" = "$resultat" ]; then
+        echo "OK"
+  else
+        echo "Résultat innatendu pour $i, le résultat:"
+        echo "$resultat"
+        echo "ce qui était attendu:"
+        echo "$(less $i.ok)"
+        exit 1
+  fi
+
+done
+
+

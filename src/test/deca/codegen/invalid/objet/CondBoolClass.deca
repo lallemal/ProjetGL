@@ -1,0 +1,16 @@
+// The ReturnType of the expression evaluated by the condition is not boolean
+// Description : Condition de if / boucle pas booléenne
+// Resultat : Erreur ligne 9 : x n'est pas booléen.
+
+class A{
+    int x = 1;
+   
+    void Test(){
+        while (x > 0) {
+            x = x - 1;
+            if (x) {
+                x = x + 2;
+            }
+        }
+    }
+}

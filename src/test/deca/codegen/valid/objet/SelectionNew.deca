@@ -4,9 +4,6 @@
 // Resultats decac:
 // Resultat ima: 1
 
-// PROBLEME IMA:   ** IMA ** ERREUR ** Ligne 38 : 
-//  WINT avec R1 adresse code
-
 
 class A{
     

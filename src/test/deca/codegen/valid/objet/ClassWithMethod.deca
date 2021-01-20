@@ -4,8 +4,6 @@
 // Resultats decac:
 // Resultat ima: Rien
 
-// PLUTOT OK
-
 class A{
     
     void PrintHey(){

@@ -1,3 +1,9 @@
+// Description :
+//    Test génération de code exemple du poly
+//
+// Resultats decac:
+// Resultat ima: x vaut 1
+
 class A {
 
     int x;

@@ -1,0 +1,42 @@
+// Description :
+//    Test génération de code while dans une méthode
+//
+// Resultats decac:
+// Resultat ima: resultat test while: 5
+
+
+
+class A{
+
+    int x = 1;
+    int y = 0;
+    
+    int getX(){
+        return x;
+    }
+
+    int TestWhile(){
+        int i,j,u,v;
+        i = 0;
+        j = 0;
+        u = 0;
+        v = 0;
+        while (u != 3 && v != 3){
+            u = u + 1;
+            v = v + 1;
+            y = y + 1; 
+            while (i!=2 && j!= 2){
+                i = i + 1;
+                j = j + 1;
+                y = y + 1;
+            }
+           
+        }
+        return y;
+    }
+
+}
+{
+    A a = new A();
+    println("resultat test while: ", a.TestWhile());
+}

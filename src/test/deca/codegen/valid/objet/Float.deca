@@ -1,0 +1,32 @@
+// Description :
+//    Test génération de code avec des float
+//
+// Resultats decac:
+// Resultat ima: 
+// valeur de x: 1.20000e+00
+// valeur de y avec le getY: 3.00000e-01
+// valeur de y sans le getY: 3.00000e-01
+
+
+
+
+class A{
+
+    protected float x = 1.2;
+    float y = 0.3;
+    
+    float getX(){
+        return x;
+    }
+    
+    float getY(){
+        return y;
+    }
+}
+{
+    A a = new A();
+    println("valeur de x: ", a.getX());
+    println("valeur de y avec le getY: ", a.getY());
+    println("valeur de y sans le getY: ", a.y);
+}
+

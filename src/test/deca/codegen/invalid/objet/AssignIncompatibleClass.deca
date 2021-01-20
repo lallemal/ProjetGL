@@ -1,0 +1,11 @@
+// The type of the variable and its assignation are not compatible
+// Description : Assignation incompatible.
+// Resultat : Echec en ligne 7 : un int ne peut recevoir un booléan
+
+class A{
+    int x = 4;
+
+    void Test(){
+        x = true;
+    }
+}

@@ -84,6 +84,11 @@ public class DeclMethod extends AbstractDeclMethod {
     }
     
     public void codeGenMethod(DecacCompiler compiler, String className) {
+    	
+    	if (body.isAsmBody()) {
+    		body.codeGenBody(compiler, new Label(""));
+    		return;
+    	}
 
     	// ----- fake call to determine the number of register used (to push them)
     	compiler.setAux(true);

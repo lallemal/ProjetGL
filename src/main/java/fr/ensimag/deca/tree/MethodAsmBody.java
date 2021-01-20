@@ -39,6 +39,11 @@ public class MethodAsmBody extends AbstractMethodBody {
     }
     
     @Override
+    public boolean isAsmBody() {
+    	return true;
+    }
+    
+    @Override
     public void decompile(IndentPrintStream s) {
         cont.decompile(s);
     }

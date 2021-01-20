@@ -25,4 +25,8 @@ public abstract class AbstractMethodBody extends Tree {
     public abstract int codeGenBody(DecacCompiler compiler, Label labelFin);
     
     public abstract ListDeclVar getVar();
+    
+    public boolean isAsmBody() {
+    	return false;
+    }
 }

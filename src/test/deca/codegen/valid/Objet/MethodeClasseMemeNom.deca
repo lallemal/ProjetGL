@@ -1,0 +1,23 @@
+// Description :
+//    Test génération de code, une méthode porte le même nom que la classe (type constructeur en java)
+//
+// Resultats decac:
+// Resultat ima: en appliquant la méthode: 1
+
+
+
+class A{
+
+    int x = 1;
+    
+    void A(int x){
+        this.x = x;
+    }
+
+}
+{
+    A a = new A();
+    a.A(1);
+    print("en appliquant la méthode: ", a.x);
+}
+

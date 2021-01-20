@@ -163,6 +163,17 @@ public abstract class AbstractExpr extends AbstractInst {
     		} else {
     			compiler.addInstruction(new WFLOAT());
     		}
+    	} else if (this.isSelection()) {
+    		Selection s = (Selection) this;
+    		if (s.getIdent().getType().isInt()) {
+    			compiler.addInstruction(new WINT());
+    		} else if (s.getIdent().getType().isFloat()) {
+    			if (printHex) {
+        			compiler.addInstruction(new WFLOATX());
+        		} else {
+        			compiler.addInstruction(new WFLOAT());
+        		}
+    		}
     	} else {
     		//nothing to do
     	}

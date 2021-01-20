@@ -287,16 +287,4 @@ public class Identifier extends AbstractIdentifier {
             s.println();
         }
     }
-
-    @Override
-    protected void codeGenBranch(DecacCompiler compiler, boolean evaluate, Label label) {
-        codeExp(compiler, 0);
-        compiler.addInstruction(new CMP(0, Register.R0));
-        if (evaluate) {
-            compiler.addInstruction(new BNE(label));
-        } else {
-            compiler.addInstruction(new BEQ(label));
-        }
-
-    }
 }

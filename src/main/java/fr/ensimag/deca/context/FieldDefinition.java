@@ -14,6 +14,10 @@ public class FieldDefinition extends ExpDefinition {
     public int getIndex() {
         return index;
     }
+    
+    public void setIndex(int n) {
+        index = n;
+    }
 
     private int index;
     

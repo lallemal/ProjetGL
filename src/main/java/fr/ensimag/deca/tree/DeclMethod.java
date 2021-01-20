@@ -84,6 +84,8 @@ public class DeclMethod extends AbstractDeclMethod {
     }
     
     public void codeGenMethod(DecacCompiler compiler, String className) {
+    	compiler.addComment("---------- Initialisation de la methode de "+name.getName().getName());
+    	compiler.addLabel(name.getMethodDefinition().getLabel());
     	compiler.setAux(true);
     	compiler.cleanProgramAux();
     	Label labelFin = new Label("fin."+className+"."+name.getName().getName());
@@ -98,9 +100,6 @@ public class DeclMethod extends AbstractDeclMethod {
     	
     	compiler.incrementKGB(3); // SP <- SP + 2
     	compiler.incrementKGB(n);
-    	compiler.addLabel(name.getMethodDefinition().getLabel());
-    	
-    	
     	
     	compiler.addComment("instructions");
     	
@@ -111,8 +110,7 @@ public class DeclMethod extends AbstractDeclMethod {
     	compiler.addFirst(new Line("sauvegarde des registres"));
     	compiler.addInstructionFirst(new ADDSP(body.getVar().size()));
     	compiler.addInstructionFirst(new BOV(compiler.getLabelError().getLabelPilePleine()));
-    	compiler.addInstructionFirst(new TSTO(body.getVar().size()));
-    	compiler.addFirst(new Line("---------- Initialisation de la methode de "+name.getName().getName()));
+    	compiler.addInstructionFirst(new TSTO(n+body.getVar().size()));
     	// Fin : on verifie quil y a eu return si ce nest pas une void fonction
     	if (!type.getName().getName().equals("void")) {
     		compiler.addInstruction(new WSTR("Erreur : sortie de la methode "+className+"."+name.getName().getName()+" sans return"));
@@ -121,15 +119,11 @@ public class DeclMethod extends AbstractDeclMethod {
     	}
     	
     	compiler.addLabel(labelFin);
-    	for (AbstractDeclVar i : body.getVar().getList()) { // On enleve les variables locales de la methodes
-    		compiler.decrementKGB();
-    	}
     	
     	for (int i=n-1; i>=0; i--) {
     		compiler.addInstruction(new POP(Register.getR(i+2)));
     	}
-    	compiler.decrementKGB(n);
-    	compiler.decrementKGB(3);
+    	compiler.setKGB(kGB);
     	compiler.addInstruction(new SUBSP(body.getVar().size()));
     	compiler.addInstruction(new RTS());
     	compiler.setAux(false);

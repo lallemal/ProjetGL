@@ -3,11 +3,13 @@ package fr.ensimag.deca.tree;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.Label;
 import fr.ensimag.ima.pseudocode.NullOperand;
 import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.RegisterOffset;
 import fr.ensimag.ima.pseudocode.instructions.ADDSP;
 import fr.ensimag.ima.pseudocode.instructions.BEQ;
+import fr.ensimag.ima.pseudocode.instructions.BNE;
 import fr.ensimag.ima.pseudocode.instructions.BOV;
 import fr.ensimag.ima.pseudocode.instructions.BSR;
 import fr.ensimag.ima.pseudocode.instructions.CMP;
@@ -68,6 +70,17 @@ public class MethodCall extends AbstractExpr{
 		compiler.decrementKSP(nbParam+1);
 		compiler.addInstruction(new LOAD(Register.R0, Register.getR(n)));
 	}
+	
+	@Override
+    protected void codeGenBranch(DecacCompiler compiler, boolean evaluate, Label label) {
+        codeExp(compiler, 0);
+        compiler.addInstruction(new CMP(0, Register.R0));
+        if (evaluate) {
+            compiler.addInstruction(new BNE(label));
+        } else {
+            compiler.addInstruction(new BEQ(label));
+        }
+    }
 	
 	@Override
 	public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass)

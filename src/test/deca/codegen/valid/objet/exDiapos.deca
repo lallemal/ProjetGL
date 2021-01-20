@@ -16,6 +16,10 @@ class Point3D extends Point2D {
         y = y + a;
         z = z + a;
     }
+
+    int getZ() {
+        return z;
+    }
 }
 
 {

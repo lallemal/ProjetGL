@@ -49,7 +49,14 @@ public class Assign extends AbstractBinaryExpr {
         e.codeExp(compiler, 2);
     	if (this.getLeftOperand().isIdentifier()) {
 	        Identifier x = (Identifier) this.getLeftOperand();
-	        compiler.addInstruction(new STORE(Register.getR(2), x.getExpDefinition().getOperand()));
+	        if (x.getExpDefinition().isField()) { // si jamais on a x = ... avec x un field, on est forcement dans une methode..
+	        	compiler.addInstruction(new LOAD(new RegisterOffset(-2, Register.LB), Register.getR(3)));
+	        	compiler.setRegistreUsed(3);
+	        	int index = x.getFieldDefinition().getIndex()+1;
+	        	compiler.addInstruction(new STORE(Register.getR(2), new RegisterOffset(index, Register.getR(3))));
+	        } else {
+	        	compiler.addInstruction(new STORE(Register.getR(2), x.getExpDefinition().getOperand()));
+	        }
     	} else if (this.getLeftOperand().isSelection()) {
     		Selection select = (Selection) this.getLeftOperand();
 	        int index = select.getIdent().getFieldDefinition().getIndex()+1;

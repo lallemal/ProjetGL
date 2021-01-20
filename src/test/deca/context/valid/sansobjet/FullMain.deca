@@ -1,0 +1,42 @@
+// Description :
+//    test main avec le plus de caractéristiques possibles
+//
+// Resultats (en comparaison avec le résultat attendu 
+// disponible dans le fichier *.deca.ok dans le dossier Modeles_OK) :
+//    ok
+
+{
+
+    int i = 0, j = 1;
+    float k;
+    boolean b = true;
+    int a = readInt();
+    k = readFloat();
+
+    print(23);
+    printx(2.23);
+    println("hello", "you");
+    printlnx(j);
+
+    if ( i == 0){
+        print("ok!");
+    }
+    else if (j < 1 && !b ){
+        if (k != 0){
+        }
+    }
+    else{
+        i = (i - 1);
+        k = -3.0;
+    }
+
+    while ( i > 5){
+        i = (i + 1);
+        i = i*i;
+        i = i/j;
+        j = j%i;
+        while (i >= 1 || j <= 2){
+        }
+    }
+
+}

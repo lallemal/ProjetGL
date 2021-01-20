@@ -4,9 +4,12 @@ import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.*;
 import fr.ensimag.ima.pseudocode.DVal;
 import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.instructions.BOV;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
 import fr.ensimag.ima.pseudocode.instructions.POP;
 import fr.ensimag.ima.pseudocode.instructions.PUSH;
+import fr.ensimag.ima.pseudocode.instructions.TSTO;
+
 import org.apache.log4j.Logger;
 
 
@@ -62,6 +65,11 @@ public abstract class AbstractOpArith extends AbstractBinaryExpr {
                 this.mnemo(compiler, Register.getR(n+1), n);
             } else {
                 e1.codeExp(compiler, n);
+                compiler.getLabelError().setErrorPilePleine(true);
+            	compiler.addInstruction(new TSTO(1));
+            	if (!compiler.getCompilerOptions().isNoCheck()) {
+            		compiler.addInstruction(new BOV(compiler.getLabelError().getLabelPilePleine()));
+            	}
                 compiler.addInstruction(new PUSH(Register.getR(n)));
                 e2.codeExp(compiler, n);
                 compiler.addInstruction(new LOAD(Register.getR(n), Register.R0));

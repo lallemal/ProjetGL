@@ -1,0 +1,24 @@
+// Description :
+//    test décompilation if, else avec multiples conditions
+//
+// Resultats (en comparaison avec le résultat attendu 
+// disponible dans le fichier *.deca.ok dans le dossier Modeles_OK) :
+//    ok
+
+
+{
+    int i = 0;
+    int j = 0;
+    if (i == 0 && j == 0){
+        i = i + 1;
+        if (i == 1 || j == 0){
+            j = j + 1;
+        }
+        else{
+            j = j + 2;
+        }
+    }
+    else{   
+        i = i + 2;
+    }
+}

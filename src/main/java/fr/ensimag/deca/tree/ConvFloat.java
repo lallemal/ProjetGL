@@ -42,7 +42,9 @@ public class ConvFloat extends AbstractUnaryExpr {
     	this.getOperand().codeExp(compiler, n);
     	compiler.addInstruction(new FLOAT(Register.getR(n), Register.getR(n)));
     	compiler.getLabelError().setErrorConvFloat(true);
-    	compiler.addInstruction(new BOV(compiler.getLabelError().getLabelErrorFLOAT()));
+    	if (!compiler.getCompilerOptions().isNoCheck()) {
+            compiler.addInstruction(new BOV(compiler.getLabelError().getLabelErrorFLOAT()));
+        }
     }
 
     @Override

@@ -1,0 +1,12 @@
+// Description :
+//    test décompilation printx et printlnx
+//
+// Resultats (en comparaison avec le résultat attendu 
+// disponible dans le fichier *.deca.ok dans le dossier Modeles_OK) :
+//    ok
+
+
+{
+    printx("23");
+    printlnx(23);
+}

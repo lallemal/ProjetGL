@@ -1,0 +1,16 @@
+{
+    int input;
+    int r = 1;
+    println("entrez un entier positif, nous allons calculer sa factorielle");
+    input = readInt();
+    while (input < 0) {
+        println("un entier positif svp : ");
+        input = readInt();
+    }
+    while (input > 0) {
+        r = r * input;
+        input = input - 1;
+    }
+    println("le resultat est : ");
+    println(r);
+}

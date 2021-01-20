@@ -1,0 +1,15 @@
+// Description :
+//    test décompilation while avec multiples conditions
+//
+// Resultats (en comparaison avec le résultat attendu 
+// disponible dans le fichier *.deca.ok dans le dossier Modeles_OK) :
+//    ok
+
+{
+    int i = 0;
+    int j = 0;
+    while (i != 2 || j != 1){
+        i = i + 1;
+        j = j + 1;
+    }
+}

@@ -1,0 +1,6 @@
+//DeclFlHexMax2.deca:5:34: Erreur de compilation: flottant arrondi a l'infini
+//Description: teste creation folttant infini
+//Resultats: erreur ligne 5: arrondi a infini
+{
+    float t = 0x1.7fffff000001p127;
+}

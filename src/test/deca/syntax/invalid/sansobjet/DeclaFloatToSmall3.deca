@@ -1,0 +1,6 @@
+//DeclaFloatToSmall3.deca:5:28: Erreur de compilation: flottant arrondi 0
+//Description: teste creation folttant converti a nulle
+//Resultats: erreur ligne 5: arrondi a nulle
+{
+    float t = 0.14012985E-55;
+}

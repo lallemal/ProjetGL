@@ -1,0 +1,5 @@
+{
+	int x=2;
+	float y=0x1.4p1;
+	boolean bool=false;
+}

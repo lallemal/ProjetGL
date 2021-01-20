@@ -16,22 +16,20 @@ cd "$(dirname "$0")"/../../.. || exit 1
 PATH=./src/test/script/launchers:"$PATH"
 
 cd src/test/deca/syntax/valid/sansobjet|| exit 1
-nb=$(ls -l | wc -l)
-nb=$(($nb-1))
 
-echo "------- Démarrage des tests valide pour lexer($nb)"
+echo "------- Démarrage des tests valide pour lexer"
 echo "Test valides:"
 for i in *.deca
 do
-    # est lex valid normalement
+    # est lex valid normalement si pas valid sort
     if echo "$i" | grep "_valid" 
     then
         resultat=../../soresultat/"$i".resu
         # cree le fichier et regarde si il y a une erreur
-        if test_lex $i 2>&1 > $resultat | grep -e -q "$i"
+        if test_lex $i 2>&1 > $resultat | grep -q "$i"
         then
             echo "Erreur innatendu de test_lex"
-           # exit 1
+            exit 1
         fi
     fi
 done
@@ -47,10 +45,10 @@ do
         echo "test du fichier $i"
         resultat=../../soresultat/"$i".resu
         # cree le fichier et regarde si il y a une erreur
-        if test_lex $i 2>&1 > $resultat | grep -e -q "$i"
+        if test_lex $i 2>&1 > $resultat | grep  -q "$i"
         then
             echo "Erreur innatendu de test_lex"
-            #exit 1
+            exit 1
         fi
     fi
 done

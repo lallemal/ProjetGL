@@ -1,0 +1,4 @@
+// test.deca: include file not found
+//Description: inclusion fichier non existant
+//Resultats: fichier non disponible
+#include         "test.deca"

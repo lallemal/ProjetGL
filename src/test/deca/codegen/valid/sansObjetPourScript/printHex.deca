@@ -1,0 +1,6 @@
+{
+    float x = 16;
+    float y = 24;
+    printlnx(x);
+    printlnx(y);
+}

@@ -1,0 +1,6 @@
+//AddInt.deca:5:15: mismatched input ';'
+//Description: teste addition sans second membre
+//Resultats: ligne 5: il manque une exporession a droite de + sumexpr)
+{
+    int a = 1 +; 
+}

@@ -1,0 +1,14 @@
+{
+    int a;
+    int b = 1;
+    float x = 1.2;
+    float y = 2;
+    float z;
+    boolean b0 = true;
+    boolean b1 = false;
+    boolean b2;
+
+    println(b);
+    println(x);
+    println(y);
+}

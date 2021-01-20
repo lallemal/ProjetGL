@@ -1,8 +1,0 @@
-// test l'inclusion de fichier
-// sortie: token filename
-
-
-#include "test"
-
-
-

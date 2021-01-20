@@ -1,0 +1,6 @@
+//mismatched input ';' 
+//Description: test soustraction incorrecte
+//Resultats: erreur ligne 5: pas de deuxieme terme a droite (sum_exp)
+{
+    int i = 1-;
+}

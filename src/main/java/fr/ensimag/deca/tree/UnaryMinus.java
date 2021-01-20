@@ -37,7 +37,11 @@ public class UnaryMinus extends AbstractUnaryExpr {
     
     @Override
     protected void codeExp(DecacCompiler compiler, int n) {
-    	compiler.addInstruction(new LOAD(0, Register.getR(n)));
+    	if (this.getOperand().getType().isInt()) {
+    		compiler.addInstruction(new LOAD(0, Register.getR(n)));
+    	} else {
+    		compiler.addInstruction(new LOAD((float) 0, Register.getR(n)));
+    	}
     	if (n==compiler.getRmax()) {
     		this.getOperand().codeExp(compiler, 0);
     		compiler.addInstruction(new SUB(Register.R0, Register.getR(n)));

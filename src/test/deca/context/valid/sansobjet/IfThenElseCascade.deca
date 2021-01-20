@@ -1,0 +1,24 @@
+// Description :
+//    test décompilation if et else en cascade
+//
+// Resultats (en comparaison avec le résultat attendu 
+// disponible dans le fichier *.deca.ok dans le dossier Modeles_OK) :
+//    ok
+
+
+{
+    int i = 2;
+    if (i == 0){
+        print("1er if");
+    }
+    else{
+        if (i == 1){
+            print("2e if");
+        }
+        else{
+            if (i == 2){
+                print("3e if");
+            }
+        }
+    }
+}

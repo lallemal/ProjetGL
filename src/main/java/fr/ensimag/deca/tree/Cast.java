@@ -27,6 +27,7 @@ public class Cast extends AbstractExpr{
 	    if (!TypeOp.castComp(compiler, type2, type)) {
 	    	throw new ContextualError(ContextualError.CAST_INCOMPATIBLE, getLocation());
 		}
+	    setType(type);
 	    return type;
 	}
 

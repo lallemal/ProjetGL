@@ -1,0 +1,38 @@
+// Description :
+//    Test génération de code pour un override de méthode
+//
+// Resultats decac:
+// Resultat ima: Me voici dans la classe fille
+
+
+
+class A{
+
+    int x = 1;
+    
+    int getX(){
+        return x;
+    }
+
+    void printX(){
+        print("Me voici dans la classe mère");
+    }
+}
+class B extends A{
+    int y = 0;
+
+    int getY(){
+        return y;
+    }
+    
+    //La méthode printX est override par la fille
+    void printX(){
+        print("Me voici dans la classe fille");
+    }
+}
+{
+    B b = new B();
+    b.printX();
+    //b devrait avoir les méthode getX de A, getY et printX de B
+    
+}

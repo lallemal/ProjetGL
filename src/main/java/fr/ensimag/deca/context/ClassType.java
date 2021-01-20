@@ -2,7 +2,6 @@ package fr.ensimag.deca.context;
 
 import fr.ensimag.deca.tools.SymbolTable.Symbol;
 import fr.ensimag.deca.tree.Location;
-import fr.ensimag.ima.pseudocode.Label;
 
 /**
  * Type defined by a class.
@@ -52,7 +51,7 @@ public class ClassType extends Type {
 
     @Override
     public boolean sameType(Type otherType) {
-        return otherType.isClass();
+        return getName().toString().equals(otherType.getName().toString());
     }
 
     /**

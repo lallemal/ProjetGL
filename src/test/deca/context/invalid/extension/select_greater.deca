@@ -1,0 +1,8 @@
+// The dimension of the selection is greater than the dimension of the object
+// Description : try to select an element with more dimension than the object
+// Result : error
+
+{
+    int[] x;
+    println(x[1][2]);
+}

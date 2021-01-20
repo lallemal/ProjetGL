@@ -1,0 +1,9 @@
+// Elements of array literal are not all of the same type
+// Description : Test with literal not all the same between sub literal
+// Result : error line 8
+
+
+
+{
+    int[][] x = {{1,2}, {1}};
+}

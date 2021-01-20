@@ -1,0 +1,8 @@
+// The index of selection has to be an integer
+// Description : try to select an element in an array with an not integer value;
+// Result : error line 7;
+
+{
+    int[] x;
+    println(x[1.2]);
+}

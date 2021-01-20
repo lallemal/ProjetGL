@@ -1,0 +1,9 @@
+// The selection in a index can not be in a not Array object
+// Description : Try to select an index of a non array object
+// Result : error line 8
+
+
+{
+    int x;
+    println(x[0]);
+}

@@ -1,0 +1,8 @@
+// The dimension of an array has to be give with an integer or nothing
+// Description : give a dimension with something other than integer
+// Result : error line 7;
+
+
+{
+    int[] x = new int[true];
+}

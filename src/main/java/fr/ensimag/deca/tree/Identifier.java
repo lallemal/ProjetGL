@@ -183,15 +183,13 @@ public class Identifier extends AbstractIdentifier {
     @Override
     protected void codeGenPrint(DecacCompiler compiler, boolean printHex) {
     	Type type = this.getType();
+    	compiler.addInstruction(new LOAD(this.getExpDefinition().getOperand(), Register.R1));
     	if (type.isInt()) {
-    		compiler.addInstruction(new LOAD(this.getExpDefinition().getOperand(), Register.R1));
     		compiler.addInstruction(new WINT());
     	} else if (type.isFloat()) {
     		if (printHex) {
-    			compiler.addInstruction(new LOAD(this.getExpDefinition().getOperand(), Register.R1));
     			compiler.addInstruction(new WFLOATX());
     		} else {
-    			compiler.addInstruction(new LOAD(this.getExpDefinition().getOperand(), Register.R1));
     			compiler.addInstruction(new WFLOAT());
     		}
     	}

@@ -24,7 +24,7 @@
              |         ||     +> [9, 16] Identifier (x)
              |         ||     `> [9, 20] Int (1)
              |         []> [10, 12] Print
-             |             `> ListExpr [List with 1 elements]
+             |             `> [10, 18] ListExpr [List with 1 elements]
              |                []> [10, 18] Identifier (x)
              `> ListInst [List with 1 elements]
                 []> [13, 4] IfThenElse
@@ -33,9 +33,9 @@
                     |  `> [13, 17] Int (6)
                     +> ListInst [List with 1 elements]
                     |  []> [14, 8] Println
-                    |      `> ListExpr [List with 1 elements]
+                    |      `> [14, 16] ListExpr [List with 1 elements]
                     |         []> [14, 16] Identifier (x)
                     `> ListInst [List with 1 elements]
                        []> [17, 8] Print
-                           `> ListExpr [List with 1 elements]
+                           `> [17, 14] ListExpr [List with 1 elements]
                               []> [17, 14] StringLiteral (OUAH)

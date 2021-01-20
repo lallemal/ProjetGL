@@ -1,0 +1,17 @@
+// The class pointed by this can not be Object class
+// Description :
+//    Test génération de code pour un appel de this dans un main
+//
+// Resultats decac: The class pointed by this can not be Object class
+// Resultat ima: /
+
+class A{
+
+    void printA(){
+        print("Je suis A");
+    }
+}
+{
+    this.printA();
+}
+

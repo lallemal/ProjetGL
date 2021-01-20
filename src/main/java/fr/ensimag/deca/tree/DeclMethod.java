@@ -84,8 +84,8 @@ public class DeclMethod extends AbstractDeclMethod {
     }
     
     public void codeGenMethod(DecacCompiler compiler, String className) {
-    	compiler.addComment("---------- Initialisation de la methode de "+name.getName().getName());
-    	compiler.addLabel(name.getMethodDefinition().getLabel());
+
+    	// ----- fake call to determine the number of register used (to push them)
     	compiler.setAux(true);
     	compiler.cleanProgramAux();
     	Label labelFin = new Label("fin."+className+"."+name.getName().getName());
@@ -97,20 +97,31 @@ public class DeclMethod extends AbstractDeclMethod {
     	compiler.setKSP(kSP);
     	compiler.setMaxSP(maxkSP);
     	compiler.cleanProgramAux();
+    	compiler.setAux(false);
+    	// -----
     	
+    	compiler.addComment("---------- Initialisation de la methode de "+name.getName().getName());
+    	compiler.addLabel(name.getMethodDefinition().getLabel());
+    	if (n+body.getVar().size() > 0) {
+    		compiler.getLabelError().setErrorPilePleine(true);
+    		compiler.addInstruction(new TSTO(n+body.getVar().size()));
+    		compiler.addInstruction(new BOV(compiler.getLabelError().getLabelPilePleine()));
+    		if (body.getVar().size() > 0) {
+    	    	compiler.addInstruction(new ADDSP(body.getVar().size()));
+    		}
+    		if (n > 0) {
+    			compiler.addComment("sauvegarde des registres");
+    			for (int i=0; i<n; i++) {
+    	    		compiler.addInstruction(new PUSH(Register.getR(i+2)));
+    	    	}
+    		}
+    	}
+    	// augmentation du k(GB) pour ne pas ecraser les donnees avec les variables locales
     	compiler.incrementKGB(3); // SP <- SP + 2
-    	compiler.incrementKGB(n);
+    	compiler.incrementKGB(n); // nombre de registre à conserver
     	
     	compiler.addComment("instructions");
-    	
     	n = body.codeGenBody(compiler, labelFin);
-    	for (int i=n; i>0; i--) {
-    		compiler.addInstructionFirst(new PUSH(Register.getR(i+1)));
-    	}
-    	compiler.addFirst(new Line("sauvegarde des registres"));
-    	compiler.addInstructionFirst(new ADDSP(body.getVar().size()));
-    	compiler.addInstructionFirst(new BOV(compiler.getLabelError().getLabelPilePleine()));
-    	compiler.addInstructionFirst(new TSTO(n+body.getVar().size()));
     	// Fin : on verifie quil y a eu return si ce nest pas une void fonction
     	if (!type.getName().getName().equals("void")) {
     		compiler.addInstruction(new WSTR("Erreur : sortie de la methode "+className+"."+name.getName().getName()+" sans return"));
@@ -119,15 +130,16 @@ public class DeclMethod extends AbstractDeclMethod {
     	}
     	
     	compiler.addLabel(labelFin);
-    	
-    	for (int i=n-1; i>=0; i--) {
-    		compiler.addInstruction(new POP(Register.getR(i+2)));
+    	if (n > 0) {
+    		compiler.addComment("restauration des registres");
+    		for (int i=n-1; i>=0; i--) {
+        		compiler.addInstruction(new POP(Register.getR(i+2)));
+        	}
     	}
-    	compiler.setKGB(kGB);
+    
+    	compiler.setKGB(kGB); // restauration du kGB
     	compiler.addInstruction(new SUBSP(body.getVar().size()));
     	compiler.addInstruction(new RTS());
-    	compiler.setAux(false);
-    	compiler.append(compiler.getProgramAux());
     }
 
     @Override

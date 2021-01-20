@@ -67,6 +67,9 @@ public class IdentifierArray extends AbstractIdentifier{
 	@Override
 	public Type verifyType(DecacCompiler compiler) throws ContextualError {
 	    Type baseType = varName.verifyType(compiler);
+	    if (baseType.isVoid()) {
+	    	throw new ContextualError(ContextualError.ARRAY_NEW_VOID, getLocation());
+		}
 	    ArrayType arrayType = new ArrayType(compiler.getSymbols().create(varName.getName().toString()+"_"+length), baseType, length);
 		TypeDefinition typeDef = new TypeDefinition(arrayType, Location.BUILTIN);
 		setDefinition(typeDef);

@@ -35,7 +35,7 @@ public class NewArray extends AbstractExpr{
 			if (stop && !otherType.isNoType()) {
 				throw new ContextualError(ContextualError.ARRAY_NO_THEN, getLocation());
 			}
-			if (!type.isNoType() && !type.isInt()) {
+			if (!otherType.isNoType() && !otherType.isInt()) {
 				throw new ContextualError(ContextualError.ARRAY_DIM_GIVEN, getLocation());
 			}
 		}

@@ -1,0 +1,7 @@
+// The base Type of this array can not be void
+// Description : test with an array of type void
+// Result : error line 6
+
+{
+    void[] x;
+}

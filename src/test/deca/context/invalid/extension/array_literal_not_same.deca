@@ -1,0 +1,10 @@
+// Elements of array literal are not all of the same type
+// Description : Test with a literal which contains different types
+// (l'erreur de ne pas avoir le même type entre type de variable et le literal est géré par l'erreur d'assign
+// Result : error ligne 7 - 8 - 9 (seule la premiere sera visible)
+
+{
+    int[] x = {1, 2.0, 3};
+    int[] x = {1, "hello", 3};
+    int[] x = {1, true, 3};
+}

@@ -157,13 +157,21 @@ public class DeclMethod extends AbstractDeclMethod {
         if (param != null){
             param.decompile(s);
         }
-        s.println(") {");
-        s.indent();
+        s.print(") ");
         if (body != null){
-            body.decompile(s);
+            if (body.isAsmBody()){
+                s.println("asm(");
+                body.decompile(s);
+                s.print(");");
+            }
+            else{
+                s.println("{");
+                s.indent();
+                body.decompile(s);
+                s.unindent();
+                s.println("}");
+            }
         }
-        s.unindent();
-        s.println("}");
     }
 
     @Override

@@ -1,7 +1,0 @@
-// Array Literal can not be empty
-// Description : Test with an array literal which is empty
-// Error line 6
-
-{
-    int[] x = {};
-}

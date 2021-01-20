@@ -1,0 +1,11 @@
+class Test{
+	
+	int test;
+	public Test(int test){
+		setTest(test);
+	}
+
+	void setTest(int test){
+		this.test = test;
+	}
+}

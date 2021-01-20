@@ -1,0 +1,9 @@
+{
+        int r = 3;
+        int[] s = new int[r];
+        int[] tab;
+        int[][] semiEmptyMat = { {1, 2, 3}, {4, 5, 6} };
+        int[] copyS = s;
+        tab = new int[10];
+
+}

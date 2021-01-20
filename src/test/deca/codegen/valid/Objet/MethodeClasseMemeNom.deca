@@ -17,7 +17,8 @@ class A{
 }
 {
     A a = new A();
-    a.A(1);
-    print("en appliquant la méthode: ", a.x);
+    println(a.x);
+    a.A(2);
+    println("en appliquant la méthode: ", a.x);
 }
 

@@ -77,6 +77,7 @@ public class DeclMethod extends AbstractDeclMethod {
     	Label label = name.getMethodDefinition().getLabel();
     	compiler.addInstruction(new LOAD(new LabelOperand(label), Register.R0));
     	compiler.addInstruction(new STORE(Register.R0, new RegisterOffset(compiler.getKGB(), Register.GB)));
+    	name.getMethodDefinition().setAddress(new RegisterOffset(compiler.getKGB(), Register.GB));
     	compiler.incrementKGB();
     	compiler.incrementKSP();
     }
@@ -103,7 +104,6 @@ public class DeclMethod extends AbstractDeclMethod {
     	
     	compiler.incrementKGB(3); // SP <- SP + 2
     	compiler.incrementKGB(n);
-    	compiler.addComment("---------- Initialisation de la methode de "+name.getName().getName());
     	compiler.addLabel(name.getMethodDefinition().getLabel());
     	
     	
@@ -118,6 +118,7 @@ public class DeclMethod extends AbstractDeclMethod {
     	compiler.addInstructionFirst(new ADDSP(body.getVar().size()));
     	compiler.addInstructionFirst(new BOV(compiler.getLabelError().getLabelPilePleine()));
     	compiler.addInstructionFirst(new TSTO(body.getVar().size()));
+    	compiler.addFirst(new Line("---------- Initialisation de la methode de "+name.getName().getName()));
     	// Fin : on verifie quil y a eu return si ce nest pas une void fonction
     	if (!type.getName().getName().equals("void")) {
     		compiler.addInstruction(new WSTR("Erreur : sortie de la methode "+className+"."+name.getName().getName()+" sans return"));

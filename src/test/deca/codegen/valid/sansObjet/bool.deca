@@ -1,5 +1,13 @@
 {
     boolean x = true;
+    int n1 = 3;
+    int n2 = 2;
+    boolean b = (n1 < n2);
+    if(b){
+    	println("true");
+    }else{
+    	println("false");
+    }
     x = true && false;
     if (x) {
         println("true");

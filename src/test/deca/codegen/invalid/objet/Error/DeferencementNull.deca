@@ -1,0 +1,18 @@
+// Erreur : dereferencement de null
+// Description : Deferencement null
+// Resultat : erreur lors de ima
+
+
+class A{
+    float x = 1.0;
+    float y = 0.0;
+   
+    void Test(){
+        float z = x/y;
+    }
+}
+{
+    A a = null;
+    a.Test();
+}
+

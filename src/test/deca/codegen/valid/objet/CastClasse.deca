@@ -1,0 +1,28 @@
+// Description :
+//    test de génération de code pour le cast d'une classe
+//
+// Resultats deca: 
+// Resultats ima : 
+
+class A{
+    
+    int i = 2;
+    
+    int getI(){
+        return i;
+    }
+
+    void setI(int j){
+        this.i = j;
+    }
+}
+class B extends A{
+    
+}
+{
+    A a = new A();
+    A b = new B();
+    a = (A)(a);
+    b = (A)(b);
+}
+

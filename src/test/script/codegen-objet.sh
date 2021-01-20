@@ -14,7 +14,7 @@ cd "$(dirname "$0")"/../../.. || exit 1
 PATH=./src/test/script/launchers:"$PATH"
 
 nb=$(ls -l src/test/deca/codegen/valid/objet/*.deca | wc -l)
-echo "------ Démarrage des tests valide decac $((nb))"
+echo "------ Démarrage des tests valide decac ($((nb)))"
 for i in  src/test/deca/codegen/valid/objet/*.deca
 do
   if decac $i 2>&1 | grep -q -e "$i:"
@@ -25,7 +25,7 @@ do
   fi
 done
 
-echo "------ Démarrage des tests valide ima $((nb))"
+echo "------ Démarrage des tests valide ima ($((nb)))"
 for i in  src/test/deca/codegen/valid/objet/*.ass
 do
   if ima $i 2>&1 | grep -q -e "$i:"
@@ -40,7 +40,7 @@ done
 cd "$(dirname "$0")"/../../.. || exit 1
 
 nb=$(ls -l src/test/deca/codegen/invalid/objet/*.deca | wc -l)
-echo "------- Démarrage des tests invalide deca $((nb))"
+echo "------- Démarrage des tests invalide deca ($((nb)))"
 for i in src/test/deca/codegen/invalid/objet/*.deca
 do
   error=$(head $i -n 1 | sed 's/\/\///')
@@ -59,7 +59,7 @@ do
 done
 
 nb=$(ls -l src/test/deca/codegen/invalid/objet/Error/*.deca | wc -l)
-echo "------- Démarrage des tests invalide ima $((nb))"
+echo "------- Démarrage des tests invalide ima ($((nb)))"
 for i in src/test/deca/codegen/invalid/objet/Error/*.deca
 do
     decac $i
@@ -76,7 +76,32 @@ do
         echo "$(less $i.ok)"
         exit 1
   fi
-
 done
+
+echo "------- Démarrage des test de débordement de pile"
+resultat=$(ima -p 003 src/test/deca/codegen/invalid/objet/debordementPile/pilePleine.ass)
+if [ "$(cat src/test/deca/codegen/invalid/objet/debordementPile/pilePleine.ass.ok)" = "$resultat" ]; then
+    echo "OK"
+else
+    echo "src/test/deca/codegen/invalid/objet/debordementPile/pilePeine.ass KO ->"
+    echo "Résultat innatendu, le résultat:"
+    echo "$resultat"
+    echo "ce qui était attendu:"
+    echo "$(cat src/test/deca/codegen/invalid/objet/debordementPile/pilePleine.ass.ok)"
+    exit 1
+fi
+
+echo "------- Démarrage des test de débordement de tas"
+resultat=$(ima -t 003 src/test/deca/codegen/invalid/objet/debordementTas/tasPlein.ass)
+if [ "$(cat src/test/deca/codegen/invalid/objet/debordementTas/tasPlein.ass.ok)" = "$resultat" ]; then
+    echo "OK"
+else
+    echo "src/test/deca/codegen/invalid/objet/debordementTas/tasPlein.ass KO ->"
+    echo "Résultat innatendu, le résultat:"
+    echo "$resultat"
+    echo "ce qui était attendu:"
+    echo "$(cat src/test/deca/codegen/invalid/objet/debordementTas/tasPlein.ass.ok)"
+    exit 1
+fi
 
 

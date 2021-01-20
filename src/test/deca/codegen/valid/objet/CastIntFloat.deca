@@ -1,0 +1,10 @@
+// Description :
+//    test de génération de code pour le cast d'un float en int
+//
+// Resultats deca: 
+// Resultats ima : 
+
+{
+    float a;
+    a = (int)(a);
+}

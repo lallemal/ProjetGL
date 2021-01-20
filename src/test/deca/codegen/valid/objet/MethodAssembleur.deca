@@ -1,0 +1,27 @@
+// Description :
+//    Test génération de code méthode assembleur
+//
+// Resultats decac:
+// Resultat ima: 
+
+class A{
+    
+    int x = 1;
+
+    void setX(int x) asm(
+    "TSTO #2\\
+    BOV pile_pleine\\
+    ; Sauvegarde des registres\\
+    PUSH R2\\
+    PUSH R3\\
+    LOAD -2 (LB), R2\\
+    CMP #null, R2\\
+    BEQ dereferencement_null\\
+    LOAD -3 (LB), R3\\
+    STORE R3, 1 (R2)\\
+    fin.A.setX\\
+    ; Restauration des registres\\
+    POP R3\\
+    POP R2\\
+    RTS");
+}

@@ -15,7 +15,7 @@ class A{
     }
 
     void printX(){
-        print("Me voici dans la classe mère");
+        println("Me voici dans la classe mère");
     }
 }
 class B extends A{
@@ -27,11 +27,13 @@ class B extends A{
     
     //La méthode printX est override par la fille
     void printX(){
-        print("Me voici dans la classe fille");
+        println("Me voici dans la classe fille");
     }
 }
 {
+    A a = new A();
     B b = new B();
+    a.printX();
     b.printX();
     //b devrait avoir les méthode getX de A, getY et printX de B
     

@@ -34,11 +34,6 @@ public class DeclParam extends AbstractDeclParam{
     public AbstractIdentifier getType() {
     	return type;
     }
-    
-    @Override
-    public boolean equals(AbstractDeclParam other) {
-    	return (type.getName().getName()).equals(other.getType().getName().getName());
-    }
 
     @Override
     public void decompile(IndentPrintStream s) {

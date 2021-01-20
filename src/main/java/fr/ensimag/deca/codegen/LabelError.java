@@ -26,6 +26,8 @@ public class LabelError {
 	private Label errorRFLOAT;
 	private boolean errorConvFloat;
 	private Label errorFLOAT;
+	private boolean errorConvInt;
+	private Label errorINT;
 	private boolean errorPilePleine;
 	private Label pilePleine;
 	private boolean errorTasPlein;
@@ -73,6 +75,14 @@ public class LabelError {
 		return errorFLOAT;
 	}
 	
+	public void setErrorConvInt(boolean b) {
+		errorConvInt = b;
+	}
+	
+	public Label getLabelErrorINT() {
+		return errorINT;
+	}
+	
 	public void setErrorPilePleine(boolean b) {
 		errorPilePleine = b;
 	}
@@ -108,6 +118,8 @@ public class LabelError {
 		errorRFLOAT = new Label("error_read_float");
 		errorConvFloat = false;
 		errorFLOAT = new Label("error_conv_float");
+		errorConvInt = false;
+		errorINT = new Label("error_conv_int");
 		errorPilePleine = false;
 		pilePleine = new Label("pile_pleine");
 		errorTasPlein = false;
@@ -131,6 +143,9 @@ public class LabelError {
 		}
 		if (errorConvFloat) {
 			addError(compiler, errorFLOAT, "conversion flottant", "Erreur : V[dval] non codable sur un flottant");
+		}
+		if (errorConvInt) {
+			addError(compiler, errorINT, "conversion entier", "Erreur : V[dval] non codable sur un entier");
 		}
 		if (errorPilePleine) {
 			addError(compiler, pilePleine, "debordement de pile", "Erreur : debordement de pile");

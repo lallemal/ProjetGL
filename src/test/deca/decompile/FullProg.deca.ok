@@ -10,44 +10,29 @@ class Thing extends Objet {
 	void setplusK(int i, int j) {
 		(k = (i + j));
 		print(k);
+		(this.k = k);
 	}
 
 }
 {
-	Thing a=new Thing();
-	int i=0;
-	int j=1;
-	float k;
-	boolean b=true;
-	int a=readInt();
-	(k = readFloat());
-	a.setplus(i, j);
-	println("a.getI() = ", a.getI());
-	print(23);
-	printx(0x1.1d70a4p1);
-	println("hello", "you");
-	printlnx(j);
-	if (i == 0) {
-		print("ok!");
+	int x=4;
+	int y=0;
+	Thing t=(new Thing());
+	if (x < 5) {
+		while (x > 0) {
+			(x = (x - 1));
+			print(x);
+		}
 	}
 	else {
-		if ((j < 1) && (!b)) {
-			if (k != 0) {
-			}
-			else {
-			}
+		if (x > 6) {
+			println(x);
 		}
 		else {
-			(i = (i - 1));
-			(k = (-0x1.8p1));
+			print("OUAH");
 		}
 	}
-	while (i > 5) {
-		(i = (i + 1));
-		(i = (i * i));
-		(i = (i / j));
-		(j = (j % i));
-		while ((i >= 1) || (j <= 2)) {
-		}
-	}
+	(t.i = 4);
+	t.setplusK(t.getI(), 3);
+	(new Thing()).getI();
 }

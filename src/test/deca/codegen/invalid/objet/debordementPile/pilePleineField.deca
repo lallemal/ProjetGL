@@ -1,3 +1,6 @@
+// Description : pile pleine avec des declaration de field
+// Resultat : erreur lors de ima -p avec une pile petite
+
 class A{
     int a1 = 1;
     int a2 = 1;

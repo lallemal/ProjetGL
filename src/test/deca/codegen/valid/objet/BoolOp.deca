@@ -1,0 +1,29 @@
+// Description :
+//    test de génération de code pour des operations booleen
+//
+// Resultats deca: 
+// Resultats ima : 
+
+class A{
+    
+    boolean i = true;
+    boolean j = false;
+    
+    boolean and(){
+        return i&&j;
+    }
+
+    boolean or(){
+        return i||j;
+    }
+}
+{
+    A a = new A();
+    if (!a.and()){
+        println("and ok");
+    }
+    if (a.or()){
+        println("or ok");
+    }
+}
+

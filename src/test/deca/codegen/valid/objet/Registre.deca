@@ -1,0 +1,31 @@
+// Description :
+//    Test génération de code lorsqu'on essaie d'utiliser plus de registre qu'il n'y en a 
+//
+// Resultats decac:
+// Resultat ima: 
+
+
+class A{
+    
+    int x = 1;
+
+    int TestMultipleRegister() asm("
+        LOAD #1, R2\\
+        LOAD #1, R3\\
+        LOAD #1, R4\\
+        LOAD #1, R5\\
+        LOAD #1, R6\\
+        LOAD #1, R7\\
+        LOAD #1, R8\\
+        LOAD #1, R9\\
+        LOAD #1, R10\\
+        LOAD #1, R11\\
+        LOAD #1, R12\\
+        LOAD #1, R13\\
+        LOAD #1, R14\\
+        LOAD #1, R15\\
+        ADD R15, R16
+        "
+    );
+}
+

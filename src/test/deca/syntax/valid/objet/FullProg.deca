@@ -12,11 +12,13 @@ class Thing extends Objet{
     void setplusK(int i, int j){
         k = i + j;
         print(k);
+        this.k = k;
     }
 }
 {
     int x = 4;
     int y = 0;
+    Thing t = new Thing();
     if (x < 5) {
         while (x > 0) {
             x = x - 1;
@@ -29,4 +31,7 @@ class Thing extends Objet{
     else {
         print("OUAH");
     }
+    t.i = 4;
+    t.setplusK(t.getI(), 3);
+    (new Thing()).getI();
 }

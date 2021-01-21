@@ -1,0 +1,48 @@
+{
+
+	
+	int operateur;
+	int x1; 
+	int x2;
+	int result;
+	println("Calculatrice des entiers");
+
+	operateur = 1;
+	
+	while(operateur < 7 && operateur > 0){
+		println("Que voulez-vous faire?");
+		println(" 1 - Somme");
+		println(" 2 - Soustraction");
+		println(" 3 - Multiplication");
+		println(" 4 - Division");
+		println(" 5 - Modulo");
+		println(" 6 - Éteindre");
+		
+		operateur = readInt();
+		
+		if(operateur < 6){
+			println("Opérande de gauche: ");
+			x1 =readInt();
+			println("Opérande de droite: ");
+			x2 = readInt();
+
+			if( operateur == 1){
+				result = x1 + x2;
+			} else if( operateur == 2){
+				result = x1 - x2;
+			} else if( operateur == 3){
+				result = x1 * x2;
+			} else if (operateur == 4){
+				result = x1 / x2;
+			} else if(operateur == 5){
+				result = x1 % x2;
+			} 
+			println("Le résulatat vaut: ", result);
+		} else if(operateur == 6){
+			operateur = 0;
+		} else{
+			println("Vous devez entrer un nombre entre 1 et 5");
+		}
+	}
+
+}

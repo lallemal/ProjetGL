@@ -255,6 +255,10 @@ public abstract class AbstractExpr extends AbstractInst {
     	return false;
     }
 
+    public boolean isArraySelection() {
+        return false;
+    }
+
     @Override
     protected void decompileInst(IndentPrintStream s) {
         decompile(s);

@@ -80,7 +80,11 @@ public class Assign extends AbstractBinaryExpr {
 	        	compiler.addInstruction(new LOAD(a.getExpDefinition().getOperand(), Register.getR(3)));
 	        	compiler.addInstruction(new STORE(Register.getR(2), new RegisterOffset(index, Register.getR(3))));
 	        }
-    	}
+    	} else if (this.getLeftOperand().isArraySelection()) {
+			ArraySelection selectA = (ArraySelection) this.getLeftOperand();
+			selectA.codeExp(compiler, 3);
+			compiler.addInstruction(new STORE(Register.getR(2), new RegisterOffset(0, Register.getR(3))));
+		}
     }
 
     @Override

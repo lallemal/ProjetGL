@@ -42,7 +42,7 @@ public class IdentifierArray extends AbstractIdentifier{
 
 	@Override
 	public Symbol getName() {
-	    // TODO
+		// In theory, never called
 		return null;
 	}
 
@@ -60,8 +60,7 @@ public class IdentifierArray extends AbstractIdentifier{
 
 	@Override
 	public void setDefinition(Definition definition) {
-		// TODO Auto-generated method stub
-		
+		this.definition = definition;
 	}
 
 	@Override

@@ -3,6 +3,10 @@ package fr.ensimag.deca.tree;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.ImmediateInteger;
+import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.RegisterOffset;
+import fr.ensimag.ima.pseudocode.instructions.*;
 import org.apache.log4j.Logger;
 
 import java.io.PrintStream;
@@ -17,6 +21,27 @@ public class NewArray extends AbstractExpr{
 	public NewArray(AbstractIdentifier type, ListExpr memory) {
 		this.type = type;
 		this.memory = memory;
+	}
+
+	@Override
+	protected void codeExp(DecacCompiler compiler, int n) {
+	    compiler.getLabelError().setErrorTasPlein(true);
+	    compiler.addInstruction(new LOAD(new ImmediateInteger(1), Register.getR(n)));
+	    for (AbstractExpr expr : memory.getList()) {
+	    	expr.codeExp(compiler, n+1);
+	    	compiler.addInstruction(new MUL(Register.getR(n+1), Register.getR(n)));
+		}
+	    compiler.addInstruction(new ADD(new ImmediateInteger(1), Register.getR(n)));
+	    compiler.addInstruction(new NEW(Register.getR(n), Register.getR(n)));
+	    compiler.addInstruction(new NEW(memory.size(), Register.getR(n+1)));
+	    int i = 0;
+	    for (AbstractExpr expr : memory.getList()) {
+	    	expr.codeExp(compiler, n+2);
+	    	compiler.addInstruction(new STORE(Register.getR(n+2), new RegisterOffset(i, Register.getR(n+1))));
+	    	i++;
+		}
+	    // Tocheck
+	    compiler.addInstruction(new STORE(Register.getR(n+1), new RegisterOffset(0, Register.getR(n))));
 	}
 
 	@Override

@@ -37,6 +37,19 @@ public class LabelError {
 	private boolean errorCastFail;
 	private Label castFail;
 	
+	public void setAllTrue() {
+		this.setErrorCastFail(true);
+		this.setErrorDereferencementNull(true);
+		this.setErrorTasPlein(true);
+		this.setErrorPilePleine(true);
+		this.setErrorConvInt(true);
+		this.setErrorConvFloat(true);
+		this.setErrorReadFloat(true);
+		this.setErrorReadInt(true);
+		this.setErrorMod0(true);
+		this.setErrorDiv0(true);
+	}
+	
 	public void setErrorDiv0(boolean b) {
 		errorDiv0 = b;
 	}

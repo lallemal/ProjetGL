@@ -1,0 +1,14 @@
+// Description :
+//    test de génération de code instanceof new
+//
+// Resultats deca: 
+// Resultats ima : 
+
+
+class A{
+}
+{
+    if ((new A()) instanceof A){
+        println("InstanceOf marche avec new");
+    }
+}

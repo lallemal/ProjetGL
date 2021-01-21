@@ -36,7 +36,24 @@ do
   fi
 
 done
- 
+
+echo "------ Démarrage des tests valide avec changement du nombre de regsitre decac "
+if decac -r 4 src/test/deca/codegen/valid/objet/Registre/Registre.deca 2>&1 | grep -q -e "$i:"
+then
+  echo "Echec inattendu pour decac pour Registre.deca"
+else
+  echo "OK"
+fi
+
+echo "------ Démarrage des tests valide avec changement du nombre de regsitre ima "
+if ima src/test/deca/codegen/valid/objet/Registre/Registre.ass 2>&1 | grep -q -e "$i:"
+then
+  echo "Echec inattendu pour decac pour Registre.ass"
+else
+  echo "OK"
+fi
+
+
 cd "$(dirname "$0")"/../../.. || exit 1
 
 nb=$(ls -l src/test/deca/codegen/invalid/objet/*.deca | wc -l)

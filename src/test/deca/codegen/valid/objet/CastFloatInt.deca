@@ -4,19 +4,19 @@
 // Resultats deca: 
 // Resultats ima : 
 
-
 class A{
-    float a = 1.0;
+    int a = 1;
     
-    int castA(){
-        return (int)(a);
+    float castA(){
+        return (float)(a);
     }
 }
 {
     A objet = new A();
-    float a = 1.1;
-    int b = (int)(a);
+    int a = 1;
+    float b = (float)(a);
     println("cast dans le main: ", b);
     println("cast dans la méthode: ", objet.castA());
 
 }
+

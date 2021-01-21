@@ -14,10 +14,8 @@ class C extends B {
 boolean gCapte;
 A a;
 B b;
-A ax;
 a = new C();
-ax = a.x;
-//gCapte = (a.x) instanceof B;
+gCapte = (a.newB()) instanceof B;
 if (gCapte) {
     println("okbro");
 } else {

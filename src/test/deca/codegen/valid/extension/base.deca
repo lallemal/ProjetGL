@@ -1,8 +1,10 @@
 {
     int n = 10;
     int e = 1;
-    int[] x = new int[4];
-    int[][] y = new int[3][2];
+    int i = 0;
+    int j = 0;
+    int[] x = new int[n];
+    int[][] y = new int[n][n];
     int[][][] z = new int[n][n][n];
     x[1] = 1;
     x[2] = 3;
@@ -12,4 +14,23 @@
     println(x[2]);
     println(y[1][1]);
     println(z[e][e+1][e+2]);
+    while (i < n) {
+        x[i] = i;
+        println(x[i]);
+        i = i + 1;
+    }
+    i = 0;
+
+
+    println("--------------");
+    while( i < n) {
+        j = 0;
+        while (j < n) {
+            y[i][j] = i + j;
+            println(y[i][j]);
+            j = j + 1;
+        }
+        i = i + 1;
+    }
+
 }

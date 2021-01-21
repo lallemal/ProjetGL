@@ -36,7 +36,7 @@ public class ArraySelection extends AbstractLValue{
 			compiler.addInstruction(new ADD(Register.getR(n+4), Register.getR(n+2)));
 			compiler.addInstruction(new MUL(new RegisterOffset(i, Register.getR(n+1)), Register.getR(n+3)));
 		}
-		compiler.addInstruction(new LEA(new RegisterOffsetRegister(0, Register.getR(n), Register.getR(n+2)),Register.getR(n)));
+		compiler.addInstruction(new LEA(new RegisterOffsetRegister(1, Register.getR(n), Register.getR(n+2)),Register.getR(n)));
 	}
 
 

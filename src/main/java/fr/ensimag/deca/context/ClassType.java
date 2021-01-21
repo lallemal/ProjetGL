@@ -68,11 +68,7 @@ public class ClassType extends Type {
         if (potentialSuperClass == null) {
             return false;
         }
-        if (definition.getSuperClass() == null) {
-            return false;
-        }
         return definition.getSuperClass().getType().isSubClassOf(potentialSuperClass);
-
     }
 
 

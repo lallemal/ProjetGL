@@ -56,7 +56,12 @@ public class Cast extends AbstractExpr{
 				expression.codeExp(compiler, n);
 			}
 		} else if (T.isClass()) {
-			if (expression.getType().isClass()) {
+			if (expression.getType().isNull()) {
+				expression.codeExp(compiler, n);
+			} else if (expression.getType().isClass()) {
+				
+				InstanceOf testInstanceOf = new InstanceOf(expression, ident);
+				
 				String label = "castSucceed_";
 		        String pos = getLocation().getLine() + "_" + getLocation().getPositionInLine();
 				Label castSucceed = new Label(label+pos);

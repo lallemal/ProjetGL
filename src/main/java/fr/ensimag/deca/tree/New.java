@@ -31,6 +31,10 @@ public class New extends AbstractExpr {
 	    this.ident = operand;
 	}
 	
+	public AbstractIdentifier getIdent() {
+		return ident;
+	}
+	
 	@Override
 	protected void codeExp(DecacCompiler compiler, int n) {
 		compiler.getLabelError().setErrorTasPlein(true);

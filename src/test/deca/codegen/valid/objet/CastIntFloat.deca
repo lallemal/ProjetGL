@@ -6,5 +6,7 @@
 
 {
     float a;
+    a = 1.1;
     a = (int)(a);
+    println(a);
 }

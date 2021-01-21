@@ -101,7 +101,7 @@ FLOAT : FLOATDEC {isDecimal(getText());} | FLOATHEX{ isHexadecimal(getText()); }
 
 // litteraux entiers doit lever erreur si trop grand
 fragment POSITIVE_DIGIT : '1'..'9';
-INT : '0' | POSITIVE_DIGIT DIGIT* {intCondition(getText());};  
+INT : '0' | POSITIVE_DIGIT DIGIT* ;  
 
 
 // mot reserve ne sont pas des ident donc le placer a la fin pour priorite

@@ -461,7 +461,11 @@ type returns[AbstractIdentifier tree]
 
 literal returns[AbstractExpr tree]
     : INT {
-   			$tree = new IntLiteral(Integer.parseInt($INT.text));
+        try{
+   		$tree = new IntLiteral(Integer.parseInt($INT.text));
+        }catch(NumberFormatException e){
+            throw new InvalidInt(this,$ctx);
+        }
    			setLocation($tree, $INT);
 
         }

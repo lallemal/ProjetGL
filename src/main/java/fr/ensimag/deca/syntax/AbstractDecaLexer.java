@@ -288,28 +288,7 @@ public abstract class AbstractDecaLexer extends Lexer {
     // nombre maximum entier signé positif sur 32 bits => un bit de signe 
     //le maximum est donc 2^31-1 donc 2147483647 on va comparer les chaine de caractere
     // des deux nombres
-     void intCondition(String stringentier) throws DecaRecognitionException{
-    	
-    	String maximum = "2147483647";
-    	
-    	if (stringentier.length() < 10) {
-    		return;
-    	}
-    	if (stringentier.length() >10) {
-    		  throw new InvalidInt(this, getInputStream());
-    	}
-    	// chaine de meme longueur
-    	for (int i = 0;i< maximum.length();i++) {
-    		// compare asci mais '1' <'2' donc marche bien
-    		int max =maximum.charAt(i);
-    		int entier = stringentier.charAt(i);
-    		if(max < entier) {
-    			  throw new InvalidInt(this, getInputStream());
-    		}
-    	}
-    	return;
-    	
-    }
+   
 
  	/* Fonction  associee si le float est un decimal*/
 

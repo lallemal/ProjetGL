@@ -1,13 +1,13 @@
 package fr.ensimag.deca.syntax;
-
-import org.antlr.v4.runtime.IntStream;
-import org.antlr.v4.runtime.RecognitionException;
+import org.antlr.v4.runtime.ParserRuleContext;
 
 public class InvalidInt extends DecaRecognitionException {
-	public InvalidInt(AbstractDecaLexer recognizer, IntStream input) {
-        super(recognizer, input);
-    
+
+
+    public InvalidInt(DecaParser recognizer, ParserRuleContext ctx) {
+        super(recognizer, ctx);
     }
+
     
  
     @Override

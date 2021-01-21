@@ -12,6 +12,10 @@ import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.context.Signature;
 import fr.ensimag.deca.tools.IndentPrintStream;
 
+import java.io.PrintStream;
+import java.util.Iterator;
+
+
 /**
  *
  * @author louise
@@ -25,18 +29,26 @@ public class ListParam extends TreeList<AbstractDeclParam> {
         }
         return sig;
     }
-
+    
     public void verifyDeclMethodBody(DecacCompiler compiler, EnvironmentExp localExp, ClassDefinition currentClass)
         throws ContextualError {
+    	int index = 0;
         for (AbstractDeclParam p : getList()) {
-            p.verifyDeclParamBody(compiler, localExp, currentClass);
+            p.verifyDeclParamBody(compiler, localExp, currentClass, index);
+            index++;
         }
     }
 
-
     @Override
     public void decompile(IndentPrintStream s) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int j = 0;
+        for (AbstractDeclParam i: getList()){
+            i.decompile(s);
+            if (j != size()-1){
+                s.print(", ");
+            }
+            j ++; 
+        };
     }
 
     

@@ -1,6 +1,7 @@
 package fr.ensimag.deca.context;
 
 import fr.ensimag.deca.tree.Location;
+import fr.ensimag.ima.pseudocode.DAddr;
 import fr.ensimag.ima.pseudocode.Label;
 import org.apache.commons.lang.Validate;
 
@@ -30,6 +31,10 @@ public class MethodDefinition extends ExpDefinition {
     public int getIndex() {
         return index;
     }
+    
+    public void setIndex(int n) {
+    	index = n;
+    }
 
     private int index;
 
@@ -41,6 +46,15 @@ public class MethodDefinition extends ExpDefinition {
 
     private final Signature signature;
     private Label label;
+    private DAddr address;
+    
+    public DAddr getAddress() {
+    	return address;
+    }
+    
+    public void setAddress(DAddr address) {
+    	this.address = address;
+    }
     
     /**
      * 

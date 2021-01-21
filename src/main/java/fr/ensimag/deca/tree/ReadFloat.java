@@ -29,6 +29,7 @@ public class ReadFloat extends AbstractReadExpr {
 
     @Override
     protected void codeGenInst(DecacCompiler compiler) {
+    	compiler.setRegistreUsed(2);
         codeExp(compiler, 2);
     }
     

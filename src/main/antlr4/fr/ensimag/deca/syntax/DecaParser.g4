@@ -262,9 +262,11 @@ list_expr returns[ListExpr tree]
 @init   {
 
 	$tree = new ListExpr();
+
         }
     : (e1=expr {
     	$tree.add($e1.tree);
+    	setLocation($tree, $e1.start);
         }
        (COMMA e2=expr {
        	$tree.add($e2.tree);
@@ -507,6 +509,7 @@ select_expr returns[AbstractExpr tree]
             // we matched "e1.i(args)"
             assert($args.tree != null);
             $tree = new MethodCall($e1.tree, $i.tree, $args.tree);
+            setLocation($args.tree, $args.start);
             setLocation($tree, $e1.start);
         }
         
@@ -528,7 +531,9 @@ primary_expr returns[AbstractExpr tree]
     | m=ident OPARENT args=list_expr CPARENT {
             assert($args.tree != null);
             assert($m.tree != null);
-            $tree = new MethodCall(new This(), $m.tree, $args.tree);
+            AbstractExpr thisExpr = new This();
+            setLocation(thisExpr, $m.start);
+            $tree = new MethodCall(thisExpr, $m.tree, $args.tree);
         }
     | OPARENT expr CPARENT {
             assert($expr.tree != null);
@@ -654,11 +659,11 @@ literal returns[AbstractExpr tree]
         }
     | THIS {
     	$tree = new This();
-        setLocation($tree, $THIS);
+                setLocation($tree, $THIS);
         }
     | NULL {
     	$tree = new Null();
-        setLocation($tree, $NULL);
+                        setLocation($tree, $NULL);
         }
     ;
 
@@ -770,7 +775,11 @@ decl_method returns[DeclMethod tree]
       | ASM OPARENT code=multi_line_string CPARENT SEMI {
             assert($type.tree != null);
             assert($ident.tree != null);
-            $tree = new DeclMethod($type.tree, $ident.tree, $params.tree, new MethodAsmBody(new StringLiteral($code.text)));
+            StringLiteral stringAsm = new StringLiteral($code.text);
+            setLocation(stringAsm, $code.start);
+            MethodAsmBody asmBody = new MethodAsmBody(stringAsm);
+            setLocation(asmBody, $ASM);
+            $tree = new DeclMethod($type.tree, $ident.tree, $params.tree, asmBody);
         }
       ) {
             setLocation($tree, $type.start);

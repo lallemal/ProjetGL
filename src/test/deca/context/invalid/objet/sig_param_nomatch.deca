@@ -1,0 +1,13 @@
+// The signature of this method does not match the number of parameters given
+// Description : Try to use a method with the wrong number of parameters
+// Result : error line 11
+
+class A {
+    void m(int x) {}
+}
+
+
+{
+    A a = new A();
+    a.m();
+}

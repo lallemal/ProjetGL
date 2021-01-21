@@ -1,5 +1,6 @@
 package fr.ensimag.deca;
 
+import fr.ensimag.deca.codegen.LabelClass;
 import fr.ensimag.deca.codegen.LabelError;
 import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.syntax.DecaLexer;
@@ -11,6 +12,10 @@ import fr.ensimag.ima.pseudocode.AbstractLine;
 import fr.ensimag.ima.pseudocode.IMAProgram;
 import fr.ensimag.ima.pseudocode.Instruction;
 import fr.ensimag.ima.pseudocode.Label;
+import fr.ensimag.ima.pseudocode.Line;
+import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.RegisterOffset;
+
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.apache.log4j.Logger;
@@ -38,19 +43,87 @@ public class DecacCompiler implements Callable<Boolean> {
     private static final Logger LOG = Logger.getLogger(DecacCompiler.class);
     
     private LabelError labelError;
+    private LabelClass labelClass;
     
     public LabelError getLabelError() {
     	return labelError;
     }
     
+    public LabelClass getLabelClass() {
+    	return labelClass;
+    }
+    
     private int kGB = 1;
+    private int kSP = 1;
+    private int maxSP = 1;
+    
+    public int getMaxSP() {
+    	return maxSP;
+    }
+    
+    public void incrementKSP() {
+    	kSP++;
+    	if (kSP > maxSP) {
+    		maxSP = kSP;
+    	}
+    }
+    
+    public void incrementKSP(int n) {
+    	kSP = kSP + n;
+    	if (kSP > maxSP) {
+    		maxSP = kSP;
+    	}
+    }
+    
+    public void decrementKSP() {
+    	kSP--;
+    	assert(kSP > 0);
+    }
+    
+    public void decrementKSP(int n) {
+    	kSP = kSP - n;
+    	if (kSP > maxSP) {
+    		maxSP = kSP;
+    	}
+    }
     
     public void incrementKGB() {
     	kGB++;
     }
     
+    public void incrementKGB(int n) {
+    	kGB = kGB + n;
+    }
+    
+    public void decrementKGB() {
+    	kGB--;
+    	assert(kGB > 0);
+    }
+    
+
+    public void decrementKGB(int n) {
+    	kGB = kGB - n;
+    	assert(kGB > 0);
+    }
+    
     public int getKGB() {
     	return kGB;
+    }
+    
+    public int getKSP() {
+    	return kSP;
+    }
+    
+    public void setKGB(int x) {
+    	kGB = x;
+    }
+    
+    public void setKSP(int x) {
+    	kSP = x;
+    }
+    
+    public void setMaxSP(int x) {
+    	maxSP = x;
     }
     
     /**
@@ -68,6 +141,9 @@ public class DecacCompiler implements Callable<Boolean> {
         createPredefTypes();
         this.rmax = 15;
         this.labelError = new LabelError();
+        this.labelClass = new LabelClass();
+        this.registreUsed = new boolean[16];
+        this.resetRegistreUsed();
         
     }
     private int rmax;
@@ -96,14 +172,34 @@ public class DecacCompiler implements Callable<Boolean> {
      * fr.ensimag.ima.pseudocode.IMAProgram#add(fr.ensimag.ima.pseudocode.AbstractLine)
      */
     public void add(AbstractLine line) {
-        program.add(line);
+    	if (aux) {
+    		programAux.add(line);
+    	} else {
+    		program.add(line);
+    	}
+    }
+    
+    /**
+     * @see
+     * fr.ensimag.ima.pseudocode.IMAProgram#addFirst(fr.ensimag.ima.pseudocode.AbstractLine)
+     */
+    public void addFirst(Line line) {
+    	if (aux) {
+    		programAux.addFirst(line);
+    	} else {
+    		program.addFirst(line);
+    	}
     }
 
     /**
      * @see fr.ensimag.ima.pseudocode.IMAProgram#addComment(java.lang.String)
      */
     public void addComment(String comment) {
-        program.addComment(comment);
+    	if (aux) {
+    		programAux.addComment(comment);
+    	} else {
+    		program.addComment(comment);
+    	}
     }
 
     /**
@@ -111,7 +207,11 @@ public class DecacCompiler implements Callable<Boolean> {
      * fr.ensimag.ima.pseudocode.IMAProgram#addLabel(fr.ensimag.ima.pseudocode.Label)
      */
     public void addLabel(Label label) {
-        program.addLabel(label);
+    	if (aux) {
+    		programAux.addLabel(label);
+    	} else {
+    		program.addLabel(label);
+    	}
     }
 
     /**
@@ -119,8 +219,25 @@ public class DecacCompiler implements Callable<Boolean> {
      * fr.ensimag.ima.pseudocode.IMAProgram#addInstruction(fr.ensimag.ima.pseudocode.Instruction)
      */
     public void addInstruction(Instruction instruction) {
-        program.addInstruction(instruction);
+    	if (aux) {
+    		programAux.addInstruction(instruction);
+    	} else {
+    		program.addInstruction(instruction);
+    	}
     }
+    
+    /**
+    * @see
+    * fr.ensimag.ima.pseudocode.IMAProgram#addFirstInstruction(fr.ensimag.ima.pseudocode.Instruction,
+    * java.lang.String)
+    */
+    public void addInstructionFirst(Instruction instruction) {
+    	if (aux) {
+    		programAux.addFirst(new Line(instruction));
+   		} else {
+   			program.addFirst(new Line(instruction));
+   		}
+   }
 
     /**
      * @see
@@ -128,7 +245,20 @@ public class DecacCompiler implements Callable<Boolean> {
      * java.lang.String)
      */
     public void addInstruction(Instruction instruction, String comment) {
-        program.addInstruction(instruction, comment);
+    	if (aux) {
+    		programAux.addInstruction(instruction, comment);
+   		} else {
+   			program.addInstruction(instruction, comment);
+   		}
+    }
+    
+    /**
+     * @see
+     * fr.ensimag.ima.pseudocode.IMAProgram#append(fr.ensimag.ima.pseudocode.Instruction,
+     * java.lang.String)
+     */
+    public void append(IMAProgram p) {
+        program.append(p);
     }
     
     /**
@@ -145,7 +275,41 @@ public class DecacCompiler implements Callable<Boolean> {
      * The main program. Every instruction generated will eventually end up here.
      */
     private final IMAProgram program = new IMAProgram();
- 
+    private IMAProgram programAux;
+    private boolean aux = false;
+    private boolean[] registreUsed;
+    
+    public void resetRegistreUsed() {
+    	for (int i = 0; i<16; i++) {
+    		registreUsed[i] = false;
+    	}
+    }
+    
+    public void setRegistreUsed(int n) {
+    	this.registreUsed[n] = true;
+    }
+    
+    public int nbRegistreUsed() {
+    	int cp = 0;
+    	for (int i = 0; i<16; i++) {
+    		if (registreUsed[i]) {
+    			cp++;
+    		}
+    	}
+    	return cp;
+    }
+    
+    public void setAux(boolean b) {
+    	this.aux = b;
+    }
+    
+    public void cleanProgramAux() {
+    	programAux = new IMAProgram();
+    }
+    
+    public IMAProgram getProgramAux() {
+    	return programAux;
+    }
 
     /**
      * Run the compiler (parse source file, generate code)
@@ -223,9 +387,8 @@ public class DecacCompiler implements Callable<Boolean> {
         }
         assert(prog.checkAllDecorations());
 
-        addComment("start main program");
         prog.codeGenProgram(this);
-        addComment("end main program");
+        addComment("end of program");
         LOG.debug("Generated assembly code:" + nl + program.display());
         LOG.info("Output file assembly file is: " + destName);
 
@@ -298,10 +461,10 @@ public class DecacCompiler implements Callable<Boolean> {
             env_types.declare(intSymbol, new TypeDefinition(new IntType(intSymbol), Location.BUILTIN));
 
             Signature equalsSig = new Signature();
-            equalsSig.add(getBool());
             ClassType objectClass = new ClassType(objectSymbol, Location.BUILTIN, null);
+            equalsSig.add(objectClass);
             ClassDefinition objectDef = new ClassDefinition(objectClass, Location.BUILTIN, null);
-            objectDef.getMembers().declare(symbols.create("equals"), new MethodDefinition(objectClass, Location.BUILTIN, equalsSig, 0));
+            objectDef.getMembers().declare(symbols.create("equals"), new MethodDefinition(getBool(), Location.BUILTIN, equalsSig, 0));
             objectDef.setNumberOfMethods(1);
             env_types.declare(objectSymbol, objectDef);
 
@@ -348,7 +511,9 @@ public class DecacCompiler implements Callable<Boolean> {
 
     public DeclClass initObject() {
         ClassDefinition objectDef = (ClassDefinition)env_types.get(symbols.create("Object"));
+        objectDef.setIsClassObject(true);
         MethodDefinition equalDef = (MethodDefinition) objectDef.getMembers().get(symbols.create("equals"));
+        equalDef.setLabel(new Label("code.Object.equals"));
         Identifier objectIdent = new Identifier(symbols.create("Object"));
         objectIdent.setLocation(Location.BUILTIN);
         objectIdent.setDefinition(objectDef);
@@ -371,7 +536,7 @@ public class DecacCompiler implements Callable<Boolean> {
         typeParamIdent.setDefinition(objectDef);
         Identifier nameParamIdent = new Identifier(symbols.create("other"));
         nameParamIdent.setLocation(Location.BUILTIN);
-        nameParamIdent.setDefinition(objectDef);
+        nameParamIdent.setDefinition(new ParamDefinition(objectDef.getType(), Location.BUILTIN, 0));
         DeclParam paramObject = new DeclParam(typeParamIdent, nameParamIdent);
         listParamEquals.add(paramObject);
 
@@ -381,10 +546,12 @@ public class DecacCompiler implements Callable<Boolean> {
         thisBody.setLocation(Location.BUILTIN);
         Identifier otherBody = new Identifier(symbols.create("other"));
         otherBody.setLocation(Location.BUILTIN);
-        otherBody.setDefinition(objectDef);
+        otherBody.setDefinition(new ParamDefinition(objectDef.getType(), Location.BUILTIN, 0));
         Equals equalBody = new Equals(thisBody, otherBody);
         equalBody.setLocation(Location.BUILTIN);
-        listInst.add(equalBody);
+        Return returnBody = new Return(equalBody);
+        returnBody.setLocation(Location.BUILTIN);
+        listInst.add(returnBody);
         ListDeclVar listDeclVar = new ListDeclVar();
         listDeclVar.setLocation(Location.BUILTIN);
 
@@ -394,6 +561,8 @@ public class DecacCompiler implements Callable<Boolean> {
         DeclMethod equalMethod = new DeclMethod(booleanIdent, equalsIdent, listParamEquals, equalBodyMethod);
         equalMethod.setLocation(Location.BUILTIN);
         objectMethod.add(equalMethod);
+        objectDef.setMethods(objectMethod);
+        objectDef.setAddress(new RegisterOffset(1, Register.GB));
         object = new DeclClass(objectIdent, null, objectField, objectMethod);
         object.setLocation(Location.BUILTIN);
 

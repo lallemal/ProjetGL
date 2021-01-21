@@ -1,0 +1,6 @@
+class Thing {
+	protected int i=0;
+	protected int j=1;
+	protected float k;
+
+}

@@ -11,6 +11,10 @@ import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.Label;
+import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.instructions.BRA;
+import fr.ensimag.ima.pseudocode.instructions.LOAD;
 
 import java.io.PrintStream;
 
@@ -18,6 +22,7 @@ import java.io.PrintStream;
  *
  * @author louise
  */
+
 public class Return extends AbstractInst {
     private final AbstractExpr operand;
     
@@ -35,14 +40,27 @@ public class Return extends AbstractInst {
     }
 
     @Override
-    protected void codeGenInst(DecacCompiler compiler) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void codeGenInst(DecacCompiler compiler) {
+    	//nothing to do, we need a labelFin 
+    }
+    
+    public void codeGenInst(DecacCompiler compiler, Label labelFin) {
+    	compiler.setRegistreUsed(2);
+    	operand.codeExp(compiler, 2);
+    	compiler.addInstruction(new LOAD(Register.getR(2), Register.R0));
+        compiler.addInstruction(new BRA(labelFin));
+    }
+    
+    @Override
+    protected boolean isReturn() {
+    	return true;
     }
 
     @Override
     public void decompile(IndentPrintStream s) {
-
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        s.print("return ");
+        operand.decompile(s);
+        s.print(";");
     }
 
     @Override
@@ -53,6 +71,5 @@ public class Return extends AbstractInst {
     @Override
     protected void iterChildren(TreeFunction f) {
         operand.iter(f);
-
     }
 }

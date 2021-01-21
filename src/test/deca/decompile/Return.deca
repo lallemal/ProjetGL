@@ -1,0 +1,19 @@
+// Description :
+//    test décompilation return dans classe et main
+//
+// Resultats (en comparaison avec le résultat attendu 
+// disponible dans le fichier *.deca.ok dans le dossier Modeles_OK) :
+//    ok
+
+class Thing {
+
+    int i;
+    
+    int getI(){
+        return i;
+    }
+}
+{
+    int i = 0;
+    return i;
+}

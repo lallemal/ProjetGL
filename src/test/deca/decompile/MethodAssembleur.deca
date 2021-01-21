@@ -1,0 +1,31 @@
+// Description :
+//    Test decompilation méthode assembleur
+//
+// Resultats (en comparaison avec le résultat attendu 
+// disponible dans le fichier *.deca.ok dans le dossier Modeles_OK) :
+//    ok
+
+class A{
+    
+    int x = 1;
+
+    void setX(int x) asm(
+    "TSTO #2\\
+	BOV pile_pleine\\
+; sauvegarde des registres\\
+	PUSH R2\\
+	PUSH R3\\
+; instructions\\
+	LOAD -3(LB), R2\\
+	LOAD -2(LB), R3\\
+	CMP #null, R3\\
+	BEQ dereferencement_null\\
+	STORE R2, 1(R3)\\
+fin.A.setX:\\
+; restauration des registres\\
+	POP R3\\
+	POP R2\\
+	SUBSP #0\\
+	RTS\\
+");
+}

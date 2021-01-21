@@ -21,7 +21,7 @@ resultat=$(decac -p src/test/deca/decompile/Test_include/Include.deca)
   if [ "$(less src/test/deca/decompile/Include.deca.ok)" = "$resultat" ]; then
         echo "OK"
   else
-        echo "Résultat innatendu, le résultat:"
+        echo "Résultat innatendu pour $i, le résultat:"
         echo "$resultat"
         echo "ce qui était attendu:"
         echo "$(less src/test/deca/decompile/Include.deca.ok)"
@@ -33,7 +33,7 @@ do
     if [ "$(less $i.ok)" = "$resultat" ]; then
          echo "OK"
      else
-        echo "Résultat innatendu, le résultat:"
+        echo "Résultat innatendu pour $i, le résultat:"
         echo "$resultat"
         echo "ce qui était attendu:"
         echo "$(less $i.ok)"
@@ -42,5 +42,4 @@ do
   
 done
  
-cd "$(dirname "$0")"/../../.. || exit 1
 echo "Pour plus de détails: decac -p fichier_à_étudier"

@@ -1,0 +1,31 @@
+// Description :
+//    Test génération de code appel de méthodes 
+//
+// Resultats decac:
+// Resultat ima: 
+
+
+class A{
+ 
+    int x = 1;
+
+    int getX(){
+        return x;
+    }
+    
+    void setX(int x){
+        this.x = x;
+        //Method Call this
+        this.getX();
+    }
+
+}
+{
+    A a = new A();
+    //method call Identifier
+    println(a.getX());
+    
+    //method call new
+    println((new A()).getX());
+    
+}

@@ -1,0 +1,20 @@
+// Description :
+//    Test génération de code selection sur un new directement + Return 
+//
+// Resultats decac:
+// Resultat ima: 1
+
+
+class A{
+    
+    int x = 1;
+
+    int getX(){
+        return x;
+    }
+}
+{
+    print("mon résultat est:", (new A()).getX());
+    
+}
+

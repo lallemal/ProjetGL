@@ -1,11 +1,10 @@
 package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.DecacCompiler;
-import fr.ensimag.deca.context.ClassDefinition;
-import fr.ensimag.deca.context.ContextualError;
-import fr.ensimag.deca.context.EnvironmentExp;
-import fr.ensimag.deca.context.Type;
+import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.*;
+import fr.ensimag.ima.pseudocode.instructions.*;
 import org.apache.commons.lang.Validate;
 
 import java.io.PrintStream;
@@ -20,6 +19,59 @@ public class InstanceOf extends AbstractExpr{
 		this.expr = expr;
 		this.ident = ident;
 	}
+	
+	@Override
+	public void codeExp(DecacCompiler compiler, int n) {
+		if (expr.isNew()) {
+			New e = (New) expr;
+			ClassType classe = (ClassType) e.getIdent().getType();
+			boolean subClass = classe.isSubClassOf(((ClassType) ident.getType()));
+			compiler.addInstruction(new LOAD(subClass?1:0, Register.getR(n)));
+		} else if (expr.getType().isNull()) {
+			compiler.addInstruction(new LOAD(1, Register.getR(n)));
+		} 
+		else {
+			Label fin_false = new Label("fin_false_"+getLocation().getLine()+"_"+getLocation().getPositionInLine());
+			Label fin_true = new Label("fin_true_"+getLocation().getLine()+"_"+getLocation().getPositionInLine());
+			Label fin = new Label("fin_"+getLocation().getLine()+"_"+getLocation().getPositionInLine());
+			Label boucle = new Label("while_instanceOf_"+getLocation().getLine()+"_"+getLocation().getPositionInLine());
+			
+			DAddr rightAddress = ident.getClassDefinition().getAddress();
+			if (expr.isIdentifier()) {
+				Identifier a = (Identifier) expr;
+				DAddr leftAddress = a.getExpDefinition().getOperand();
+				compiler.addInstruction(new LEA(leftAddress, Register.getR(n)));
+			} else {
+				expr.codeExp(compiler, n);
+			}
+			
+			compiler.addLabel(boucle);
+			compiler.addInstruction(new LOAD(new RegisterOffset(0, Register.getR(n)), Register.getR(n)));
+			compiler.addInstruction(new CMP(new NullOperand(), Register.getR(n)));
+			compiler.addInstruction(new BEQ(fin_false));
+			compiler.addInstruction(new CMP(rightAddress, Register.getR(n)));
+			compiler.addInstruction(new BEQ(fin_true));
+			compiler.addInstruction(new BRA(boucle));
+			compiler.addLabel(fin_false);
+			compiler.addInstruction(new LOAD(0, Register.getR(n)));
+			compiler.addInstruction(new BRA(fin));
+			compiler.addLabel(fin_true);
+			compiler.addInstruction(new LOAD(1, Register.getR(n)));
+			compiler.addLabel(fin);
+		}
+	}
+	
+	@Override
+	protected void codeGenBranch(DecacCompiler compiler, boolean evaluate, Label label) {
+        this.codeExp(compiler, 2);
+        compiler.addInstruction(new CMP(0, Register.getR(2)));
+        if (evaluate) {
+            compiler.addInstruction(new BNE(label));
+        } else {
+            compiler.addInstruction(new BEQ(label));
+        }
+    }
+	
 	@Override
 	public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass)
 			throws ContextualError {
@@ -34,19 +86,25 @@ public class InstanceOf extends AbstractExpr{
 
 	@Override
 	public void decompile(IndentPrintStream s) {
-		// TODO Auto-generated method stub
+                s.print("(");
+		expr.decompile(s);
+                s.print(" instanceof ");
+                ident.decompile(s);
+                s.print(")");
 		
 	}
 
 	@Override
 	protected void prettyPrintChildren(PrintStream s, String prefix) {
-		// TODO Auto-generated method stub
+		expr.prettyPrint(s, prefix, false);
+                ident.prettyPrint(s, prefix, true);
 		
 	}
 
 	@Override
 	protected void iterChildren(TreeFunction f) {
-		// TODO Auto-generated method stub
+		expr.iter(f);
+                ident.iter(f);
 		
 	}
 

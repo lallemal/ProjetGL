@@ -1,0 +1,13 @@
+// Description :
+//    test de génération de code pour le cast d'un float en int
+//
+// Resultats deca: 
+// Resultats ima : 
+
+{
+    float a;
+    int b;
+    a = 1.1;
+    b = (int)(a);
+    println(b);
+}

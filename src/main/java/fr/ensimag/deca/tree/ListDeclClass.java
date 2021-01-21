@@ -25,6 +25,25 @@ public class ListDeclClass extends TreeList<AbstractDeclClass> {
      * Pass 1 of [SyntaxeContextuelle]
      */
     void verifyListClass(DecacCompiler compiler) throws ContextualError {
+    	/**
+    	if (this.size() > 0) {
+    		AbstractIdentifier ident = new Identifier(compiler.getSymbols().create("Object"));
+    		AbstractIdentifier type = new Identifier(compiler.getSymbols().create("boolean"));
+    		AbstractIdentifier nom = new Identifier(compiler.getSymbols().create("equals"));
+    		ListParam param = new ListParam();
+    		Identifier other = new Identifier(compiler.getSymbols().create("other"));
+    		param.add(new DeclParam(new Identifier(compiler.getSymbols().create("Object")), other));
+    		ListDeclVar var = new ListDeclVar();
+    		ListInst inst = new ListInst();
+    		AbstractExpr exp = new Equals(new This(), other);
+    		Return ret = new Return(exp);
+    		inst.add(ret);
+    		AbstractMethodBody body = new MethodBody(var, inst);
+    		AbstractDeclMethod equals = new DeclMethod(type, nom, param, body);
+    		ListDeclMethod listMethod = new ListDeclMethod();
+    		listMethod.add(equals);
+    		this.add(new DeclClass(ident, null, new ListDeclField(), listMethod));
+    	}*/
         LOG.debug("verify listClass: start");
         for (AbstractDeclClass c : getList()) {
             c.verifyClass(compiler);
@@ -52,6 +71,15 @@ public class ListDeclClass extends TreeList<AbstractDeclClass> {
             c.verifyClassBody(compiler);
         }
         LOG.debug("verify listClassBody : end");
+    }
+    
+    /**
+     * Step C
+     */
+    public void codeGenDeclClass(DecacCompiler compiler) {
+    	for (AbstractDeclClass i : getList()) {
+            i.codeGenDeclClass(compiler);
+        }
     }
 
 

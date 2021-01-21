@@ -8,7 +8,9 @@ import fr.ensimag.deca.context.Type;
 import fr.ensimag.ima.pseudocode.DVal;
 import fr.ensimag.ima.pseudocode.Label;
 import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.instructions.BRA;
 import fr.ensimag.ima.pseudocode.instructions.CMP;
+import fr.ensimag.ima.pseudocode.instructions.LOAD;
 
 /**
  *
@@ -48,12 +50,33 @@ public abstract class AbstractOpCmp extends AbstractBinaryExpr {
         setType(compiler.getBool());
         return compiler.getBool();
     }
+    
+    @Override
+    protected void codeExp(DecacCompiler compiler, int n) {
+        String label = "boolOp_";
+        String pos;
+        if (getLocation() == Location.BUILTIN) {
+        	pos = "BuiltIn";
+        } else {
+        	pos = getLocation().getLine() + "_" + getLocation().getPositionInLine();
+        }
+        Label sinonLabel = new Label(label + "False." + pos);
+        Label finLabel = new Label(label + "Fin." + pos);
+        this.codeGenBranch(compiler, false, sinonLabel);
+        compiler.addInstruction(new LOAD(1, Register.getR(n)));
+        compiler.addInstruction(new BRA(finLabel));
+        compiler.addLabel(sinonLabel);
+        compiler.addInstruction(new LOAD(0, Register.getR(n)));
+        compiler.addLabel(finLabel);
+    }
 
     @Override
     protected void codeGenBranch(DecacCompiler compiler, boolean evaluate, Label label) {
         DVal opG = getLeftOperand().dval();
+        compiler.setRegistreUsed(3);
         getRightOperand().codeExp(compiler, 3);
         if (opG == null) {
+        	compiler.setRegistreUsed(2);
             getLeftOperand().codeExp(compiler, 2);
             compiler.addInstruction(new CMP(Register.getR(2), Register.getR(3)));
         } else {

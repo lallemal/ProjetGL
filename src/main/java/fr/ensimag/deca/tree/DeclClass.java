@@ -4,6 +4,13 @@ import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.tools.DecacInternalError;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.Label;
+import fr.ensimag.ima.pseudocode.NullOperand;
+import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.RegisterOffset;
+import fr.ensimag.ima.pseudocode.instructions.LEA;
+import fr.ensimag.ima.pseudocode.instructions.LOAD;
+import fr.ensimag.ima.pseudocode.instructions.STORE;
 import fr.ensimag.deca.tools.SymbolTable;
 import org.apache.commons.lang.Validate;
 import org.apache.log4j.Logger;
@@ -29,14 +36,76 @@ public class DeclClass extends AbstractDeclClass {
     public DeclClass(AbstractIdentifier ident, AbstractIdentifier parent, ListDeclField field, ListDeclMethod method){
         Validate.notNull(ident);
         this.ident = ident;
-        this.parent = parent;
+        this.parent = parent; // null si classe Object
         this.field = field;
         this.method = method;
+    }
+    
+    public AbstractIdentifier getIdent() {
+    	return ident;
+    }
+    
+    public ListDeclMethod getMethod() {
+    	return method;
+    }
+    
+    public ListDeclField getField() {
+    	return field;
+    }
+    
+    @Override
+    public void codeGenDeclClass(DecacCompiler compiler) {
+    	
+    	if (compiler.getKGB() == 1) { //Premiere classe a initialiser : Object
+    		DeclClass object = compiler.getObject();
+    		object.getIdent().getClassDefinition().setLabelInit(new Label("init.Object"));
+    		compiler.addComment("Construction de la table des methodes de Object");
+    		compiler.addInstruction(new LOAD(new NullOperand(), Register.R0));
+    		compiler.addInstruction(new STORE(Register.R0, new RegisterOffset(compiler.getKGB(), Register.GB)));
+        	compiler.incrementKGB();
+        	compiler.incrementKSP();
+        	object.getMethod().codeGenListDeclMethod(compiler);        	
+    	}
+    	ident.getClassDefinition().setLabelInit(new Label("init."+ident.getName().getName()));
+    	ident.getClassDefinition().setAddress(new RegisterOffset(compiler.getKGB(), Register.GB));
+    	compiler.addComment("Construction de la table des methodes de " + ident.getName().getName());
+    	compiler.addInstruction(new LEA(parent.getClassDefinition().getAddress(), Register.R0));   
+    	compiler.addInstruction(new STORE(Register.R0, new RegisterOffset(compiler.getKGB(), Register.GB)));
+    	compiler.incrementKGB();
+    	compiler.incrementKSP();
+    	
+    	for (AbstractDeclMethod i : parent.getClassDefinition().getMethods().getList()) {
+	    	ident.getClassDefinition().getMethods().add(i);
+	    }
+    	for (AbstractDeclMethod i : method.getList()) {
+    		ident.getClassDefinition().getMethods().add(i);
+    		Label label = new Label("code."+ident.getName().getName()+"."+i.getName().getName().getName());
+    		i.getName().getMethodDefinition().setLabel(label);
+    	}
+    	
+    	ident.getClassDefinition().getMethods().codeGenListDeclMethod(compiler);
+    	
     }
 
     @Override
     public void decompile(IndentPrintStream s) {
-        s.print("class { ... A FAIRE ... }");
+        s.print("class ");
+        ident.decompile(s);
+        if (parent != null){
+            s.print(" extends ");
+            parent.decompile(s);
+        }
+        s.println(" {");
+        s.indent();
+        if (field != null){
+            field.decompile(s);
+        }
+        s.println();
+        if (method != null){
+            method.decompile(s);
+        }
+        s.unindent();
+        s.print("}");
     }
 
     @Override
@@ -56,6 +125,7 @@ public class DeclClass extends AbstractDeclClass {
         if (!parentType.isClass()) {
             throw new ContextualError(ContextualError.PARENT_CLASS_NOT_CLASS, getLocation());
         }
+        parent.setDefinition(parentType);
         ClassType newClassType = new ClassType(name, getLocation(), (ClassDefinition)parentType);
         ClassDefinition newClassDef = new ClassDefinition(newClassType, getLocation(), (ClassDefinition) parentType);
         try {
@@ -86,6 +156,10 @@ public class DeclClass extends AbstractDeclClass {
         }
         ClassDefinition classDef = (ClassDefinition) classTypeDef;
         // Change classDef with definition of Methods and Fields
+        if (parent != null) {
+        	ident.getClassDefinition().setNumberOfFields(parent.getClassDefinition().getNumberOfFields());
+        	ident.getClassDefinition().setNumberOfMethods(parent.getClassDefinition().getNumberOfMethods());
+        }
         field.verifyListDeclField(compiler, classDef);
         method.verifyListDeclMethod(compiler, classDef);
 
@@ -105,7 +179,6 @@ public class DeclClass extends AbstractDeclClass {
             throw new ContextualError(ContextualError.CLASS_NOT_CLASS, getLocation());
         }
         ClassDefinition classDef = (ClassDefinition) classType;
-
         field.verifyListDeclFieldBody(compiler, classDef);
         method.verifyListDeclMethodBody(compiler, classDef);
     }
@@ -128,9 +201,15 @@ public class DeclClass extends AbstractDeclClass {
     @Override
     protected void iterChildren(TreeFunction f) {
         ident.iter(f);
-        // parent.iter(f);
-        // field.iter(f);
-        // method.iter(f);
+        if (parent != null){
+            parent.iter(f);
+        }
+        if (field != null){
+            field.iterChildren(f);
+        }
+        if (method != null){
+            method.iterChildren(f);
+        }
     }
 
 }

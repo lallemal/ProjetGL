@@ -22,4 +22,6 @@ public abstract class AbstractDeclField extends Tree{
      protected abstract void verifyDeclFieldBody(DecacCompiler compiler,
                                              ClassDefinition currentClass)
              throws ContextualError;
+     
+     public abstract void codeGenField(DecacCompiler compiler);
 }

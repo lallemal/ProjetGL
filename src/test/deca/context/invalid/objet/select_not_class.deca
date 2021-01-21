@@ -1,0 +1,14 @@
+// The type of expression selected is not a class
+// Description : Test with a selection of an object which is not a class : a (type int)
+// Result : error ligne 13
+
+
+class A {
+   int x = 1;
+}
+
+
+{
+    int a;
+    print(a.x);
+}

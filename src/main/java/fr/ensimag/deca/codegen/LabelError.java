@@ -6,6 +6,14 @@ import fr.ensimag.ima.pseudocode.instructions.ERROR;
 import fr.ensimag.ima.pseudocode.instructions.WNL;
 import fr.ensimag.ima.pseudocode.instructions.WSTR;
 
+/**
+ * 
+ * @author gl40
+ * Classe permettant la gestion des erreurs dans le code assembleur.
+ * Les booleens permettent de savoir si une erreur est envisageable (ie si une instruction a pu la provoquer)
+ * En consequence on cree un label en fin de fichier assembleur grace à la methode codeGenLabelError appelee par
+ * le compilateur.
+ */
 public class LabelError {
 
 	private boolean errorDiv0;
@@ -18,8 +26,14 @@ public class LabelError {
 	private Label errorRFLOAT;
 	private boolean errorConvFloat;
 	private Label errorFLOAT;
+	private boolean errorConvInt;
+	private Label errorINT;
 	private boolean errorPilePleine;
 	private Label pilePleine;
+	private boolean errorTasPlein;
+	private Label tasPlein;
+	private boolean errorDereferencementNull;
+	private Label dereferencementNull;
 	
 	public void setErrorDiv0(boolean b) {
 		errorDiv0 = b;
@@ -61,12 +75,36 @@ public class LabelError {
 		return errorFLOAT;
 	}
 	
+	public void setErrorConvInt(boolean b) {
+		errorConvInt = b;
+	}
+	
+	public Label getLabelErrorINT() {
+		return errorINT;
+	}
+	
 	public void setErrorPilePleine(boolean b) {
 		errorPilePleine = b;
 	}
 	
 	public Label getLabelPilePleine() {
 		return pilePleine;
+	}
+	
+	public void setErrorTasPlein(boolean b) {
+		errorTasPlein = b;
+	}
+	
+	public Label getLabelTasPlein() {
+		return tasPlein;
+	}
+	
+	public void setErrorDereferencementNull(boolean b) {
+		errorDereferencementNull = b;
+	}
+	
+	public Label getLabelDereferencementNull() {
+		return dereferencementNull;
 	}
 	
 	public LabelError() {
@@ -80,8 +118,14 @@ public class LabelError {
 		errorRFLOAT = new Label("error_read_float");
 		errorConvFloat = false;
 		errorFLOAT = new Label("error_conv_float");
+		errorConvInt = false;
+		errorINT = new Label("error_conv_int");
 		errorPilePleine = false;
 		pilePleine = new Label("pile_pleine");
+		errorTasPlein = false;
+		tasPlein = new Label("tas_plein");
+		errorDereferencementNull = false;
+		dereferencementNull = new Label("dereferencement_null");
 	}
 	
 	public void codeGenLabelError(DecacCompiler compiler) {
@@ -100,8 +144,17 @@ public class LabelError {
 		if (errorConvFloat) {
 			addError(compiler, errorFLOAT, "conversion flottant", "Erreur : V[dval] non codable sur un flottant");
 		}
+		if (errorConvInt) {
+			addError(compiler, errorINT, "conversion entier", "Erreur : V[dval] non codable sur un entier");
+		}
 		if (errorPilePleine) {
 			addError(compiler, pilePleine, "debordement de pile", "Erreur : debordement de pile");
+		}
+		if (errorTasPlein) {
+			addError(compiler, tasPlein, "debordement de tas", "Erreur : tas plein");
+		}
+		if (errorDereferencementNull) {
+			addError(compiler, dereferencementNull, "dereferencement de null", "Erreur : dereferencement de null");
 		}
 	}
 	

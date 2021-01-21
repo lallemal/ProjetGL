@@ -30,10 +30,16 @@ public class DeclParam extends AbstractDeclParam{
         this.type = type;
         this.name = name;
     }
+    
+    public AbstractIdentifier getType() {
+    	return type;
+    }
 
     @Override
     public void decompile(IndentPrintStream s) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        type.decompile(s);
+        s.print(" ");
+        name.decompile(s);
     }
 
     @Override
@@ -44,7 +50,8 @@ public class DeclParam extends AbstractDeclParam{
 
     @Override
     protected void iterChildren(TreeFunction f) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        type.iter(f);
+        name.iter(f);
     }
 
     @Override
@@ -59,10 +66,10 @@ public class DeclParam extends AbstractDeclParam{
     }
 
     @Override
-    public void verifyDeclParamBody(DecacCompiler compiler, EnvironmentExp localExp, ClassDefinition currentClass) throws ContextualError {
+    public void verifyDeclParamBody(DecacCompiler compiler, EnvironmentExp localExp, ClassDefinition currentClass, int index) throws ContextualError {
         Type type = this.type.verifyType(compiler);
         try {
-            ParamDefinition paramDefinition = new ParamDefinition(type, getLocation());
+            ParamDefinition paramDefinition = new ParamDefinition(type, getLocation(), index);
             localExp.declare(this.name.getName(), paramDefinition);
             name.setDefinition(paramDefinition);
         } catch (EnvironmentExp.DoubleDefException e) {

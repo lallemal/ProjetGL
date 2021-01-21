@@ -1,0 +1,27 @@
+// Description :
+//    Test génération de code, méthode qui override equals
+//
+// Resultats decac:
+// Resultat ima: 
+
+//Problème: impossible d'override equals, quelle est sa signature????
+
+class A{
+    boolean b = true;
+    
+    boolean equals(Object other){
+        return b;
+    }
+}
+{
+    A a = new A();
+    A b = new A();
+    if (a.equals(b)){
+        println("ils sont égaux!");
+    }
+    else{
+        println("ils ne sont pas égaux...");
+    }
+}
+
+    

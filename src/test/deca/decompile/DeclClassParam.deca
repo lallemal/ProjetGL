@@ -1,0 +1,14 @@
+// Description :
+//    test décompilation déclaration méthode avec paramètres
+//
+// Resultats (en comparaison avec le résultat attendu 
+// disponible dans le fichier *.deca.ok dans le dossier Modeles_OK) :
+//    ok
+
+class Thing {
+
+    int getI(int i){
+        print("cool");
+    }
+
+}

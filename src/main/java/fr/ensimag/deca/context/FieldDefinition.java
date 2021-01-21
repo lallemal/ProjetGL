@@ -10,8 +10,13 @@ import fr.ensimag.deca.tree.Visibility;
  * @date 01/01/2021
  */
 public class FieldDefinition extends ExpDefinition {
+	
     public int getIndex() {
         return index;
+    }
+    
+    public void setIndex(int n) {
+        index = n;
     }
 
     private int index;

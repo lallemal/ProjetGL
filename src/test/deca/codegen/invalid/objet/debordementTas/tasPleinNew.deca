@@ -1,0 +1,18 @@
+// Description : tas plein avec des new
+// Resultat : erreur lors de ima -t avec un tas petit
+
+class A{
+    int x;
+    int y;
+}
+{
+    A a = new A();
+    A b = new A();
+    A c = new A();
+    A d = new A();
+    A e = new A();
+    A f = new A();
+    A g = new A();
+    A h = new A();
+    A i = new A();
+}

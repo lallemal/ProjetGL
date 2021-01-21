@@ -1,0 +1,9 @@
+// The parent class of this class was not declared before
+// Description :
+//    Test génération de code pour une dont le parent n'a pas été défini au préalable
+//
+// Resultats decac: erreur de définiton du parent: ParentNotDefine.deca:7:6: The parent class of this class was not declared before
+// Resultat ima: /
+
+class A extends B{
+}

@@ -1,0 +1,43 @@
+// Description : pile pleine avec des declaration de methode
+// Resultat : erreur lors de ima -p avec une pile petite
+
+
+class A{
+    
+    int get1(){
+        return 1;
+    }
+
+    int get2(){
+        return get1();
+    }
+
+    int get3(){
+        return get2();
+    }
+    
+    int get4(){
+        return get3();
+    }
+    
+    int get5(){
+        return get4();
+    }
+    
+    int get6(){
+        return get5();
+    }
+    
+    int get7(){
+        return get6();
+    }
+
+    int get8(){
+        return get7();
+    }
+}
+{
+    A a = new A();
+    a.get8();
+    
+}

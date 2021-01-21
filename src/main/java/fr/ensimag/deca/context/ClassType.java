@@ -12,7 +12,7 @@ import fr.ensimag.deca.tree.Location;
 public class ClassType extends Type {
     
     protected ClassDefinition definition;
-    
+        
     public ClassDefinition getDefinition() {
         return this.definition;
     }

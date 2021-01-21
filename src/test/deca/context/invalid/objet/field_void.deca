@@ -1,0 +1,7 @@
+// The type of a field to be declared can not be void
+// Description : Test with a field of type void
+// Resultat : Error : ligne 6
+
+class A {
+    void x;
+}

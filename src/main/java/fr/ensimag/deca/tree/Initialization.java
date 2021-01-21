@@ -39,6 +39,11 @@ public class Initialization extends AbstractInitialization {
     protected void codeGenDecl(DecacCompiler compiler, DAddr address) {
     	expression.codeGenDecl(compiler, address);
     }
+    
+    @Override
+    protected void codeGenField(DecacCompiler compiler, AbstractIdentifier type) {
+    	expression.codeGenField(compiler);
+    }
 
     @Override
     protected void verifyInitialization(DecacCompiler compiler, Type t,
@@ -47,7 +52,6 @@ public class Initialization extends AbstractInitialization {
         setExpression(expression.verifyRValue(compiler, localEnv, currentClass, t));
         setDimension(expression.getDimension());
     }
-
 
     @Override
     public void decompile(IndentPrintStream s) {

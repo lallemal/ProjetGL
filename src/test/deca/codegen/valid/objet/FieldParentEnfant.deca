@@ -1,0 +1,31 @@
+// Description :
+//    Test génération de code, la classe fille à bien les field aussi de la classe mère
+//
+// Resultats decac:
+// Resultat ima:
+// attribut de la mère: 1
+// attribut de la fille: O
+
+class A{
+
+    int x = 1;
+    int a;
+    
+    int getX(){
+        return x;
+    }
+
+}
+class B extends A{
+    int y = 0;
+
+
+    int getY(){
+        return y;
+    }
+}
+{
+    B b = new B();
+    println("attribut de la mère: ", b.x);
+    print("attribut de la fille: ", b.y);
+}

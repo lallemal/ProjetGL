@@ -1,0 +1,8 @@
+// This field is already defined in this scope
+// Description : Test with a field declared twice
+// Resultat : error ligne 7
+
+class A {
+    int x;
+    int x;
+}

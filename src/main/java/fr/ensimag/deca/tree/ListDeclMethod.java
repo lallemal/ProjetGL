@@ -8,7 +8,11 @@ package fr.ensimag.deca.tree;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
+import fr.ensimag.deca.context.Signature;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import java.io.PrintStream;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -29,7 +33,40 @@ public class ListDeclMethod extends TreeList<AbstractDeclMethod>{
     }
     @Override
     public void decompile(IndentPrintStream s) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        for (AbstractDeclMethod c : getList()) {
+            c.decompile(s);
+            s.println();
+        }
+    }
+    
+    public void codeGenListDeclMethod(DecacCompiler compiler) {
+    	
+    	Map<String, AbstractDeclMethod> noms = new HashMap<String, AbstractDeclMethod> ();
+    	
+    	for (AbstractDeclMethod i : getList()) {
+    		if (noms.containsKey(i.getName().getName().getName())) {
+    			Signature sig_fille = i.getName().getMethodDefinition().getSignature();
+    			Signature sig_mere = (noms.get(i.getName().getName().getName())).getName().getMethodDefinition().getSignature();
+    			if (sig_fille.sameSignature(sig_mere)) {
+    				int indexMom = noms.get(i.getName().getName().getName()).getName().getMethodDefinition().getIndex();
+    				i.getName().getMethodDefinition().setIndex(indexMom);
+    				i.codeGenDeclMethodOverride(compiler, noms.get(i.getName().getName().getName()).getName().getMethodDefinition().getAddress());
+    				// On ecrase la methode mere par la methode fille
+    			}
+    			
+    		} else {
+    			i.codeGenDeclMethod(compiler);
+    			noms.put(i.getName().getName().getName(), i);
+    		}	
+    	}
+    }
+    
+    public void codeGenListMethod(DecacCompiler compiler, String className) {
+    	
+    	for (AbstractDeclMethod i : getList()) {
+    		i.codeGenMethod(compiler, className);
+    	}
+    	
     }
 
 }

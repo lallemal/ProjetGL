@@ -4,8 +4,13 @@ import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
+import fr.ensimag.ima.pseudocode.instructions.LOAD;
 import fr.ensimag.ima.pseudocode.instructions.STORE;
+import fr.ensimag.ima.pseudocode.instructions.BEQ;
+import fr.ensimag.ima.pseudocode.instructions.CMP;
+import fr.ensimag.ima.pseudocode.NullOperand;
 import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.RegisterOffset;
 import fr.ensimag.deca.context.Type;
 
 /**
@@ -43,10 +48,39 @@ public class Assign extends AbstractBinaryExpr {
     
     @Override
     protected void codeGenInst(DecacCompiler compiler) {
-        Identifier x = (Identifier) this.getLeftOperand();
-        AbstractExpr e = this.getRightOperand();
+    	compiler.setRegistreUsed(2);
+    	AbstractExpr e = this.getRightOperand(); 
         e.codeExp(compiler, 2);
-        compiler.addInstruction(new STORE(Register.getR(2), x.getExpDefinition().getOperand()));
+    	if (this.getLeftOperand().isIdentifier()) {
+	        Identifier x = (Identifier) this.getLeftOperand();
+	        if (x.getExpDefinition().isField()) { // si jamais on a x = ... avec x un field, on est forcement dans une methode..
+	        	compiler.addInstruction(new LOAD(new RegisterOffset(-2, Register.LB), Register.getR(3)));
+	        	compiler.setRegistreUsed(3);
+	        	int index = x.getFieldDefinition().getIndex()+1;
+	        	compiler.addInstruction(new STORE(Register.getR(2), new RegisterOffset(index, Register.getR(3))));
+	        } else {
+	        	compiler.addInstruction(new STORE(Register.getR(2), x.getExpDefinition().getOperand()));
+	        }
+    	} else if (this.getLeftOperand().isSelection()) {
+    		Selection select = (Selection) this.getLeftOperand();
+	        int index = select.getIdent().getFieldDefinition().getIndex()+1;
+	        if (select.getExpr().isThis()) {
+	        	compiler.setRegistreUsed(3);
+	        	compiler.addInstruction(new LOAD(new RegisterOffset(-2, Register.LB), Register.getR(3)));
+	        	compiler.addInstruction(new CMP(new NullOperand(), Register.getR(3)));
+	        	compiler.addInstruction(new BEQ(compiler.getLabelError().getLabelDereferencementNull()));
+	        	compiler.addInstruction(new STORE(Register.getR(2), new RegisterOffset(index, Register.getR(3))));
+	        }
+	        else if (select.getExpr().isNew()) { // cas : (new A()).x = y;
+	        	//nothing to do (new A() is going to disappear at the end of the line)
+	        }
+	        else if (select.getExpr().isIdentifier()) {
+	        	Identifier a = (Identifier) select.getExpr();
+	        	compiler.setRegistreUsed(2);
+	        	compiler.addInstruction(new LOAD(a.getExpDefinition().getOperand(), Register.getR(3)));
+	        	compiler.addInstruction(new STORE(Register.getR(2), new RegisterOffset(index, Register.getR(3))));
+	        }
+    	}
     }
 
     @Override

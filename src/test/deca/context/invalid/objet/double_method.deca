@@ -1,0 +1,8 @@
+// This method is already defined in this scope
+// Description : Method defined twice in a class
+// Resultat : error ligne 7
+
+class A {
+    int method() {}
+    int method() {}
+}

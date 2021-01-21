@@ -1,0 +1,12 @@
+// This identifier does not correspond to a method in this scope
+// Description : Try to do a methodcall with an object which is not a method
+// Result : error line 10
+
+
+
+class A {
+    int y;
+    void m() {
+        int x = y();
+    }
+}

@@ -1,0 +1,8 @@
+class Thing {
+	protected int i;
+
+	int getI() {
+		return i;
+	}
+
+}

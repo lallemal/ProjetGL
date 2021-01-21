@@ -1,11 +1,16 @@
 // Description :
-//    test décompilation print et println avec multiples arguments
+//    test décompilation null dans classe et main
 //
 // Resultats (en comparaison avec le résultat attendu 
 // disponible dans le fichier *.deca.ok dans le dossier Modeles_OK) :
 //    ok
 
-{
-    print("Hello", "You");
-    println("How", "Are", "You", "Today", "?");
+class Thing {
+
+    int i = null;
+
 }
+{
+    int j = null;
+}
+

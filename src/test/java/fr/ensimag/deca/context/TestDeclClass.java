@@ -49,6 +49,6 @@ public class TestDeclClass {
     public void TestClassNature() throws  ContextualError {
         DeclClass newClass = new DeclClass(ident, null, null, null);
         newClass.verifyClass(compiler);
-        assertTrue(compiler.getEnv_types().get(ident.getName()).getNature().equals("class"));
+        assertTrue(compiler.getEnv_types().get(ident.getName()).isClass());
     }
 }

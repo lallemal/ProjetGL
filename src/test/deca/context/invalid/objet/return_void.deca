@@ -1,0 +1,13 @@
+// The returnType can not be of type void
+// Description : Return with a void type
+// Result : error line 11;
+
+
+class A {
+    void m() {
+    }
+
+    void m2() {
+        return m();
+    }
+}

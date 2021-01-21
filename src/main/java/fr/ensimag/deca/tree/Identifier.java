@@ -5,10 +5,14 @@ import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.tools.DecacInternalError;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.deca.tools.SymbolTable.Symbol;
+import fr.ensimag.ima.pseudocode.DAddr;
 import fr.ensimag.ima.pseudocode.DVal;
-import fr.ensimag.ima.pseudocode.Label;
 import fr.ensimag.ima.pseudocode.Register;
-import fr.ensimag.ima.pseudocode.instructions.*;
+import fr.ensimag.ima.pseudocode.RegisterOffset;
+import fr.ensimag.ima.pseudocode.instructions.LOAD;
+import fr.ensimag.ima.pseudocode.instructions.WFLOAT;
+import fr.ensimag.ima.pseudocode.instructions.WFLOATX;
+import fr.ensimag.ima.pseudocode.instructions.WINT;
 import org.apache.commons.lang.Validate;
 import org.apache.log4j.Logger;
 
@@ -182,15 +186,13 @@ public class Identifier extends AbstractIdentifier {
     @Override
     protected void codeGenPrint(DecacCompiler compiler, boolean printHex) {
     	Type type = this.getType();
+    	compiler.addInstruction(new LOAD(this.getExpDefinition().getOperand(), Register.R1));
     	if (type.isInt()) {
-    		compiler.addInstruction(new LOAD(this.getExpDefinition().getOperand(), Register.R1));
     		compiler.addInstruction(new WINT());
     	} else if (type.isFloat()) {
     		if (printHex) {
-    			compiler.addInstruction(new LOAD(this.getExpDefinition().getOperand(), Register.R1));
     			compiler.addInstruction(new WFLOATX());
     		} else {
-    			compiler.addInstruction(new LOAD(this.getExpDefinition().getOperand(), Register.R1));
     			compiler.addInstruction(new WFLOAT());
     		}
     	}
@@ -203,11 +205,26 @@ public class Identifier extends AbstractIdentifier {
     
     @Override
     protected void codeGenInst(DecacCompiler compiler) {
+    	compiler.setRegistreUsed(2);
         codeExp(compiler, 2);
     }
     
     protected void codeExp(DecacCompiler compiler, int n) {
-    	compiler.addInstruction(new LOAD(this.getExpDefinition().getOperand(), Register.getR(n)));
+    	ExpDefinition def = this.getExpDefinition();
+    	if (def.isField()) {
+	    	compiler.addInstruction(new LOAD(new RegisterOffset(-2, Register.LB), Register.getR(n)));
+			compiler.addInstruction(new LOAD(new RegisterOffset( ((FieldDefinition) def).getIndex()+1, Register.getR(n)), Register.getR(n)));
+    	} else if (def.isParam()) {
+    		int index = ((ParamDefinition) def).getIndex();
+    		compiler.addInstruction(new LOAD(new RegisterOffset(-(3+index), Register.LB), Register.getR(n)));
+    	} else {
+    		compiler.addInstruction(new LOAD(this.getExpDefinition().getOperand(), Register.getR(n)));
+    	}
+    }
+    
+    @Override
+    public boolean isIdentifier() {
+    	return true;
     }
 
     /**
@@ -223,6 +240,7 @@ public class Identifier extends AbstractIdentifier {
             throw new ContextualError(ContextualError.IDENTIFIER_TYPE_NOTTYPE, getLocation());
         }
         setDefinition(compiler.getEnv_types().get(name));
+        setType(compiler.getEnv_types().get(name).getType());
         return compiler.getEnv_types().get(name).getType();
     }
 
@@ -272,17 +290,5 @@ public class Identifier extends AbstractIdentifier {
             s.print(d);
             s.println();
         }
-    }
-
-    @Override
-    protected void codeGenBranch(DecacCompiler compiler, boolean evaluate, Label label) {
-        codeExp(compiler, 0);
-        compiler.addInstruction(new CMP(0, Register.R0));
-        if (evaluate) {
-            compiler.addInstruction(new BNE(label));
-        } else {
-            compiler.addInstruction(new BEQ(label));
-        }
-
     }
 }

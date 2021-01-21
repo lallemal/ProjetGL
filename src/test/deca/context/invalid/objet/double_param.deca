@@ -1,0 +1,7 @@
+// This parameter is already defined for this method
+// Description : Test with a parameter which is defined twice for a single method
+// Resultat : erreur ligne 6
+
+class A {
+    void method(int x, int x) {}
+}

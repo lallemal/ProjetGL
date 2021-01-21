@@ -28,6 +28,8 @@ public abstract class AbstractInitialization extends Tree {
             throws ContextualError;
     
     protected abstract void codeGenDecl(DecacCompiler compiler, DAddr address);
+    
+    protected abstract void codeGenField(DecacCompiler compiler, AbstractIdentifier type);
 
     public ListExpr getDimension() {
         return dimension;

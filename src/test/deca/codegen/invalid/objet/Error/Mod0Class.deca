@@ -1,0 +1,17 @@
+// Erreur : reste entier par zero impossible
+// Description : Modulo 0
+// Resultat : erreur lors de ima
+
+
+class A{
+    int x = 2;
+    int y = 0;
+   
+    void Test(){
+        int z = x%y;
+    }
+}
+{
+    A a = new A();
+    a.Test();
+}

@@ -1,0 +1,23 @@
+// Description :
+//    Programme en sans objet avec variable, if elseif else, >, <, minus, et print, while.
+//
+// Resultats (en comparaison avec le résultat attendu 
+// disponible dans le fichier *.deca.ok dans le dossier Modeles_OK) :
+//    ok
+
+
+{
+    int x = 4;
+    if (x < 5) {
+        while (x > 0) {
+            x = x - 1;
+            print(x);
+        }
+    }
+    else if (x > 6) {
+        println(x);
+    }
+    else {
+        print("OUAH");
+    }
+}

@@ -1,0 +1,7 @@
+class Thing {
+	int i=null;
+
+}
+{
+	int j=null;
+}

@@ -1,0 +1,17 @@
+// Description :
+//    Test génération de code lorsqu'il n'y a aucune instruction (NoOperation)
+//
+// Resultats decac:
+// Resultat ima: Rien
+
+class A{
+    
+    void NoOp(){
+        ;
+        ;
+    }
+}
+{
+    ;
+    ;
+}

@@ -57,7 +57,6 @@ WHILE : 'while';
 // mot reserve deca avec objet a decommenter pour l'ajouter
 RETURN : 'return'; 
 INSTANCEOF : 'instanceof'; 
-
 NEW : 'new';
 THIS : 'this';
 NULL : 'null';

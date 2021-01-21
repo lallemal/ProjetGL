@@ -11,6 +11,8 @@ import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.Label;
+
 import java.io.PrintStream;
 
 /**
@@ -26,9 +28,27 @@ public class MethodBody extends AbstractMethodBody {
         this.var = var;
         this.inst = inst;
     }
+    
+    public ListDeclVar getVar() {
+    	return var;
+    }
+    
+    @Override
+    public int codeGenBody(DecacCompiler compiler, Label labelFin) {
+    	compiler.resetRegistreUsed();
+    	var.codeGenListDecl(compiler);
+    	inst.codeGenListInst(compiler, labelFin);
+    	if (compiler.nbRegistreUsed() == 0) {
+    		return ((var.size()>0)?1:0);
+    	} else {
+    		return compiler.nbRegistreUsed();
+    	}
+    }
+    
     @Override
     public void decompile(IndentPrintStream s) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        var.decompile(s);
+        inst.decompile(s);
     }
 
     @Override
@@ -39,7 +59,12 @@ public class MethodBody extends AbstractMethodBody {
 
     @Override
     protected void iterChildren(TreeFunction f) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (var != null){
+            var.iterChildren(f);
+        }
+        if (inst != null){
+            inst.iterChildren(f);
+        }
     }
 
 

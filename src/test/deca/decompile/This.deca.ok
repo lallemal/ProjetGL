@@ -1,0 +1,8 @@
+class Thing {
+	int i;
+
+	int getI() {
+		(this.i = i);
+	}
+
+}

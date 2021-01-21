@@ -1,6 +1,9 @@
 package fr.ensimag.deca.context;
 
+import fr.ensimag.deca.tree.ListDeclMethod;
 import fr.ensimag.deca.tree.Location;
+import fr.ensimag.ima.pseudocode.DAddr;
+import fr.ensimag.ima.pseudocode.Label;
 import org.apache.commons.lang.Validate;
 
 /**
@@ -10,7 +13,6 @@ import org.apache.commons.lang.Validate;
  * @date 01/01/2021
  */
 public class ClassDefinition extends TypeDefinition {
-
 
     public void setNumberOfFields(int numberOfFields) {
         this.numberOfFields = numberOfFields;
@@ -40,6 +42,15 @@ public class ClassDefinition extends TypeDefinition {
 
     private int numberOfFields = 0;
     private int numberOfMethods = 0;
+    private Label labelInit;
+    
+    public void setLabelInit(Label label) {
+    	labelInit = label;
+    }
+    
+    public Label getLabelInit() {
+    	return labelInit;
+    }
     
     @Override
     public boolean isClass() {
@@ -59,6 +70,33 @@ public class ClassDefinition extends TypeDefinition {
 
     private final EnvironmentExp members;
     private final ClassDefinition superClass; 
+    private DAddr address;
+    private ListDeclMethod methods;
+    private boolean isClassObject = false;
+    
+    public void setIsClassObject(boolean b) {
+    	isClassObject = b;
+    }
+    
+    public boolean getIsClassObject() {
+    	return isClassObject;
+    }
+    
+    public void setMethods(ListDeclMethod methods) {
+    	this.methods = methods;
+    }
+    
+    public ListDeclMethod getMethods() {
+    	return methods;
+    }
+    
+    public void setAddress(DAddr address) {
+    	this.address = address;
+    }
+    
+    public DAddr getAddress() {
+    	return address;
+    }
 
     public EnvironmentExp getMembers() {
         return members;
@@ -74,6 +112,7 @@ public class ClassDefinition extends TypeDefinition {
         }
         members = new EnvironmentExp(parent);
         this.superClass = superClass;
+        this.methods = new ListDeclMethod();
     }
 
 }

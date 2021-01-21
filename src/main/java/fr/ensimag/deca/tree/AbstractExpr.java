@@ -103,7 +103,7 @@ public abstract class AbstractExpr extends AbstractInst {
         LOG.debug("verify AbstractExpr RValue : start");
         Type type2 = verifyExpr(compiler, localEnv, currentClass);
         if (!expectedType.isFloat() || !type2.isInt()) {
-            if (!TypeOp.subType(compiler, expectedType, type2)) {
+            if (!TypeOp.subType(compiler, type2, expectedType)) {
                 if (expectedType.isArray() && type2.isArray()) {
                     ArrayType arrayType1 = (ArrayType) expectedType;
                     ArrayType arrayType2 = (ArrayType) type2;
@@ -191,6 +191,17 @@ public abstract class AbstractExpr extends AbstractInst {
     		} else {
     			compiler.addInstruction(new WFLOAT());
     		}
+    	} else if (this.isSelection()) {
+    		Selection s = (Selection) this;
+    		if (s.getIdent().getType().isInt()) {
+    			compiler.addInstruction(new WINT());
+    		} else if (s.getIdent().getType().isFloat()) {
+    			if (printHex) {
+        			compiler.addInstruction(new WFLOATX());
+        		} else {
+        			compiler.addInstruction(new WFLOAT());
+        		}
+    		}
     	} else {
     		//nothing to do
     	}
@@ -199,6 +210,10 @@ public abstract class AbstractExpr extends AbstractInst {
     protected void codeGenDecl(DecacCompiler compiler, DAddr address) {
     	this.codeExp(compiler, 2);
     	compiler.addInstruction(new STORE(Register.getR(2), address));
+    }
+    
+    protected void codeGenField(DecacCompiler compiler) {
+    	this.codeExp(compiler, 0);
     }
 
     @Override
@@ -222,6 +237,22 @@ public abstract class AbstractExpr extends AbstractInst {
      */
     protected void codeGenBranch(DecacCompiler compiler, boolean evaluate, Label label) {
         // Nothing to do for most of expression
+    }
+    
+    public boolean isIdentifier() {
+    	return false;
+    }
+    
+    public boolean isSelection() {
+    	return false;
+    }
+    
+    public boolean isThis() {
+    	return false;
+    }
+    
+    public boolean isNew() {
+    	return false;
     }
 
     @Override

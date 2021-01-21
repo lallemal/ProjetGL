@@ -1,0 +1,45 @@
+// Description :
+//    Test génération de code, appel d'un fiel avec et sans this
+//
+// Resultats decac:
+// Resultat ima: 
+// avec this: 1
+// sans this: 1
+
+
+class A{
+
+    int x = 1;
+    boolean b = true;
+    
+    int getThis(){
+        return this.x;
+    }
+
+    int getNoThis(){
+        return x;
+    }
+
+    boolean Test(){
+        if (b){
+            if (this.b){
+                return b;
+            }   
+            else{
+                return !b;
+            }
+        }
+        else{
+            return !b;
+        }
+    }
+
+}
+{
+    A a = new A();
+    println("avec this: ", a.getThis());
+    println("sans this: ", a.getNoThis());
+    if (a.Test()){    
+        println("test passé");
+    }
+}

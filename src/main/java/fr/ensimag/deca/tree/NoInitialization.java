@@ -7,6 +7,7 @@ import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.DAddr;
+import fr.ensimag.ima.pseudocode.NullOperand;
 import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
 import fr.ensimag.ima.pseudocode.instructions.STORE;
@@ -32,6 +33,22 @@ public class NoInitialization extends AbstractInitialization {
     @Override
     protected void codeGenDecl(DecacCompiler compiler, DAddr address) {
     	//nothing to do
+    }
+    
+    @Override
+    protected void codeGenField(DecacCompiler compiler, AbstractIdentifier type) {
+    	switch (type.getName().getName()) {
+    	case "int":
+    	case "boolean":
+    		compiler.addInstruction(new LOAD(0, Register.R0));
+    		break;
+    	case "float":
+    		compiler.addInstruction(new LOAD((float) 0.0, Register.R0));
+    		break;
+    	default:
+    		compiler.addInstruction(new LOAD(new NullOperand(), Register.R0));
+    		break;
+    	}
     }
     
     /**

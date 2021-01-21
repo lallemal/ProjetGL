@@ -3,7 +3,11 @@ package fr.ensimag.deca.tree;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.instructions.ADDSP;
+import fr.ensimag.ima.pseudocode.instructions.BOV;
 import fr.ensimag.ima.pseudocode.instructions.HALT;
+import fr.ensimag.ima.pseudocode.instructions.TSTO;
+import fr.ensimag.ima.pseudocode.Line;
 import org.apache.commons.lang.Validate;
 import org.apache.log4j.Logger;
 
@@ -52,9 +56,25 @@ public class Program extends AbstractProgram {
 
     @Override
     public void codeGenProgram(DecacCompiler compiler) {
-        compiler.addComment("Main program");
+        // A FAIRE: compléter ce squelette très rudimentaire de code
+    	compiler.addComment("----------------------------------------------");
+		compiler.addComment("	Construction des tables des methodes");
+		compiler.addComment("----------------------------------------------");
+        classes.codeGenDeclClass(compiler);
+        compiler.addComment("----------------------------------------------");
+		compiler.addComment("		Main program ");
+		compiler.addComment("----------------------------------------------");
         main.codeGenMain(compiler);
+        if (compiler.getMaxSP()>1) {
+        	compiler.addFirst(new Line(new ADDSP(compiler.getKGB()-1)));
+        	compiler.getLabelError().setErrorPilePleine(true);
+        	if (!compiler.getCompilerOptions().isNoCheck()) {
+	        	compiler.addFirst(new Line(new BOV(compiler.getLabelError().getLabelPilePleine())));
+	        	compiler.addFirst(new Line(new TSTO(compiler.getMaxSP()-1)));
+        	}
+        }
         compiler.addInstruction(new HALT());
+        compiler.getLabelClass().codeGenLabelClass(compiler, classes);
         compiler.getLabelError().codeGenLabelError(compiler);
     }
 

@@ -1,0 +1,7 @@
+// A parameter can not be void type
+// Description : Test with a parameter for a method which is a void
+// Resultat : error ligne 6
+
+class A {
+    void method(void a) {}
+}

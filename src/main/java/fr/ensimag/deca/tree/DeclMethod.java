@@ -8,6 +8,25 @@ package fr.ensimag.deca.tree;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.DAddr;
+import fr.ensimag.ima.pseudocode.Label;
+import fr.ensimag.ima.pseudocode.LabelOperand;
+import fr.ensimag.ima.pseudocode.Line;
+import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.RegisterOffset;
+import fr.ensimag.ima.pseudocode.instructions.ADDSP;
+import fr.ensimag.ima.pseudocode.instructions.BOV;
+import fr.ensimag.ima.pseudocode.instructions.ERROR;
+import fr.ensimag.ima.pseudocode.instructions.LOAD;
+import fr.ensimag.ima.pseudocode.instructions.POP;
+import fr.ensimag.ima.pseudocode.instructions.PUSH;
+import fr.ensimag.ima.pseudocode.instructions.RTS;
+import fr.ensimag.ima.pseudocode.instructions.STORE;
+import fr.ensimag.ima.pseudocode.instructions.SUBSP;
+import fr.ensimag.ima.pseudocode.instructions.TSTO;
+import fr.ensimag.ima.pseudocode.instructions.WNL;
+import fr.ensimag.ima.pseudocode.instructions.WSTR;
+
 import org.apache.commons.lang.Validate;
 import org.apache.log4j.Logger;
 
@@ -34,10 +53,125 @@ public class DeclMethod extends AbstractDeclMethod {
         this.param = param;
         this.body = body;
     }
+    
+    public AbstractIdentifier getType() {
+    	return type;
+    }
+    
+    public AbstractIdentifier getName() {
+    	return name;
+    }
+    
+    public ListParam getListParam() {
+    	return param;
+    }
+    
+    @Override
+    public void codeGenDeclMethod(DecacCompiler compiler) {
+    	Label label = name.getMethodDefinition().getLabel();
+    	compiler.addInstruction(new LOAD(new LabelOperand(label), Register.R0));
+    	compiler.addInstruction(new STORE(Register.R0, new RegisterOffset(compiler.getKGB(), Register.GB)));
+    	name.getMethodDefinition().setAddress(new RegisterOffset(compiler.getKGB(), Register.GB));
+    	compiler.incrementKGB();
+    	compiler.incrementKSP();
+    }
+    
+    @Override
+    public void codeGenDeclMethodOverride(DecacCompiler compiler, DAddr address) {
+    	Label label = name.getMethodDefinition().getLabel();
+    	compiler.addInstruction(new LOAD(new LabelOperand(label), Register.R0));
+    	compiler.addInstruction(new STORE(Register.R0, address));
+    }
+    
+    public void codeGenMethod(DecacCompiler compiler, String className) {
+    	
+    	compiler.addComment("---------- Initialisation de la methode de "+name.getName().getName());
+    	compiler.addLabel(name.getMethodDefinition().getLabel());
+    	Label labelFin = new Label("fin."+className+"."+name.getName().getName());
+    	
+    	if (body.isAsmBody()) {
+    		body.codeGenBody(compiler, labelFin);
+    		return;
+    	}
+
+    	// ----- fake call to determine the number of register used (to push them)
+    	compiler.setAux(true);
+    	compiler.cleanProgramAux();
+    	int kGB = compiler.getKGB();
+    	int kSP = compiler.getKSP();
+    	int maxkSP = compiler.getMaxSP();
+    	int n = body.codeGenBody(compiler, labelFin);
+    	compiler.setKGB(kGB);
+    	compiler.setKSP(kSP);
+    	compiler.setMaxSP(maxkSP);
+    	compiler.cleanProgramAux();
+    	compiler.setAux(false);
+    	// -----
+    	
+    	if (n+body.getVar().size() > 0) {
+    		compiler.getLabelError().setErrorPilePleine(true);
+    		compiler.addInstruction(new TSTO(n+body.getVar().size()));
+    		compiler.addInstruction(new BOV(compiler.getLabelError().getLabelPilePleine()));
+    		if (body.getVar().size() > 0) {
+    	    	compiler.addInstruction(new ADDSP(body.getVar().size()));
+    		}
+    		if (n > 0) {
+    			compiler.addComment("sauvegarde des registres");
+    			for (int i=0; i<n; i++) {
+    	    		compiler.addInstruction(new PUSH(Register.getR(i+2)));
+    	    	}
+    		}
+    	}
+    	// augmentation du k(GB) pour ne pas ecraser les donnees avec les variables locales
+    	compiler.incrementKGB(3); // SP <- SP + 2
+    	compiler.incrementKGB(n); // nombre de registre à conserver
+    	
+    	compiler.addComment("instructions");
+    	n = body.codeGenBody(compiler, labelFin);
+    	// Fin : on verifie quil y a eu return si ce nest pas une void fonction
+    	if (!type.getName().getName().equals("void")) {
+    		compiler.addInstruction(new WSTR("Erreur : sortie de la methode "+className+"."+name.getName().getName()+" sans return"));
+    		compiler.addInstruction(new WNL());
+    		compiler.addInstruction(new ERROR());
+    	}
+    	
+    	compiler.addLabel(labelFin);
+    	if (n > 0) {
+    		compiler.addComment("restauration des registres");
+    		for (int i=n-1; i>=0; i--) {
+        		compiler.addInstruction(new POP(Register.getR(i+2)));
+        	}
+    	}
+    
+    	compiler.setKGB(kGB); // restauration du kGB
+    	compiler.addInstruction(new SUBSP(body.getVar().size()));
+    	compiler.addInstruction(new RTS());
+    }
 
     @Override
     public void decompile(IndentPrintStream s) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        type.decompile(s);
+        s.print(" ");
+        name.decompile(s);
+        s.print("(");
+        if (param != null){
+            param.decompile(s);
+        }
+        s.print(") ");
+        if (body != null){
+            if (body.isAsmBody()){
+                s.println("asm(");
+                body.decompile(s);
+                s.print(");");
+            }
+            else{
+                s.println("{");
+                s.indent();
+                body.decompile(s);
+                s.unindent();
+                s.println("}");
+            }
+        }
     }
 
     @Override
@@ -54,7 +188,14 @@ public class DeclMethod extends AbstractDeclMethod {
 
     @Override
     protected void iterChildren(TreeFunction f) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        type.iter(f);
+        name.iter(f);
+        if (param != null){
+            param.iterChildren(f);
+        }
+        if (body != null){
+            body.iterChildren(f);
+        }
     }
 
     @Override
@@ -81,7 +222,8 @@ public class DeclMethod extends AbstractDeclMethod {
             }
         }
         try {
-            MethodDefinition methodDefinition = new MethodDefinition(type, getLocation(), sig, currentClass.getNumberOfMethods());
+        	// On a changé l'index de methode pour quil designe sa place dans la table des methodes
+        	MethodDefinition methodDefinition = new MethodDefinition(type, getLocation(), sig, currentClass.getNumberOfMethods());
             classExp.declare(name.getName(), methodDefinition);
             name.setDefinition(methodDefinition);
             currentClass.incNumberOfMethods();

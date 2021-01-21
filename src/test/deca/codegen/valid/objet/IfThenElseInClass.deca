@@ -1,0 +1,48 @@
+// Description :
+//    Test génération de code avec if 
+//
+// Resultats decac:
+// Resultat ima: 
+// 2.20000e+00
+// 1.00000e+00
+
+
+class A {
+
+    float x;
+
+    float getX() {
+        return x;
+    }
+
+    void setX(float x) {
+        this.x = x;
+    }
+
+    float If(){
+        float j = 1.0;
+        if (x >= 0 && j > 0){
+            x = x + 1;
+            if (x != 1 || j != 0){
+                j = j + 1.2;
+            }
+            else{
+                j = j - 2.5;
+            }
+        }
+        else{   
+            x = x + 2.5;
+        }
+        return j;
+    }
+}
+
+{
+    A a = new A();
+    a.setX(1.2);
+    println(a.If());
+    a.setX(-1.2);
+    println(a.If());
+
+
+}

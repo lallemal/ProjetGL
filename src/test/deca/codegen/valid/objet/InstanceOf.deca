@@ -1,0 +1,25 @@
+class A { }
+class B extends A {
+    int y = 2;
+    A x = new A();
+}
+class C extends B {
+    B z = new B();
+    B newB() {
+        return new B();
+    }
+
+}
+
+class D extends C {}
+
+{
+
+A a;
+B b;
+a = new B();
+if (a instanceof C) {
+b = (B)(a);
+println("ok");
+}
+}

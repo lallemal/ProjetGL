@@ -1,0 +1,23 @@
+// Description : pile pleine avec des opération arithmétique
+// Resultat : erreur lors de ima -p avec une pile petite
+
+
+class A{
+    
+    int get1(){
+        int a1 = 1;
+        int a2 = 1;
+        int a3 = 1;
+        int a4 = 1;
+        int a5 = 1;
+        int a6 = 1;
+        int a7 = 1;
+        int a8 = 1;
+        int a9 = 1;
+        return a9+a8-a7*a6/a5-a4+a3*a2%a1;
+    }
+}
+{
+   A a = new A();
+   print(a.get1());
+}

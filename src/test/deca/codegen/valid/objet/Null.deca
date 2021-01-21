@@ -1,0 +1,14 @@
+// Description :
+//    Test génération de code avec intervention de null
+//
+// Resultats decac:
+// Resultats ima:
+
+
+class A{
+    int x;
+}
+{
+    A a;
+    a = null;
+}

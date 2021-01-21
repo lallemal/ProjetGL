@@ -61,18 +61,21 @@ public abstract class AbstractOpArith extends AbstractBinaryExpr {
         } else {
             if (compiler.getRmax() > n) {
                 e1.codeExp(compiler, n);
+                compiler.setRegistreUsed(n+1);
                 e2.codeExp(compiler, n+1);
                 this.mnemo(compiler, Register.getR(n+1), n);
             } else {
                 e1.codeExp(compiler, n);
                 compiler.getLabelError().setErrorPilePleine(true);
-            	compiler.addInstruction(new TSTO(1));
+                compiler.addInstruction(new TSTO(1));
             	if (!compiler.getCompilerOptions().isNoCheck()) {
             		compiler.addInstruction(new BOV(compiler.getLabelError().getLabelPilePleine()));
             	}
+                compiler.incrementKSP();
                 compiler.addInstruction(new PUSH(Register.getR(n)));
                 e2.codeExp(compiler, n);
                 compiler.addInstruction(new LOAD(Register.getR(n), Register.R0));
+                compiler.decrementKSP();
                 compiler.addInstruction(new POP(Register.getR(n)));
                 this.mnemo(compiler, Register.R0, n);
             }
@@ -81,6 +84,7 @@ public abstract class AbstractOpArith extends AbstractBinaryExpr {
 
     @Override
     protected void codeGenInst(DecacCompiler compiler) {
+    	compiler.setRegistreUsed(2);
         this.codeExp(compiler, 2);
     }
 

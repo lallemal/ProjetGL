@@ -1,0 +1,12 @@
+class Thing {
+	int i;
+
+	int getI() {
+		return i;
+	}
+
+}
+{
+	int i=0;
+	return i;
+}

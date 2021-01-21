@@ -1,0 +1,18 @@
+class A extends Object {
+	protected int x;
+	float k;
+
+	int getX() {
+		return x;
+	}
+
+	void setX(int x, float k) {
+		(this.x = x);
+	}
+
+}
+{
+	A a=(new A());
+	a.setX(1);
+	println("a.getX() = ", a.getX());
+}

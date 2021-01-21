@@ -1,0 +1,44 @@
+// Description :
+//    Test génération de code assign de différents types
+//
+// Resultats decac:
+// Resultat ima: 
+
+
+
+class A{
+ 
+    int x = 1;
+
+    int getX(){
+        return x;
+    }
+    
+    void setX(int x){
+        //Assign Selection This
+        this.x = x;
+    }
+
+}
+{
+    int y;
+    A a = new A();
+
+    //Assign Selection New
+    (new A()).x = 2;
+    
+    //Assign Identifier
+    y = 1;
+    
+    //Assign Selection Identifier
+    a.x = 3;
+
+    println("Assign Identifier ", y);
+    println("Assign Selection Identifier " , a.x);
+
+    a.setX(4);
+    println("Assign Selection This ", a.x);
+
+    
+}
+

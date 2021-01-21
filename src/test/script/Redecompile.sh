@@ -52,4 +52,3 @@ do
   fi
 done
 
-cd "$(dirname "$0")"/../../.. || exit 1

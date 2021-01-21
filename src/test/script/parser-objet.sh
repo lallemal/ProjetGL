@@ -15,12 +15,11 @@ cd "$(dirname "$0")"/../../.. || exit 1
 
 PATH=./src/test/script/launchers:"$PATH"
 
-cd src/test/deca/syntax/valid/objet/ || exit 1
 
 nb=$(ls -l | wc -l)
 echo "------- Démarrage des tests valide $(($nb-1))"
 
-for i in *.deca
+for i in src/test/deca/syntax/valid/objet/*.deca
 do
   if test_synt $i 2>&1 | grep -q -e "$i:"
   then
@@ -30,14 +29,12 @@ do
   fi
 
 done
-cd "$(dirname "$0")"/../../.. || exit 1
 
-cd src/test/deca/syntax/invalid/objet/ || exit 1
 
 nb=$(ls -l | wc -l)
 echo "------- Démarrage des tests invalide $(($nb-1))"
 
-for i in *.deca
+for i in src/test/deca/syntax/invalid/objet/*.deca
 do
   error=$(head $i -n 1 | sed 's/\/\///')
   if test_synt $i 2>&1 | grep -q -e "$error"
@@ -51,4 +48,3 @@ do
   fi
 done
 
-cd "$(dirname "$0")"/../../.. || exit 1

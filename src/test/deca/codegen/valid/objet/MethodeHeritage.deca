@@ -45,7 +45,7 @@ class B extends A{
    
     a.setX(3);
     b.setXB(4);
-    //Pas normal, on arrive pas a appeller une méthode mère dans une méthode fille
+   
     println(a.x);
     println(b.x);
 }

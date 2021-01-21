@@ -32,6 +32,5 @@ class Polyexp {
 	    fg = fm;
 	}
     }
-    print (g, " = "); printlnx(g);
-
+    print (g, " = "); printlnx(g); 
 }

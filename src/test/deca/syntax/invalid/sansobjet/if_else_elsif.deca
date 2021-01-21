@@ -3,7 +3,7 @@
 	if( 1 > 2){
 	
 	}else{
-	}elseif( 2 < 3 ){
+	}else if( 2 < 3 ){
 			
 	}
 	

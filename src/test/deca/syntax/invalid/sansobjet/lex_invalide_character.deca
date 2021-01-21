@@ -1,0 +1,4 @@
+//lex_invalide_character.deca:4:0: token recognition error a
+//DEscription; token non reconnu
+//Resultat: token non reconnu
+#"1"

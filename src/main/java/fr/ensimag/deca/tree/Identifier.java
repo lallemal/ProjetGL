@@ -6,10 +6,12 @@ import fr.ensimag.deca.tools.DecacInternalError;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.deca.tools.SymbolTable.Symbol;
 import fr.ensimag.ima.pseudocode.DVal;
-import fr.ensimag.ima.pseudocode.Label;
 import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.RegisterOffset;
-import fr.ensimag.ima.pseudocode.instructions.*;
+import fr.ensimag.ima.pseudocode.instructions.LOAD;
+import fr.ensimag.ima.pseudocode.instructions.WFLOAT;
+import fr.ensimag.ima.pseudocode.instructions.WFLOATX;
+import fr.ensimag.ima.pseudocode.instructions.WINT;
 import org.apache.commons.lang.Validate;
 import org.apache.log4j.Logger;
 
@@ -237,6 +239,7 @@ public class Identifier extends AbstractIdentifier {
             throw new ContextualError(ContextualError.IDENTIFIER_TYPE_NOTTYPE, getLocation());
         }
         setDefinition(compiler.getEnv_types().get(name));
+        setType(compiler.getEnv_types().get(name).getType());
         return compiler.getEnv_types().get(name).getType();
     }
 

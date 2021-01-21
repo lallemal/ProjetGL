@@ -1,0 +1,30 @@
+class A { }
+class B extends A { }
+class C extends B {
+
+    A x = new A();
+
+    B newB() {
+        return new B();
+    }
+
+}
+
+{
+boolean gCapte;
+A a;
+B b;
+A ax;
+a = new C();
+ax = a.x;
+//gCapte = (a.x) instanceof B;
+if (gCapte) {
+    println("okbro");
+} else {
+    println("pasok");
+}
+//if (a instanceof B) {
+//b = (B)(a);
+//println("ok");
+//}
+}

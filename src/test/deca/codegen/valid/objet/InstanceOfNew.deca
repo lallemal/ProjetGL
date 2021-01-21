@@ -8,7 +8,7 @@
 class A{
 }
 {
-    if ((new A()) instanceof A){
+    if (new A() instanceof A){
         println("InstanceOf marche avec new");
     }
 }

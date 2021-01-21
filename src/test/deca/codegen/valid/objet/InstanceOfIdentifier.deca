@@ -1,0 +1,15 @@
+// Description :
+//    test de génération de code instanceof identifier
+//
+// Resultats deca: 
+// Resultats ima : 
+
+
+class A{
+}
+{
+    A a = new A();
+    if (a instanceof A){
+        println("InstanceOf marche avec identifier");
+    }
+}

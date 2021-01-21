@@ -1,0 +1,22 @@
+// no viable alternative at input 'voidprint'
+// Description :
+//    test de génération de code print dans une méthode (impossible de définir
+// une méthode print car le mot est reconnu par le lexer
+// Resultats deca: 
+// Resultats ima : 
+
+
+class A{
+    
+    void print(){
+        print("quelque chose");
+    }
+    
+    void printA(){
+        print();
+    }
+}
+{
+   A a = new A();
+   a.print();
+}

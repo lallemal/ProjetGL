@@ -1,6 +1,7 @@
 lexer grammar DecaLexer;
 
 options {
+
    language=Java;
    // Tell ANTLR to make the generated lexer class extend the
    // the named class, which is where any supporting code and
@@ -9,6 +10,7 @@ options {
 }
 
 @members {
+
 
 }
 

@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
 def generate():
-    result = "{int x1"
-    n = 50000
+    result = ""
+    n = 150000
     for i in range(2, n):
-        result += ", x" + str(i)
-    result += ";}"
+        result += "class A" + str(i) + "{}"
     print(result)
 
 generate()

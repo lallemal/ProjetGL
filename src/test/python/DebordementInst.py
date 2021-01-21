@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 def generate():
-    result = "{int x1"
-    n = 15000
-    for i in range(2, n):
-        result += ", x" + str(i)
-    result += ";}"
+    result = "{\nint x;\n"
+    n = 150000
+    result += " x = x  "
+    for i in range(1, n):
+        result += " + " + str(i)
+    result += ";\n}"
     print(result)
 
 generate()

@@ -41,8 +41,8 @@ public class New extends AbstractExpr {
 		int nbField = ident.getClassDefinition().getNumberOfFields();
 		compiler.addInstruction(new NEW(new ImmediateInteger(nbField+1+ident.getClassDefinition().getSuperClass().getNumberOfFields()), Register.getR(n)));
 		compiler.addInstruction(new BOV(compiler.getLabelError().getLabelTasPlein()));
-		compiler.addInstruction(new LEA(ident.getClassDefinition().getAddress(), Register.R0));
-		compiler.addInstruction(new STORE(Register.R0, new RegisterOffset(0, Register.getR(n))));
+		compiler.addInstruction(new LEA(ident.getClassDefinition().getAddress(), Register.R1));
+		compiler.addInstruction(new STORE(Register.R1, new RegisterOffset(0, Register.getR(n))));
 		compiler.incrementKSP();
 		compiler.addInstruction(new PUSH(Register.getR(n)));
 		compiler.incrementKSP(2);

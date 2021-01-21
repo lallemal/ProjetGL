@@ -52,7 +52,8 @@ public class InstanceOf extends AbstractExpr{
 			
 			DAddr rightAddress = ident.getClassDefinition().getAddress();
 			if (compiler.getRmax() > n) {
-				compiler.addInstruction(new LEA(rightAddress, Register.getR(n+1)));
+				compiler.setRegistreUsed(n+1);
+				compiler.addInstruction(new LEA(rightAddress, Register.getR(n+1)));	
 			} else {
 				
 			}

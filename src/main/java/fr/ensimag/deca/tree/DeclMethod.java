@@ -87,16 +87,16 @@ public class DeclMethod extends AbstractDeclMethod {
     	
     	compiler.addComment("---------- Initialisation de la methode de "+name.getName().getName());
     	compiler.addLabel(name.getMethodDefinition().getLabel());
+    	Label labelFin = new Label("fin."+className+"."+name.getName().getName());
     	
     	if (body.isAsmBody()) {
-    		body.codeGenBody(compiler, new Label(""));
+    		body.codeGenBody(compiler, labelFin);
     		return;
     	}
 
     	// ----- fake call to determine the number of register used (to push them)
     	compiler.setAux(true);
     	compiler.cleanProgramAux();
-    	Label labelFin = new Label("fin."+className+"."+name.getName().getName());
     	int kGB = compiler.getKGB();
     	int kSP = compiler.getKSP();
     	int maxkSP = compiler.getMaxSP();

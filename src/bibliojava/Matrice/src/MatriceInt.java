@@ -106,12 +106,24 @@ class MatriceInt extends AbstractMatrice{
 	
 	
 	
-	
-	
-	
-	
-	
-	
+	int abs(int number) {
+		if( number > 0) {
+			return number;
+		}else {
+			return -number;
+		}
+	}
+	int norme1() {
+		int result = 0;
+		int l = 0;
+		int c = 0;
+		while(l < nbl) {
+			while( c < nbc) {
+				result = result + abs(this.matint[l][c]);
+			}
+		}
+		return result;
+	}
 	
 	
 	

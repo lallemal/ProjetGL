@@ -18,6 +18,7 @@ import fr.ensimag.ima.pseudocode.instructions.BRA;
 import fr.ensimag.ima.pseudocode.instructions.CMP;
 import fr.ensimag.ima.pseudocode.instructions.LEA;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
+import fr.ensimag.ima.pseudocode.instructions.PUSH;
 
 import org.apache.commons.lang.Validate;
 
@@ -51,12 +52,6 @@ public class InstanceOf extends AbstractExpr{
 			Label boucle = new Label("while_instanceOf_"+getLocation().getLine()+"_"+getLocation().getPositionInLine());
 			
 			DAddr rightAddress = ident.getClassDefinition().getAddress();
-			if (compiler.getRmax() > n) {
-				compiler.setRegistreUsed(n+1);
-				compiler.addInstruction(new LEA(rightAddress, Register.getR(n+1)));	
-			} else {
-				
-			}
 			if (expr.isIdentifier()) {
 				Identifier a = (Identifier) expr;
 				DAddr leftAddress = a.getExpDefinition().getOperand();
@@ -69,7 +64,7 @@ public class InstanceOf extends AbstractExpr{
 			compiler.addInstruction(new LOAD(new RegisterOffset(0, Register.getR(n)), Register.getR(n)));
 			compiler.addInstruction(new CMP(new NullOperand(), Register.getR(n)));
 			compiler.addInstruction(new BEQ(fin_false));
-			compiler.addInstruction(new CMP(Register.getR(n), Register.getR(n+1)));
+			compiler.addInstruction(new CMP(rightAddress, Register.getR(n)));
 			compiler.addInstruction(new BEQ(fin_true));
 			compiler.addInstruction(new BRA(boucle));
 			compiler.addLabel(fin_false);

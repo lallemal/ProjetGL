@@ -1,0 +1,18 @@
+class A {
+	int i=0;
+	float j=0x1.333334p0;
+
+	float add() {
+		(j = (j + i));
+		return j;
+	}
+
+}
+{
+	int i=0;
+	float j=0x1.333334p0;
+	A a=(new A());
+	(j = (j + i));
+	println("convFloat depuis le main: ", j);
+	println("convFloat depuis les classes: ", a.add());
+}

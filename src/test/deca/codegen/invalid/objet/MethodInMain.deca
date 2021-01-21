@@ -1,0 +1,18 @@
+// The class pointed by this can not be Object class
+// Description :
+//    Test génération de code pour un appel de méthode dans un main
+//
+// Resultats decac: un this est mis par le parser avant l'appel de méthode, on 
+// attend donc une erreur au niveau du this
+// Resultat ima: /
+
+class A{
+
+    void printA(){
+        print("Je suis A");
+    }
+}
+{
+    printA();
+}
+

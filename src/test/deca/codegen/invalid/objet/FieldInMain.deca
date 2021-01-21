@@ -1,0 +1,20 @@
+// This identifier is not declared in this scope x
+// Description :
+//    Test génération de code pour un appel de this dans un main
+//
+// Resultats decac: un this est mis par le parser avant l'appel de méthode, on 
+// attend donc une erreur au niveau du this
+// Resultat ima: /
+
+class A{
+    
+    int x;
+    
+    void printA(){
+        print("Je suis A");
+    }
+}
+{
+    int y = x;
+}
+

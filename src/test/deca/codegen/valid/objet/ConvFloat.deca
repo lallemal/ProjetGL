@@ -1,0 +1,24 @@
+// Description :
+//    test décompilation conv float
+//
+// Resultats (en comparaison avec le résultat attendu 
+// disponible dans le fichier *.deca.ok dans le dossier Modeles_OK) :
+//    ok
+
+class A{
+    int i = 0;
+    float j = 1.2;
+
+    float add(){
+        j = j + i;
+        return j;
+    }
+}
+{
+    int i = 0;
+    float j = 1.2;  
+    A a = new A();
+    j = j + i;
+    println("convFloat depuis le main: ", j);
+    println("convFloat depuis les classes: ", a.add());
+}

@@ -1,0 +1,13 @@
+// Description :
+//    Test génération de code, avec field et objet du même nom
+//
+// Resultats decac:
+// Resultat ima:
+
+class A {
+    int a = 0;
+}
+{
+    A a = new A();
+    println(a.a);
+}

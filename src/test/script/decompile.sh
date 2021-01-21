@@ -42,5 +42,4 @@ do
   
 done
  
-cd "$(dirname "$0")"/../../.. || exit 1
 echo "Pour plus de détails: decac -p fichier_à_étudier"

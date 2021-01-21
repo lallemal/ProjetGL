@@ -1,0 +1,51 @@
+// Description :
+//    Test génération de code, méthode qui hérite les unes des autres
+//
+// Resultats decac:
+// Resultat ima: 
+
+
+class A{
+
+    int x = 1;
+    int y = 0;
+    int z = 2;
+    
+    void setX(int x){
+        this.x = x;
+    }
+        
+    void setY(int y){
+        this.y = y;
+    }
+    
+    void setZ(int z){
+        this.z = z;
+    }   
+
+}
+class B extends A{
+    
+    void setXB(int x){
+        setX(x);
+    }
+        
+     void setYB(int y){
+        setY(y);
+    }
+    
+     void setZB(int z){
+        setZ(z);
+    }
+}
+    
+{
+    A a = new A();
+    B b = new B();
+   
+    a.setX(3);
+    b.setXB(4);
+    //Pas normal, on arrive pas a appeller une méthode mère dans une méthode fille
+    println(a.x);
+    println(b.x);
+}

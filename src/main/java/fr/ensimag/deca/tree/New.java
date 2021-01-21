@@ -70,7 +70,7 @@ public class New extends AbstractExpr {
 
 	@Override
 	public void decompile(IndentPrintStream s) {
-		s.print("new " + ident.decompile() +"()");
+		s.print("(new " + ident.decompile() +"())");
 	}
 
 	@Override

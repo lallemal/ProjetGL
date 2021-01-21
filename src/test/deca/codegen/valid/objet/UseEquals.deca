@@ -1,0 +1,23 @@
+// Description :
+//    Test génération de code, utilisation de equals
+//
+// Resultats decac:
+// Resultat ima: 
+
+//Problème: impossible d'utiliser equals : The type of the variable and its assignation are not compatible (boolean,A)
+
+
+class A{
+    int y; 
+    
+    void egalite(A other){
+        boolean b = equals(other);
+    }
+    
+}
+{
+    A a = new A();
+    A b = new A();
+    
+    a.egalite(b);
+}

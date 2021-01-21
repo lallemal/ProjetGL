@@ -1,11 +1,11 @@
 // Erreur : dereferencement de null
-// Description : Deferencement null dans un appel de méthode
+// Description : Deferencement null dans une selection
 // Resultat : erreur lors de ima
 
 
 class A{
     float x = 1.0;
-    float y = 0.0;
+    float y = 0.1;
    
     void Test(){
         float z = x/y;
@@ -13,6 +13,6 @@ class A{
 }
 {
     A a = null;
-    a.Test();
+    float y = a.x;
 }
 

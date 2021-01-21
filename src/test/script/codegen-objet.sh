@@ -78,30 +78,60 @@ do
   fi
 done
 
-echo "------- Démarrage des test de débordement de pile"
-resultat=$(ima -p 003 src/test/deca/codegen/invalid/objet/debordementPile/pilePleine.ass)
-if [ "$(cat src/test/deca/codegen/invalid/objet/debordementPile/pilePleine.ass.ok)" = "$resultat" ]; then
+nb=$(ls -l src/test/deca/codegen/invalid/objet/debordementPile/*.deca | wc -l)
+echo "------- Démarrage des test de débordement de pile decac ($((nb)))"
+for i in src/test/deca/codegen/invalid/objet/debordementPile/*.deca
+do 
+    if decac $i 2>&1 | grep -q -e "$i:"
+  then
+    echo "Echec inattendu pour decac pour $i"
+  else
     echo "OK"
-else
-    echo "src/test/deca/codegen/invalid/objet/debordementPile/pilePeine.ass KO ->"
-    echo "Résultat innatendu, le résultat:"
-    echo "$resultat"
-    echo "ce qui était attendu:"
-    echo "$(cat src/test/deca/codegen/invalid/objet/debordementPile/pilePleine.ass.ok)"
-    exit 1
-fi
+  fi
+done 
 
-echo "------- Démarrage des test de débordement de tas"
-resultat=$(ima -t 003 src/test/deca/codegen/invalid/objet/debordementTas/tasPlein.ass)
-if [ "$(cat src/test/deca/codegen/invalid/objet/debordementTas/tasPlein.ass.ok)" = "$resultat" ]; then
+echo "------- Démarrage des test de débordement de pile ima ($((nb)))"
+for i in src/test/deca/codegen/invalid/objet/debordementPile/*.ass
+do
+    resultat=$(ima -p 003 $i)
+    if [ "$(cat src/test/deca/codegen/invalid/objet/debordementPile/MessageErreur.ok)" = "$resultat" ]; then
+        echo "OK"
+    else
+        echo "$i KO ->"
+        echo "Résultat innatendu, le résultat:"
+        echo "$resultat"
+        echo "ce qui était attendu:"
+        echo "$(cat src/test/deca/codegen/invalid/objet/debordementPile/MessageErreur.ok)"
+        exit 1
+fi
+done
+
+nb=$(ls -l src/test/deca/codegen/invalid/objet/debordementTas/*.deca | wc -l)
+echo "------- Démarrage des test de débordement de tas decac ($((nb)))"
+for i in src/test/deca/codegen/invalid/objet/debordementTas/*.deca
+do 
+    if decac $i 2>&1 | grep -q -e "$i:"
+  then
+    echo "Echec inattendu pour decac pour $i"
+  else
+    echo "OK"
+  fi
+done 
+
+echo "------- Démarrage des test de débordement de tas ima ($((nb)))"
+for i in src/test/deca/codegen/invalid/objet/debordementTas/*.ass
+do 
+resultat=$(ima -t 003 $i)
+if [ "$(cat src/test/deca/codegen/invalid/objet/debordementTas/MessageErreur.ok)" = "$resultat" ]; then
     echo "OK"
 else
-    echo "src/test/deca/codegen/invalid/objet/debordementTas/tasPlein.ass KO ->"
+    echo "$i KO ->"
     echo "Résultat innatendu, le résultat:"
     echo "$resultat"
     echo "ce qui était attendu:"
-    echo "$(cat src/test/deca/codegen/invalid/objet/debordementTas/tasPlein.ass.ok)"
+    echo "$(cat src/test/deca/codegen/invalid/objet/debordementTas/MessageErreur.ok)"
     exit 1
 fi
+done
 
 

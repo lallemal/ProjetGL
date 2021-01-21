@@ -10,7 +10,7 @@
 class A{
 
     int x = 1;
-    boolean b;
+    boolean b = true;
     
     int getThis(){
         return this.x;

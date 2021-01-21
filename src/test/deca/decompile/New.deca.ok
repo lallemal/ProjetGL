@@ -1,7 +1,7 @@
 class Thing {
-	int i=new Objet();
+	int i=(new Objet());
 
 }
 {
-	Thing i=new Thing();
+	Thing i=(new Thing());
 }

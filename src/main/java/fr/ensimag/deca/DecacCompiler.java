@@ -461,10 +461,10 @@ public class DecacCompiler implements Callable<Boolean> {
             env_types.declare(intSymbol, new TypeDefinition(new IntType(intSymbol), Location.BUILTIN));
 
             Signature equalsSig = new Signature();
-            equalsSig.add(getBool());
             ClassType objectClass = new ClassType(objectSymbol, Location.BUILTIN, null);
+            equalsSig.add(objectClass);
             ClassDefinition objectDef = new ClassDefinition(objectClass, Location.BUILTIN, null);
-            objectDef.getMembers().declare(symbols.create("equals"), new MethodDefinition(objectClass, Location.BUILTIN, equalsSig, 0));
+            objectDef.getMembers().declare(symbols.create("equals"), new MethodDefinition(getBool(), Location.BUILTIN, equalsSig, 0));
             objectDef.setNumberOfMethods(1);
             env_types.declare(objectSymbol, objectDef);
 

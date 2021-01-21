@@ -156,6 +156,10 @@ public class DeclClass extends AbstractDeclClass {
         }
         ClassDefinition classDef = (ClassDefinition) classTypeDef;
         // Change classDef with definition of Methods and Fields
+        if (parent != null) {
+        	ident.getClassDefinition().setNumberOfFields(parent.getClassDefinition().getNumberOfFields());
+        	ident.getClassDefinition().setNumberOfMethods(parent.getClassDefinition().getNumberOfMethods());
+        }
         field.verifyListDeclField(compiler, classDef);
         method.verifyListDeclMethod(compiler, classDef);
 
@@ -175,7 +179,6 @@ public class DeclClass extends AbstractDeclClass {
             throw new ContextualError(ContextualError.CLASS_NOT_CLASS, getLocation());
         }
         ClassDefinition classDef = (ClassDefinition) classType;
-
         field.verifyListDeclFieldBody(compiler, classDef);
         method.verifyListDeclMethodBody(compiler, classDef);
     }

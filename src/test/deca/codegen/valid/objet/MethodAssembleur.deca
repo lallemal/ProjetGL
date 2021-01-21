@@ -9,22 +9,22 @@ class A{
     int x = 1;
 
     void setX(int x) asm(
-    "TSTO #2\\
-	BOV pile_pleine\\
-; sauvegarde des registres\\
-	PUSH R2\\
-	PUSH R3\\
-; instructions\\
-	LOAD -3(LB), R2\\
-	LOAD -2(LB), R3\\
-	CMP #null, R3\\
-	BEQ dereferencement_null\\
-	STORE R2, 1(R3)\\
-fin.A.setX:\\
-; restauration des registres\\
-	POP R3\\
-	POP R2\\
-	SUBSP #0\\
-	RTS\\
+    "TSTO #2\n
+	BOV pile_pleine\n
+; sauvegarde des registres\n
+	PUSH R2\n
+	PUSH R3\n
+; instructions\n
+	LOAD -3(LB), R2\n
+	LOAD -2(LB), R3\n
+	CMP #null, R3\n
+	BEQ dereferencement_null\n
+	STORE R2, 1(R3)\n
+fin.A.setX:\n
+; restauration des registres\n
+	POP R3\n
+	POP R2\n
+	SUBSP #0\n
+	RTS\n
 ");
 }

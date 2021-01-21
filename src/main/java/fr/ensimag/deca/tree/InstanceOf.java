@@ -13,6 +13,7 @@ import fr.ensimag.ima.pseudocode.NullOperand;
 import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.RegisterOffset;
 import fr.ensimag.ima.pseudocode.instructions.BEQ;
+import fr.ensimag.ima.pseudocode.instructions.BNE;
 import fr.ensimag.ima.pseudocode.instructions.BRA;
 import fr.ensimag.ima.pseudocode.instructions.CMP;
 import fr.ensimag.ima.pseudocode.instructions.LEA;
@@ -50,7 +51,12 @@ public class InstanceOf extends AbstractExpr{
 			Label boucle = new Label("while_instanceOf_"+getLocation().getLine()+"_"+getLocation().getPositionInLine());
 			
 			DAddr rightAddress = ident.getClassDefinition().getAddress();
-			compiler.addInstruction(new LEA(rightAddress, Register.R1));
+			if (compiler.getRmax() > n) {
+				compiler.setRegistreUsed(n+1);
+				compiler.addInstruction(new LEA(rightAddress, Register.getR(n+1)));	
+			} else {
+				
+			}
 			if (expr.isIdentifier()) {
 				Identifier a = (Identifier) expr;
 				DAddr leftAddress = a.getExpDefinition().getOperand();
@@ -63,7 +69,7 @@ public class InstanceOf extends AbstractExpr{
 			compiler.addInstruction(new LOAD(new RegisterOffset(0, Register.getR(n)), Register.getR(n)));
 			compiler.addInstruction(new CMP(new NullOperand(), Register.getR(n)));
 			compiler.addInstruction(new BEQ(fin_false));
-			compiler.addInstruction(new CMP(Register.getR(n), Register.R1));
+			compiler.addInstruction(new CMP(Register.getR(n), Register.getR(n+1)));
 			compiler.addInstruction(new BEQ(fin_true));
 			compiler.addInstruction(new BRA(boucle));
 			compiler.addLabel(fin_false);
@@ -74,6 +80,17 @@ public class InstanceOf extends AbstractExpr{
 			compiler.addLabel(fin);
 		}
 	}
+	
+	@Override
+	protected void codeGenBranch(DecacCompiler compiler, boolean evaluate, Label label) {
+        this.codeExp(compiler, 2);
+        compiler.addInstruction(new CMP(0, Register.getR(2)));
+        if (evaluate) {
+            compiler.addInstruction(new BNE(label));
+        } else {
+            compiler.addInstruction(new BEQ(label));
+        }
+    }
 	
 	@Override
 	public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass)

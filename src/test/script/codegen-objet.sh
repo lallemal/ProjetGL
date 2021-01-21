@@ -37,6 +37,22 @@ do
 
 done
 
+echo "------ Démarrage des tests valide ima comparaison avec les modèles OK($((nb)))"
+for i in  src/test/deca/codegen/valid/objet/*.ass
+do
+  resultat=$(ima $i)
+    if [ "$(less $i.ok)" = "$resultat" ]; then
+         echo "OK"
+     else
+        echo "Résultat innatendu pour $i, le résultat:"
+        echo "$resultat"
+        echo "ce qui était attendu:"
+        echo "$(less $i.ok)"
+        exit 1
+    fi
+
+done
+
 echo "------ Démarrage des tests valide avec changement du nombre de regsitre decac "
 if decac -r 4 src/test/deca/codegen/valid/objet/Registre/Registre.deca 2>&1 | grep -q -e "$i:"
 then

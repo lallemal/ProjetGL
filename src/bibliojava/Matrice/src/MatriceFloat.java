@@ -122,6 +122,27 @@ class MatriceFloat extends AbstractMatrice{
 		return;
 	}
 
+	MatriceFloat sumMat(MatriceFloat m) {
+		if (this.nbc != m.nbc && this.nbl != m.nbl) {
+			return null;
+		}
+		float [][] tabfinal = new float[this.nbl][m.getNbc()];
+		MatriceFloat matfinal = new MatriceFloat();
+		matfinal.setInit(tabfinal, this.nbl, m.getNbc());
+		int i = 0;
+		int j = 0;
+		while(i < this.nbl) {
+			while (j < this.nbc) {
+				tabfinal[i][j] = this.matfloat[i][j] + m.getCase(i, j);
+				j = j + 1;
+			}
+			j = 0;
+			i = i + 1;
+		}
+		return matfinal;
+		
+	}
+	
 	// produit matriciel retourne null si echoue 
 	MatriceFloat prodMat(MatriceFloat m) {
 		
@@ -354,6 +375,20 @@ class MatriceFloat extends AbstractMatrice{
 		return res;
 	}
 	
+	// multiplie par un scalaire modifie directement
+	void multi(float scalaire) {
+		int i = 0;
+		int j = 0;
+		while(i < this.nbl) {
+			while(j < this.nbc) {
+				this.matfloat[i][j] = this.matfloat[i][j] * scalaire; 
+				j = j + 1;
+			}
+			j = 0;
+			i = i + 1;
+		}
+	}
+	
 	float convertTofloat() {
 		return this.matfloat[0][0];
 	}
@@ -378,9 +413,8 @@ class MatriceFloat extends AbstractMatrice{
 	// calcul du rayon spectral par lam methode des puissances
 		// determine valeur propre et vecteur propre
 		// rayon spectral = plus boule contenant toute les valeur prorpes
-		// entree vecteur propre + matrice = sortie valeur propre 
-	float Puissancevpvectp() {
-			
+		// entree vecteur propre + matrice = sortie valeur propre
+	MatriceFloat Puissancevp(MatriceFloat a) {
 		// vecteur initialisation
 		MatriceFloat vecteurx = new MatriceFloat();
 		vecteurx.setOneVector(this.nbl);
@@ -392,17 +426,33 @@ class MatriceFloat extends AbstractMatrice{
 		float vlp = 0;
 		
 		while(i < iteration) {
-			vecteury = this.prodMat(vecteurx);
+			vecteury = a.prodMat(vecteurx);
 			vecteurx = vecteury.multScalaire(1/vecteury.normeVect());
 			MatriceFloat transpose = vecteurx.transpose();
 			
-			vlp = transpose.prodMat(this.prodMat(vecteurx)).convertTofloat();
+			vlp = transpose.prodMat(a.prodMat(vecteurx)).convertTofloat();
 			i = i + 1;
 		}
 		System.out.print("vecteur propre= ");
 		vecteurx.print();
 		System.out.println("valeur propre " + vlp);
-		return vlp;
+		return vecteurx;
+		
+	}
+	MatriceFloat Puissancevpvectp() {
+			return Puissancevp(this);
+	
+	}
+	
+	MatriceFloat PuissanceInverse(float nu) {
+		// calculer (A-uId)-1
+		// identite
+		MatriceFloat id = new MatriceFloat();
+		id.setIndentite(this.nbl);
+		id.multi(-nu);
+		MatriceFloat f = id.sumMat(this);
+		f = f.inverse();
+		return Puissancevp(f);
 	}
 }
 

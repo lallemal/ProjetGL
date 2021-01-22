@@ -2,7 +2,7 @@
 //    Test génération de code sur une des if imbriqué dans une méthode 
 //
 // Resultats decac:
-// Resultat ima: 
+// Resultat ima: le résultat est: 3
 
 
 class A{

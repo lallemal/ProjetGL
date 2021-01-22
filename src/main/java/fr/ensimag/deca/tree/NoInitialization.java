@@ -37,7 +37,7 @@ public class NoInitialization extends AbstractInitialization {
     @Override
     protected void codeGenField(DecacCompiler compiler, AbstractIdentifier type) {
         Type typeField = type.getType();
-        if (typeField.isBoolean()) {
+        if (typeField.isInt() || typeField.isBoolean()) {
             compiler.addInstruction(new LOAD(0, Register.R0));
         }
         else if (typeField.isFloat()) {

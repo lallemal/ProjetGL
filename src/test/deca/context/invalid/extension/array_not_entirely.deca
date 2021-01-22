@@ -1,8 +1,0 @@
-// It is impossible to give dimension if the previous index dimension was empty
-// Description : precise the dimension of a dimension when the greater dimension was not precised
-// Result : error line 7
-
-{
-    int[][][] x;
-    x = new int[2][][4];
-}

@@ -1,0 +1,50 @@
+class Mat {
+    int[][] mat;
+    int n;
+
+    void init(int n) {
+        int i = 0;
+        int j = 0;
+        mat = new int[n][n];
+        while (i < n) {
+            j = 0;
+            while (j < n) {
+                mat[i][j] = 0;
+                j = j + 1;
+            }
+            i = i + 1;
+        }
+        this.n = n;
+    }
+
+    int get(int i, int j) {
+        return mat[i][j];
+    }
+
+    void set(int i, int j, int a) {
+        mat[i][j] = a;
+    }
+
+    void printMat() {
+        int i = 0;
+        int j = 0;
+        while (i < n) {
+            j = 0;
+            while (j < n) {
+                print(mat[i][j], " ");
+                j = j + 1;
+            }
+            println();
+            i = i + 1;
+        }
+    }
+
+}
+
+
+{
+    Mat matrice = new Mat();
+    int n = 10;
+    matrice.init(n);
+    matrice.printMat();
+}

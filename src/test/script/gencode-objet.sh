@@ -54,11 +54,13 @@ do
   resultat=$(ima $i)
     if [ "$(less $i.ok)" = "$resultat" ]; then
          echo "OK"
+         rm $i
      else
         echo "Résultat innatendu pour $i, le résultat:"
         echo "$resultat"
         echo "ce qui était attendu:"
-        echo "$(less $i.ok)"
+        echo "$(less $i.ok)"    
+        rm $i
         exit 1
     fi
 
@@ -88,11 +90,13 @@ echo "------ Démarrage des tests valide avec changement du nombre de registre i
 resultat=$(ima src/test/deca/codegen/valid/objet/Registre/Registre.ass)
 if [ "$(less src/test/deca/codegen/valid/objet/Registre/Registre.ass.ok)" = "$resultat" ]; then
         echo "OK"
+        rm src/test/deca/codegen/valid/objet/Registre/Registre.ass
   else
         echo "Résultat innatendu pour Registre.ass, le résultat:"
         echo "$(resultat)"
         echo "ce qui était attendu:"
         echo "$(less src/test/deca/codegen/valid/objet/Registre/Registre.ass.ok)"
+        rm src/test/deca/codegen/valid/objet/Registre/Registre.ass
         exit 1
   fi
 
@@ -109,11 +113,13 @@ do
   resultat=$(ima $i)
   if [ "$(less $i.ok)" = "$resultat" ]; then
         echo "OK"
+        rm $i
   else
         echo "Résultat innatendu pour $i, le résultat:"
         echo "$resultat"
         echo "ce qui était attendu:"
         echo "$(less $i.ok)"
+        rm $i
         exit 1
   fi
 done
@@ -137,12 +143,14 @@ do
     resultat=$(ima -p 003 $i)
     if [ "$(cat src/test/deca/codegen/invalid/objet/debordementPile/MessageErreur.ok)" = "$resultat" ]; then
         echo "OK"
+        rm $i
     else
         echo "$i KO ->"
         echo "Résultat innatendu, le résultat:"
         echo "$resultat"
         echo "ce qui était attendu:"
         echo "$(cat src/test/deca/codegen/invalid/objet/debordementPile/MessageErreur.ok)"
+        rm $i
         exit 1
 fi
 done
@@ -166,14 +174,18 @@ do
 resultat=$(ima -t 003 $i)
 if [ "$(cat src/test/deca/codegen/invalid/objet/debordementTas/MessageErreur.ok)" = "$resultat" ]; then
     echo "OK"
+    rm $i
 else
     echo "$i KO ->"
     echo "Résultat innatendu, le résultat:"
     echo "$resultat"
     echo "ce qui était attendu:"
     echo "$(cat src/test/deca/codegen/invalid/objet/debordementTas/MessageErreur.ok)"
+    rm $i
     exit 1
 fi
 done
+
+
 
 

@@ -30,13 +30,15 @@ for i in "$VALID_CODEGEN"/*.ass
 do
     resultat=$(ima ./$i)
     if [ "$(cat $i.ok)" = "$resultat" ]; then
-        echo "$i OK"
+        echo "OK"
+        rm $i
     else
         echo "$i KO ->"
         echo "Résultat innatendu, le résultat:"
         echo "$resultat"
         echo "ce qui était attendu:"
         echo "$(cat $i.ok)"
+        rm $i
         exit 1
   fi
 done
@@ -45,13 +47,15 @@ done
 decac -r 4 $VALID_CODEGEN/pushpop/pushpop.deca
 resultat=$(ima $VALID_CODEGEN/pushpop/pushpop.ass)
 if [ "$(cat $VALID_CODEGEN/pushpop/pushpop.ass.ok)" = "$resultat" ]; then
-    echo "$VALID_CODEGEN/pushpop/pushpop.ass OK"
+    echo "OK"
+    rm $VALID_CODEGEN/pushpop/pushpop.ass
 else
     echo "$VALID_CODEGEN/pushpop/pushpop.ass KO ->"
     echo "Résultat innatendu, le résultat:"
     echo "$resultat"
     echo "ce qui était attendu:"
     echo "$(cat $VALID_CODEGEN/pushpop/pushpop.ass.ok)"
+    rm $VALID_CODEGEN/pushpop/pushpop.ass
     exit 1
 fi
 
@@ -60,13 +64,15 @@ decac ./src/test/deca/decompile/Test_include/Include.deca || exit 1
 resultat=$(ima ./src/test/deca/decompile/Test_include/Include.ass)
 
     if [ "$(cat ./src/test/deca/codegen/valid/sansObjetPourScript/Include.ass.ok)" = "$resultat" ]; then
-        echo "$INVALID_CODEGEN/Include.ass OK"
+        echo "OK"
+        rm src/test/deca/decompile/Test_include/Include.ass
     else
-        echo "$INVALID_CODEGEN/Include.ass KO ->"
+        echo "Include.ass KO ->"
         echo "Résultat innatendu, le résultat:"
         echo "$resultat"
         echo "ce qui était attendu:"
         echo "$(cat ./src/test/deca/codegen/valid/sansObjetPourScript/Include.ass.ok)"
+        rm rm src/test/deca/decompile/Test_include/Include.ass
         exit 1
   fi
 

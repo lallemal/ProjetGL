@@ -36,12 +36,14 @@ do
     resultat=$(ima ./$i)
     if [ "$(cat $i.ok)" = "$resultat" ]; then
         echo "$i OK"
+        rm $i
     else
         echo "$i KO ->"
         echo "Résultat innatendu, le résultat:"
         echo "$resultat"
         echo "ce qui était attendu:"
         echo "$(cat $i.ok)"
+        rm $i
         exit 1
   fi
 done
@@ -70,13 +72,15 @@ for i in $INVALID_CODEGEN/noCheck/*.ass
 do
     resultat=$(ima -p 005 ./$i)
     if [ "$(cat $i.ok)" = "$resultat" ]; then
-        echo "$i OK"
+        echo "OK"
+        rm $i
     else
         echo "$i KO ->"
         echo "Résultat innatendu, le résultat:"
         echo "$resultat"
         echo "ce qui était attendu:"
         echo "$(cat $i.ok)"
+        rm $i
         exit 1
     fi
 done

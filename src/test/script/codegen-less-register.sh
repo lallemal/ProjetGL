@@ -29,12 +29,14 @@ do
     resultat=$(ima ./$i)
     if [ "$(cat $i.ok)" = "$resultat" ]; then
         echo "$i OK"
+        rm $i
     else
         echo "$i KO ->"
         echo "Résultat innatendu, le résultat:"
         echo "$resultat"
         echo "ce qui était attendu:"
         echo "$(cat $i.ok)"
+        rm $i
         exit 1
   fi
 done
@@ -44,12 +46,14 @@ decac -r 4 $VALID_CODEGEN/pushpop/pushpop.deca
 resultat=$(ima $VALID_CODEGEN/pushpop/pushpop.ass)
 if [ "$(cat $VALID_CODEGEN/pushpop/pushpop.ass.ok)" = "$resultat" ]; then
     echo "$VALID_CODEGEN/pushpop/pushpop.ass OK"
+    rm $VALID_CODEGEN/pushpop/pushpop.ass
 else
     echo "$VALID_CODEGEN/pushpop/pushpop.ass KO ->"
     echo "Résultat innatendu, le résultat:"
     echo "$resultat"
     echo "ce qui était attendu:"
     echo "$(cat $VALID_CODEGEN/pushpop/pushpop.ass.ok)"
+    rm $VALID_CODEGEN/pushpop/pushpop.ass
     exit 1
 fi
 
@@ -58,13 +62,15 @@ decac -r 4 ./src/test/deca/decompile/Test_include/Include.deca || exit 1
 resultat=$(ima ./src/test/deca/decompile/Test_include/Include.ass)
 
     if [ "$(cat ./src/test/deca/codegen/valid/sansObjetPourScript/Include.ass.ok)" = "$resultat" ]; then
-        echo "$INVALID_CODEGEN/Include.ass OK"
+        echo "OK"
+        rm src/test/deca/decompile/Test_include/Include.ass
     else
-        echo "$INVALID_CODEGEN/Include.ass KO ->"
+        echo "Include.ass KO ->"
         echo "Résultat innatendu, le résultat:"
         echo "$resultat"
         echo "ce qui était attendu:"
         echo "$(cat ./src/test/deca/codegen/valid/sansObjetPourScript/Include.ass.ok)"
+        rm src/test/deca/decompile/Test_include/Include.ass
         exit 1
   fi
 
@@ -98,26 +104,32 @@ do
     resultat=$(ima ./$i)
     if [ "$(cat $i.ok)" = "$resultat" ]; then
         echo "$i OK"
+        rm $i
     else
         echo "$i KO ->"
         echo "Résultat innatendu, le résultat:"
         echo "$resultat"
         echo "ce qui était attendu:"
         echo "$(cat $i.ok)"
+        rm $i
         exit 1
   fi
 done
+
+cd "$(dirname "$0")"/../../.. || exit 1
 
 #on met a part le test de debordement de pile car il necessite une execution de ima -p nnn
 resultat=$(ima -p 003 $INVALID_CODEGEN/debordementPile/pilePleine.ass)
 if [ "$(cat $INVALID_CODEGEN/debordementPile/pilePleine.ass.ok)" = "$resultat" ]; then
     echo "$INVALID_CODEGEN/debordementPile/pilePeine.ass OK"
+    rm $INVALID_CODEGEN/debordementPile/pilePleine.ass
 else
     echo "$INVALID_CODEGEN/debordementPile/pilePeine.ass KO ->"
     echo "Résultat innatendu, le résultat:"
     echo "$resultat"
     echo "ce qui était attendu:"
     echo "$(cat $INVALID_CODEGEN/debordementPile/pilePleine.ass.ok)"
+    rm $INVALID_CODEGEN/debordementPile/pilePleine.ass
     exit 1
 fi
 
@@ -132,7 +144,7 @@ nb=$(ls -l src/test/deca/codegen/valid/objet/*.deca | wc -l)
 echo "------ Démarrage des tests valide decac -r 4 ($((nb)))"
 for i in  src/test/deca/codegen/valid/objet/*.deca
 do
-  if decac -r $i 2>&1 | grep -q -e "$i:"
+  if decac -r 4 $i 2>&1 | grep -q -e "$i:"
   then
     echo "Echec inattendu pour decac -r 4 pour $i"
   else
@@ -146,7 +158,7 @@ for i in  src/test/deca/codegen/valid/objet/*.ass
 do
   if ima $i 2>&1 | grep -q -e "$i:"
   then
-    echo "Echec inattendu pour decac -r 4 pour $i"
+    echo "Echec inattendu pour ima pour $i"
   else
     echo "OK"
   fi
@@ -160,11 +172,13 @@ do
   resultat=$(ima $i)
     if [ "$(less $i.ok)" = "$resultat" ]; then
          echo "OK"
+         rm $i
      else
         echo "Résultat innatendu pour $i, le résultat:"
         echo "$resultat"
         echo "ce qui était attendu:"
         echo "$(less $i.ok)"
+        rm $i
         exit 1
     fi
 
@@ -184,7 +198,7 @@ fi
 echo "------ Démarrage des tests valide avec changement du nombre de regsitre ima "
 if ima src/test/deca/codegen/valid/objet/Registre/Registre.ass 2>&1 | grep -q -e "$i:"
 then
-  echo "Echec inattendu pour decac -r 4 pour Registre.ass"
+  echo "Echec inattendu pour ima pour Registre.ass"
 else
   echo "OK"
 fi
@@ -194,11 +208,13 @@ echo "------ Démarrage des tests valide avec changement du nombre de registre i
 resultat=$(ima src/test/deca/codegen/valid/objet/Registre/Registre.ass)
 if [ "$(less src/test/deca/codegen/valid/objet/Registre/Registre.ass.ok)" = "$resultat" ]; then
         echo "OK"
+        rm src/test/deca/codegen/valid/objet/Registre/Registre.ass
   else
         echo "Résultat innatendu pour Registre.ass, le résultat:"
         echo "$(resultat)"
         echo "ce qui était attendu:"
         echo "$(less src/test/deca/codegen/valid/objet/Registre/Registre.ass.ok)"
+        rm src/test/deca/codegen/valid/objet/Registre/Registre.ass
         exit 1
   fi
 
@@ -217,11 +233,13 @@ do
   resultat=$(ima $i)
   if [ "$(less $i.ok)" = "$resultat" ]; then
         echo "OK"
+        rm $i
   else
         echo "Résultat innatendu pour $i, le résultat:"
         echo "$resultat"
         echo "ce qui était attendu:"
         echo "$(less $i.ok)"
+        rm $i
         exit 1
   fi
 done
@@ -245,12 +263,14 @@ do
     resultat=$(ima -p 003 $i)
     if [ "$(cat src/test/deca/codegen/invalid/objet/debordementPile/MessageErreur.ok)" = "$resultat" ]; then
         echo "OK"
+        rm $i
     else
         echo "$i KO ->"
         echo "Résultat innatendu, le résultat:"
         echo "$resultat"
         echo "ce qui était attendu:"
         echo "$(cat src/test/deca/codegen/invalid/objet/debordementPile/MessageErreur.ok)"
+        rm $i
         exit 1
 fi
 done
@@ -274,12 +294,14 @@ do
 resultat=$(ima -t 003 $i)
 if [ "$(cat src/test/deca/codegen/invalid/objet/debordementTas/MessageErreur.ok)" = "$resultat" ]; then
     echo "OK"
+    rm $i
 else
     echo "$i KO ->"
     echo "Résultat innatendu, le résultat:"
     echo "$resultat"
     echo "ce qui était attendu:"
     echo "$(cat src/test/deca/codegen/invalid/objet/debordementTas/MessageErreur.ok)"
+    rm $i
     exit 1
 fi
 done
@@ -310,9 +332,11 @@ for i in  src/test/deca/codegen/valid/extension/*.ass
 do
   if ima $i 2>&1 | grep -q -e "$i:"
   then
-    echo "Echec inattendu pour decac -r 4 pour $i"
+    echo "Echec inattendu pour ima pour $i"
+    rm $i
   else
     echo "OK"
+    rm $i
   fi
 
 done

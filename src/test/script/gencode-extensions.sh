@@ -41,8 +41,10 @@ do
   if ima $i 2>&1 | grep -q -e "$i:"
   then
     echo "Echec inattendu pour decac pour $i"
+    rm $i
   else
     echo "OK"
+    rm $i
   fi
 
 done

@@ -13,6 +13,25 @@ class MatriceInt extends AbstractMatrice{
 		return this.matint[i][j];
 	}
 	
+	
+	void setInitCopy(int[][] mat, int nbl, int nbc) {
+		this.matint = new int[nbl][nbc];
+		this.nbl = nbl;
+		this.nbc = nbc;
+		int i = 0;
+		int j = 0;
+		while(i < nbl) {
+			while(j < nbc) {
+				this.matint[i][j] = mat[i][j];
+				j = j + 1;
+			}
+		j = 0;
+		i = i + 1;
+		
+		}
+		return;
+	}
+
 	void print() {
 		System.out.print("[");
 		int l = 0;
@@ -126,29 +145,8 @@ class MatriceInt extends AbstractMatrice{
 		return result;
 	}
 
-	// cree un vecteur de taille (n,1) de 1
-	void setOneVector(int n){
-		int[][] m = new int[n][1];
-		int i = 0;
-		while(i < this.nbl) {
-			m[i][1] = 1;
-			i = i + 1;
-		}
-		this.matint = m;
-	}
-	// calcul du rayon spectral par lam methode des puissances
-	// determine valeur propre et vecteur propre
-	// rayon spectral = plus boule contenant toute les valeur prorpes
-	// entree vecteur propre + matrice = sortie valeur propre 
-	float Puissancevpvectp() {
-		MatriceInt m = new MatriceInt();
-		
-		
-		
-		
-		
-		
-		return 1;
-	}
+	
+	
+	
 	
 }

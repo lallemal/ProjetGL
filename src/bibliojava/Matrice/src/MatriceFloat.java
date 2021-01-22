@@ -29,7 +29,21 @@ class MatriceFloat extends AbstractMatrice{
 		}
 		return;
 	}
-	
+	// cree un vecteur de taille (n,1) de 1
+	void setOneVector(int n){
+		float[][] mat = new float[n][1];
+		System.out.println(n);
+		this.nbl = n;
+		this.nbc = 1;
+		
+		int i = 0;
+		while(i < this.nbl) {
+			mat[i][0] = 1;
+			i = i + 1;
+		}
+		this.matfloat = mat;
+		
+	}	
 	// initialise a partir d'un tableau de float, une copie du tableau est creer
 	void setInitFloat(float[][] mat, int nbl, int nbc) {
 		this.matfloat = new float[nbl][nbc];
@@ -231,7 +245,9 @@ class MatriceFloat extends AbstractMatrice{
 		}
 	return indice;
 	}
+
 	
+
 	// calcul la matrice inverse
 	MatriceFloat inverse() {
 		int r = -1; // indice dernier pivot
@@ -320,6 +336,73 @@ class MatriceFloat extends AbstractMatrice{
 		return determinant;
 	}
 	
+	// multiplie par un scalaire les composantes revoi une nouvelle matrice 
+	MatriceFloat multScalaire(float scalaire) {
+		MatriceFloat res = new MatriceFloat();
+		float[][] f = new float[this.nbl][this.nbc];
+		int i = 0;
+		int j = 0;
+		while(i < this.nbl) {
+			while(j < this.nbc) {
+				f[i][j] = this.matfloat[i][j] * scalaire; 
+				j = j + 1;
+			}
+			j = 0;
+			i = i + 1;
+		}
+		res.setInit(f,this.nbl,this.nbc);
+		return res;
+	}
 	
+	float convertTofloat() {
+		return this.matfloat[0][0];
+	}
+	
+	float normeVect() {
+		if (this.nbc != 1) {
+			return 0;
+		}
+		float res = 0;
+		int i = 0;
+		Racine r = new Racine();
+		// calcul des carre puis racine a la fin
+		while (i < this.nbl) {
+			res = res + this.matfloat[i][0]* this.matfloat[i][0];
+			i = i + 1;
+		}
+		System.out.println("valeur carre " + res);
+		return r.sqrt(res);
+	}
+	
+	
+	// calcul du rayon spectral par lam methode des puissances
+		// determine valeur propre et vecteur propre
+		// rayon spectral = plus boule contenant toute les valeur prorpes
+		// entree vecteur propre + matrice = sortie valeur propre 
+	float Puissancevpvectp() {
+			
+		// vecteur initialisation
+		MatriceFloat vecteurx = new MatriceFloat();
+		vecteurx.setOneVector(this.nbl);
+		
+		// vecteur resultat
+		MatriceFloat vecteury = new MatriceFloat();
+		int iteration = 20;
+		int i = 0;
+		float vlp = 0;
+		
+		while(i < iteration) {
+			vecteury = this.prodMat(vecteurx);
+			vecteurx = vecteury.multScalaire(1/vecteury.normeVect());
+			MatriceFloat transpose = vecteurx.transpose();
+			
+			vlp = transpose.prodMat(this.prodMat(vecteurx)).convertTofloat();
+			i = i + 1;
+		}
+		System.out.print("vecteur propre= ");
+		vecteurx.print();
+		System.out.println("valeur propre " + vlp);
+		return vlp;
+	}
 }
 

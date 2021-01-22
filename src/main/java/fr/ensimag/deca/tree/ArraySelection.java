@@ -83,6 +83,9 @@ public class ArraySelection extends AbstractLValue{
 		if (getType().isInt()) {
 			compiler.addInstruction(new LOAD(new RegisterOffset(0, Register.getR(1)), Register.R1));
 			compiler.addInstruction(new WINT());
+		} else if (getType().isFloat()) {
+			compiler.addInstruction(new LOAD(new RegisterOffset(0, Register.getR(1)), Register.R1));
+			compiler.addInstruction(new WFLOAT());
 		}
 	}
 

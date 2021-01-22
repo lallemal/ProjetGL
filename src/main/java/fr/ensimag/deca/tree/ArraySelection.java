@@ -26,7 +26,17 @@ public class ArraySelection extends AbstractLValue{
 	@Override
 	protected void codeExp(DecacCompiler compiler, int n) {
 		compiler.getLabelError().setErrorIndexOutOfRange(true);
-	    compiler.addInstruction(new LOAD(ident.getExpDefinition().getOperand(), Register.getR(n)));
+		ExpDefinition expDefinition = ident.getExpDefinition();
+		if (expDefinition.isField()) {
+			compiler.addInstruction(new LOAD(new RegisterOffset(-2, Register.LB), Register.getR(n)));
+			compiler.addInstruction(new LOAD(new RegisterOffset( ((FieldDefinition) expDefinition).getIndex()+1, Register.getR(n)), Register.getR(n)));
+
+		} else if (expDefinition.isParam()) {
+			int index = ((ParamDefinition) expDefinition).getIndex();
+			compiler.addInstruction(new LOAD(new RegisterOffset(-(3 + index), Register.LB), Register.getR(n)));
+		} else {
+			compiler.addInstruction(new LOAD(ident.getExpDefinition().getOperand(), Register.getR(n)));
+		}
 	    compiler.addInstruction(new LOAD(new RegisterOffset(0, Register.getR(n)), Register.getR(n+1)));
 	    compiler.addInstruction(new LOAD(new ImmediateInteger(0), Register.getR(n+2)));
 	    compiler.addInstruction(new LOAD(new ImmediateInteger(1), Register.getR(n+3)));

@@ -8,25 +8,8 @@ package fr.ensimag.deca.tree;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.tools.IndentPrintStream;
-import fr.ensimag.ima.pseudocode.DAddr;
-import fr.ensimag.ima.pseudocode.Label;
-import fr.ensimag.ima.pseudocode.LabelOperand;
-import fr.ensimag.ima.pseudocode.Line;
-import fr.ensimag.ima.pseudocode.Register;
-import fr.ensimag.ima.pseudocode.RegisterOffset;
-import fr.ensimag.ima.pseudocode.instructions.ADDSP;
-import fr.ensimag.ima.pseudocode.instructions.BOV;
-import fr.ensimag.ima.pseudocode.instructions.ERROR;
-import fr.ensimag.ima.pseudocode.instructions.LOAD;
-import fr.ensimag.ima.pseudocode.instructions.POP;
-import fr.ensimag.ima.pseudocode.instructions.PUSH;
-import fr.ensimag.ima.pseudocode.instructions.RTS;
-import fr.ensimag.ima.pseudocode.instructions.STORE;
-import fr.ensimag.ima.pseudocode.instructions.SUBSP;
-import fr.ensimag.ima.pseudocode.instructions.TSTO;
-import fr.ensimag.ima.pseudocode.instructions.WNL;
-import fr.ensimag.ima.pseudocode.instructions.WSTR;
-
+import fr.ensimag.ima.pseudocode.*;
+import fr.ensimag.ima.pseudocode.instructions.*;
 import org.apache.commons.lang.Validate;
 import org.apache.log4j.Logger;
 
@@ -129,7 +112,7 @@ public class DeclMethod extends AbstractDeclMethod {
     	compiler.addComment("instructions");
     	n = body.codeGenBody(compiler, labelFin);
     	// Fin : on verifie quil y a eu return si ce nest pas une void fonction
-    	if (!type.getName().getName().equals("void")) {
+    	if (!type.getType().isVoid()) {
     		compiler.addInstruction(new WSTR("Erreur : sortie de la methode "+className+"."+name.getName().getName()+" sans return"));
     		compiler.addInstruction(new WNL());
     		compiler.addInstruction(new ERROR());

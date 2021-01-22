@@ -509,7 +509,7 @@ public class DecacCompiler implements Callable<Boolean> {
 
     private DeclClass object;
 
-    public DeclClass initObject() {
+    public DeclClass initObject() throws ContextualError {
         ClassDefinition objectDef = (ClassDefinition)env_types.get(symbols.create("Object"));
         objectDef.setIsClassObject(true);
         MethodDefinition equalDef = (MethodDefinition) objectDef.getMembers().get(symbols.create("equals"));
@@ -523,6 +523,7 @@ public class DecacCompiler implements Callable<Boolean> {
         objectMethod.setLocation(Location.BUILTIN);
 
         Identifier booleanIdent = new Identifier(symbols.create("boolean"));
+        booleanIdent.verifyType(this);
         booleanIdent.setLocation(Location.BUILTIN);
         booleanIdent.setDefinition(env_types.get(symbols.create("boolean")));
         Identifier equalsIdent = new Identifier(symbols.create("equals"));
@@ -532,6 +533,7 @@ public class DecacCompiler implements Callable<Boolean> {
         ListParam listParamEquals = new ListParam();
         listParamEquals.setLocation(Location.BUILTIN);
         Identifier typeParamIdent = new Identifier(symbols.create("Object"));
+        typeParamIdent.verifyType(this);
         typeParamIdent.setLocation(Location.BUILTIN);
         typeParamIdent.setDefinition(objectDef);
         Identifier nameParamIdent = new Identifier(symbols.create("other"));

@@ -1,5 +1,5 @@
-// test l'inclusion de fichier
-// sortie: token filename
+// Description: test l'inclusion de fichier
+// Résultat: token filename (à comparer avec le fichier .ok)
 
 
 #include "IfthenElse.deca"

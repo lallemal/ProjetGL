@@ -267,9 +267,9 @@
                         </goals>
                     </execution>
                      <execution>
-                        <id>lexer-so-comp.sh</id>
+                        <id>lexer-so</id>
                         <configuration>
-                            <executable>./src/test/script/lexer-so-comp.sh</executable>
+                            <executable>./src/test/script/lexer-so.sh</executable>
                         </configuration>
                         <phase>test</phase>
                         <goals>
@@ -278,9 +278,9 @@
                     </execution>
  
                      <execution>
-                        <id>parser-so-comp.sh</id>
+                        <id>parser-so</id>
                         <configuration>
-                            <executable>./src/test/script/parser-so-comp.sh</executable>
+                            <executable>./src/test/script/parser-so.sh</executable>
                         </configuration>
                         <phase>test</phase>
                         <goals>
@@ -318,9 +318,9 @@
                         </goals>
                     </execution>
                     <execution>
-                        <id>gencode-so</id>
+                        <id>gencode-so-valide</id>
                         <configuration>
-                            <executable>./src/test/script/gencode-so.sh</executable>
+                            <executable>./src/test/script/gencode-so-valide.sh</executable>
                         </configuration>
                         <phase>test</phase>
                         <goals>
@@ -328,9 +328,9 @@
                         </goals>
                     </execution>
                     <execution>
-                        <id>gencode-so-err</id>
+                        <id>gencode-so-invalide</id>
                         <configuration>
-                            <executable>./src/test/script/gencode-so-err.sh</executable>
+                            <executable>./src/test/script/gencode-so-invalide.sh</executable>
 						</configuration>
                         <phase>test</phase>
                         <goals>
@@ -348,9 +348,9 @@
                         </goals>
                     </execution>
                     <execution>
-                        <id>codegen-objet</id>
+                        <id>gencode-objet</id>
                         <configuration>
-                            <executable>./src/test/script/codegen-objet.sh</executable>
+                            <executable>./src/test/script/gencode-objet.sh</executable>
                         </configuration>
                         <phase>test</phase>
                         <goals>

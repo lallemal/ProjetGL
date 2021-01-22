@@ -68,6 +68,7 @@ public class Assign extends AbstractBinaryExpr {
     		Selection select = (Selection) this.getLeftOperand();
 	        int index = select.getIdent().getFieldDefinition().getIndex()+1;
 	        if (select.getExpr().isThis()) {
+	        	compiler.getLabelError().setErrorDereferencementNull(true);
 	        	compiler.setRegistreUsed(3);
 	        	compiler.addInstruction(new LOAD(new RegisterOffset(-2, Register.LB), Register.getR(3)));
 	        	compiler.addInstruction(new CMP(new NullOperand(), Register.getR(3)));

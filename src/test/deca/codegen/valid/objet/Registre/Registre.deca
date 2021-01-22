@@ -1,0 +1,27 @@
+// Description :
+//    Test génération de code lorsqu'on essaie d'utiliser plus de registre qu'il n'y en a 
+//
+// Resultats decac:
+// Resultat ima: 
+
+
+class A{
+    
+    int x = 1;
+
+    void TestMultipleRegister() {
+        int a, b, c, d, e, f;
+        a = 1;
+        b = 2;
+        c = 3;
+        d = 4;
+        e = 5;
+        f = (2*(b+e-(d*d+1)*1)-(b*b*2-e-b))*c+a/3 + ((a*a*a)*(b/c)+(2*(b+e-(d*d+1)*1)-(b*b*2-e-b)));
+        println(f);
+    }   
+}
+{
+    A a = new A();
+    a.TestMultipleRegister();
+}
+

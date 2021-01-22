@@ -28,3 +28,8 @@ fin.A.setX:
 	RTS
 ");
 }
+{
+    A a = new A();
+    a.setX(1);
+    print(a.x);
+}

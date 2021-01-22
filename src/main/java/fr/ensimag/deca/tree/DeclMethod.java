@@ -127,7 +127,10 @@ public class DeclMethod extends AbstractDeclMethod {
     	}
     
     	compiler.setKGB(kGB); // restauration du kGB
-    	compiler.addInstruction(new SUBSP(body.getVar().size()));
+    	if (body.getVar().size() > 0) {
+    		compiler.addInstruction(new SUBSP(body.getVar().size()));
+    	}
+    	
     	compiler.addInstruction(new RTS());
     }
 

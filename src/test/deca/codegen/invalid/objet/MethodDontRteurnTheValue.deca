@@ -1,0 +1,9 @@
+class A{
+     int main(){
+     }
+}
+
+{
+	A a = new A();
+	int x = a.main();
+}

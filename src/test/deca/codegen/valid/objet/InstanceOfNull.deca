@@ -1,0 +1,14 @@
+// Description :
+//    test de génération de code instanceof null
+//
+// Resultats deca: 
+// Resultats ima : 
+
+
+class A{
+}
+{
+    if (null instanceof A){
+        println("InstanceOf marche avec null");
+    }
+}

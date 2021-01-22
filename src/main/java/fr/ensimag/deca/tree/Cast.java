@@ -56,22 +56,17 @@ public class Cast extends AbstractExpr{
 				expression.codeExp(compiler, n);
 			}
 		} else if (T.isClass()) {
-			if (expression.getType().isClass()) {
-				String label = "castSucceed_";
-		        String pos = getLocation().getLine() + "_" + getLocation().getPositionInLine();
-				Label castSucceed = new Label(label+pos);
+			if (expression.getType().isNull()) {
 				expression.codeExp(compiler, n);
-				// cas 1 expr est null -> cast tjrs possible
-				compiler.addInstruction(new CMP(new NullOperand(), Register.getR(n)));
-				compiler.addInstruction(new BEQ(castSucceed));
-				// sinon si instanceof vrai alors on branche
+			} else if (expression.getType().isClass()) {
 				
-				//fin
-				compiler.addLabel(castSucceed);
-				// ?? Doit on changer sur le tas le pointeur vers la table des methodes ? 
-				compiler.addInstruction(new LEA(ident.getClassDefinition().getAddress(), Register.R0));
-				compiler.addInstruction(new STORE(Register.R0, new RegisterOffset(0, Register.getR(n))));
-				// ?? Doit on changer dans le code java le type de expr si cest un identifier ? 
+				InstanceOf testInstanceOf = new InstanceOf(expression, ident);
+				compiler.getLabelError().setErrorCastFail(true);
+				testInstanceOf.setLocation(getLocation());
+				testInstanceOf.codeExp(compiler, n);
+				compiler.addInstruction(new CMP(0, Register.getR(n)));
+				compiler.addInstruction(new BEQ(compiler.getLabelError().getLabelCastFail()));
+				expression.codeExp(compiler, n);
 			}
 		}
 	}

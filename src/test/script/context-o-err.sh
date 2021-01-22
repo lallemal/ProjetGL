@@ -3,26 +3,19 @@
 # Auteur : gl40
 # Version initiale : 01/01/2021
 
-# Base pour un script de test de la lexicographie.
-# On teste un fichier valide et un fichier invalide.
-# Il est conseillé de garder ce fichier tel quel, et de créer de
-# nouveaux scripts (en s'inspirant si besoin de ceux fournis).
+# Base pour un script de test de context de objet
+# Test pour les fichiers invalides qu'il y a une erreur lors de test_context et 
+# vérifie que c'est l'erreur attendue (disponible en première ligne)
+# Test pour les fichiers valides qu'aucune erreur lors de test_context
+# Test pour les fichiers de codegen qu'aucune erreur lors du test_context
 
 
-# On se place dans le répertoire du projet (quel que soit le
-# répertoire d'où est lancé le script) :
 cd "$(dirname "$0")"/../../.. || exit 1
 
 PATH=./src/test/script/launchers:"$PATH"
 INVALID_CONTEXT=src/test/deca/context/invalid/objet
 VALID_CONTEXT=src/test/deca/context/valid/objet
 VALID_CODEGEN=src/test/deca/codegen/valid/objet
-
-# /!\ test valide lexicalement, mais invalide pour l'étape A.
-# test_lex peut au choix afficher les messages sur la sortie standard
-# (1) ou sortie d'erreur (2). On redirige la sortie d'erreur sur la
-# sortie standard pour accepter les deux (2>&1)
-
 
 
 nb=$(ls -l $INVALID_CONTEXT/*.deca | wc -l)

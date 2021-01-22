@@ -1,0 +1,43 @@
+// Description :
+//    test de génération de code pour le cast bool et int/float
+//
+// Resultats deca: 
+// Resultats ima : 
+
+
+class A{
+    float a = 1.0;
+    int b = 1;
+    boolean c = true;
+    
+    boolean castC(){
+        return (boolean)(c);
+    }
+
+    int castB(){
+        return (int)(b);
+    }
+    
+    float castA(){
+        return (float)(a);
+    }
+}
+{
+    A objet = new A();
+    float a = 1.0;
+    int b = 1;
+    boolean c = true;
+    if ((boolean)(c)){
+        println("cast boolean dans le main réussi");
+    }
+    println("cast float dans le main: ", (float)(a));
+    println("cast int dans le main: ", (int)(b));
+    
+    if (objet.castC()){
+        println("cast boolean dans la méthode réussi");
+    }
+    println("cast int dans le main: ", objet.castB());
+    println("cast float dans le main: ", objet.castA());
+    
+
+}

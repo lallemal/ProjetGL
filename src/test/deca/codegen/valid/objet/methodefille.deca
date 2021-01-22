@@ -1,0 +1,35 @@
+//
+//Descritpion: passage methode fille
+//Restultat: OK
+class A{
+        int x;
+        void setX(){
+              this.x = 1;
+                        
+        }
+        
+}
+
+
+class B extends A{
+        int y;
+        void setY(){
+             this.y = 1;
+        }
+}
+
+class C {
+        A a;
+        void setY(A b){
+            this.a = b;
+             print("OK");
+        }
+        A getA(){
+            return this.a;
+        }
+}
+{
+B b = new B();
+C c = new C();
+c.setY(b);
+}

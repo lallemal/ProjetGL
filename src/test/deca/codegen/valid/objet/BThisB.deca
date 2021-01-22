@@ -5,6 +5,8 @@
 // Resultat ima: 
 // avec this: 1
 // sans this: 1
+// true
+// true
 
 
 class A{
@@ -20,17 +22,18 @@ class A{
         return x;
     }
 
-    boolean Test(){
+    void Test(){
         if (b){
-            if (this.b){
-                return b;
-            }   
-            else{
-                return !b;
-            }
+            println("true");
         }
         else{
-            return !b;
+            println("false");
+        }
+        if (this.b){
+            println("true");
+        }
+        else{
+            println("false");
         }
     }
 
@@ -39,7 +42,5 @@ class A{
     A a = new A();
     println("avec this: ", a.getThis());
     println("sans this: ", a.getNoThis());
-    if (a.Test()){    
-        println("test passé");
-    }
+    a.Test();
 }

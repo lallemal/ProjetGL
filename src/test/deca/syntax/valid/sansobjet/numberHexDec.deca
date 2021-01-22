@@ -1,6 +1,5 @@
-
 //Description: Test nombre hexa et decimal
-//Resultats: OK
+//Resultats: OK (à comparer avec le fichier .ok)
 
 {
     float f = 0.3232E12f;

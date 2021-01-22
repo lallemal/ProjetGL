@@ -21,8 +21,8 @@ class B extends A{
 }
 {
     A a = new A();
-    A b = new B();
-    a = (A)(a);
-    b = (A)(b);
+    B b = new B();
+    A c = (A)(b);
+    
 }
 

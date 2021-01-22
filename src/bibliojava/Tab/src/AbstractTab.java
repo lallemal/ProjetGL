@@ -153,7 +153,7 @@ class TabInt extends AbstractTab{
         }
     	return;
     }
-    // tableau = deux tableau trie, modifie le tableau directement pour fusionner evite maximum perte de memoire
+  // tableau = deux tableau trie, modifie le tableau directement pour fusionner evite maximum perte de memoire
     protected void fusion(int deb1, int fin1, int fin2) {
     	int deb2 = fin1 + 1;
     	// on fait une copie du tableau1 au gauche 
@@ -324,9 +324,66 @@ class TabFloat extends AbstractTab{
     		}
     	}
     	System.out.print("]");
-    	
     	return;
     }
+    
+    void mergeSortAscending(){
+    	triFusion(0, this.size - 1);
+    	return;
+    }
+	
+    protected void triFusion(int deb, int fin) {
+    	if (deb!=fin){
+    		int milieu=(fin+deb)/2;
+    		triFusion(deb,milieu);
+    		triFusion(milieu+1,fin);
+    		fusion(deb,milieu,fin);
+        }
+    	return;
+    }
+  // tableau = deux tableau trie, modifie le tableau directement pour fusionner evite maximum perte de memoire
+    protected void fusion(int deb1, int fin1, int fin2) {
+    	int deb2 = fin1 + 1;
+    	// on fait une copie du tableau1 au gauche 
+    	// car si tout tab1 > tab2, on recopie tab2 et on ecrase donc tab1, au contraire, on ne change pas l'ordre
+    	// d'ou une copie de tab1
+    	float[] copietab1 = new float[fin1 - deb1 + 1];
+    	int i = deb1;
+    	
+    	while(i <= fin1) {
+    		copietab1[i - deb1] = this.tab[i];
+    		i = i + 1;
+    	}
+    	
+    	int compt1 = deb1;
+    	int compt2 = deb2;
+    	int j = deb1;
+    	// parcours des deux tableaux
+    	while(j <= fin2) {
+    		if(compt1 == deb2) {
+    			// tous les elements de tab1 ont été classe donc tous classe
+    			// on sort de la boucle
+    			j = fin2;
+    		}
+    		// tous les elements de tab2 ont ete classe, on rajoute les element de tab1
+    		else if(compt2 == (fin2 + 1)){
+    			this.tab[j] = copietab1[compt1 - deb1];
+    			compt1 = compt1 + 1;
+    		}
+    		// utilise copie car peut etre deja ecrase ici tab1 < tab2, on ajoute tab1 
+    		else if (copietab1[compt1 - deb1] < this.tab[compt2]){
+    			this.tab[j] = copietab1[compt1 - deb1];
+    			compt1 = compt1 + 1;
+    		}
+    		// ajoute element du second tableau
+    		else {
+    			this.tab[j] = this.tab[compt2];
+    			compt2 = compt2 + 1;
+    		}
+    		j = j + 1;
+    	}
+    	return;
+    }	
 
 }
 

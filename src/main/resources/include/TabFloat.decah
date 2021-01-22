@@ -1,0 +1,11 @@
+class TabFloat extends AbstractTab{
+
+    float[] tab;
+    
+    // modifier TabInt modifie aussi le tableau si declare explicitement
+    void setInit(float[] tab, int size){
+    	this.tab = tab;
+        this.size = size;
+    }
+
+}

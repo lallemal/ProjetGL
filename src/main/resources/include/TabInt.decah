@@ -1,0 +1,18 @@
+class TabInt extends AbstractTab{
+    int[] tab;
+    // modifier TabInt modifie aussi le tableau si declare explicitement
+    void setInit(int[] tab, int size){
+        this.size = size;
+        this.tab = tab;
+    }
+
+    void setInitCopy(int[] tab, int size){
+        this.tab = new int[size];
+        int i = 0;
+        while(i < size){
+            this.tab[i] = tab[i];
+            i = i + 1;
+        }
+        this.size = size;
+    }
+}

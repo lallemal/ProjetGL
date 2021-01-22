@@ -1,0 +1,7 @@
+class AbstractTab{
+    int size;
+    int getsize(){
+        return size;
+    }
+}
+

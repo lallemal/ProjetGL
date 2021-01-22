@@ -48,6 +48,21 @@ public class While extends AbstractInst {
         compiler.addLabel(condLabel);
         condition.codeGenBranch(compiler, true, debutLabel);
     }
+    
+    @Override
+    protected void codeGenInst(DecacCompiler compiler, Label labelFin) {
+        compiler.addComment("While instruction");
+        String label = "while_";
+        String pos = getLocation().getLine() + "_" + getLocation().getPositionInLine();
+        Label condLabel = new Label(label + "Cond." + pos);
+        Label debutLabel = new Label(label + "Debut." + pos);
+        compiler.addInstruction(new BRA(condLabel));
+        compiler.addLabel(debutLabel);
+        body.codeGenListInst(compiler, labelFin);
+        compiler.addLabel(condLabel);
+        condition.codeGenBranch(compiler, true, debutLabel);
+    }
+    
 
     @Override
     protected void verifyInst(DecacCompiler compiler, EnvironmentExp localEnv,

@@ -75,16 +75,27 @@ fi
 
 
 # Test de registres avec ima
-echo "------ Démarrage des tests valide avec changement du nombre de regsitre ima "
+echo "------ Démarrage des tests valide avec changement du nombre de registre ima "
 if ima src/test/deca/codegen/valid/objet/Registre/Registre.ass 2>&1 | grep -q -e "$i:"
 then
-  echo "Echec inattendu pour decac pour Registre.ass"
+  echo "Echec inattendu pour ima pour Registre.ass"
 else
   echo "OK"
 fi
 
+# Test de registres comparaison avec ima
+echo "------ Démarrage des tests valide avec changement du nombre de registre ima "
+resultat=$(ima src/test/deca/codegen/valid/objet/Registre/Registre.ass)
+if [ "$(less src/test/deca/codegen/valid/objet/Registre/Registre.ass.ok)" = "$resultat" ]; then
+        echo "OK"
+  else
+        echo "Résultat innatendu pour Registre.ass, le résultat:"
+        echo "$(resultat)"
+        echo "ce qui était attendu:"
+        echo "$(less src/test/deca/codegen/valid/objet/Registre/Registre.ass.ok)"
+        exit 1
+  fi
 
-cd "$(dirname "$0")"/../../.. || exit 1
 
 #On test que l'erreur des fichier invalide soit celle attendu (disponible en première ligne)
 nb=$(ls -l src/test/deca/codegen/invalid/objet/Error/*.deca | wc -l)

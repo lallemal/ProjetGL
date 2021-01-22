@@ -189,6 +189,19 @@ else
   echo "OK"
 fi
 
+# Test de registres comparaison avec ima
+echo "------ Démarrage des tests valide avec changement du nombre de registre ima "
+resultat=$(ima src/test/deca/codegen/valid/objet/Registre/Registre.ass)
+if [ "$(less src/test/deca/codegen/valid/objet/Registre/Registre.ass.ok)" = "$resultat" ]; then
+        echo "OK"
+  else
+        echo "Résultat innatendu pour Registre.ass, le résultat:"
+        echo "$(resultat)"
+        echo "ce qui était attendu:"
+        echo "$(less src/test/deca/codegen/valid/objet/Registre/Registre.ass.ok)"
+        exit 1
+  fi
+
 
 cd "$(dirname "$0")"/../../.. || exit 1
 

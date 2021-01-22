@@ -1,0 +1,17 @@
+`> [3, 0] Program
+   +> ListDeclClass [List with 0 elements]
+   `> [3, 0] Main
+      +> ListDeclVar [List with 0 elements]
+      `> ListInst [List with 4 elements]
+         []> [4, 8] Print
+         ||  `> [4, 14] ListExpr [List with 1 elements]
+         ||     []> [4, 14] StringLiteral (Hello)
+         []> [5, 8] Println
+         ||  `> [5, 16] ListExpr [List with 1 elements]
+         ||     []> [5, 16] StringLiteral (Are)
+         []> [6, 8] Print
+         ||  `> [6, 14] ListExpr [List with 1 elements]
+         ||     []> [6, 14] StringLiteral (You)
+         []> [7, 8] Println
+             `> [7, 16] ListExpr [List with 1 elements]
+                []> [7, 16] StringLiteral (Ok?)

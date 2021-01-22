@@ -3,19 +3,20 @@
 # Auteur : gl40
 # Version initiale : 01/01/2021
 
-# Base pour un script de test de la lexicographie.
-# On teste un fichier valide et un fichier invalide.
-# Il est conseillé de garder ce fichier tel quel, et de créer de
-# nouveaux scripts (en s'inspirant si besoin de ceux fournis).
+# Script de test pour la syntaxe objet.
+# On test tout d'abord que test_synt ne produise pas d'erreur pour les fichiers valides
+# On compare ensuite le résultat de test_synt avec un modèle préetablie et vérifié
+# On regarde que la bonne erreur est levée dans les tests invalides (l'erreur attendu
+# est disponible en première ligne du fichier invalide)
 
 
-# On se place dans le répertoire du projet (quel que soit le
-# répertoire d'où est lancé le script) :
+
 cd "$(dirname "$0")"/../../.. || exit 1
 
 PATH=./src/test/script/launchers:"$PATH"
 
 
+# Test pas d'erreur lors de test_synt pour les fichiers valides
 nb=$(ls -l | wc -l)
 echo "------- Démarrage des tests valide $(($nb-1))"
 
@@ -31,6 +32,7 @@ do
 done
 
 
+# Test l'erreur des tests invalides
 nb=$(ls -l | wc -l)
 echo "------- Démarrage des tests invalide $(($nb-1))"
 

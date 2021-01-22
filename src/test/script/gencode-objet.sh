@@ -6,13 +6,22 @@
 # Base pour un script de test de la génération de code.
 # On teste des fichiers valides et des fichiers invalides.
 
+# Script de test pour la génération de code pour l'objet.
+# On test tout d'abord que decac ne produise pas d'erreur pour les fichiers valides
+# On fait de même avec ima et les fichiers valides
+# On compare ensuite le résultat de ima avec un modèle préetablie et vérifié
+# On test certain fichier avec moins de registres (decac -r)
+# On regarde que la bonne erreur est levée dans les tests invalides avec ima(l'erreur attendu
+# est disponible en première ligne du fichier invalide)
+# On test les débordements de pile
+# On test les débordements de tas
 
-# On se place dans le répertoire du projet (quel que soit le
-# répertoire d'où est lancé le script) :
+
 cd "$(dirname "$0")"/../../.. || exit 1
 
 PATH=./src/test/script/launchers:"$PATH"
 
+# Test pas d'erreur avec decac et fichier valide
 nb=$(ls -l src/test/deca/codegen/valid/objet/*.deca | wc -l)
 echo "------ Démarrage des tests valide decac ($((nb)))"
 for i in  src/test/deca/codegen/valid/objet/*.deca
@@ -25,6 +34,7 @@ do
   fi
 done
 
+# Test pas d'erreur avec ima et fichier valide
 echo "------ Démarrage des tests valide ima ($((nb)))"
 for i in  src/test/deca/codegen/valid/objet/*.ass
 do
@@ -37,6 +47,7 @@ do
 
 done
 
+# Test comparaison des résultat ima avec les modèles (.decac.ok)
 echo "------ Démarrage des tests valide ima comparaison avec les modèles OK($((nb)))"
 for i in  src/test/deca/codegen/valid/objet/*.ass
 do
@@ -53,6 +64,7 @@ do
 
 done
 
+# Test de registres avec decac
 echo "------ Démarrage des tests valide avec changement du nombre de regsitre decac "
 if decac -r 4 src/test/deca/codegen/valid/objet/Registre/Registre.deca 2>&1 | grep -q -e "$i:"
 then
@@ -61,6 +73,8 @@ else
   echo "OK"
 fi
 
+
+# Test de registres avec ima
 echo "------ Démarrage des tests valide avec changement du nombre de regsitre ima "
 if ima src/test/deca/codegen/valid/objet/Registre/Registre.ass 2>&1 | grep -q -e "$i:"
 then
@@ -72,25 +86,7 @@ fi
 
 cd "$(dirname "$0")"/../../.. || exit 1
 
-nb=$(ls -l src/test/deca/codegen/invalid/objet/*.deca | wc -l)
-echo "------- Démarrage des tests invalide deca ($((nb)))"
-for i in src/test/deca/codegen/invalid/objet/*.deca
-do
-  error=$(head $i -n 1 | sed 's/\/\///')
-  if decac $i 2>&1 | grep -q -e "$error"
-  then
-    echo "Echec attendu pour decac"
-  elif decac $i 2>&1 | grep -q -e "$i:"
-  then
-    echo "Echec inattendu pour decac : $i"
-    exit 1
-  else
-    echo "Succès inattendu pour decac : $i"
-    exit 1
-  fi
-
-done
-
+#On test que l'erreur des fichier invalide soit celle attendu (disponible en première ligne)
 nb=$(ls -l src/test/deca/codegen/invalid/objet/Error/*.deca | wc -l)
 echo "------- Démarrage des tests invalide ima ($((nb)))"
 for i in src/test/deca/codegen/invalid/objet/Error/*.deca
@@ -111,6 +107,7 @@ do
   fi
 done
 
+# On fait les tests de débordement de pile
 nb=$(ls -l src/test/deca/codegen/invalid/objet/debordementPile/*.deca | wc -l)
 echo "------- Démarrage des test de débordement de pile decac ($((nb)))"
 for i in src/test/deca/codegen/invalid/objet/debordementPile/*.deca
@@ -139,6 +136,7 @@ do
 fi
 done
 
+# On fait les tests de débordement de tas
 nb=$(ls -l src/test/deca/codegen/invalid/objet/debordementTas/*.deca | wc -l)
 echo "------- Démarrage des test de débordement de tas decac ($((nb)))"
 for i in src/test/deca/codegen/invalid/objet/debordementTas/*.deca

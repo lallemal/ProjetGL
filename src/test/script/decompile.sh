@@ -9,8 +9,7 @@
 # Ici on a pas de test invalide car les tests sont déjà déclarés valide ou
 # invalide par le lexer et le parser.
 
-# On se place dans le répertoire du projet (quel que soit le
-# répertoire d'où est lancé le script) :
+
 cd "$(dirname "$0")"/../../.. || exit 1
 
 PATH=./src/test/script/launchers:"$PATH"

@@ -7,8 +7,8 @@ public class TestInversePuissance {
 		// test vecteur propre
 		m2.setInitFloat(mat2, 3, 3);
 		//m2.sumMat(m2).print(); 
-		m2.PuissanceInverse(0);
-		//m2.PuissanceInverse(-2).print();
+		//System.out.println(m2.PuissanceInverse(0));
+		System.out.println(m2.PuissanceInverse(-2.5f));
 		System.out.println("AX=");
 		//m2.prodMat(vect).print();
 		System.out.println("lX=");

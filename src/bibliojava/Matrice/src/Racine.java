@@ -14,7 +14,7 @@ public class Racine {
 		float xinit = 1;
 		int i = 0;
 		float y;
-		float seuil = (float)1.0E-4;
+		float seuil =(float) 1.0E-4;
 			// calcul final
 		y = (xinit + a/xinit)/2;
 		while(this.absolue(y - xinit) > seuil) {

@@ -2,7 +2,7 @@
 //    Test génération de code while et return
 //
 // Resultats decac:
-// Resultat ima: 
+// Resultat ima: 0
 
 class A {
     int x = 0;

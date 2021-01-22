@@ -269,7 +269,7 @@ list_expr returns[ListExpr tree]
     	setLocation($tree, $e1.start);
         }
        (COMMA e2=expr {
-       	$tree.add($e2.tree);
+            $tree.add($e2.tree);
         }
        )* )?
 //     | l1=list_element{ // Definition de array explicite 
@@ -308,7 +308,7 @@ list_hook_empty_expr returns[ListExpr tree]
        (LHOOK {
        	    element = new NoElement();
        }
-       	(e2=expr{
+            (e2=expr{
        		element = $e2.tree;
        	
         })?{
@@ -582,7 +582,7 @@ new_object returns[AbstractExpr tree]
             $tree = new New($ident.tree);
             setLocation($tree, $NEW); 
         }
-       | NEW i=ident  l=list_hook_empty_expr {
+       | NEW i=ident  l=list_hook_expr {
        		assert($i.tree != null);
        		assert($l.tree != null);
        		$tree = new NewArray($i.tree, $l.tree);

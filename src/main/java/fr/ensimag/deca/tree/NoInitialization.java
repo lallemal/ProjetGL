@@ -1,16 +1,15 @@
 package fr.ensimag.deca.tree;
 
-import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
+import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.DAddr;
 import fr.ensimag.ima.pseudocode.NullOperand;
 import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
-import fr.ensimag.ima.pseudocode.instructions.STORE;
 
 import java.io.PrintStream;
 
@@ -37,17 +36,14 @@ public class NoInitialization extends AbstractInitialization {
     
     @Override
     protected void codeGenField(DecacCompiler compiler, AbstractIdentifier type) {
-    	switch (type.getName().getName()) {
-    	case "int":
-    	case "boolean":
-    		compiler.addInstruction(new LOAD(0, Register.R0));
-    		break;
-    	case "float":
-    		compiler.addInstruction(new LOAD((float) 0.0, Register.R0));
-    		break;
-    	default:
+        Type typeField = type.getType();
+        if (typeField.isBoolean()) {
+            compiler.addInstruction(new LOAD(0, Register.R0));
+        }
+        else if (typeField.isFloat()) {
+            compiler.addInstruction(new LOAD((float) 0.0, Register.R0));
+        } else {
     		compiler.addInstruction(new LOAD(new NullOperand(), Register.R0));
-    		break;
     	}
     }
     

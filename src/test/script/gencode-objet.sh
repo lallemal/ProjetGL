@@ -54,11 +54,13 @@ do
   resultat=$(ima $i)
     if [ "$(less $i.ok)" = "$resultat" ]; then
          echo "OK"
+         rm $i
      else
         echo "Résultat innatendu pour $i, le résultat:"
         echo "$resultat"
         echo "ce qui était attendu:"
-        echo "$(less $i.ok)"
+        echo "$(less $i.ok)"    
+        rm $i
         exit 1
     fi
 
@@ -75,16 +77,29 @@ fi
 
 
 # Test de registres avec ima
-echo "------ Démarrage des tests valide avec changement du nombre de regsitre ima "
+echo "------ Démarrage des tests valide avec changement du nombre de registre ima "
 if ima src/test/deca/codegen/valid/objet/Registre/Registre.ass 2>&1 | grep -q -e "$i:"
 then
-  echo "Echec inattendu pour decac pour Registre.ass"
+  echo "Echec inattendu pour ima pour Registre.ass"
 else
   echo "OK"
 fi
 
+# Test de registres comparaison avec ima
+echo "------ Démarrage des tests valide avec changement du nombre de registre ima "
+resultat=$(ima src/test/deca/codegen/valid/objet/Registre/Registre.ass)
+if [ "$(less src/test/deca/codegen/valid/objet/Registre/Registre.ass.ok)" = "$resultat" ]; then
+        echo "OK"
+        rm src/test/deca/codegen/valid/objet/Registre/Registre.ass
+  else
+        echo "Résultat innatendu pour Registre.ass, le résultat:"
+        echo "$(resultat)"
+        echo "ce qui était attendu:"
+        echo "$(less src/test/deca/codegen/valid/objet/Registre/Registre.ass.ok)"
+        rm src/test/deca/codegen/valid/objet/Registre/Registre.ass
+        exit 1
+  fi
 
-cd "$(dirname "$0")"/../../.. || exit 1
 
 #On test que l'erreur des fichier invalide soit celle attendu (disponible en première ligne)
 nb=$(ls -l src/test/deca/codegen/invalid/objet/Error/*.deca | wc -l)
@@ -98,11 +113,13 @@ do
   resultat=$(ima $i)
   if [ "$(less $i.ok)" = "$resultat" ]; then
         echo "OK"
+        rm $i
   else
         echo "Résultat innatendu pour $i, le résultat:"
         echo "$resultat"
         echo "ce qui était attendu:"
         echo "$(less $i.ok)"
+        rm $i
         exit 1
   fi
 done
@@ -126,12 +143,14 @@ do
     resultat=$(ima -p 003 $i)
     if [ "$(cat src/test/deca/codegen/invalid/objet/debordementPile/MessageErreur.ok)" = "$resultat" ]; then
         echo "OK"
+        rm $i
     else
         echo "$i KO ->"
         echo "Résultat innatendu, le résultat:"
         echo "$resultat"
         echo "ce qui était attendu:"
         echo "$(cat src/test/deca/codegen/invalid/objet/debordementPile/MessageErreur.ok)"
+        rm $i
         exit 1
 fi
 done
@@ -155,14 +174,18 @@ do
 resultat=$(ima -t 003 $i)
 if [ "$(cat src/test/deca/codegen/invalid/objet/debordementTas/MessageErreur.ok)" = "$resultat" ]; then
     echo "OK"
+    rm $i
 else
     echo "$i KO ->"
     echo "Résultat innatendu, le résultat:"
     echo "$resultat"
     echo "ce qui était attendu:"
     echo "$(cat src/test/deca/codegen/invalid/objet/debordementTas/MessageErreur.ok)"
+    rm $i
     exit 1
 fi
 done
+
+
 
 

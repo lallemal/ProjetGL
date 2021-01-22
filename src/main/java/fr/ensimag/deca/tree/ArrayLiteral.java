@@ -30,11 +30,12 @@ public class ArrayLiteral extends AbstractExpr{
 		initArray.codeExp(compiler, n);
 		
 		LinkedList<Integer> coords = new LinkedList<Integer>();
-		initValueRec(n, coords, compiler);
+		LinkedList<Integer> dims = new LinkedList<Integer>();
+		initValueRec(n, coords, dims, compiler);
 		
 	}
 	
-	protected void initValueRec(int n, LinkedList<Integer> coords, DecacCompiler compiler) {
+	protected void initValueRec(int n, LinkedList<Integer> coords, LinkedList<Integer> dims, DecacCompiler compiler) {
 		
 		if (elements.isEmpty()) {
 			return;
@@ -43,19 +44,23 @@ public class ArrayLiteral extends AbstractExpr{
 			for (int i=0; i<elements.size(); i++) {
 				ArrayLiteral subArray = (ArrayLiteral) elements.getList().get(i); // Cast succeed by construction of elements
 				LinkedList<Integer> coordsExtended = new LinkedList<Integer>(coords);
+				LinkedList<Integer> dimsExtended = new LinkedList<Integer>(dims);
 				coordsExtended.add(i);
-				subArray.initValueRec(n, coordsExtended, compiler);
+				dimsExtended.add(elements.size());
+				subArray.initValueRec(n, coordsExtended, dimsExtended, compiler);
 			}
 		} else {
 			for (int i=0; i<elements.size(); i++) {
 				LinkedList<Integer> coordsExtended = new LinkedList<Integer>(coords);
+				LinkedList<Integer> dimsExtended = new LinkedList<Integer>(dims);
 				coordsExtended.add(i);
-				initValue(n, coordsExtended, compiler, i);
+				dimsExtended.add(elements.size());
+				initValue(n, coordsExtended, dimsExtended, compiler, i);
 			}
 		}
 	}
 	
-	protected void initValue(int n, LinkedList<Integer> coords, DecacCompiler compiler, int lastCoord) {
+	protected void initValue(int n, LinkedList<Integer> coords, LinkedList<Integer> dims, DecacCompiler compiler, int lastCoord) {
 		int s = 0;
 		int m = 1;
 		int coord;
@@ -63,9 +68,10 @@ public class ArrayLiteral extends AbstractExpr{
 			coord = coords.get(i);
 			coord = coord * m;
 			s += coord;
-			m = m * elements.size();
+			m = m * dims.get(i);
 		}
 		elements.getList().get(lastCoord).codeExp(compiler, n+1);
+		compiler.setRegistreUsed(n+1);
 		compiler.addInstruction(new STORE(Register.getR(n+1), new RegisterOffset(s+1, Register.getR(n))));
 	}
 	

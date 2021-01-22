@@ -276,11 +276,20 @@
                             <goal>exec</goal>
                         </goals>
                     </execution>
- 
                      <execution>
                         <id>parser-so</id>
                         <configuration>
                             <executable>./src/test/script/parser-so.sh</executable>
+                        </configuration>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                    </execution>
+                     <execution>
+                        <id>parser-objet</id>
+                        <configuration>
+                            <executable>./src/test/script/parser-objet.sh</executable>
                         </configuration>
                         <phase>test</phase>
                         <goals>
@@ -317,6 +326,26 @@
                             <goal>exec</goal>
                         </goals>
                     </execution>
+                     <execution>
+                        <id>context-o-err</id>
+                        <configuration>
+                            <executable>./src/test/script/context-o-err.sh</executable>
+                        </configuration>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                    </execution>
+                     <execution>
+                        <id>context-ext-err</id>
+                        <configuration>
+                            <executable>./src/test/script/context-ext-err.sh</executable>
+                        </configuration>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                    </execution>
                     <execution>
                         <id>gencode-so-valide</id>
                         <configuration>
@@ -338,20 +367,20 @@
                         </goals>
                     </execution>
                     <execution>
-                        <id>parser-objet</id>
+                        <id>gencode-objet</id>
                         <configuration>
-                            <executable>./src/test/script/parser-objet.sh</executable>
+                            <executable>./src/test/script/gencode-objet.sh</executable>
                         </configuration>
                         <phase>test</phase>
                         <goals>
                             <goal>exec</goal>
                         </goals>
                     </execution>
-                    <execution>
-                        <id>gencode-objet</id>
+                     <execution>
+                        <id>codegen-less-register</id>
                         <configuration>
-                            <executable>./src/test/script/gencode-objet.sh</executable>
-                        </configuration>
+                            <executable>./src/test/script/codegen-less-register.sh</executable>
+						</configuration>
                         <phase>test</phase>
                         <goals>
                             <goal>exec</goal>

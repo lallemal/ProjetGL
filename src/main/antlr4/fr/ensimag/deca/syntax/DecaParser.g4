@@ -478,6 +478,9 @@ mult_expr returns[AbstractExpr tree]
     ;
 
 unary_expr returns[AbstractExpr tree]
+@init {
+    ListExpr LExpr = new ListExpr();
+}
     : op=MINUS e=unary_expr {
             assert($e.tree != null);
             $tree = new UnaryMinus($e.tree);
@@ -492,6 +495,18 @@ unary_expr returns[AbstractExpr tree]
             assert($select_expr.tree != null);
             $tree = $select_expr.tree;
         }
+    |OPARENT i1=select_expr CPARENT LHOOK ex1=expr RHOOK {LExpr.add($ex1.tree);} (LHOOK ex=expr RHOOK{LExpr.add($ex.tree);})* {
+              	assert($i1.tree != null);
+              	assert(LExpr!= null);
+              	$tree = new ArraySelection($i1.tree, LExpr);
+              	setLocation($tree, $i1.start);
+              }
+    | i2=ident LHOOK ex1=expr RHOOK {LExpr.add($ex1.tree);} (LHOOK ex=expr RHOOK{LExpr.add($ex.tree);})* {
+              	assert($i2.tree != null);
+              	assert(LExpr!= null);
+              	$tree = new ArraySelection($i2.tree, LExpr);
+              	setLocation($tree, $i2.start);
+              }
     ;
 
 select_expr returns[AbstractExpr tree]
@@ -517,6 +532,7 @@ select_expr returns[AbstractExpr tree]
             // we matched "e.i"
         }
         )
+
     ;
 
 primary_expr returns[AbstractExpr tree]
@@ -564,12 +580,7 @@ primary_expr returns[AbstractExpr tree]
             $tree = new Cast($type.tree, $expr.tree);
             setLocation($tree, $OPARENT);
         }
-     |i1=ident l1=list_hook_expr {
-        	assert($i1.tree != null);
-        	assert($l1.tree != null);
-        	$tree = new ArraySelection($i1.tree, $l1.tree);
-        	setLocation($tree, $i1.start);
-        }
+
     | literal {
             assert($literal.tree != null);
             $tree = $literal.tree;

@@ -2,7 +2,7 @@
 //    Test génération de code sur une méthode récursive 
 //
 // Resultats decac:
-// Resultat ima: 
+// Resultat ima: 120
 
 
 class A{
@@ -15,7 +15,7 @@ class A{
                 return 1;
             }
             else{
-                return this.fact(n -1);
+                return n*this.fact(n -1);
             }
         }
         else{
@@ -26,7 +26,7 @@ class A{
 {
     A a = new A();
 
-    print(a.fact(3));
+    print(a.fact(5));
     
 }
 

@@ -62,6 +62,27 @@ public class IfThenElse extends AbstractInst {
         }
         compiler.addLabel(finLabel);
     }
+    
+    @Override
+    protected void codeGenInst(DecacCompiler compiler, Label labelFin) {
+    	compiler.addComment("If Else instruction");
+        String label = "if_";
+        String pos = getLocation().getLine() + "_" + getLocation().getPositionInLine();
+        Label sinonLabel = new Label(label + "Sinon." + pos);
+        Label finLabel = new Label(label + "Fin." + pos);
+        if (!elseBranch.isEmpty()) {
+            condition.codeGenBranch(compiler, false, sinonLabel);
+        } else {
+            condition.codeGenBranch(compiler, false, finLabel);
+        }
+        thenBranch.codeGenListInst(compiler, labelFin);
+        compiler.addInstruction(new BRA(finLabel));
+        if (!elseBranch.isEmpty()) {
+            compiler.addLabel(sinonLabel);
+            elseBranch.codeGenListInst(compiler, labelFin);
+        }
+        compiler.addLabel(finLabel);
+    }
 
     @Override
     public void decompile(IndentPrintStream s) {

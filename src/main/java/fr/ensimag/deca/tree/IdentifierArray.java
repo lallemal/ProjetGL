@@ -85,8 +85,10 @@ public class IdentifierArray extends AbstractIdentifier{
 
 	@Override
 	public void decompile(IndentPrintStream s) {
-		// TODO Auto-generated method stub
-		
+	    varName.decompile(s);
+		for (int i = 0; i < length; i++) {
+			s.print("[]");
+		}
 	}
 
 	@Override

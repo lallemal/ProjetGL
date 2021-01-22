@@ -1,0 +1,33 @@
+// Description :
+//    test de syntaxe pour le instanceof (tout cas confondu)
+//
+
+class A{
+}
+class B extends A{
+    A a = new A();
+    
+    A getA(){
+        A a = new A();
+        return a;
+    }
+}
+{
+    B b = new B();
+    if (b.a instanceof A){
+        println("InstanceOf marche avec selection");
+    }
+    if (null instanceof A){
+        println("InstanceOf marche avec null");
+    }
+    if (new A() instanceof A){
+        println("InstanceOf marche avec new");
+    }
+    if (b.getA() instanceof A){
+        println("InstanceOf marche avec methodcall");
+    }
+    if (b instanceof B){
+        println("InstanceOf marche avec identifier");
+    }
+    
+}

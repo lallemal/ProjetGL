@@ -47,8 +47,9 @@ public class ArrayLiteral extends AbstractExpr{
 		if (elements.isEmpty()) {
 			return;
 		} else if (elements.getList().get(0).getType().isArray()) {
-			ArrayLiteral subArray = (ArrayLiteral) elements.getList().get(0); // Cast succeed by construction of elements
-			for (int i=0; i<subArray.getElements().size(); i++) {
+			
+			for (int i=0; i<elements.size(); i++) {
+				ArrayLiteral subArray = (ArrayLiteral) elements.getList().get(i); // Cast succeed by construction of elements
 				LinkedList<Integer> coordsExtended = new LinkedList<Integer>(coords);
 				coordsExtended.add(i);
 				subArray.initValueRec(n, coordsExtended, compiler);

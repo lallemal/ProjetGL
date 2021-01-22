@@ -113,6 +113,7 @@ class MatriceInt extends AbstractMatrice{
 			return -number;
 		}
 	}
+
 	int norme1() {
 		int result = 0;
 		int l = 0;
@@ -124,9 +125,30 @@ class MatriceInt extends AbstractMatrice{
 		}
 		return result;
 	}
-	
-	
-	
-	
+
+	// cree un vecteur de taille (n,1) de 1
+	void setOneVector(int n){
+		int[][] m = new int[n][1];
+		int i = 0;
+		while(i < this.nbl) {
+			m[i][1] = 1;
+			i = i + 1;
+		}
+		this.matint = m;
+	}
+	// calcul du rayon spectral par lam methode des puissances
+	// determine valeur propre et vecteur propre
+	// rayon spectral = plus boule contenant toute les valeur prorpes
+	// entree vecteur propre + matrice = sortie valeur propre 
+	float Puissancevpvectp() {
+		MatriceInt m = new MatriceInt();
+		
+		
+		
+		
+		
+		
+		return 1;
+	}
 	
 }

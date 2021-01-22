@@ -1,0 +1,33 @@
+DEBUG fr.ensimag.deca.tree.Program.verifyProgram(Program.java:42) - verify program: start
+DEBUG fr.ensimag.deca.tree.ListDeclClass.verifyListClass(ListDeclClass.java:47) - verify listClass: start
+DEBUG fr.ensimag.deca.tree.ListDeclClass.verifyListClass(ListDeclClass.java:51) - verify listClass: end
+DEBUG fr.ensimag.deca.tree.ListDeclClass.verifyListClassMembers(ListDeclClass.java:58) - verify listClassMembers: start
+DEBUG fr.ensimag.deca.tree.ListDeclClass.verifyListClassMembers(ListDeclClass.java:62) - verify listClassMembers : end
+DEBUG fr.ensimag.deca.tree.ListDeclClass.verifyListClassBody(ListDeclClass.java:69) - verify listClassBody: start
+DEBUG fr.ensimag.deca.tree.ListDeclClass.verifyListClassBody(ListDeclClass.java:73) - verify listClassBody : end
+DEBUG fr.ensimag.deca.tree.Main.verifyMain(Main.java:31) - verify Main: start
+DEBUG fr.ensimag.deca.tree.ListDeclVar.verifyListDeclVariable(ListDeclVar.java:41) - verify ListDeclVar : start
+DEBUG fr.ensimag.deca.tree.ListDeclVar.verifyListDeclVariable(ListDeclVar.java:45) - verify ListDeclVar : end
+DEBUG fr.ensimag.deca.tree.ListInst.verifyListInst(ListInst.java:33) - Verify ListInst : start
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyCondition(AbstractExpr.java:170) - verify AbstractExpr Condition : start
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyCondition(AbstractExpr.java:175) - verify AbstractExpr Condition : end
+DEBUG fr.ensimag.deca.tree.ListInst.verifyListInst(ListInst.java:33) - Verify ListInst : start
+DEBUG fr.ensimag.deca.tree.ListInst.verifyListInst(ListInst.java:38) - Verify ListInst : stop
+DEBUG fr.ensimag.deca.tree.ListInst.verifyListInst(ListInst.java:33) - Verify ListInst : start
+DEBUG fr.ensimag.deca.tree.ListInst.verifyListInst(ListInst.java:38) - Verify ListInst : stop
+DEBUG fr.ensimag.deca.tree.ListInst.verifyListInst(ListInst.java:38) - Verify ListInst : stop
+DEBUG fr.ensimag.deca.tree.Main.verifyMain(Main.java:42) - verify Main: end
+`> [7, 0] Program
+   +> ListDeclClass [List with 0 elements]
+   `> [7, 0] Main
+      +> ListDeclVar [List with 0 elements]
+      `> ListInst [List with 1 elements]
+         []> [8, 4] IfThenElse
+             +> [8, 8] Equals
+             |  type: boolean
+             |  +> [8, 8] Int (0)
+             |  |  type: int
+             |  `> [8, 13] Int (0)
+             |     type: int
+             +> ListInst [List with 0 elements]
+             `> ListInst [List with 0 elements]

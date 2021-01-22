@@ -1,9 +1,7 @@
 // Description :
-//    test décompilation printx et printlnx
+//    test context printx et printlnx
 //
-// Resultats (en comparaison avec le résultat attendu 
-// disponible dans le fichier *.deca.ok dans le dossier Modeles_OK) :
-//    ok
+// Resultats arbre décoré (.deca.ok)
 
 
 {

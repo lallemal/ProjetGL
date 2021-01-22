@@ -1,9 +1,7 @@
 // Description :
-//    test décompilation while avec multiples conditions
+//    test context while avec multiples conditions
 //
-// Resultats (en comparaison avec le résultat attendu 
-// disponible dans le fichier *.deca.ok dans le dossier Modeles_OK) :
-//    ok
+// Resultats arbre décoré (.deca.ok)
 
 {
     int i = 0;

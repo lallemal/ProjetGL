@@ -1,0 +1,54 @@
+DEBUG fr.ensimag.deca.tree.Program.verifyProgram(Program.java:42) - verify program: start
+DEBUG fr.ensimag.deca.tree.ListDeclClass.verifyListClass(ListDeclClass.java:47) - verify listClass: start
+DEBUG fr.ensimag.deca.tree.ListDeclClass.verifyListClass(ListDeclClass.java:51) - verify listClass: end
+DEBUG fr.ensimag.deca.tree.ListDeclClass.verifyListClassMembers(ListDeclClass.java:58) - verify listClassMembers: start
+DEBUG fr.ensimag.deca.tree.ListDeclClass.verifyListClassMembers(ListDeclClass.java:62) - verify listClassMembers : end
+DEBUG fr.ensimag.deca.tree.ListDeclClass.verifyListClassBody(ListDeclClass.java:69) - verify listClassBody: start
+DEBUG fr.ensimag.deca.tree.ListDeclClass.verifyListClassBody(ListDeclClass.java:73) - verify listClassBody : end
+DEBUG fr.ensimag.deca.tree.Main.verifyMain(Main.java:31) - verify Main: start
+DEBUG fr.ensimag.deca.tree.ListDeclVar.verifyListDeclVariable(ListDeclVar.java:41) - verify ListDeclVar : start
+DEBUG fr.ensimag.deca.tree.ListDeclVar.verifyListDeclVariable(ListDeclVar.java:45) - verify ListDeclVar : end
+DEBUG fr.ensimag.deca.tree.ListInst.verifyListInst(ListInst.java:33) - Verify ListInst : start
+DEBUG fr.ensimag.deca.tree.AbstractPrint.verifyInst(AbstractPrint.java:42) - Verify Inst AbstractPrint : start
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyPrint(AbstractExpr.java:151) - verify AbstractExpr Print : start
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyPrint(AbstractExpr.java:156) - verify AbstractExpr print : end
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyPrint(AbstractExpr.java:151) - verify AbstractExpr Print : start
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyPrint(AbstractExpr.java:156) - verify AbstractExpr print : end
+DEBUG fr.ensimag.deca.tree.AbstractPrint.verifyInst(AbstractPrint.java:47) - Verify Inst AbstractPrint : end
+DEBUG fr.ensimag.deca.tree.AbstractPrint.verifyInst(AbstractPrint.java:42) - Verify Inst AbstractPrint : start
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyPrint(AbstractExpr.java:151) - verify AbstractExpr Print : start
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyPrint(AbstractExpr.java:156) - verify AbstractExpr print : end
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyPrint(AbstractExpr.java:151) - verify AbstractExpr Print : start
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyPrint(AbstractExpr.java:156) - verify AbstractExpr print : end
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyPrint(AbstractExpr.java:151) - verify AbstractExpr Print : start
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyPrint(AbstractExpr.java:156) - verify AbstractExpr print : end
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyPrint(AbstractExpr.java:151) - verify AbstractExpr Print : start
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyPrint(AbstractExpr.java:156) - verify AbstractExpr print : end
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyPrint(AbstractExpr.java:151) - verify AbstractExpr Print : start
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyPrint(AbstractExpr.java:156) - verify AbstractExpr print : end
+DEBUG fr.ensimag.deca.tree.AbstractPrint.verifyInst(AbstractPrint.java:47) - Verify Inst AbstractPrint : end
+DEBUG fr.ensimag.deca.tree.ListInst.verifyListInst(ListInst.java:38) - Verify ListInst : stop
+DEBUG fr.ensimag.deca.tree.Main.verifyMain(Main.java:42) - verify Main: end
+`> [6, 0] Program
+   +> ListDeclClass [List with 0 elements]
+   `> [6, 0] Main
+      +> ListDeclVar [List with 0 elements]
+      `> ListInst [List with 2 elements]
+         []> [7, 4] Print
+         ||  `> [7, 10] ListExpr [List with 2 elements]
+         ||     []> [7, 10] StringLiteral (Hello)
+         ||     ||  type: string
+         ||     []> [7, 19] StringLiteral (You)
+         ||         type: string
+         []> [8, 4] Println
+             `> [8, 12] ListExpr [List with 5 elements]
+                []> [8, 12] StringLiteral (How)
+                ||  type: string
+                []> [8, 19] StringLiteral (Are)
+                ||  type: string
+                []> [8, 26] StringLiteral (You)
+                ||  type: string
+                []> [8, 33] StringLiteral (Today)
+                ||  type: string
+                []> [8, 42] StringLiteral (?)
+                    type: string

@@ -1,9 +1,7 @@
 // Description :
 //    test main avec le plus de caractéristiques possibles
 //
-// Resultats (en comparaison avec le résultat attendu 
-// disponible dans le fichier *.deca.ok dans le dossier Modeles_OK) :
-//    ok
+// Resultats arbre décoré (.deca.ok)
 
 {
 

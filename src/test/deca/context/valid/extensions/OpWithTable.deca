@@ -1,3 +1,9 @@
+// Description :
+//    Test context avec opération avec des tableaux
+//
+// Resultats: arbre décoré
+
+
 class Puiss {
     int x;
     int n;

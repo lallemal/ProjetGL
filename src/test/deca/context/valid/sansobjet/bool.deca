@@ -1,5 +1,5 @@
 // Description : Opération booléen
-// resultat ok
+// resultat arbre décoré (.deca.ok)
 
 {
     boolean x = true;

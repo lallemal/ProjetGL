@@ -1,0 +1,62 @@
+DEBUG fr.ensimag.deca.tree.Program.verifyProgram(Program.java:42) - verify program: start
+DEBUG fr.ensimag.deca.tree.ListDeclClass.verifyListClass(ListDeclClass.java:47) - verify listClass: start
+DEBUG fr.ensimag.deca.tree.ListDeclClass.verifyListClass(ListDeclClass.java:51) - verify listClass: end
+DEBUG fr.ensimag.deca.tree.ListDeclClass.verifyListClassMembers(ListDeclClass.java:58) - verify listClassMembers: start
+DEBUG fr.ensimag.deca.tree.ListDeclClass.verifyListClassMembers(ListDeclClass.java:62) - verify listClassMembers : end
+DEBUG fr.ensimag.deca.tree.ListDeclClass.verifyListClassBody(ListDeclClass.java:69) - verify listClassBody: start
+DEBUG fr.ensimag.deca.tree.ListDeclClass.verifyListClassBody(ListDeclClass.java:73) - verify listClassBody : end
+DEBUG fr.ensimag.deca.tree.Main.verifyMain(Main.java:31) - verify Main: start
+DEBUG fr.ensimag.deca.tree.ListDeclVar.verifyListDeclVariable(ListDeclVar.java:41) - verify ListDeclVar : start
+DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:40) - verify DeclVar : start x
+DEBUG fr.ensimag.deca.tree.NewArray.verifyRValue(NewArray.java:74) - Verify RValue Array : start
+DEBUG fr.ensimag.deca.tree.NewArray.verifyRValue(NewArray.java:82) - Verify RValue Array : end
+DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:61) - Verify DeclVar : end
+DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:40) - verify DeclVar : start u
+DEBUG fr.ensimag.deca.tree.NewArray.verifyRValue(NewArray.java:74) - Verify RValue Array : start
+DEBUG fr.ensimag.deca.tree.NewArray.verifyRValue(NewArray.java:82) - Verify RValue Array : end
+DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:61) - Verify DeclVar : end
+DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:40) - verify DeclVar : start w
+DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:61) - Verify DeclVar : end
+DEBUG fr.ensimag.deca.tree.ListDeclVar.verifyListDeclVariable(ListDeclVar.java:45) - verify ListDeclVar : end
+DEBUG fr.ensimag.deca.tree.ListInst.verifyListInst(ListInst.java:33) - Verify ListInst : start
+DEBUG fr.ensimag.deca.tree.ListInst.verifyListInst(ListInst.java:38) - Verify ListInst : stop
+DEBUG fr.ensimag.deca.tree.Main.verifyMain(Main.java:42) - verify Main: end
+`> [8, 0] Program
+   +> ListDeclClass [List with 0 elements]
+   `> [8, 0] Main
+      +> ListDeclVar [List with 3 elements]
+      |  []> [9, 12] DeclVar
+      |  ||  +> [9, 4] IdentifierArray
+      |  ||  |  type: float_1
+      |  ||  +> [9, 12] Identifier (x)
+      |  ||  |  definition: variable defined at [9, 12], type=float_1
+      |  ||  `> [9, 16] Initialization
+      |  ||     `> [9, 16] NewArray
+      |  ||        type: float_1
+      |  ||        `> [9, 20] Identifier (float)
+      |  ||           definition: type (builtin), type=float
+      |  ||        +> ListExpr [List with 1 elements]
+      |  ||        |  []> [9, 26] Int (4)
+      |  ||        |      type: int
+      |  []> [10, 14] DeclVar
+      |  ||  +> [10, 4] IdentifierArray
+      |  ||  |  type: float_2
+      |  ||  +> [10, 14] Identifier (u)
+      |  ||  |  definition: variable defined at [10, 14], type=float_2
+      |  ||  `> [10, 18] Initialization
+      |  ||     `> [10, 18] NewArray
+      |  ||        type: float_2
+      |  ||        `> [10, 22] Identifier (float)
+      |  ||           definition: type (builtin), type=float
+      |  ||        +> ListExpr [List with 2 elements]
+      |  ||        |  []> [10, 28] Int (4)
+      |  ||        |  ||  type: int
+      |  ||        |  []> [10, 31] Int (3)
+      |  ||        |      type: int
+      |  []> [11, 16] DeclVar
+      |      +> [11, 4] IdentifierArray
+      |      |  type: int_4
+      |      +> [11, 16] Identifier (w)
+      |      |  definition: variable defined at [11, 16], type=int_4
+      |      `> NoInitialization
+      `> ListInst [List with 0 elements]

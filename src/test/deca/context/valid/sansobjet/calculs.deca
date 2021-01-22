@@ -1,5 +1,5 @@
 // Description : Suite de calculs
-// Resultat : fonctionnels
+// Resultat : arbre décoré (.deca.ok)
 
 {
     int x = 5;

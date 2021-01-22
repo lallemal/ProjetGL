@@ -1,3 +1,9 @@
+// Description :
+//    Test context avec des operations avec des tableaux
+//
+// Resultats: arbre décoré
+
+
 {
 	float[] tab = new float[10];
 	int[][] mat = new int[10][10];

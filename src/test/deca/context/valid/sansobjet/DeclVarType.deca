@@ -1,9 +1,7 @@
 // Description :
-//    test décompilation déclaration multiple de variable de type multiples
+//    test context déclaration multiple de variable de type multiples
 //
-// Resultats (en comparaison avec le résultat attendu 
-// disponible dans le fichier *.deca.ok dans le dossier Modeles_OK) :
-//    ok
+// Resultats arbre décoré (.deca.ok)
 
 {
     int x = 2;

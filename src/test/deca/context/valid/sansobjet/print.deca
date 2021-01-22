@@ -1,5 +1,5 @@
 // Description : Tests with print, println, println x, and multiple expr
-// Resultat : fonctionnel
+// Resultat : arbre décoré (.deca.ok)
 
 {
     float f = 0.5;

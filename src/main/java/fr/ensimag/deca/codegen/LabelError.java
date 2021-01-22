@@ -34,6 +34,8 @@ public class LabelError {
 	private Label tasPlein;
 	private boolean errorDereferencementNull;
 	private Label dereferencementNull;
+	private boolean errorIndexOutOfRange;
+	private Label indexOutOfRange;
 	
 	public void setErrorDiv0(boolean b) {
 		errorDiv0 = b;
@@ -107,6 +109,14 @@ public class LabelError {
 		return dereferencementNull;
 	}
 	
+	public void setErrorIndexOutOfRange(boolean b) {
+		errorIndexOutOfRange = b;
+	}
+	
+	public Label getLabelIndexOutOfRange() {
+		return indexOutOfRange;
+	}
+	
 	public LabelError() {
 		errorDiv0 = false;
 		div0 = new Label("division_par_zero");
@@ -126,6 +136,8 @@ public class LabelError {
 		tasPlein = new Label("tas_plein");
 		errorDereferencementNull = false;
 		dereferencementNull = new Label("dereferencement_null");
+		errorIndexOutOfRange = false;
+		indexOutOfRange = new Label("index_out_of_range");
 	}
 	
 	public void codeGenLabelError(DecacCompiler compiler) {
@@ -155,6 +167,9 @@ public class LabelError {
 		}
 		if (errorDereferencementNull) {
 			addError(compiler, dereferencementNull, "dereferencement de null", "Erreur : dereferencement de null");
+		}
+		if (errorIndexOutOfRange) {
+			addError(compiler, indexOutOfRange, "index out of range", "Erreur : index out of range");
 		}
 	}
 	

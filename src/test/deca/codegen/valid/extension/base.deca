@@ -6,11 +6,11 @@
     int[] x = new int[n];
     int[][] y = new int[n][n];
     int[][][] z = new int[n][n][n];
-    x[1] = 1;
+    x[9] = 1;
     x[2] = 3;
     y[1][1] = 8;
     z[e][e+1][e+2] = 10;
-    println(x[1]);
+    println(x[9]);
     println(x[2]);
     println(y[1][1]);
     println(z[e][e+1][e+2]);

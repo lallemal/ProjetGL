@@ -25,23 +25,85 @@ public class NewArray extends AbstractExpr{
 
 	@Override
 	protected void codeExp(DecacCompiler compiler, int n) {
+	    //  CAN BE FACTORIZE : NOT ENOUGH TIME
 	    compiler.getLabelError().setErrorTasPlein(true);
 	    compiler.addInstruction(new LOAD(new ImmediateInteger(1), Register.getR(n)));
 	    for (AbstractExpr expr : memory.getList()) {
-	    	expr.codeExp(compiler, n+1);
-	    	compiler.addInstruction(new MUL(Register.getR(n+1), Register.getR(n)));
+	    	if (n + 1 <= compiler.getRmax()) {
+				expr.codeExp(compiler, n + 1);
+				compiler.setRegistreUsed(n+1);
+				compiler.addInstruction(new MUL(Register.getR(n + 1), Register.getR(n)));
+			} else {
+	    	    compiler.addInstruction(new TSTO(new ImmediateInteger(1)));
+	    	    if (!compiler.getCompilerOptions().isNoCheck()) {
+	    	    	compiler.addInstruction(new BOV(compiler.getLabelError().getLabelPilePleine()));
+				}
+	    		compiler.addInstruction(new PUSH(Register.getR(n)));
+				expr.codeExp(compiler, n);
+				compiler.addInstruction(new MUL(new RegisterOffset(0, Register.SP), Register.getR(n)));
+				compiler.addInstruction(new SUBSP(new ImmediateInteger(1)));
+			}
 		}
 	    compiler.addInstruction(new ADD(new ImmediateInteger(1), Register.getR(n)));
 	    compiler.addInstruction(new NEW(Register.getR(n), Register.getR(n)));
-	    compiler.addInstruction(new NEW(memory.size(), Register.getR(n+1)));
-	    int i = 0;
-	    for (AbstractExpr expr : memory.getList()) {
-	    	expr.codeExp(compiler, n+2);
-	    	compiler.addInstruction(new STORE(Register.getR(n+2), new RegisterOffset(i, Register.getR(n+1))));
-	    	i++;
+	    compiler.addInstruction(new BOV(compiler.getLabelError().getLabelPilePleine()));
+	    // TSTO :
+		if (n + 2 <= compiler.getRmax()) {
+		    compiler.setRegistreUsed(n+1);
+		    compiler.setRegistreUsed(n+2);
+			compiler.addInstruction(new NEW(memory.size(), Register.getR(n + 1)));
+			compiler.addInstruction(new BOV(compiler.getLabelError().getLabelPilePleine()));
+			int i = 0;
+			for (AbstractExpr expr : memory.getList()) {
+				expr.codeExp(compiler, n + 2);
+				compiler.addInstruction(new STORE(Register.getR(n + 2), new RegisterOffset(i, Register.getR(n + 1))));
+				i++;
+			}
+
+			compiler.addInstruction(new STORE(Register.getR(n + 1), new RegisterOffset(0, Register.getR(n))));
+		} else {
+			if (n + 1 <= compiler.getRmax()) {
+				compiler.addInstruction(new TSTO(new ImmediateInteger(1)));
+				if (!compiler.getCompilerOptions().isNoCheck()) {
+					compiler.addInstruction(new BOV(compiler.getLabelError().getLabelPilePleine()));
+				}
+				compiler.setRegistreUsed(n+1);
+				compiler.addInstruction(new NEW(memory.size(), Register.getR(n + 1)));
+				compiler.addInstruction(new BOV(compiler.getLabelError().getLabelPilePleine()));
+				compiler.addInstruction(new PUSH(Register.getR(n+1)));
+				int i = 0;
+				for (AbstractExpr expr : memory.getList()) {
+					expr.codeExp(compiler, n + 1);
+					compiler.addInstruction(new POP(Register.R0));
+					compiler.addInstruction(new STORE(Register.getR(n + 1), new RegisterOffset(i, Register.R0)));
+					compiler.addInstruction(new PUSH(Register.R0));
+					i++;
+				}
+				compiler.addInstruction(new POP(Register.getR(n+1)));
+				compiler.addInstruction(new STORE(Register.getR(n + 1), new RegisterOffset(0, Register.getR(n))));
+			} else {
+				compiler.addInstruction(new TSTO(new ImmediateInteger(2)));
+				if (!compiler.getCompilerOptions().isNoCheck()) {
+					compiler.addInstruction(new BOV(compiler.getLabelError().getLabelPilePleine()));
+				}
+				compiler.addInstruction(new PUSH(Register.getR(n)));
+				compiler.addInstruction(new NEW(memory.size(), Register.getR(n)));
+				compiler.addInstruction(new BOV(compiler.getLabelError().getLabelPilePleine()));
+				compiler.addInstruction(new PUSH(Register.getR(n)));
+				int i = 0;
+				for (AbstractExpr expr : memory.getList()) {
+					expr.codeExp(compiler, n);
+					compiler.addInstruction(new POP(Register.R0));
+					compiler.addInstruction(new STORE(Register.getR(n), new RegisterOffset(i, Register.R0)));
+					compiler.addInstruction(new PUSH(Register.R0));
+					i++;
+				}
+
+				compiler.addInstruction(new POP(Register.R0));
+				compiler.addInstruction(new POP(Register.getR(n)));
+				compiler.addInstruction(new STORE(Register.R0, new RegisterOffset(0, Register.getR(n))));
+			}
 		}
-	    // Tocheck
-	    compiler.addInstruction(new STORE(Register.getR(n+1), new RegisterOffset(0, Register.getR(n))));
 	}
 
 	@Override

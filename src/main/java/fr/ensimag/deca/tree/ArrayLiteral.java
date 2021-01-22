@@ -66,6 +66,7 @@ public class ArrayLiteral extends AbstractExpr{
 			m = m * elements.size();
 		}
 		elements.getList().get(lastCoord).codeExp(compiler, n+1);
+		compiler.setRegistreUsed(n+1);
 		compiler.addInstruction(new STORE(Register.getR(n+1), new RegisterOffset(s+1, Register.getR(n))));
 	}
 	

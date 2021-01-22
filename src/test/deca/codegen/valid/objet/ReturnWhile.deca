@@ -12,7 +12,7 @@ class A {
         while (x == 0){
             return x;
         }
-        return 0;
+        return 10;
     }
 }
 {

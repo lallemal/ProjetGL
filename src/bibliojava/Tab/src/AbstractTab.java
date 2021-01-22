@@ -25,7 +25,6 @@ class TabInt extends AbstractTab{
             i = i + 1;
         }
         this.size = size;
-        return;
     }
      
     int getCase(int indice){
@@ -61,13 +60,11 @@ class TabInt extends AbstractTab{
     // ajoute un element en tete du tableau
     void addFirst(int valeur){
     	this.add(valeur, 0);
-    	return;
     }
     
     // ajoute a la fin du tableau
     void addLast(int valeur){
     	this.add(valeur, this.size);
-    	return;
     }
     
     // supprime la case i du tableau i < size renvoi true si ok false sinon
@@ -92,11 +89,9 @@ class TabInt extends AbstractTab{
 
     void deleteFirst(){
         this.delete(0);
-        return;
     }
     void deleteLast(){
         this.delete(this.size - 1);
-        return;
     }
     
     // somme terme a terme
@@ -136,12 +131,10 @@ class TabInt extends AbstractTab{
     		}
     	}
     	System.out.print("]");
-    	return;
     }
     
     void mergeSortAscending(){
     	triFusion(0, this.size - 1);
-    	return;
     }
 	
     protected void triFusion(int deb, int fin) {
@@ -151,7 +144,6 @@ class TabInt extends AbstractTab{
     		triFusion(milieu+1,fin);
     		fusion(deb,milieu,fin);
         }
-    	return;
     }
   // tableau = deux tableau trie, modifie le tableau directement pour fusionner evite maximum perte de memoire
     protected void fusion(int deb1, int fin1, int fin2) {
@@ -194,7 +186,6 @@ class TabInt extends AbstractTab{
     		}
     		j = j + 1;
     	}
-    	return;
     }	
 }
 
@@ -207,7 +198,6 @@ class TabFloat extends AbstractTab{
     	this.tab = tab;
         this.size = size;
         this.tab = tab;
-        return;
     }
     // cree une copie
     void setInitCopy(float[] tab, int size){
@@ -218,7 +208,6 @@ class TabFloat extends AbstractTab{
             i = i + 1;
         }
         this.size = size;
-        return;
     }
     
     
@@ -249,12 +238,10 @@ class TabFloat extends AbstractTab{
 
     void addFirst(float valeur){
         this.add(valeur, 0);
-        return;
     }
     
     void addLast(float valeur){
         this.add(valeur, size);
-        return;
     }
    
     
@@ -279,13 +266,10 @@ class TabFloat extends AbstractTab{
 
     void deleteFirst(){
         this.delete(0);
-        return;
     }
     void deleteLast(){
         this.delete(this.size - 1);
-        return;
-    }
-    
+    } 
     // somme terme a terme
     boolean sumTab(TabFloat tab){
         int i = 0;
@@ -324,12 +308,10 @@ class TabFloat extends AbstractTab{
     		}
     	}
     	System.out.print("]");
-    	return;
     }
     
     void mergeSortAscending(){
     	triFusion(0, this.size - 1);
-    	return;
     }
 	
     protected void triFusion(int deb, int fin) {
@@ -339,7 +321,6 @@ class TabFloat extends AbstractTab{
     		triFusion(milieu+1,fin);
     		fusion(deb,milieu,fin);
         }
-    	return;
     }
   // tableau = deux tableau trie, modifie le tableau directement pour fusionner evite maximum perte de memoire
     protected void fusion(int deb1, int fin1, int fin2) {
@@ -382,7 +363,6 @@ class TabFloat extends AbstractTab{
     		}
     		j = j + 1;
     	}
-    	return;
     }	
 
 }

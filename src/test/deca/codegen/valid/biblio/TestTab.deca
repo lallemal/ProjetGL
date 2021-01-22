@@ -1,0 +1,4 @@
+#include "Tab.decah"
+{
+   TabInt t = new TabInt(); 
+}

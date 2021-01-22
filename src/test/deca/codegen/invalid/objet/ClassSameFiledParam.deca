@@ -1,0 +1,7 @@
+class A{
+    int x;
+    void setX(int x){
+    	this.x = x;
+    }
+
+}

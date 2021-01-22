@@ -1,0 +1,32 @@
+// Description :
+//    test de syntaxe pour le cast (tout cas confondu)
+//
+
+class A{
+    float a = 1.0;
+    int b = 1;
+    boolean c = true;
+    
+    boolean castC(){
+        return (boolean)(c);
+    }
+
+    int castB(){
+        return (int)(b);
+    }
+    
+    float castA(){
+        return (float)(a);
+    }
+}
+{
+    A a = new A();
+    int z = 1;
+    float y = (float)(z);
+    float x = 1.1;
+    int w = (int)(x);
+    a.castC();
+    a.castB();
+    a.castA();
+
+}

@@ -37,10 +37,8 @@ public class ArrayLiteral extends AbstractExpr{
 		NewArray initArray = new NewArray(null, getDimension());
 		initArray.codeExp(compiler, n);
 		
-		for (int i=0; i<elements.size(); i++) {
-			LinkedList<Integer> coords = new LinkedList<Integer>();
-			initValueRec(n, coords, compiler);
-		}
+		LinkedList<Integer> coords = new LinkedList<Integer>();
+		initValueRec(n, coords, compiler);
 		
 	}
 	
@@ -65,7 +63,6 @@ public class ArrayLiteral extends AbstractExpr{
 	}
 	
 	protected void initValue(int n, LinkedList<Integer> coords, DecacCompiler compiler, int lastCoord) {
-		compiler.addInstruction(new LOAD(new RegisterOffset(0, Register.getR(n)), Register.getR(n+1)));
 		int s = 0;
 		int m = 1;
 		int coord;

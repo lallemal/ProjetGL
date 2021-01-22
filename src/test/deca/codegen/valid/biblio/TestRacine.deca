@@ -1,17 +1,35 @@
 class Racine {
-	// calcul la racine carre par methode de Héron
-        float absolue(float t){
-            float j = t;
-            if (t < 0){
-                j = -t;
-            }
-            return j;
-        } 
+    // calcul la racine carre par methode de Héron
+    float absolue(float t){
+        float j = t;
+        if (t < 0){
+            j = -t;
+        }
+        return j;
+     } 
+    float sqrt(float a) {
+        float diff;
+        float y;
+        float xinit = 1;
+        int i = 0;
+        float seuil = 1.0E-4;
+        // calcul final
+        y = (xinit + a/xinit)/2;
+        diff = y - xinit;
+        diff = this.absolue(diff);
+        while(diff > seuil) {
+            xinit = y;
+            y = (xinit + a/xinit)/2;
+            diff = y - xinit;
+            diff = this.absolue(diff);
+        }
+        return y;
+    }
 }
+    
 {
-    float q = 0;
-    Racine r = new Racine();
-    float f = r.absolue(1.0E10);
-    print(q);
+   Racine r = new Racine();
+   print("valeur absolue = ");
+   print(r.sqrt(2.0E0));
     
 }

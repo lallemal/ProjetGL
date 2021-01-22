@@ -1,4 +1,83 @@
-#include "Tab.decah"
+class AbstractTab{
+    int size;
+    int getsize(){
+        return size;
+    }
+}
+
+class TabInt extends AbstractTab{
+    int[] tab;
+    void setInit(int[] tab, int size){
+        this.size = size;
+        this.tab = tab;
+    }
+
+    int getCase(int indice){
+        return (this.tab)[indice];
+    }
+
+    int[] getTab(){
+        return this.tab;
+    }
+    void setInitCopy(int[] tab, int size){
+        int i = 0;
+        this.tab = new int[size];
+        while(i < size){
+            (this.tab)[i] = tab[i];
+            i = i + 1;
+        }
+        this.size = size;
+    }
+
+   
+    void affichage() {
+        int valeur;
+    	int i = 0;
+    	print("[");
+    	while(i < this.size) {
+            valeur = (this.tab)[i];
+            print(valeur);
+            i = i + 1;
+            if (i != this.size) {
+                print(",");
+            }
+    	}
+    	print("]");
+    }
+
+    boolean add(int element, int indice) {
+    	int i = 0;
+    	int[] tabnew = new int[this.size + 1];
+    	this.size = this.size + 1;
+        
+    	if (indice > this.size || indice < 0) {
+    		return false;
+    	}
+    	
+    	while(i < indice) {
+    		tabnew[i] = (this.tab)[i];
+    		i = i + 1;
+    	}
+    	tabnew[i] = element;
+    	i = i + 1;
+    	
+    	
+    	while(i < this.size) {
+    		tabnew[i] = (this.tab)[i - 1];
+    		i = i + 1;
+    	}
+    	this.tab = tabnew;
+        
+
+    	return true;
+    }
+    
+}
 {
-   TabInt t = new TabInt(); 
+   int[] t = {1, 2, 3};
+   TabInt tableau = new TabInt(); 
+   tableau.setInit(t,3);
+   tableau.affichage();
+   tableau.add(4,0);
+   tableau.affichage();
 }

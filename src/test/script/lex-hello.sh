@@ -40,7 +40,7 @@ fi
 
 # Ligne encore codée en dur
 
-if test_lex src/test/deca/syntax/invalid/commentaire_simple_deux_lignes.deca 2>&1 \
+if test_lex src/test/deca/syntax/invalid/hello/commentaire_simple_deux_lignes.deca 2>&1 \
     | grep -q -e 'commentaire_simple_deux_lignes.deca:3:'
 then
     echo "Echec attendu pour test_lex"
@@ -49,7 +49,7 @@ else
     exit 1
 fi
 
-if test_lex src/test/deca/syntax/invalid/commentaire_non_ouvert.deca 2>&1 \
+if test_lex src/test/deca/syntax/invalid/hello/commentaire_non_ouvert.deca 2>&1 \
     | grep -q -e 'commentaire_non_ouvert.deca:1:'
 then
     echo "Echec attendu pour test_lex"
@@ -59,7 +59,7 @@ else
 fi
 
 
-for i in src/test/deca/syntax/valid/*.deca
+for i in src/test/deca/syntax/valid/hello/*.deca
 do
   if test_lex $i 2>&1 | grep -q -e "$i:"
   then

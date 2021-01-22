@@ -54,6 +54,26 @@ do
 
 done
 
+#Test que le résultats des fichiers valides est celui attendu (modèle dispo dans 
+# les .deca.ok)
+nb=$(ls -l $VALID_CONTEXT/*.deca | wc -l)
+echo "------ Démarrage des tests valide comparaison test_context ($nb)"
+for i in $VALID_CONTEXT/*.deca
+do
+    resultat=$(test_context $i)
+    if [ "$(less $i.ok)" = "$resultat" ]; then
+         echo "OK"
+     else
+        echo "Résultat innatendu pour $i, le résultat:"
+        echo "$resultat"
+        echo "ce qui était attendu:"
+        echo "$(less $i.ok)"
+        exit 1
+    fi
+  
+done
+
+
 # Test des fichiers de codegen
 nb=$(ls -l $VALID_CODEGEN/*.deca | wc -l)
 echo "------ Démarrage des tests valide de codegen test_context($nb)"

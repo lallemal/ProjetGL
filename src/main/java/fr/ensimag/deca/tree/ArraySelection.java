@@ -25,6 +25,21 @@ public class ArraySelection extends AbstractLValue{
 
 	@Override
 	protected void codeExp(DecacCompiler compiler, int n) {
+		if (n+4 > compiler.getRmax()) {
+			compiler.addInstruction(new PUSH(Register.getR(3)));
+			compiler.addInstruction(new PUSH(Register.getR(2)));
+			compiler.addInstruction(new PUSH(Register.getR(1)));
+			compiler.addInstruction(new PUSH(Register.getR(0)));
+			this.codeExp(compiler, 0);
+			compiler.addInstruction(new LOAD(Register.R0, Register.getR(n)));
+			int nbPop = 0;
+			for (int i=0; i<Math.min(4, n);i++) {
+				compiler.addInstruction(new POP(Register.getR(i)));
+				nbPop++;
+			}
+			compiler.addInstruction(new SUBSP(4-nbPop));
+			return;
+		};
 		compiler.getLabelError().setErrorIndexOutOfRange(true);
 		ExpDefinition expDefinition = ident.getExpDefinition();
 		if (expDefinition.isField()) {
@@ -37,18 +52,23 @@ public class ArraySelection extends AbstractLValue{
 		} else {
 			compiler.addInstruction(new LOAD(ident.getExpDefinition().getOperand(), Register.getR(n)));
 		}
-	    compiler.addInstruction(new LOAD(new RegisterOffset(0, Register.getR(n)), Register.getR(n+1)));
-	    compiler.addInstruction(new LOAD(new ImmediateInteger(0), Register.getR(n+2)));
-	    compiler.addInstruction(new LOAD(new ImmediateInteger(1), Register.getR(n+3)));
+		compiler.addInstruction(new PUSH(Register.getR(n)));
+	    compiler.addInstruction(new LOAD(new RegisterOffset(0, Register.getR(n)), Register.getR(n)));
+	    compiler.addInstruction(new LOAD(new ImmediateInteger(0), Register.getR(n+1)));
+	    compiler.setRegistreUsed(n+1);
+	    compiler.addInstruction(new LOAD(new ImmediateInteger(1), Register.getR(n+2)));
+	    compiler.setRegistreUsed(n+2);
 		for (int i = memory.size() - 1;  i >= 0 ; i--) {
 			AbstractExpr expr = memory.getList().get(i);
-			expr.codeExp(compiler, n+4);
-			compiler.addInstruction(new CMP(new RegisterOffset(i, Register.getR(n+1)), Register.getR(n+4)));
+			expr.codeExp(compiler, n+3);
+			compiler.setRegistreUsed(n+3);
+			compiler.addInstruction(new CMP(new RegisterOffset(i, Register.getR(n)), Register.getR(n+3)));
 			compiler.addInstruction(new BGE(compiler.getLabelError().getLabelIndexOutOfRange()));
-			compiler.addInstruction(new MUL(Register.getR(n+3), Register.getR(n+4)));
-			compiler.addInstruction(new ADD(Register.getR(n+4), Register.getR(n+2)));
-			compiler.addInstruction(new MUL(new RegisterOffset(i, Register.getR(n+1)), Register.getR(n+3)));
+			compiler.addInstruction(new MUL(Register.getR(n+2), Register.getR(n+3)));
+			compiler.addInstruction(new ADD(Register.getR(n+3), Register.getR(n+1)));
+			compiler.addInstruction(new MUL(new RegisterOffset(i, Register.getR(n)), Register.getR(n+2)));
 		}
+		compiler.addInstruction(new POP(Register.getR(n)));
 		compiler.addInstruction(new LEA(new RegisterOffsetRegister(1, Register.getR(n), Register.getR(n+2)),Register.getR(n)));
 	}
 
@@ -59,9 +79,7 @@ public class ArraySelection extends AbstractLValue{
 		if (getType().isInt()) {
 			compiler.addInstruction(new LOAD(new RegisterOffset(0, Register.getR(1)), Register.R1));
 			compiler.addInstruction(new WINT());
-
 		}
-
 	}
 
 	@Override

@@ -1,3 +1,8 @@
+// Description :
+//    Test context avec une selection de new
+//
+// Resultats: arbre décoré
+
 class A {
 
     int x;

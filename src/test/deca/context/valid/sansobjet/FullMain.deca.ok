@@ -1,0 +1,349 @@
+DEBUG fr.ensimag.deca.tree.Program.verifyProgram(Program.java:42) - verify program: start
+DEBUG fr.ensimag.deca.tree.ListDeclClass.verifyListClass(ListDeclClass.java:47) - verify listClass: start
+DEBUG fr.ensimag.deca.tree.ListDeclClass.verifyListClass(ListDeclClass.java:51) - verify listClass: end
+DEBUG fr.ensimag.deca.tree.ListDeclClass.verifyListClassMembers(ListDeclClass.java:58) - verify listClassMembers: start
+DEBUG fr.ensimag.deca.tree.ListDeclClass.verifyListClassMembers(ListDeclClass.java:62) - verify listClassMembers : end
+DEBUG fr.ensimag.deca.tree.ListDeclClass.verifyListClassBody(ListDeclClass.java:69) - verify listClassBody: start
+DEBUG fr.ensimag.deca.tree.ListDeclClass.verifyListClassBody(ListDeclClass.java:73) - verify listClassBody : end
+DEBUG fr.ensimag.deca.tree.Main.verifyMain(Main.java:31) - verify Main: start
+DEBUG fr.ensimag.deca.tree.ListDeclVar.verifyListDeclVariable(ListDeclVar.java:41) - verify ListDeclVar : start
+DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:40) - verify DeclVar : start i
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:103) - verify AbstractExpr RValue : start
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:134) - verify AbstractExpr Rvalue : end
+DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:61) - Verify DeclVar : end
+DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:40) - verify DeclVar : start j
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:103) - verify AbstractExpr RValue : start
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:134) - verify AbstractExpr Rvalue : end
+DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:61) - Verify DeclVar : end
+DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:40) - verify DeclVar : start k
+DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:61) - Verify DeclVar : end
+DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:40) - verify DeclVar : start b
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:103) - verify AbstractExpr RValue : start
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:134) - verify AbstractExpr Rvalue : end
+DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:61) - Verify DeclVar : end
+DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:40) - verify DeclVar : start a
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:103) - verify AbstractExpr RValue : start
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:134) - verify AbstractExpr Rvalue : end
+DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:61) - Verify DeclVar : end
+DEBUG fr.ensimag.deca.tree.ListDeclVar.verifyListDeclVariable(ListDeclVar.java:45) - verify ListDeclVar : end
+DEBUG fr.ensimag.deca.tree.ListInst.verifyListInst(ListInst.java:33) - Verify ListInst : start
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyInst(AbstractExpr.java:143) - verify AbstractExpr Inst : start
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:172) - verify Identifier Expr : start
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:182) - verify Identifier Expr : end
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:103) - verify AbstractExpr RValue : start
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:134) - verify AbstractExpr Rvalue : end
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyInst(AbstractExpr.java:145) - verify AbstractExpr Inst : end
+DEBUG fr.ensimag.deca.tree.AbstractPrint.verifyInst(AbstractPrint.java:42) - Verify Inst AbstractPrint : start
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyPrint(AbstractExpr.java:151) - verify AbstractExpr Print : start
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyPrint(AbstractExpr.java:156) - verify AbstractExpr print : end
+DEBUG fr.ensimag.deca.tree.AbstractPrint.verifyInst(AbstractPrint.java:47) - Verify Inst AbstractPrint : end
+DEBUG fr.ensimag.deca.tree.AbstractPrint.verifyInst(AbstractPrint.java:42) - Verify Inst AbstractPrint : start
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyPrint(AbstractExpr.java:151) - verify AbstractExpr Print : start
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyPrint(AbstractExpr.java:156) - verify AbstractExpr print : end
+DEBUG fr.ensimag.deca.tree.AbstractPrint.verifyInst(AbstractPrint.java:47) - Verify Inst AbstractPrint : end
+DEBUG fr.ensimag.deca.tree.AbstractPrint.verifyInst(AbstractPrint.java:42) - Verify Inst AbstractPrint : start
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyPrint(AbstractExpr.java:151) - verify AbstractExpr Print : start
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyPrint(AbstractExpr.java:156) - verify AbstractExpr print : end
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyPrint(AbstractExpr.java:151) - verify AbstractExpr Print : start
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyPrint(AbstractExpr.java:156) - verify AbstractExpr print : end
+DEBUG fr.ensimag.deca.tree.AbstractPrint.verifyInst(AbstractPrint.java:47) - Verify Inst AbstractPrint : end
+DEBUG fr.ensimag.deca.tree.AbstractPrint.verifyInst(AbstractPrint.java:42) - Verify Inst AbstractPrint : start
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyPrint(AbstractExpr.java:151) - verify AbstractExpr Print : start
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:172) - verify Identifier Expr : start
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:182) - verify Identifier Expr : end
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyPrint(AbstractExpr.java:156) - verify AbstractExpr print : end
+DEBUG fr.ensimag.deca.tree.AbstractPrint.verifyInst(AbstractPrint.java:47) - Verify Inst AbstractPrint : end
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyCondition(AbstractExpr.java:170) - verify AbstractExpr Condition : start
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:172) - verify Identifier Expr : start
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:182) - verify Identifier Expr : end
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyCondition(AbstractExpr.java:175) - verify AbstractExpr Condition : end
+DEBUG fr.ensimag.deca.tree.ListInst.verifyListInst(ListInst.java:33) - Verify ListInst : start
+DEBUG fr.ensimag.deca.tree.AbstractPrint.verifyInst(AbstractPrint.java:42) - Verify Inst AbstractPrint : start
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyPrint(AbstractExpr.java:151) - verify AbstractExpr Print : start
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyPrint(AbstractExpr.java:156) - verify AbstractExpr print : end
+DEBUG fr.ensimag.deca.tree.AbstractPrint.verifyInst(AbstractPrint.java:47) - Verify Inst AbstractPrint : end
+DEBUG fr.ensimag.deca.tree.ListInst.verifyListInst(ListInst.java:38) - Verify ListInst : stop
+DEBUG fr.ensimag.deca.tree.ListInst.verifyListInst(ListInst.java:33) - Verify ListInst : start
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyCondition(AbstractExpr.java:170) - verify AbstractExpr Condition : start
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:172) - verify Identifier Expr : start
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:182) - verify Identifier Expr : end
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:172) - verify Identifier Expr : start
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:182) - verify Identifier Expr : end
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyCondition(AbstractExpr.java:175) - verify AbstractExpr Condition : end
+DEBUG fr.ensimag.deca.tree.ListInst.verifyListInst(ListInst.java:33) - Verify ListInst : start
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyCondition(AbstractExpr.java:170) - verify AbstractExpr Condition : start
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:172) - verify Identifier Expr : start
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:182) - verify Identifier Expr : end
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyCondition(AbstractExpr.java:175) - verify AbstractExpr Condition : end
+DEBUG fr.ensimag.deca.tree.ListInst.verifyListInst(ListInst.java:33) - Verify ListInst : start
+DEBUG fr.ensimag.deca.tree.ListInst.verifyListInst(ListInst.java:38) - Verify ListInst : stop
+DEBUG fr.ensimag.deca.tree.ListInst.verifyListInst(ListInst.java:33) - Verify ListInst : start
+DEBUG fr.ensimag.deca.tree.ListInst.verifyListInst(ListInst.java:38) - Verify ListInst : stop
+DEBUG fr.ensimag.deca.tree.ListInst.verifyListInst(ListInst.java:38) - Verify ListInst : stop
+DEBUG fr.ensimag.deca.tree.ListInst.verifyListInst(ListInst.java:33) - Verify ListInst : start
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyInst(AbstractExpr.java:143) - verify AbstractExpr Inst : start
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:172) - verify Identifier Expr : start
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:182) - verify Identifier Expr : end
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:103) - verify AbstractExpr RValue : start
+DEBUG fr.ensimag.deca.tree.AbstractOpArith.verifyExpr(AbstractOpArith.java:32) - verify AbstractOpArith : start
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:172) - verify Identifier Expr : start
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:182) - verify Identifier Expr : end
+DEBUG fr.ensimag.deca.tree.AbstractOpArith.verifyExpr(AbstractOpArith.java:49) - verify AbstractOpArith : end
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:134) - verify AbstractExpr Rvalue : end
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyInst(AbstractExpr.java:145) - verify AbstractExpr Inst : end
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyInst(AbstractExpr.java:143) - verify AbstractExpr Inst : start
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:172) - verify Identifier Expr : start
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:182) - verify Identifier Expr : end
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:103) - verify AbstractExpr RValue : start
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:134) - verify AbstractExpr Rvalue : end
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyInst(AbstractExpr.java:145) - verify AbstractExpr Inst : end
+DEBUG fr.ensimag.deca.tree.ListInst.verifyListInst(ListInst.java:38) - Verify ListInst : stop
+DEBUG fr.ensimag.deca.tree.ListInst.verifyListInst(ListInst.java:38) - Verify ListInst : stop
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyCondition(AbstractExpr.java:170) - verify AbstractExpr Condition : start
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:172) - verify Identifier Expr : start
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:182) - verify Identifier Expr : end
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyCondition(AbstractExpr.java:175) - verify AbstractExpr Condition : end
+DEBUG fr.ensimag.deca.tree.ListInst.verifyListInst(ListInst.java:33) - Verify ListInst : start
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyInst(AbstractExpr.java:143) - verify AbstractExpr Inst : start
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:172) - verify Identifier Expr : start
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:182) - verify Identifier Expr : end
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:103) - verify AbstractExpr RValue : start
+DEBUG fr.ensimag.deca.tree.AbstractOpArith.verifyExpr(AbstractOpArith.java:32) - verify AbstractOpArith : start
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:172) - verify Identifier Expr : start
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:182) - verify Identifier Expr : end
+DEBUG fr.ensimag.deca.tree.AbstractOpArith.verifyExpr(AbstractOpArith.java:49) - verify AbstractOpArith : end
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:134) - verify AbstractExpr Rvalue : end
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyInst(AbstractExpr.java:145) - verify AbstractExpr Inst : end
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyInst(AbstractExpr.java:143) - verify AbstractExpr Inst : start
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:172) - verify Identifier Expr : start
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:182) - verify Identifier Expr : end
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:103) - verify AbstractExpr RValue : start
+DEBUG fr.ensimag.deca.tree.AbstractOpArith.verifyExpr(AbstractOpArith.java:32) - verify AbstractOpArith : start
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:172) - verify Identifier Expr : start
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:182) - verify Identifier Expr : end
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:172) - verify Identifier Expr : start
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:182) - verify Identifier Expr : end
+DEBUG fr.ensimag.deca.tree.AbstractOpArith.verifyExpr(AbstractOpArith.java:49) - verify AbstractOpArith : end
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:134) - verify AbstractExpr Rvalue : end
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyInst(AbstractExpr.java:145) - verify AbstractExpr Inst : end
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyInst(AbstractExpr.java:143) - verify AbstractExpr Inst : start
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:172) - verify Identifier Expr : start
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:182) - verify Identifier Expr : end
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:103) - verify AbstractExpr RValue : start
+DEBUG fr.ensimag.deca.tree.AbstractOpArith.verifyExpr(AbstractOpArith.java:32) - verify AbstractOpArith : start
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:172) - verify Identifier Expr : start
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:182) - verify Identifier Expr : end
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:172) - verify Identifier Expr : start
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:182) - verify Identifier Expr : end
+DEBUG fr.ensimag.deca.tree.AbstractOpArith.verifyExpr(AbstractOpArith.java:49) - verify AbstractOpArith : end
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:134) - verify AbstractExpr Rvalue : end
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyInst(AbstractExpr.java:145) - verify AbstractExpr Inst : end
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyInst(AbstractExpr.java:143) - verify AbstractExpr Inst : start
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:172) - verify Identifier Expr : start
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:182) - verify Identifier Expr : end
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:103) - verify AbstractExpr RValue : start
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:172) - verify Identifier Expr : start
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:182) - verify Identifier Expr : end
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:172) - verify Identifier Expr : start
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:182) - verify Identifier Expr : end
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:134) - verify AbstractExpr Rvalue : end
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyInst(AbstractExpr.java:145) - verify AbstractExpr Inst : end
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyCondition(AbstractExpr.java:170) - verify AbstractExpr Condition : start
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:172) - verify Identifier Expr : start
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:182) - verify Identifier Expr : end
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:172) - verify Identifier Expr : start
+DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:182) - verify Identifier Expr : end
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyCondition(AbstractExpr.java:175) - verify AbstractExpr Condition : end
+DEBUG fr.ensimag.deca.tree.ListInst.verifyListInst(ListInst.java:33) - Verify ListInst : start
+DEBUG fr.ensimag.deca.tree.ListInst.verifyListInst(ListInst.java:38) - Verify ListInst : stop
+DEBUG fr.ensimag.deca.tree.ListInst.verifyListInst(ListInst.java:38) - Verify ListInst : stop
+DEBUG fr.ensimag.deca.tree.ListInst.verifyListInst(ListInst.java:38) - Verify ListInst : stop
+DEBUG fr.ensimag.deca.tree.Main.verifyMain(Main.java:42) - verify Main: end
+`> [6, 0] Program
+   +> ListDeclClass [List with 0 elements]
+   `> [6, 0] Main
+      +> ListDeclVar [List with 5 elements]
+      |  []> [8, 8] DeclVar
+      |  ||  +> [8, 4] Identifier (int)
+      |  ||  |  definition: type (builtin), type=int
+      |  ||  +> [8, 8] Identifier (i)
+      |  ||  |  definition: variable defined at [8, 8], type=int
+      |  ||  `> [8, 12] Initialization
+      |  ||     `> [8, 12] Int (0)
+      |  ||        type: int
+      |  []> [8, 15] DeclVar
+      |  ||  +> [8, 4] Identifier (int)
+      |  ||  |  definition: type (builtin), type=int
+      |  ||  +> [8, 15] Identifier (j)
+      |  ||  |  definition: variable defined at [8, 15], type=int
+      |  ||  `> [8, 19] Initialization
+      |  ||     `> [8, 19] Int (1)
+      |  ||        type: int
+      |  []> [9, 10] DeclVar
+      |  ||  +> [9, 4] Identifier (float)
+      |  ||  |  definition: type (builtin), type=float
+      |  ||  +> [9, 10] Identifier (k)
+      |  ||  |  definition: variable defined at [9, 10], type=float
+      |  ||  `> NoInitialization
+      |  []> [10, 12] DeclVar
+      |  ||  +> [10, 4] Identifier (boolean)
+      |  ||  |  definition: type (builtin), type=boolean
+      |  ||  +> [10, 12] Identifier (b)
+      |  ||  |  definition: variable defined at [10, 12], type=boolean
+      |  ||  `> [10, 16] Initialization
+      |  ||     `> [10, 16] BooleanLiteral (true)
+      |  ||        type: boolean
+      |  []> [11, 8] DeclVar
+      |      +> [11, 4] Identifier (int)
+      |      |  definition: type (builtin), type=int
+      |      +> [11, 8] Identifier (a)
+      |      |  definition: variable defined at [11, 8], type=int
+      |      `> [11, 12] Initialization
+      |         `> [11, 12] ReadInt
+      |            type: int
+      `> ListInst [List with 7 elements]
+         []> [12, 4] Assign
+         ||  type: float
+         ||  +> [12, 4] Identifier (k)
+         ||  |  definition: variable defined at [9, 10], type=float
+         ||  `> [12, 8] ReadFloat
+         ||     type: float
+         []> [14, 4] Print
+         ||  `> [14, 10] ListExpr [List with 1 elements]
+         ||     []> [14, 10] Int (23)
+         ||         type: int
+         []> [15, 4] Print
+         ||  `> [15, 11] ListExpr [List with 1 elements]
+         ||     []> [15, 11] Float (2.23)
+         ||         type: float
+         []> [16, 4] Println
+         ||  `> [16, 12] ListExpr [List with 2 elements]
+         ||     []> [16, 12] StringLiteral (hello)
+         ||     ||  type: string
+         ||     []> [16, 21] StringLiteral (you)
+         ||         type: string
+         []> [17, 4] Println
+         ||  `> [17, 13] ListExpr [List with 1 elements]
+         ||     []> [17, 13] Identifier (j)
+         ||         definition: variable defined at [8, 15], type=int
+         []> [19, 4] IfThenElse
+         ||  +> [19, 9] Equals
+         ||  |  type: boolean
+         ||  |  +> [19, 9] Identifier (i)
+         ||  |  |  definition: variable defined at [8, 8], type=int
+         ||  |  `> [19, 14] Int (0)
+         ||  |     type: int
+         ||  +> ListInst [List with 1 elements]
+         ||  |  []> [20, 8] Print
+         ||  |      `> [20, 14] ListExpr [List with 1 elements]
+         ||  |         []> [20, 14] StringLiteral (ok!)
+         ||  |             type: string
+         ||  `> ListInst [List with 1 elements]
+         ||     []> [22, 4] IfThenElse
+         ||         +> [22, 13] And
+         ||         |  type: boolean
+         ||         |  +> [22, 13] Lower
+         ||         |  |  type: boolean
+         ||         |  |  +> [22, 13] Identifier (j)
+         ||         |  |  |  definition: variable defined at [8, 15], type=int
+         ||         |  |  `> [22, 17] Int (1)
+         ||         |  |     type: int
+         ||         |  `> [22, 22] Not
+         ||         |     type: boolean
+         ||         |     `> [22, 23] Identifier (b)
+         ||         |        definition: variable defined at [10, 12], type=boolean
+         ||         +> ListInst [List with 1 elements]
+         ||         |  []> [23, 8] IfThenElse
+         ||         |      +> [23, 12] NotEquals
+         ||         |      |  type: boolean
+         ||         |      |  +> [23, 12] Identifier (k)
+         ||         |      |  |  definition: variable defined at [9, 10], type=float
+         ||         |      |  `> ConvFloat
+         ||         |      |     type: float
+         ||         |      |     `> [23, 17] Int (0)
+         ||         |      |        type: int
+         ||         |      +> ListInst [List with 0 elements]
+         ||         |      `> ListInst [List with 0 elements]
+         ||         `> ListInst [List with 2 elements]
+         ||            []> [27, 8] Assign
+         ||            ||  type: int
+         ||            ||  +> [27, 8] Identifier (i)
+         ||            ||  |  definition: variable defined at [8, 8], type=int
+         ||            ||  `> [27, 12] Minus
+         ||            ||     type: int
+         ||            ||     +> [27, 13] Identifier (i)
+         ||            ||     |  definition: variable defined at [8, 8], type=int
+         ||            ||     `> [27, 17] Int (1)
+         ||            ||        type: int
+         ||            []> [28, 8] Assign
+         ||                type: float
+         ||                +> [28, 8] Identifier (k)
+         ||                |  definition: variable defined at [9, 10], type=float
+         ||                `> [28, 12] UnaryMinus
+         ||                   type: float
+         ||                   `> [28, 13] Float (3.0)
+         ||                      type: float
+         []> [31, 4] While
+             +> [31, 12] Greater
+             |  type: boolean
+             |  +> [31, 12] Identifier (i)
+             |  |  definition: variable defined at [8, 8], type=int
+             |  `> [31, 16] Int (5)
+             |     type: int
+             `> ListInst [List with 5 elements]
+                []> [32, 8] Assign
+                ||  type: int
+                ||  +> [32, 8] Identifier (i)
+                ||  |  definition: variable defined at [8, 8], type=int
+                ||  `> [32, 12] Plus
+                ||     type: int
+                ||     +> [32, 13] Identifier (i)
+                ||     |  definition: variable defined at [8, 8], type=int
+                ||     `> [32, 17] Int (1)
+                ||        type: int
+                []> [33, 8] Assign
+                ||  type: int
+                ||  +> [33, 8] Identifier (i)
+                ||  |  definition: variable defined at [8, 8], type=int
+                ||  `> [33, 12] Multiply
+                ||     type: int
+                ||     +> [33, 12] Identifier (i)
+                ||     |  definition: variable defined at [8, 8], type=int
+                ||     `> [33, 14] Identifier (i)
+                ||        definition: variable defined at [8, 8], type=int
+                []> [34, 8] Assign
+                ||  type: int
+                ||  +> [34, 8] Identifier (i)
+                ||  |  definition: variable defined at [8, 8], type=int
+                ||  `> [34, 12] Divide
+                ||     type: int
+                ||     +> [34, 12] Identifier (i)
+                ||     |  definition: variable defined at [8, 8], type=int
+                ||     `> [34, 14] Identifier (j)
+                ||        definition: variable defined at [8, 15], type=int
+                []> [35, 8] Assign
+                ||  type: int
+                ||  +> [35, 8] Identifier (j)
+                ||  |  definition: variable defined at [8, 15], type=int
+                ||  `> [35, 12] Modulo
+                ||     type: int
+                ||     +> [35, 12] Identifier (j)
+                ||     |  definition: variable defined at [8, 15], type=int
+                ||     `> [35, 14] Identifier (i)
+                ||        definition: variable defined at [8, 8], type=int
+                []> [36, 8] While
+                    +> [36, 15] Or
+                    |  type: boolean
+                    |  +> [36, 15] GreaterOrEqual
+                    |  |  type: boolean
+                    |  |  +> [36, 15] Identifier (i)
+                    |  |  |  definition: variable defined at [8, 8], type=int
+                    |  |  `> [36, 20] Int (1)
+                    |  |     type: int
+                    |  `> [36, 25] LowerOrEqual
+                    |     type: boolean
+                    |     +> [36, 25] Identifier (j)
+                    |     |  definition: variable defined at [8, 15], type=int
+                    |     `> [36, 30] Int (2)
+                    |        type: int
+                    `> ListInst [List with 0 elements]

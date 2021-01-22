@@ -1,9 +1,7 @@
 // Description :
-//    test décompilation print et println avec multiples arguments
+//    test context print et println avec multiples arguments
 //
-// Resultats (en comparaison avec le résultat attendu 
-// disponible dans le fichier *.deca.ok dans le dossier Modeles_OK) :
-//    ok
+// Resultats arbre décoré (.deca.ok)
 
 {
     print("Hello", "You");

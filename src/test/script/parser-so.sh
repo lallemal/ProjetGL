@@ -15,8 +15,7 @@ cd "$(dirname "$0")"/../../.. || exit 1
 
 PATH=./src/test/script/launchers:"$PATH"
 
-nb=$(ls -l | wc -l)
-nb=$(($nb-1))
+nb=$(ls -l src/test/deca/syntax/valid/sansobjet/*.deca| wc -l)
 echo "------- Démarrage des tests valide test_synt ($nb)"
 for i in src/test/deca/syntax/valid/sansobjet/*.deca
 do
@@ -31,6 +30,7 @@ do
 done
 
 # Test comparaison du résultat de test_synt avec un modèle
+nb=$(ls -l src/test/deca/syntax/valid/sansobjet/*.deca| wc -l)
 echo "------- Démarrage des tests valide comparaison ($nb)"
 for i in src/test/deca/syntax/valid/sansobjet/*.deca
 do
@@ -48,8 +48,7 @@ done
 
 
 # Test de l'erreur dans les tests invalides
-nb=$(ls -l | wc -l)
-((nb=$nb-1))
+nb=$(ls -l src/test/deca/syntax/invalid/sansobjet/*.deca| wc -l)
 echo "------ Démarrage des tests invalide ($nb)"
 echo "Test invalides:"
 for i in src/test/deca/syntax/invalid/sansobjet/*.deca

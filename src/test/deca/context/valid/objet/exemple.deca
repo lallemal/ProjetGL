@@ -1,4 +1,7 @@
-// Un exemple de programme Deca
+// Description :
+//    Test context avec un exemple de programme Deca
+//
+// Resultats: arbre décoré
 
 class A {
   protected int x ;

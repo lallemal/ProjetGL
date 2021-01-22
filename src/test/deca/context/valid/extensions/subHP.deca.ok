@@ -1,0 +1,87 @@
+DEBUG fr.ensimag.deca.tree.Program.verifyProgram(Program.java:42) - verify program: start
+DEBUG fr.ensimag.deca.tree.ListDeclClass.verifyListClass(ListDeclClass.java:47) - verify listClass: start
+DEBUG fr.ensimag.deca.tree.DeclClass.verifyClass(DeclClass.java:114) - Verify Class : start HarryPotter
+DEBUG fr.ensimag.deca.tree.DeclClass.verifyClass(DeclClass.java:138) - Verify Class : end HarryPotter
+DEBUG fr.ensimag.deca.tree.DeclClass.verifyClass(DeclClass.java:114) - Verify Class : start Nimbus2000
+DEBUG fr.ensimag.deca.tree.DeclClass.verifyClass(DeclClass.java:138) - Verify Class : end Nimbus2000
+DEBUG fr.ensimag.deca.tree.DeclClass.verifyClass(DeclClass.java:114) - Verify Class : start VifDOr
+DEBUG fr.ensimag.deca.tree.DeclClass.verifyClass(DeclClass.java:138) - Verify Class : end VifDOr
+DEBUG fr.ensimag.deca.tree.ListDeclClass.verifyListClass(ListDeclClass.java:51) - verify listClass: end
+DEBUG fr.ensimag.deca.tree.ListDeclClass.verifyListClassMembers(ListDeclClass.java:58) - verify listClassMembers: start
+DEBUG fr.ensimag.deca.tree.DeclClass.verifyClassMembers(DeclClass.java:145) - Verify Class Members : start HarryPotter
+DEBUG fr.ensimag.deca.tree.DeclClass.verifyClassMembers(DeclClass.java:167) - Verify Class Members : end HarryPotter
+DEBUG fr.ensimag.deca.tree.DeclClass.verifyClassMembers(DeclClass.java:145) - Verify Class Members : start Nimbus2000
+DEBUG fr.ensimag.deca.tree.DeclClass.verifyClassMembers(DeclClass.java:167) - Verify Class Members : end Nimbus2000
+DEBUG fr.ensimag.deca.tree.DeclClass.verifyClassMembers(DeclClass.java:145) - Verify Class Members : start VifDOr
+DEBUG fr.ensimag.deca.tree.DeclClass.verifyClassMembers(DeclClass.java:167) - Verify Class Members : end VifDOr
+DEBUG fr.ensimag.deca.tree.ListDeclClass.verifyListClassMembers(ListDeclClass.java:62) - verify listClassMembers : end
+DEBUG fr.ensimag.deca.tree.ListDeclClass.verifyListClassBody(ListDeclClass.java:69) - verify listClassBody: start
+DEBUG fr.ensimag.deca.tree.ListDeclClass.verifyListClassBody(ListDeclClass.java:73) - verify listClassBody : end
+DEBUG fr.ensimag.deca.tree.Main.verifyMain(Main.java:31) - verify Main: start
+DEBUG fr.ensimag.deca.tree.ListDeclVar.verifyListDeclVariable(ListDeclVar.java:41) - verify ListDeclVar : start
+DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:40) - verify DeclVar : start albusPersevalWulfricBrianDumblerdore
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:103) - verify AbstractExpr RValue : start
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:134) - verify AbstractExpr Rvalue : end
+DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:61) - Verify DeclVar : end
+DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:40) - verify DeclVar : start essai2
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:103) - verify AbstractExpr RValue : start
+DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:134) - verify AbstractExpr Rvalue : end
+DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:61) - Verify DeclVar : end
+DEBUG fr.ensimag.deca.tree.ListDeclVar.verifyListDeclVariable(ListDeclVar.java:45) - verify ListDeclVar : end
+DEBUG fr.ensimag.deca.tree.ListInst.verifyListInst(ListInst.java:33) - Verify ListInst : start
+DEBUG fr.ensimag.deca.tree.ListInst.verifyListInst(ListInst.java:38) - Verify ListInst : stop
+DEBUG fr.ensimag.deca.tree.Main.verifyMain(Main.java:42) - verify Main: end
+`> [6, 0] Program
+   +> ListDeclClass [List with 3 elements]
+   |  []> [6, 6] DeclClass
+   |  ||  +> [6, 6] Identifier (HarryPotter)
+   |  ||  |  definition: type defined at [6, 6], type=HarryPotter
+   |  ||  +> Identifier (Object)
+   |  ||  |  definition: type (builtin), type=Object
+   |  []> [9, 6] DeclClass
+   |  ||  +> [9, 6] Identifier (Nimbus2000)
+   |  ||  |  definition: type defined at [9, 6], type=Nimbus2000
+   |  ||  +> [9, 17] Identifier (HarryPotter)
+   |  ||  |  definition: type defined at [6, 6], type=HarryPotter
+   |  []> [13, 6] DeclClass
+   |      +> [13, 6] Identifier (VifDOr)
+   |      |  definition: type defined at [13, 6], type=VifDOr
+   |      +> [13, 13] Identifier (HarryPotter)
+   |      |  definition: type defined at [6, 6], type=HarryPotter
+   `> [16, 0] Main
+      +> ListDeclVar [List with 2 elements]
+      |  []> [17, 18] DeclVar
+      |  ||  +> [17, 4] IdentifierArray
+      |  ||  |  type: HarryPotter_1
+      |  ||  +> [17, 18] Identifier (albusPersevalWulfricBrianDumblerdore)
+      |  ||  |  definition: variable defined at [17, 18], type=HarryPotter_1
+      |  ||  `> [17, 57] Initialization
+      |  ||     `> [17, 57] ArrayLiteral
+      |  ||        type: HarryPotter_1
+      |  ||        +> [17, 59] ListExpr [List with 2 elements]
+      |  ||        |  []> [17, 59] New
+      |  ||        |  ||  type: Nimbus2000
+      |  ||        |  ||  `> [17, 63] Identifier (Nimbus2000)
+      |  ||        |  ||     definition: type defined at [9, 6], type=Nimbus2000
+      |  ||        |  []> [17, 77] New
+      |  ||        |      type: VifDOr
+      |  ||        |      `> [17, 81] Identifier (VifDOr)
+      |  ||        |         definition: type defined at [13, 6], type=VifDOr
+      |  []> [18, 17] DeclVar
+      |      +> [18, 4] IdentifierArray
+      |      |  type: Nimbus2000_1
+      |      +> [18, 17] Identifier (essai2)
+      |      |  definition: variable defined at [18, 17], type=Nimbus2000_1
+      |      `> [18, 26] Initialization
+      |         `> [18, 26] ArrayLiteral
+      |            type: Nimbus2000_1
+      |            +> [18, 27] ListExpr [List with 2 elements]
+      |            |  []> [18, 27] New
+      |            |  ||  type: Nimbus2000
+      |            |  ||  `> [18, 31] Identifier (Nimbus2000)
+      |            |  ||     definition: type defined at [9, 6], type=Nimbus2000
+      |            |  []> [18, 45] New
+      |            |      type: Nimbus2000
+      |            |      `> [18, 49] Identifier (Nimbus2000)
+      |            |         definition: type defined at [9, 6], type=Nimbus2000
+      `> ListInst [List with 0 elements]

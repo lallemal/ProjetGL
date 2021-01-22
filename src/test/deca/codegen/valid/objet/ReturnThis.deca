@@ -1,0 +1,24 @@
+// Description :
+//    Test génération de code return this
+//
+// Resultats decac:
+// Resultat ima: ils sont égaux en retournant le this
+
+
+class A{
+    
+    int x;
+
+    A get(){
+        return this;
+    }
+}
+{
+    A a = new A();
+    A b = a.get();
+    if (a.equals(b)){
+        print("ils sont égaux en retournant le this");
+    }
+    
+}
+

@@ -17,7 +17,7 @@ PATH=./src/test/script/launchers:"$PATH"
 
 
 # Test pas d'erreur lors de test_synt pour les fichiers valides
-nb=$(ls -l | wc -l)
+nb=$(ls -l src/test/deca/syntax/valid/objet/*.deca| wc -l)
 echo "------- Démarrage des tests valide $(($nb-1))"
 
 for i in src/test/deca/syntax/valid/objet/*.deca
@@ -33,7 +33,7 @@ done
 
 
 # Test l'erreur des tests invalides
-nb=$(ls -l | wc -l)
+nb=$(ls -l src/test/deca/syntax/invalid/objet/*.deca | wc -l)
 echo "------- Démarrage des tests invalide $(($nb-1))"
 
 for i in src/test/deca/syntax/invalid/objet/*.deca

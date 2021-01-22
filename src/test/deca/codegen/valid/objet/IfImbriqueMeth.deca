@@ -1,0 +1,35 @@
+// Description :
+//    Test génération de code sur une des if imbriqué dans une méthode 
+//
+// Resultats decac:
+// Resultat ima: le résultat est: 3
+
+
+class A{
+    
+    int x;
+
+    int getNb(){
+        if (x > 1){
+            if (x > 2){
+                if (x == 3){
+                    return x;
+                }
+                else{
+                    return x;
+                }
+            }
+            else {
+                return x;
+            }
+         }
+         else{
+            return 0;
+        }
+    }
+}
+{
+     A a = new A();
+     a.x = 3;
+     println("le résultat est: ", a.getNb());
+}

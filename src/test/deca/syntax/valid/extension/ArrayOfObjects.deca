@@ -3,7 +3,7 @@ class A{
 }
 
 {
-	A[][] tabObjects = new A[4][];
+	A[][] tabObjects = new A[4][5];
 	tabObjects = new A[10][25];
 	tabObjects[9][10] = new A();
 }

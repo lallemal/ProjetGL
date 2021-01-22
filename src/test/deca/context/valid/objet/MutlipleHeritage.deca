@@ -1,0 +1,92 @@
+// Description :
+//    Test génération de code, avec de multiples héritages
+//
+// Resultats decac:
+// Resultat ima:
+
+//Héritage:
+// A
+// B C
+//   D 
+//   E
+//   F
+
+
+class A{
+    int a = 0;
+    float aa = 0.1;
+    boolean aaa = true;
+
+    void printClass(){
+        println("je suis dans A");
+    }
+}
+class B extends A{
+    int b;
+    float bb;
+    boolean bbb =false;
+}
+class C extends A{
+    int c;
+    float cc;
+    boolean ccc=false;
+
+    void printClass(){
+        println("je suis dans C");
+    }
+}
+class D extends C{
+    int d;
+    float dd;
+    boolean ddd=true;
+
+    void printClass(){
+        println("je suis dans D");
+    }
+
+    void printD(){
+        println("je suis issu directement de D");
+    }
+}
+class E extends D{
+    int e;
+    float ee;
+    boolean eee=false;
+
+    void printClass(){
+        println("je suis dans E");
+    }
+}
+class F extends E{
+    int f;
+    float ff;
+    boolean fff =true;
+
+    void printClass(){
+        println("je suis dans F");
+    }
+}
+{
+    A objetA = new A();
+    B objetB = new B();
+    C objetC = new C();
+    D objetD = new D();
+    E objetE = new E();
+    F objetF = new F();
+    objetF.printClass();
+    objetA.printClass();
+    objetE.printD();
+    //pas normal, F hérite de tous les fields mais pas de leur initialisation
+    if (objetF.fff){
+        if (!objetF.eee){
+            if (objetF.ddd){
+                if (!objetF.ccc){
+                    if (objetF.aaa){
+                        println("Waouh j'ai un super héritage!");
+                    }
+                }
+            }
+        }
+    }
+}
+

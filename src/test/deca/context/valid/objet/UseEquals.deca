@@ -1,0 +1,31 @@
+// Description :
+//    Test génération de code, utilisation de equals
+//
+// Resultats decac:
+// Resultat ima: 
+// Ils ne sont pas égaux...
+// Ils sont égaux!!
+
+
+class A{
+    int y; 
+    
+}
+{
+    A a = new A();
+    A b = new A();
+    
+    if (a.equals(b)){
+        println("Ils sont égaux!!");
+    }
+    else{
+        println("Ils ne sont pas égaux...");
+    }
+    a = b;
+    if (a.equals(b)){
+        println("Ils sont égaux!!");
+    }
+    else{
+        println("Ils ne sont pas égaux...");
+    }
+}

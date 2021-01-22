@@ -1,0 +1,32 @@
+// Description :
+//    Test génération de code sur une méthode récursive 
+//
+// Resultats decac:
+// Resultat ima: 
+
+
+class A{
+    
+    int x;
+
+    int fact(int n){
+        if (n > 0){
+            if (n == 1){
+                return 1;
+            }
+            else{
+                return this.fact(n -1);
+            }
+        }
+        else{
+            return 0;
+        }
+    }
+}
+{
+    A a = new A();
+
+    print(a.fact(3));
+    
+}
+

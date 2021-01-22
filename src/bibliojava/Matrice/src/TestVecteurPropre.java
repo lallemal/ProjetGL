@@ -10,7 +10,6 @@ public class TestVecteurPropre {
 		
 		// test vecteur propre
 		m2.setInitFloat(mat2, 3, 3);
-		vect = m2.Puissancevpvectp();
 		System.out.println("AX=");
 		m2.prodMat(vect).print();
 		System.out.println("lX=");

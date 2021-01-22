@@ -10,6 +10,10 @@ public class Racine {
 			return t;
 		}
 	}
+	
+	
+	
+	
 	float sqrt(float a) {
 		float xinit = 1;
 		int i = 0;

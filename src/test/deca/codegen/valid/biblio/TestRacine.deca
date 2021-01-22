@@ -1,0 +1,17 @@
+class Racine {
+	// calcul la racine carre par methode de Héron
+        float absolue(float t){
+            float j = t;
+            if (t < 0){
+                j = -t;
+            }
+            return j;
+        } 
+}
+{
+    float q = 0;
+    Racine r = new Racine();
+    float f = r.absolue(1.0E10);
+    print(q);
+    
+}

@@ -1,0 +1,13 @@
+class Racine {
+	// calcul la racine carre par methode de Héron
+        float absolue(float t){
+            float j = t;
+            if (t < 0){
+                j = -t;
+            }
+            return j;
+        } 
+}
+
+
+

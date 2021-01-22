@@ -1,8 +1,8 @@
-// mismatched input ';' expecting IDENT
+// no viable alternative at input 'new;'
 // Description : new seul
 // Resultat : erreur en ligne 7: new a besoin d'un membre
 
 
 {
-    new ;
+    new;
 }

@@ -14,13 +14,17 @@ import java.io.PrintStream;
 
 public class ArraySelection extends AbstractLValue{
 
-	final private AbstractIdentifier ident;
+	final private AbstractExpr ident;
 	final private ListExpr memory; 
-	public ArraySelection(AbstractIdentifier ident, ListExpr memory) {
+	public ArraySelection(AbstractExpr ident, ListExpr memory) {
 		Validate.notNull(ident);
 		Validate.notNull(memory);
 		this.ident = ident;
 		this.memory = memory;
+	}
+
+	public AbstractExpr getIdent() {
+		return ident;
 	}
 
 	@Override
@@ -42,18 +46,9 @@ public class ArraySelection extends AbstractLValue{
 			compiler.addInstruction(new SUBSP(4-nbPop));
 			return;
 		};
+		ident.codeExp(compiler, n);
 		compiler.getLabelError().setErrorIndexOutOfRange(true);
-		ExpDefinition expDefinition = ident.getExpDefinition();
-		if (expDefinition.isField()) {
-			compiler.addInstruction(new LOAD(new RegisterOffset(-2, Register.LB), Register.getR(n)));
-			compiler.addInstruction(new LOAD(new RegisterOffset( ((FieldDefinition) expDefinition).getIndex()+1, Register.getR(n)), Register.getR(n)));
 
-		} else if (expDefinition.isParam()) {
-			int index = ((ParamDefinition) expDefinition).getIndex();
-			compiler.addInstruction(new LOAD(new RegisterOffset(-(3 + index), Register.LB), Register.getR(n)));
-		} else {
-			compiler.addInstruction(new LOAD(ident.getExpDefinition().getOperand(), Register.getR(n)));
-		}
 		compiler.addInstruction(new TSTO(1));
 		compiler.addInstruction(new BOV(compiler.getLabelError().getLabelPilePleine()));
 		compiler.addInstruction(new PUSH(Register.getR(n)));

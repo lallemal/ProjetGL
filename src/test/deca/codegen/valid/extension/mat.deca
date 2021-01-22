@@ -80,5 +80,7 @@ class Mat {
     matrice.printMat();
     println("-------------------");
     matrice2.printMat();
+    println((matrice2.getMat())[1][2]);
+    println((matrice.mat)[1][1]);
 
 }

@@ -1,0 +1,16 @@
+class A {
+    int[] tab;
+	int size;
+
+    void setInitCopy(int[] tab, int size){
+            int i = 0;
+            this.tab = new int[size];
+            while(i < size){
+                (this.tab)[i] = tab[i];
+                i = i + 1;
+            }
+            this.size = size;
+    }
+
+
+}

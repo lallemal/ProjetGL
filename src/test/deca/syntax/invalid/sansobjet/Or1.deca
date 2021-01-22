@@ -1,4 +1,4 @@
-//Or1.deca:6:5: mismatched input '||' expecting {';', ',', '='}
+//Or1.deca:6:5: mismatched input '||' expecting {IDENT, '['}
 //Test or en fin de noeud;
 //
 {

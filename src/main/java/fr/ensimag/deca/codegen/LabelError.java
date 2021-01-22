@@ -34,14 +34,13 @@ public class LabelError {
 	private Label tasPlein;
 	private boolean errorDereferencementNull;
 	private Label dereferencementNull;
-<<<<<<< HEAD
-	private boolean errorIndexOutOfRange;
-	private Label indexOutOfRange;
-=======
 	private boolean errorCastFail;
 	private Label castFail;
+	private boolean errorIndexOutOfRange;
+	private Label indexOutOfRange;
 	
 	public void setAllTrue() {
+		this.setErrorIndexOutOfRange(true);
 		this.setErrorCastFail(true);
 		this.setErrorDereferencementNull(true);
 		this.setErrorTasPlein(true);
@@ -53,7 +52,6 @@ public class LabelError {
 		this.setErrorMod0(true);
 		this.setErrorDiv0(true);
 	}
->>>>>>> objet-gencode
 	
 	public void setErrorDiv0(boolean b) {
 		errorDiv0 = b;
@@ -127,19 +125,20 @@ public class LabelError {
 		return dereferencementNull;
 	}
 	
-	public void setErrorIndexOutOfRange(boolean b) {
-		errorIndexOutOfRange = b;
-	}
-	
-	public Label getLabelIndexOutOfRange() {
-		return indexOutOfRange;
-
 	public void setErrorCastFail(boolean b) {
 		errorCastFail = b;
 	}
 	
 	public Label getLabelCastFail() {
 		return castFail;
+	}
+	
+	public void setErrorIndexOutOfRange(boolean b) {
+		errorIndexOutOfRange = b;
+	}
+	
+	public Label getLabelIndexOutOfRange() {
+		return indexOutOfRange;
 	}
 	
 	public LabelError() {
@@ -195,11 +194,11 @@ public class LabelError {
 		if (errorDereferencementNull) {
 			addError(compiler, dereferencementNull, "dereferencement de null", "Erreur : dereferencement de null");
 		}
-		if (errorIndexOutOfRange) {
-			addError(compiler, indexOutOfRange, "index out of range", "Erreur : index out of range");
-		}
 		if (errorCastFail) {
 			addError(compiler, castFail, "cast impossible", "Erreur : cast impossible");
+		}
+		if (errorIndexOutOfRange) {
+			addError(compiler, indexOutOfRange, "index out of range", "Erreur : index out of range");
 		}
 	}
 	

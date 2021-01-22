@@ -25,6 +25,7 @@ public class ArraySelection extends AbstractLValue{
 
 	@Override
 	protected void codeExp(DecacCompiler compiler, int n) {
+		compiler.getLabelError().setErrorIndexOutOfRange(true);
 	    compiler.addInstruction(new LOAD(ident.getExpDefinition().getOperand(), Register.getR(n)));
 	    compiler.addInstruction(new LOAD(new RegisterOffset(0, Register.getR(n)), Register.getR(n+1)));
 	    compiler.addInstruction(new LOAD(new ImmediateInteger(0), Register.getR(n+2)));
@@ -32,6 +33,8 @@ public class ArraySelection extends AbstractLValue{
 		for (int i = memory.size() - 1;  i >= 0 ; i--) {
 			AbstractExpr expr = memory.getList().get(i);
 			expr.codeExp(compiler, n+4);
+			compiler.addInstruction(new CMP(new RegisterOffset(i, Register.getR(n+1)), Register.getR(n+4)));
+			compiler.addInstruction(new BGE(compiler.getLabelError().getLabelIndexOutOfRange()));
 			compiler.addInstruction(new MUL(Register.getR(n+3), Register.getR(n+4)));
 			compiler.addInstruction(new ADD(Register.getR(n+4), Register.getR(n+2)));
 			compiler.addInstruction(new MUL(new RegisterOffset(i, Register.getR(n+1)), Register.getR(n+3)));

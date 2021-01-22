@@ -15,6 +15,11 @@ public class ArrayLiteral extends AbstractExpr{
 		this.elements = elements;
 	}
 	
+	@Override
+	public void codeExp(DecacCompiler compiler, int n) {
+		
+	}
+	
 	private static boolean sameListDim(ListExpr l1, ListExpr l2) {
 		if (l1.size() != l2.size()) {
 			return false;

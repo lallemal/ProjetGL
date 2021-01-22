@@ -4,8 +4,20 @@ import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.deca.tools.SymbolTable;
+import fr.ensimag.ima.pseudocode.ImmediateInteger;
+import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.RegisterOffset;
+import fr.ensimag.ima.pseudocode.RegisterOffsetRegister;
+import fr.ensimag.ima.pseudocode.instructions.ADD;
+import fr.ensimag.ima.pseudocode.instructions.BGE;
+import fr.ensimag.ima.pseudocode.instructions.CMP;
+import fr.ensimag.ima.pseudocode.instructions.LEA;
+import fr.ensimag.ima.pseudocode.instructions.LOAD;
+import fr.ensimag.ima.pseudocode.instructions.MUL;
+import fr.ensimag.ima.pseudocode.instructions.STORE;
 
 import java.io.PrintStream;
+import java.util.LinkedList;
 
 public class ArrayLiteral extends AbstractExpr{
 
@@ -15,9 +27,56 @@ public class ArrayLiteral extends AbstractExpr{
 		this.elements = elements;
 	}
 	
+	public ListExpr getElements() {
+		return elements;
+	}
+	
 	@Override
 	public void codeExp(DecacCompiler compiler, int n) {
 		
+		NewArray initArray = new NewArray(null, getDimension());
+		initArray.codeExp(compiler, n);
+		
+		for (int i=0; i<elements.size(); i++) {
+			LinkedList<Integer> coords = new LinkedList<Integer>();
+			initValueRec(n, coords, compiler);
+		}
+		
+	}
+	
+	protected void initValueRec(int n, LinkedList<Integer> coords, DecacCompiler compiler) {
+		
+		if (elements.isEmpty()) {
+			return;
+		} else if (elements.getList().get(0).getType().isArray()) {
+			ArrayLiteral subArray = (ArrayLiteral) elements.getList().get(0); // Cast succeed by construction of elements
+			for (int i=0; i<subArray.getElements().size(); i++) {
+				LinkedList<Integer> coordsExtended = new LinkedList<Integer>(coords);
+				coordsExtended.add(i);
+				subArray.initValueRec(n, coordsExtended, compiler);
+			}
+		} else {
+			for (int i=0; i<elements.size(); i++) {
+				LinkedList<Integer> coordsExtended = new LinkedList<Integer>(coords);
+				coordsExtended.add(i);
+				initValue(n, coordsExtended, compiler, i);
+			}
+		}
+	}
+	
+	protected void initValue(int n, LinkedList<Integer> coords, DecacCompiler compiler, int lastCoord) {
+		compiler.addInstruction(new LOAD(new RegisterOffset(0, Register.getR(n)), Register.getR(n+1)));
+		int s = 0;
+		int m = 1;
+		int coord;
+		for (int i = coords.size() - 1;  i >= 0 ; i--) {
+			coord = coords.get(i);
+			coord = coord * m;
+			s += coord;
+			m = m * elements.size();
+		}
+		elements.getList().get(lastCoord).codeExp(compiler, n+1);
+		compiler.addInstruction(new STORE(Register.getR(n+1), new RegisterOffset(s+1, Register.getR(n))));
 	}
 	
 	private static boolean sameListDim(ListExpr l1, ListExpr l2) {

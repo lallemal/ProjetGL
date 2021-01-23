@@ -229,26 +229,6 @@ list_hook_expr returns[ListExpr tree]
     ;
     
     
-list_hook_empty_expr returns[ListExpr tree]
-@init   {
-	AbstractExpr element;
-	$tree = new ListExpr();
-        }
-    : (LHOOK e1=expr {
-    	$tree.add($e1.tree);
-        } RHOOK
-       (LHOOK {
-       	    element = new NoElement();
-       }
-            (e2=expr{
-       		element = $e2.tree;
-       	
-        })?{
-      		$tree.add(element);
-        }
-       RHOOK)*)?
-    ;
-
 expr returns[AbstractExpr tree]
     : assign_expr {
             assert($assign_expr.tree != null);

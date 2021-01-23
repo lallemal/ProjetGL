@@ -139,3 +139,4 @@
              |  definition: variable defined at [23, 6], type=A
              +> [30, 6] Identifier (castA)
              |  definition: method defined at [18, 4], type=float
+        

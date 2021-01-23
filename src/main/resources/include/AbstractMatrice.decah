@@ -2,11 +2,10 @@ class AbstractMatrice {
     int nbl;
     int nbc;
     int getNbl(){
-        return nbl;
+        return this.nbl;
     }
-
     int getNbc(){
-        return nbc;
+        return this.nbc;
     }
 }
 

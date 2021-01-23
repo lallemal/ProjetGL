@@ -113,5 +113,126 @@ class MatriceFloat extends AbstractMatrice{
         }
         println("]");
     }
+
+    MatriceFloat sumMat(MatriceFloat m) {
+        float [][] tabfinal;
+        MatriceFloat matfinal;
+        int i = 0;
+        int j = 0;
+        if (this.nbc != m.getNbc() && this.nbl != m.nbl) {
+            return null;
+        }
+        tabfinal = new float[this.nbl][m.getNbc()];
+        matfinal = new MatriceFloat();
+        matfinal.setInit(tabfinal, this.nbl, m.getNbc());
+        while(i < this.nbl) {
+            while (j < this.nbc) {
+                tabfinal[i][j] = (this.matfloat)[i][j] + m.getCase(i, j);
+                j = j + 1;
+            }
+            j = 0;
+            i = i + 1;
+        }
+        return matfinal;
+    }
+
+    MatriceFloat transpose() {
+        float[][] tab; 
+        MatriceFloat transpose;
+        int i = 0;
+        int j = 0;
+        tab = new float[this.getNbc()][this.getNbl()];
+        while (i < this.nbc) {
+            while(j < this.nbl) {
+                tab[i][j] = this.getCase(j, i);
+                j = j + 1;
+            }
+            j = 0;
+            i = i + 1;
+        }
+        transpose = new MatriceFloat();
+        transpose.setInit(tab, this.getNbc(), this.getNbl());
+        return transpose;
+    }
+
+
+
+    /* algorithme utilse pivot de Gauss transforme la matrice directement*/
+
+    // echange deux lignes
+    void echange(int li, int  lj) {
+        int i = 0;
+        float[] copieligne = new float[this.getNbc()];
+        while (i < this.nbc) {
+            copieligne[i] = (this.matfloat)[li][i];
+            i = i + 1;
+        }
+        i = 0;
+        // copie de lj dans li
+        while (i < this.nbc) {
+            (this.matfloat)[li][i] = (this.matfloat)[lj][i];
+            i = i + 1;
+        }
+        i = 0;
+        // copie de li dans lj
+        while (i < this.nbc) {
+            (this.matfloat)[lj][i] = copieligne[i];
+            i = i + 1;
+        }
+    }
+
+    // multiplication par un scalaire non nul renvoi false si echoue
+    boolean multScal(int li, float scalaire) {
+        int i = 0;
+        if(scalaire == 0) {
+            return false;
+        }
+        while(i < this.nbc) {
+            (this.matfloat)[li][i] = (this.matfloat)[li][i]* scalaire;
+            i = i + 1;
+        }
+        return true;
+    }
+
+
+    // ajout du multiple par une autre ligne ex: L1 <- L1 + x*L2
+    void addMultLine(int lmodif, int lscal, float scalaire) {
+        int i = 0;
+        while(i < this.nbc) {
+            (this.matfloat)[lmodif][i] = (this.matfloat)[lmodif][i] +(this.matfloat)[lscal][i] * scalaire;
+            i = i + 1;
+        }
+    }
+
+    // retourne la valeur absolue du flottant
+    float absolue (float i) {
+        float res = i;
+        if (i < 0) {
+            res = -i;
+        }
+        return res;
+    }
+
+    // tourve la ligne  dans colonne i avec la valeur aboslue la plus grand 
+    //retourne l'indice de ligne le plus grand
+    int indicePivot(int icolonne, int r) {
+        float compare;
+        int i = r+1;
+        // indice du max
+        int indice = i;
+        float max = this.absolue((this.matfloat)[i][icolonne]);
+        while(i < this.nbl) {
+            compare = this.absolue((this.matfloat)[i][icolonne]);
+            if(max < compare) {
+                indice = i;
+            }
+            i = i + 1;
+        }
+        return indice;
+    }
+
+
+
+
 }
 

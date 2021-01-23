@@ -112,9 +112,11 @@ public class DeclMethod extends AbstractDeclMethod {
     	n = body.codeGenBody(compiler, labelFin);
     	// Fin : on verifie quil y a eu return si ce nest pas une void fonction
     	if (!type.getType().isVoid()) {
-    		compiler.addInstruction(new WSTR("Erreur : sortie de la methode "+className+"."+name.getName().getName()+" sans return"));
-    		compiler.addInstruction(new WNL());
-    		compiler.addInstruction(new ERROR());
+    		if (!compiler.getCompilerOptions().isNoCheck()) {
+	    		compiler.addInstruction(new WSTR("Erreur : sortie de la methode "+className+"."+name.getName().getName()+" sans return"));
+	    		compiler.addInstruction(new WNL());
+	    		compiler.addInstruction(new ERROR());
+    		}
     	}
     	
     	compiler.addLabel(labelFin);

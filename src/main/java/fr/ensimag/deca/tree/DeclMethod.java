@@ -94,7 +94,9 @@ public class DeclMethod extends AbstractDeclMethod {
     	if (n+body.getVar().size() > 0) {
     		compiler.getLabelError().setErrorPilePleine(true);
     		compiler.addInstruction(new TSTO(n+body.getVar().size()));
-    		compiler.addInstruction(new BOV(compiler.getLabelError().getLabelPilePleine()));
+    		if (!compiler.getCompilerOptions().isNoCheck()) {
+    			compiler.addInstruction(new BOV(compiler.getLabelError().getLabelPilePleine()));
+    		}
     		if (body.getVar().size() > 0) {
     	    	compiler.addInstruction(new ADDSP(body.getVar().size()));
     		}

@@ -45,13 +45,17 @@ public class NewArray extends AbstractExpr{
 		}
 	    compiler.addInstruction(new ADD(new ImmediateInteger(1), Register.getR(n)));
 	    compiler.addInstruction(new NEW(Register.getR(n), Register.getR(n)));
-	    compiler.addInstruction(new BOV(compiler.getLabelError().getLabelPilePleine()));
+	    if (!compiler.getCompilerOptions().isNoCheck()) {
+	    	compiler.addInstruction(new BOV(compiler.getLabelError().getLabelPilePleine()));
+	    }
 	    // TSTO :
 		if (n + 2 <= compiler.getRmax()) {
 		    compiler.setRegistreUsed(n+1);
 		    compiler.setRegistreUsed(n+2);
 			compiler.addInstruction(new NEW(memory.size(), Register.getR(n + 1)));
-			compiler.addInstruction(new BOV(compiler.getLabelError().getLabelPilePleine()));
+			if (!compiler.getCompilerOptions().isNoCheck()) {
+				compiler.addInstruction(new BOV(compiler.getLabelError().getLabelPilePleine()));
+			}
 			int i = 0;
 			for (AbstractExpr expr : memory.getList()) {
 				expr.codeExp(compiler, n + 2);
@@ -68,7 +72,9 @@ public class NewArray extends AbstractExpr{
 				}
 				compiler.setRegistreUsed(n+1);
 				compiler.addInstruction(new NEW(memory.size(), Register.getR(n + 1)));
-				compiler.addInstruction(new BOV(compiler.getLabelError().getLabelPilePleine()));
+				if (!compiler.getCompilerOptions().isNoCheck()) {
+					compiler.addInstruction(new BOV(compiler.getLabelError().getLabelPilePleine()));
+				}
 				compiler.addInstruction(new PUSH(Register.getR(n+1)));
 				int i = 0;
 				for (AbstractExpr expr : memory.getList()) {
@@ -87,7 +93,9 @@ public class NewArray extends AbstractExpr{
 				}
 				compiler.addInstruction(new PUSH(Register.getR(n)));
 				compiler.addInstruction(new NEW(memory.size(), Register.getR(n)));
-				compiler.addInstruction(new BOV(compiler.getLabelError().getLabelPilePleine()));
+				if (!compiler.getCompilerOptions().isNoCheck()) {
+					compiler.addInstruction(new BOV(compiler.getLabelError().getLabelPilePleine()));
+				}
 				compiler.addInstruction(new PUSH(Register.getR(n)));
 				int i = 0;
 				for (AbstractExpr expr : memory.getList()) {

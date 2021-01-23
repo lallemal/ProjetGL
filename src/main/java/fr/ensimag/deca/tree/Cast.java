@@ -40,7 +40,9 @@ public class Cast extends AbstractExpr{
 				expression.codeExp(compiler, n);
 				compiler.getLabelError().setErrorConvInt(true);
 				compiler.addInstruction(new INT(Register.getR(n), Register.getR(n)));
-				compiler.addInstruction(new BOV(compiler.getLabelError().getLabelErrorINT()));
+				if (!compiler.getCompilerOptions().isNoCheck()) {
+					compiler.addInstruction(new BOV(compiler.getLabelError().getLabelErrorINT()));
+				}
 			}
 		} else if (T.isFloat()) {
 			if (expression.getType().isFloat()) {
@@ -49,7 +51,9 @@ public class Cast extends AbstractExpr{
 				expression.codeExp(compiler, n);
 				compiler.getLabelError().setErrorConvFloat(true);
 				compiler.addInstruction(new FLOAT(Register.getR(n), Register.getR(n)));
-				compiler.addInstruction(new BOV(compiler.getLabelError().getLabelErrorFLOAT()));
+				if (!compiler.getCompilerOptions().isNoCheck()) {
+					compiler.addInstruction(new BOV(compiler.getLabelError().getLabelErrorFLOAT()));
+				}
 			}
 		} else if (T.isBoolean()) {
 			if (expression.getType().isBoolean()) {

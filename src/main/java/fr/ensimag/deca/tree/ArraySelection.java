@@ -114,7 +114,10 @@ public class ArraySelection extends AbstractLValue{
 
 	@Override
 	public void decompile(IndentPrintStream s) {
-		// TODO Auto-generated method stub
+		ident.decompile(s);
+                s.print("[");
+                memory.decompile(s);
+                s.print("]");
 		
 	}
 
@@ -127,7 +130,8 @@ public class ArraySelection extends AbstractLValue{
 
 	@Override
 	protected void iterChildren(TreeFunction f) {
-		// TODO Auto-generated method stub
+		ident.iter(f);
+                memory.iterChildren(f);
 		
 	}
 

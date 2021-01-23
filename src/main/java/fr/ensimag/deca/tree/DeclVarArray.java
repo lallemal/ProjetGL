@@ -36,7 +36,15 @@ public class DeclVarArray extends AbstractDeclVar{
 
 	@Override
 	public void decompile(IndentPrintStream s) {
-		// TODO Auto-generated method stub
+		type.decompile(s);
+                s.print("[");
+                if (length != null){
+                    length.decompile(s);
+                }
+                s.print("]");
+                s.print(" ");
+                varName.decompile(s);
+                initialization.decompile(s);
 		
 	}
 
@@ -51,7 +59,10 @@ public class DeclVarArray extends AbstractDeclVar{
 
 	@Override
 	protected void iterChildren(TreeFunction f) {
-		// TODO Auto-generated method stub
+		type.iter(f);
+                length.iter(f);
+                varName.iter(f);
+                initialization.iter(f);
 		
 	}
 

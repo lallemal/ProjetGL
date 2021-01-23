@@ -32,7 +32,10 @@ public class NewMatrix extends AbstractExpr {
 
 	@Override
 	public void decompile(IndentPrintStream s) {
-		// TODO Auto-generated method stub
+		type.decompile(s);
+                s.print(Integer.toString(nbLine));
+                nbColumn.decompile(s);
+                
 		
 	}
 
@@ -44,7 +47,7 @@ public class NewMatrix extends AbstractExpr {
 
 	@Override
 	protected void iterChildren(TreeFunction f) {
-		// TODO Auto-generated method stub
+		type.iter(f);
 		
 	}
 

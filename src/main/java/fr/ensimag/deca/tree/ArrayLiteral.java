@@ -140,7 +140,7 @@ public class ArrayLiteral extends AbstractExpr{
 
 	@Override
 	public void decompile(IndentPrintStream s) {
-		// TODO Auto-generated method stub
+            elements.decompile(s);
 		
 	}
 
@@ -152,7 +152,7 @@ public class ArrayLiteral extends AbstractExpr{
 
 	@Override
 	protected void iterChildren(TreeFunction f) {
-		// TODO Auto-generated method stub
+		elements.iterChildren(f);
 		
 	}
 

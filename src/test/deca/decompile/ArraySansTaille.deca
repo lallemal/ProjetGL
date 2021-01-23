@@ -1,0 +1,15 @@
+// Description :
+//    test décompilation array vide
+//
+// Resultats (en comparaison avec le résultat attendu 
+// disponible dans le fichier *.deca.ok) :
+//    ok
+
+class A{
+    int[] array1;
+}
+{
+    // PB ici null array2
+    int[] array2;
+    A a = new A();
+}

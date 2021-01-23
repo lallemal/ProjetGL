@@ -101,7 +101,7 @@ public class IdentifierMatrix extends AbstractIdentifier {
 
 	@Override
 	protected void iterChildren(TreeFunction f) {
-		// TODO Auto-generated method stub
+		varName.iter(f);
 
 	}
 	@Override

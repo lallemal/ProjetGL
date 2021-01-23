@@ -37,7 +37,11 @@ public class DeclVarMatrix extends AbstractDeclVar {
 
 	@Override
 	public void decompile(IndentPrintStream s) {
-		// TODO Auto-generated method stub
+		type.decompile(s);
+                s.print(" ");
+                varName.decompile(s);
+                s.print("[][]");
+                initialization.decompile(s);
 
 	}
 
@@ -51,7 +55,9 @@ public class DeclVarMatrix extends AbstractDeclVar {
 
 	@Override
 	protected void iterChildren(TreeFunction f) {
-		// TODO Auto-generated method stub
+		type.iter(f);
+                varName.iter(f);
+                initialization.iter(f);
 
 	}
 

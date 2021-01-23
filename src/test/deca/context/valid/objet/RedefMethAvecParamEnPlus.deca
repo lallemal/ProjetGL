@@ -1,0 +1,18 @@
+// The redefinition of this method has not the same signature as the method defined in the super class
+// Description :
+//    Test génération de code, méthode qui override equals mais avec un paramètre en plus
+//
+// Resultats decac:
+// Resultat ima: 
+
+
+class A{
+    boolean b = true;
+    
+    boolean equals(Object other, boolean bool){
+        return b;
+    }
+}
+{
+    A a = new A();
+}

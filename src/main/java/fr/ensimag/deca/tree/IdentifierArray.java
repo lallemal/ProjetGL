@@ -99,8 +99,8 @@ public class IdentifierArray extends AbstractIdentifier{
 
 	@Override
 	protected void iterChildren(TreeFunction f) {
-		// TODO Auto-generated method stub
-		
+		varName.iter(f);
+             	
 	}
 	@Override
 	public Type verifyMethod(DecacCompiler compiler, EnvironmentExp localEnv) throws ContextualError {

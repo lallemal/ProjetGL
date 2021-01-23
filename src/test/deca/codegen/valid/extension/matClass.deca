@@ -1,0 +1,24 @@
+// Description : Test with calling method on object inside an Array
+// Result : OK. At execution, println(1) 20 fois
+
+class A {
+    void printA() {
+        println(1);
+    }
+}
+
+
+{
+    int n = 20;
+    int i = 0;
+    A[] matA = new A[n];
+    while (i < n) {
+        matA[i] = new A();
+        i = i + 1;
+    }
+    i = 0;
+    while (i<n) {
+        (matA[i]).printA();
+        i = i + 1;
+    }
+}

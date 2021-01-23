@@ -1,7 +1,0 @@
-{
-    boolean f = true;
-    if (f == true){
-        print("OK");
-    }
-
-}

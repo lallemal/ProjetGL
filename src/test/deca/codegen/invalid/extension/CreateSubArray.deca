@@ -1,3 +1,6 @@
+// The dimension of the selection is different than the dimension of the object
+// Description : Creation of Array by new & subArray by Literal
+// Resultat : Invalid : impossible to create a sub Matrix
 {
 	int[][] mat = new int[4][5];
 	

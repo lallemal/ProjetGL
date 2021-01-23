@@ -1,3 +1,5 @@
+// Description : Test with assign a new class
+// Result : Clear
 class T{
     int [] t;
 }

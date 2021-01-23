@@ -8,8 +8,7 @@ class Morpion {
 		while( i < 3) {
 			while(j < 3) {
 				print("|");
-				print(plateau[i][j]);
-				if(plateau[i][j] == 0) {
+				if(plateau[i][j] == 1) {
 					print("x");
 				}else if(plateau[i][j] == 2) {
 					print("o");
@@ -55,6 +54,7 @@ class Morpion {
 	    int numeroCase;
 	    int nbJoueur = 0;
 		boolean finish = false;
+        int nbTour = 0;
 		println(" xxxxxxxxx Bienvenue dans le jeu du morpion. ooooooooo");
 		println(" Pour désigner une case, entrez le numéro correspondant à cette case.");
 		println(" Le joueur1, celui qui commence aura les x et l'autre les o.");
@@ -72,21 +72,28 @@ class Morpion {
 				}
 			}
 			nbJoueur = (nbJoueur + 1) % 2;
-			finish = this.someoneWon();
+            nbTour = nbTour + 1;
+            if (nbTour == 9) {
+                finish = true;
+            } else {
+			    finish = this.someoneWon();
+            }
 		}
-		nbJoueur = (nbJoueur + 1) % 2;
-		println("Félicitation au joueur ", (nbJoueur + 1), " pour sa victoire");
+        if (this.someoneWon()) {
+		    nbJoueur = (nbJoueur + 1) % 2;
+            println("Félicitation au joueur ", (nbJoueur + 1), " pour sa victoire");
+        } else {
+            println("Egalite !");
+        }
 		this.printPlateau();
 	}
 }
 
 
 
-
-
 {
     Morpion morp = new Morpion();
-    morp.printPlateau();
+    morp.play();
 }
 
 

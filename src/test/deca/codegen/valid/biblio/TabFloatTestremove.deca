@@ -1,0 +1,31 @@
+//
+//Descritpion: test fonctions tableau de flottant
+//Resultat: OK
+#include "Tab.decah"
+{
+   boolean p ;
+   float[] t = {1.0E0, 2.0E0, 3.0E0, 4.0E0};
+   TabFloat tableau = new TabFloat();
+   tableau.setInit(t,4);
+   println("tableau 4 cases");
+   tableau.affichage();
+   println();
+   println("suppression position 1");
+   tableau.delete(1);
+   tableau.affichage();
+   println();
+   println("suppression tete");
+   tableau.deleteFirst();
+   tableau.affichage();
+   println();
+   println("suppression en queue");
+   tableau.deleteLast();
+   tableau.affichage();
+   println();
+   print("pas de suppression");
+   p = tableau.delete(1000);  
+   /*
+   if (false == true){
+       print("OK");
+   }*/
+}

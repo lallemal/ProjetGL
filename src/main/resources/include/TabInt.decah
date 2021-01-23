@@ -15,7 +15,11 @@ class TabInt extends AbstractTab{
         }
         this.size = size;
     }
-   
+  
+    int getCase(int indice){
+        return (this.tab)[indice];
+    }
+  
     void affichage() {
         int valeur;
     	int i = 0;

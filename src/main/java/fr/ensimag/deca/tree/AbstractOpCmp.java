@@ -75,14 +75,14 @@ public abstract class AbstractOpCmp extends AbstractBinaryExpr {
     @Override
     protected void codeGenBranch(DecacCompiler compiler, boolean evaluate, Label label) {
         DVal opG = getLeftOperand().dval();
-        compiler.setRegistreUsed(3);
-        getRightOperand().codeExp(compiler, 3);
+        compiler.setRegistreUsed(2);
+        getRightOperand().codeExp(compiler, 2);
         if (opG == null) {
-        	compiler.setRegistreUsed(2);
-            getLeftOperand().codeExp(compiler, 2);
+        	compiler.setRegistreUsed(3);
+            getLeftOperand().codeExp(compiler, 3);
             compiler.addInstruction(new CMP(Register.getR(2), Register.getR(3)));
         } else {
-            compiler.addInstruction(new CMP(opG, Register.getR(3)));
+            compiler.addInstruction(new CMP(opG, Register.getR(2)));
         }
     }
 }

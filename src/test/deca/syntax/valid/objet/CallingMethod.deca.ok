@@ -1,31 +1,31 @@
-`> [1, 0] Program
+`> [3, 0] Program
    +> ListDeclClass [List with 1 elements]
-   |  []> [1, 6] DeclClass
-   |      +> [1, 6] Identifier (Test)
-   |      []> [3, 5] DeclField
+   |  []> [3, 6] DeclClass
+   |      +> [3, 6] Identifier (Test)
+   |      []> [5, 5] DeclField
    |          Visibility: PUBLIC
-   |          +> [3, 1] Identifier (int)
-   |          +> [3, 5] Identifier (test)
+   |          +> [5, 1] Identifier (int)
+   |          +> [5, 5] Identifier (test)
    |          `> NoInitialization
-   |      []> [4, 1] DeclMethod
-   |      ||  +> [4, 1] Identifier (public)
-   |      ||  +> [4, 8] Identifier (Test)
-   |      ||  []> [4, 13] DeclParam
-   |      ||      +> [4, 13] Identifier (int)
-   |      ||      +> [4, 17] Identifier (test)
-   |      ||  []> [5, 2] MethodCall
-   |      ||      +> [5, 2] This
-   |      ||      +> [5, 2] Identifier (setTest)
-   |      ||      []> [5, 10] Identifier (test)
-   |      []> [8, 1] DeclMethod
-   |          +> [8, 1] Identifier (void)
-   |          +> [8, 6] Identifier (setTest)
-   |          []> [8, 14] DeclParam
-   |              +> [8, 14] Identifier (int)
-   |              +> [8, 18] Identifier (test)
-   |          []> [9, 2] Assign
-   |              +> [9, 2] Selection
-   |              |  +> [9, 2] This
-   |              |  `> [9, 7] Identifier (test)
-   |              `> [9, 14] Identifier (test)
+   |      []> [6, 1] DeclMethod
+   |      ||  +> [6, 1] Identifier (public)
+   |      ||  +> [6, 8] Identifier (Test)
+   |      ||  []> [6, 13] DeclParam
+   |      ||      +> [6, 13] Identifier (int)
+   |      ||      +> [6, 17] Identifier (test)
+   |      ||  []> [7, 2] MethodCall
+   |      ||      +> [7, 2] This
+   |      ||      +> [7, 2] Identifier (setTest)
+   |      ||      []> [7, 10] Identifier (test)
+   |      []> [10, 1] DeclMethod
+   |          +> [10, 1] Identifier (void)
+   |          +> [10, 6] Identifier (setTest)
+   |          []> [10, 14] DeclParam
+   |              +> [10, 14] Identifier (int)
+   |              +> [10, 18] Identifier (test)
+   |          []> [11, 2] Assign
+   |              +> [11, 2] Selection
+   |              |  +> [11, 2] This
+   |              |  `> [11, 7] Identifier (test)
+   |              `> [11, 14] Identifier (test)
    `> EmptyMain

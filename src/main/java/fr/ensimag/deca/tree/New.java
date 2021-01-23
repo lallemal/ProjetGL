@@ -40,7 +40,9 @@ public class New extends AbstractExpr {
 		compiler.getLabelError().setErrorTasPlein(true);
 		int nbField = ident.getClassDefinition().getNumberOfFields();
 		compiler.addInstruction(new NEW(new ImmediateInteger(nbField+1), Register.getR(n)));
-		compiler.addInstruction(new BOV(compiler.getLabelError().getLabelTasPlein()));
+		if (!compiler.getCompilerOptions().isNoCheck()) {
+			compiler.addInstruction(new BOV(compiler.getLabelError().getLabelTasPlein()));
+		}
 		compiler.addInstruction(new LEA(ident.getClassDefinition().getAddress(), Register.R1));
 		compiler.addInstruction(new STORE(Register.R1, new RegisterOffset(0, Register.getR(n))));
 		compiler.incrementKSP();

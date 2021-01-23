@@ -47,7 +47,9 @@ public class MethodCall extends AbstractExpr{
 		int nbParam = ident.getMethodDefinition().getSignature().size();
 		compiler.getLabelError().setErrorPilePleine(true);
 		compiler.addInstruction(new TSTO(nbParam+1));
-		compiler.addInstruction(new BOV(compiler.getLabelError().getLabelPilePleine()));
+		if (!compiler.getCompilerOptions().isNoCheck()) {
+			compiler.addInstruction(new BOV(compiler.getLabelError().getLabelPilePleine()));
+		}
 		compiler.incrementKSP(nbParam+1);
 		compiler.addInstruction(new ADDSP(nbParam+1));
 		expr.codeExp(compiler, n);

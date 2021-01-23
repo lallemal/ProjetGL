@@ -1,0 +1,22 @@
+// Description :
+//    Test génération de code pour les print
+//
+// Resultats decac:
+// Resultat ima: voir ass.ok
+
+{
+    float x = 16;
+    float y = 24;
+    int i = 0;
+    int j = 1;
+    print("Hello World !");
+    println("Hello ", "World !");
+    println(x);
+    println(i);
+    printlnx(x);
+    printlnx(i);
+    printlnx("Hello World!");
+    printlnx(j);
+    printx(y);
+
+}

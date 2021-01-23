@@ -1,3 +1,19 @@
+// Description :
+//    Test génération de code pour l'assignation
+//
+// Resultats decac:
+// Resultat ima: 
+// 1
+// 1
+// 2
+// 1
+// 1.10000e+00
+// 1.10000e+00
+// 2.00000e+00
+// 2.10000e+00
+// 1.10000e+00
+
+
 {
     int a, b;
     float x, y, z;

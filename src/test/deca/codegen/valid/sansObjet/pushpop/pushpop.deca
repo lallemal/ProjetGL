@@ -1,3 +1,6 @@
+// Description : Tests avec calculs appelant un grand nombre de registre
+//
+// Résultat: voir ass.ok
 {
     int a, b, c, d, e, f;
     a = 1;

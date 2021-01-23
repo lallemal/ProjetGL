@@ -1,0 +1,48 @@
+// Description :
+//    Test génération de code pour les opérateurs booléen
+//
+// Resultats decac:
+// Resultat ima: 
+// 1
+// 1
+// 1
+// 1
+// false
+// Erreur pour ce test
+
+{
+    boolean a = true;
+    boolean b = false;
+    int x = 5;
+    boolean y = x < 5 && x > 0;
+
+    if (!(a && b)) {
+        println(1);
+    }
+
+    if (a || b) {
+        println(1);
+    }
+
+    if (a) {
+        println(1);
+    }
+
+    if (!b) {
+        println(1);
+    }
+    
+    if (y) {
+        println("true");
+    } else {
+        println("false");
+    }
+    
+    
+    if(!(a || b) || ((!a || !b) && (x <y)) ){
+	println("Succès");
+    }else{
+	println("Erreur pour ce test");
+    }
+
+}

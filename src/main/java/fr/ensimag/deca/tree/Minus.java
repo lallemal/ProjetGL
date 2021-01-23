@@ -21,7 +21,7 @@ public class Minus extends AbstractOpArith {
     	if (this.getType().isFloat()) {
     		if (!compiler.getCompilerOptions().isNoCheck()) {
     			compiler.getLabelError().setErrorCalcFloat(true);
-    			compiler.addInstruction(new BOV(compiler.getLabelError().getLabelErrorcalcFloat()));
+    			compiler.addInstruction(new BOV(compiler.getLabelError().getLabelErrorCalcFloat()));
     		}
     	}
     }

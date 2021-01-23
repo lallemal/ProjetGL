@@ -3,6 +3,7 @@ package fr.ensimag.deca.tree;
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
+import fr.ensimag.ima.pseudocode.instructions.OPP;
 import fr.ensimag.ima.pseudocode.instructions.SUB;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ClassDefinition;
@@ -37,18 +38,8 @@ public class UnaryMinus extends AbstractUnaryExpr {
     
     @Override
     protected void codeExp(DecacCompiler compiler, int n) {
-    	if (this.getOperand().getType().isInt()) {
-    		compiler.addInstruction(new LOAD(0, Register.getR(n)));
-    	} else {
-    		compiler.addInstruction(new LOAD((float) 0, Register.getR(n)));
-    	}
-    	if (n==compiler.getRmax()) {
-    		this.getOperand().codeExp(compiler, 0);
-    		compiler.addInstruction(new SUB(Register.R0, Register.getR(n)));
-    	} else {
-    		this.getOperand().codeExp(compiler, n+1);
-    		compiler.addInstruction(new SUB(Register.getR(n+1), Register.getR(n)));
-    	}
+    	this.getOperand().codeExp(compiler, n);
+    	compiler.addInstruction(new OPP(Register.getR(n), Register.getR(n)));
     }
 
     @Override

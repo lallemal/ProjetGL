@@ -1,3 +1,6 @@
+// Description : Test with a modulo by zero
+// Error : Division or modulo by 0 at execution
+
 {
     int x = 2;
     int y = 0;

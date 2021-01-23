@@ -1,0 +1,45 @@
+// Tableau flottant test
+//Résultat: OK
+
+
+//
+//Descritpion: test fonctions tableau de flottant
+//Resultat: OK
+#include "Tab.decah"
+{
+    float[] t = {1.0E0, 2.0E0, 3.0E0};
+    float[] t2 = {2.0E0, 3.0E0, 4.0E0};
+    float f;
+    boolean q;
+    TabFloat tab3;
+    TabFloat tab1 = new TabFloat(); 
+    TabFloat tab2 = new TabFloat();
+    tab1.setInit(t, 3);
+    tab2.setInit(t2,3);
+    // test Get
+    f = tab1.getCase(1);
+    print(f);
+    // Test sum
+    q = tab1.sumTab(tab2);
+    if(q == true){
+        println("OK");
+    }
+    tab1.affichage();
+    q = tab2.multTab(tab1);
+    if(q == true){
+        println("OK");
+    }
+    tab2.affichage();
+    if(q == true){
+        println("OK");
+    }
+    tab2.addFirst(1.0E0);
+    q = tab2.multTab(tab1);
+    // TEst mult
+    if(q == false){
+        println("OK");
+    }
+
+
+}
+

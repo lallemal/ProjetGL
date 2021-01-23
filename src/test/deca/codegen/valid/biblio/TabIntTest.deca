@@ -1,4 +1,6 @@
 #include "Tab.decah"
+// Description : test with tab library
+// Result : [6,1,2,3], [0,6,1,2,3]
 {
 
    int[] t = {1, 2, 3};

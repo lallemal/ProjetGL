@@ -1,0 +1,11 @@
+#include "Tab.decah"
+{
+
+   int[] t = {1, 2, 3};
+   TabInt tableau = new TabInt(); 
+   TabInt tab2 = new TabInt();
+   tab2.setInitCopy(t,3);
+   tableau.setInit(t,3);
+   tableau.addFirst(0);
+   
+}

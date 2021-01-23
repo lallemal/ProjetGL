@@ -1,3 +1,5 @@
+// test lese fonctions de calcul de racine
+// Resultats: OK
 #include "Racine.decah"
 {
     float q ;

@@ -45,6 +45,7 @@ class TabInt extends AbstractTab{
     	print("]");
     }
 
+
     boolean add(int element, int indice) {
     	int i = 0;
     	int[] tabnew = new int[this.size + 1];
@@ -67,15 +68,20 @@ class TabInt extends AbstractTab{
     		i = i + 1;
     	}
     	this.tab = tabnew;
-        
-
     	return true;
     }
-    
+
+    void addFirst(int valeur){
+        int val = valeur;
+        this.add(val,0);
+    }
+
 }
 {
    int[] t = {1, 2, 3};
    TabInt tableau = new TabInt(); 
+   TabInt tab2 = new TabInt();
+   tab2.setInitCopy(t,3);
    tableau.setInit(t,3);
    tableau.affichage();
    tableau.add(4,0);

@@ -150,10 +150,10 @@ DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:103) - ve
 DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:134) - verify AbstractExpr Rvalue : end
 DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:61) - Verify DeclVar : end
 DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:40) - verify DeclVar : start x
-DEBUG fr.ensimag.deca.tree.NewArray.verifyRValue(NewArray.java:136) - Verify RValue Array : start
+DEBUG fr.ensimag.deca.tree.NewArray.verifyRValue(NewArray.java:135) - Verify RValue Array : start
 DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:172) - verify Identifier Expr : start
 DEBUG fr.ensimag.deca.tree.Identifier.verifyExpr(Identifier.java:182) - verify Identifier Expr : end
-DEBUG fr.ensimag.deca.tree.NewArray.verifyRValue(NewArray.java:144) - Verify RValue Array : end
+DEBUG fr.ensimag.deca.tree.NewArray.verifyRValue(NewArray.java:143) - Verify RValue Array : end
 DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:61) - Verify DeclVar : end
 DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:40) - verify DeclVar : start i
 DEBUG fr.ensimag.deca.tree.AbstractExpr.verifyRValue(AbstractExpr.java:103) - verify AbstractExpr RValue : start

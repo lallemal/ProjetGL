@@ -1,0 +1,10 @@
+`> [4, 0] Program
+   +> ListDeclClass [List with 1 elements]
+   |  []> [4, 6] DeclClass
+   |      +> [4, 6] Identifier (Thing)
+   |      []> [5, 18] DeclField
+   |          Visibility: PROTECTED
+   |          +> [5, 14] Identifier (int)
+   |          +> [5, 18] Identifier (i)
+   |          `> NoInitialization
+   `> EmptyMain

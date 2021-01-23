@@ -1,0 +1,44 @@
+`> [4, 0] Program
+   +> ListDeclClass [List with 1 elements]
+   |  []> [4, 6] DeclClass
+   |      +> [4, 6] Identifier (A)
+   |      []> [5, 18] DeclField
+   |          Visibility: PROTECTED
+   |          +> [5, 14] Identifier (int)
+   |          +> [5, 18] Identifier (x)
+   |          `> NoInitialization
+   |      []> [7, 4] DeclMethod
+   |      ||  +> [7, 4] Identifier (int)
+   |      ||  +> [7, 8] Identifier (getX)
+   |      ||  []> [8, 8] Return
+   |      ||      `> [8, 15] Identifier (x)
+   |      []> [11, 4] DeclMethod
+   |          +> [11, 4] Identifier (void)
+   |          +> [11, 9] Identifier (setX)
+   |          []> [11, 14] DeclParam
+   |              +> [11, 14] Identifier (int)
+   |              +> [11, 18] Identifier (x)
+   |          []> [12, 8] Assign
+   |              +> [12, 8] Selection
+   |              |  +> [12, 8] This
+   |              |  `> [12, 13] Identifier (x)
+   |              `> [12, 17] Identifier (x)
+   `> [16, 0] Main
+      +> ListDeclVar [List with 1 elements]
+      |  []> [17, 6] DeclVar
+      |      +> [17, 4] Identifier (A)
+      |      +> [17, 6] Identifier (a)
+      |      `> [17, 10] Initialization
+      |         `> [17, 10] New
+      |            `> [17, 14] Identifier (A)
+      `> ListInst [List with 2 elements]
+         []> [18, 4] MethodCall
+         ||  +> [18, 4] Identifier (a)
+         ||  +> [18, 6] Identifier (setX)
+         ||  []> [18, 11] Int (1)
+         []> [19, 4] Println
+             `> [19, 12] ListExpr [List with 2 elements]
+                []> [19, 12] StringLiteral (a.getX() = )
+                []> [19, 27] MethodCall
+                    +> [19, 27] Identifier (a)
+                    +> [19, 29] Identifier (getX)

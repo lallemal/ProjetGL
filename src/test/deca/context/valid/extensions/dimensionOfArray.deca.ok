@@ -8,12 +8,12 @@ DEBUG fr.ensimag.deca.tree.ListDeclClass.verifyListClassBody(ListDeclClass.java:
 DEBUG fr.ensimag.deca.tree.Main.verifyMain(Main.java:31) - verify Main: start
 DEBUG fr.ensimag.deca.tree.ListDeclVar.verifyListDeclVariable(ListDeclVar.java:41) - verify ListDeclVar : start
 DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:40) - verify DeclVar : start x
-DEBUG fr.ensimag.deca.tree.NewArray.verifyRValue(NewArray.java:136) - Verify RValue Array : start
-DEBUG fr.ensimag.deca.tree.NewArray.verifyRValue(NewArray.java:144) - Verify RValue Array : end
+DEBUG fr.ensimag.deca.tree.NewArray.verifyRValue(NewArray.java:135) - Verify RValue Array : start
+DEBUG fr.ensimag.deca.tree.NewArray.verifyRValue(NewArray.java:143) - Verify RValue Array : end
 DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:61) - Verify DeclVar : end
 DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:40) - verify DeclVar : start u
-DEBUG fr.ensimag.deca.tree.NewArray.verifyRValue(NewArray.java:136) - Verify RValue Array : start
-DEBUG fr.ensimag.deca.tree.NewArray.verifyRValue(NewArray.java:144) - Verify RValue Array : end
+DEBUG fr.ensimag.deca.tree.NewArray.verifyRValue(NewArray.java:135) - Verify RValue Array : start
+DEBUG fr.ensimag.deca.tree.NewArray.verifyRValue(NewArray.java:143) - Verify RValue Array : end
 DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:61) - Verify DeclVar : end
 DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:40) - verify DeclVar : start w
 DEBUG fr.ensimag.deca.tree.DeclVar.verifyDeclVar(DeclVar.java:61) - Verify DeclVar : end

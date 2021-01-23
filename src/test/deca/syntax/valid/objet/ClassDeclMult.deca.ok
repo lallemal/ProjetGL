@@ -1,0 +1,11 @@
+`> [4, 0] Program
+   +> ListDeclClass [List with 4 elements]
+   |  []> [4, 6] DeclClass
+   |  ||  +> [4, 6] Identifier (Bla)
+   |  []> [6, 6] DeclClass
+   |  ||  +> [6, 6] Identifier (Bli)
+   |  []> [8, 6] DeclClass
+   |  ||  +> [8, 6] Identifier (Blo)
+   |  []> [10, 6] DeclClass
+   |      +> [10, 6] Identifier (Blu)
+   `> EmptyMain

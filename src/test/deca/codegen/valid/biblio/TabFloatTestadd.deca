@@ -1,0 +1,44 @@
+//
+//Descritpion: test fonctions tableau de flottant
+//Resultat: OK
+#include "Tab.decah"
+{
+   float[] t = {1.0E0, 2.0E0, 3.0E0};
+   TabFloat tableau = new TabFloat(); 
+   TabFloat tab2 = new TabFloat();
+   tableau.setInit(t, 3);
+   tab2.setInitCopy(t,3);
+   println("tableau 3 cases");
+   tableau.affichage();
+   println();
+   println("ajout en tete");
+   tableau.addFirst(3.0E-5);
+   tableau.affichage();
+   println();
+   println("ajout en queue");
+   tableau.addLast(0xA.ffp10);
+   tableau.affichage();
+   println();
+   println("ajout en position 2 de 5");
+   tableau.add(5.0E0,2);
+   tableau.affichage();
+
+   // test affichage avec la copie
+    println("tableau 3 cases");
+   tab2.affichage();
+   println();
+   println("ajout en tete");
+   tab2.addFirst(3.0E-5);
+   tab2.affichage();
+   println();
+   println("ajout en queue");
+   tab2.addLast(0xA.ffp10);
+   tab2.affichage();
+   println();
+   println("ajout en position 2 de 5");
+   tab2.add(5.0E0,2);
+   tab2.affichage();
+
+
+}
+

@@ -33,9 +33,10 @@ public class ArraySelection extends AbstractLValue{
 	}
 
 	protected void codeExp(DecacCompiler compiler, int n, boolean b) {
-		if (n+3 > compiler.getRmax()) {
-			compiler.addInstruction(new TSTO(4));
+		if (n+3 > compiler.getRmax()) {	
 			if (!compiler.getCompilerOptions().isNoCheck()) {
+				compiler.getLabelError().setErrorPilePleine(true);
+				compiler.addInstruction(new TSTO(4));
 				compiler.addInstruction(new BOV(compiler.getLabelError().getLabelPilePleine()));
 			}
 			compiler.addInstruction(new PUSH(Register.getR(3)));
@@ -55,8 +56,9 @@ public class ArraySelection extends AbstractLValue{
 		ident.codeExp(compiler, n);
 		compiler.getLabelError().setErrorIndexOutOfRange(true);
 
-		compiler.addInstruction(new TSTO(1));
 		if (!compiler.getCompilerOptions().isNoCheck()) {
+			compiler.getLabelError().setErrorPilePleine(true);
+			compiler.addInstruction(new TSTO(1));
 			compiler.addInstruction(new BOV(compiler.getLabelError().getLabelPilePleine()));
 		}
 		compiler.addInstruction(new PUSH(Register.getR(n)));

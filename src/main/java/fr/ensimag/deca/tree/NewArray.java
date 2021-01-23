@@ -25,7 +25,6 @@ public class NewArray extends AbstractExpr{
 	
 	protected void codeExp(DecacCompiler compiler, int n) {
 	    //  CAN BE FACTORIZE : NOT ENOUGH TIME
-	    compiler.getLabelError().setErrorTasPlein(true);
 	    compiler.addInstruction(new LOAD(new ImmediateInteger(1), Register.getR(n)));
 	    for (AbstractExpr expr : memory.getList()) {
 	    	if (n + 1 <= compiler.getRmax()) {
@@ -46,7 +45,8 @@ public class NewArray extends AbstractExpr{
 	    compiler.addInstruction(new ADD(new ImmediateInteger(1), Register.getR(n)));
 	    compiler.addInstruction(new NEW(Register.getR(n), Register.getR(n)));
 	    if (!compiler.getCompilerOptions().isNoCheck()) {
-	    	compiler.addInstruction(new BOV(compiler.getLabelError().getLabelPilePleine()));
+	    	compiler.getLabelError().setErrorTasPlein(true);
+	    	compiler.addInstruction(new BOV(compiler.getLabelError().getLabelTasPlein()));
 	    }
 	    // TSTO :
 		if (n + 2 <= compiler.getRmax()) {
@@ -54,7 +54,8 @@ public class NewArray extends AbstractExpr{
 		    compiler.setRegistreUsed(n+2);
 			compiler.addInstruction(new NEW(memory.size(), Register.getR(n + 1)));
 			if (!compiler.getCompilerOptions().isNoCheck()) {
-				compiler.addInstruction(new BOV(compiler.getLabelError().getLabelPilePleine()));
+				compiler.getLabelError().setErrorTasPlein(true);
+				compiler.addInstruction(new BOV(compiler.getLabelError().getLabelTasPlein()));
 			}
 			int i = 0;
 			for (AbstractExpr expr : memory.getList()) {
@@ -66,14 +67,16 @@ public class NewArray extends AbstractExpr{
 			compiler.addInstruction(new STORE(Register.getR(n + 1), new RegisterOffset(0, Register.getR(n))));
 		} else {
 			if (n + 1 <= compiler.getRmax()) {
-				compiler.addInstruction(new TSTO(new ImmediateInteger(1)));
 				if (!compiler.getCompilerOptions().isNoCheck()) {
+					compiler.addInstruction(new TSTO(new ImmediateInteger(1)));
+					compiler.getLabelError().setErrorPilePleine(true);
 					compiler.addInstruction(new BOV(compiler.getLabelError().getLabelPilePleine()));
 				}
 				compiler.setRegistreUsed(n+1);
 				compiler.addInstruction(new NEW(memory.size(), Register.getR(n + 1)));
 				if (!compiler.getCompilerOptions().isNoCheck()) {
-					compiler.addInstruction(new BOV(compiler.getLabelError().getLabelPilePleine()));
+					compiler.getLabelError().setErrorTasPlein(true);
+					compiler.addInstruction(new BOV(compiler.getLabelError().getLabelTasPlein()));
 				}
 				compiler.addInstruction(new PUSH(Register.getR(n+1)));
 				int i = 0;
@@ -87,14 +90,16 @@ public class NewArray extends AbstractExpr{
 				compiler.addInstruction(new POP(Register.getR(n+1)));
 				compiler.addInstruction(new STORE(Register.getR(n + 1), new RegisterOffset(0, Register.getR(n))));
 			} else {
-				compiler.addInstruction(new TSTO(new ImmediateInteger(2)));
 				if (!compiler.getCompilerOptions().isNoCheck()) {
+					compiler.getLabelError().setErrorPilePleine(true);
+					compiler.addInstruction(new TSTO(new ImmediateInteger(2)));
 					compiler.addInstruction(new BOV(compiler.getLabelError().getLabelPilePleine()));
 				}
 				compiler.addInstruction(new PUSH(Register.getR(n)));
 				compiler.addInstruction(new NEW(memory.size(), Register.getR(n)));
 				if (!compiler.getCompilerOptions().isNoCheck()) {
-					compiler.addInstruction(new BOV(compiler.getLabelError().getLabelPilePleine()));
+					compiler.getLabelError().setErrorTasPlein(true);
+					compiler.addInstruction(new BOV(compiler.getLabelError().getLabelTasPlein()));
 				}
 				compiler.addInstruction(new PUSH(Register.getR(n)));
 				int i = 0;

@@ -224,4 +224,3 @@ DEBUG fr.ensimag.deca.tree.Main.verifyMain(Main.java:42) - verify Main: end
              |  definition: variable defined at [42, 6], type=A
              +> [45, 6] Identifier (Test)
              |  definition: method defined at [25, 4], type=void
- 

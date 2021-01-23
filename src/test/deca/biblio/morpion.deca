@@ -81,11 +81,9 @@ class Morpion {
 
 
 
-
-
 {
     Morpion morp = new Morpion();
-    morp.printPlateau();
+    morp.play();
 }
 
 

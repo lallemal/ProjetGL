@@ -1,0 +1,14 @@
+#include "Tab.decah"
+{
+
+   int[] t = {1, 2, 3};
+   TabInt tab1 = new TabInt(); 
+   TabInt tab2 = new TabInt();
+   tab2.setInitCopy(t,3);
+   tab1.setInit(t,3);
+   tab1.add(6,3);
+   tab1.affichage();
+   tab1.addFirst(0);
+   tab1.affichage();
+   
+}

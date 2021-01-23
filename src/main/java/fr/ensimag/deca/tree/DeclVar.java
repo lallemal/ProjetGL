@@ -68,7 +68,14 @@ public class DeclVar extends AbstractDeclVar {
     	compiler.incrementKSP();
     	initialization.codeGenDecl(compiler, varName.getExpDefinition().getOperand());
     }
-    
+
+    @Override
+    protected void codeGenDeclInMethod(DecacCompiler compiler) {
+        varName.getExpDefinition().setOperand(new RegisterOffset(compiler.getkLB(), Register.LB));
+        compiler.incrementKSP();
+        compiler.incrementKLB();
+        initialization.codeGenDecl(compiler, varName.getExpDefinition().getOperand());
+    }
     @Override
     public void decompile(IndentPrintStream s) {
     	type.decompile(s);

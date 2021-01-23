@@ -1,6 +1,5 @@
 package fr.ensimag.deca.tree;
 
-import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
@@ -36,4 +35,5 @@ public abstract class AbstractDeclVar extends Tree {
      * @param compiler
      */
     protected abstract void codeGenDecl(DecacCompiler compiler);
+    protected abstract void codeGenDeclInMethod(DecacCompiler compiler);
 }

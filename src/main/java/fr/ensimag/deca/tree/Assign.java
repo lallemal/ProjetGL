@@ -51,9 +51,6 @@ public class Assign extends AbstractBinaryExpr {
     	compiler.setRegistreUsed(2);
     	AbstractExpr e = this.getRightOperand(); 
         e.codeExp(compiler, 2);
-        if (e.isArraySelection()) {
-        	compiler.addInstruction(new LOAD(new RegisterOffset(0, Register.getR(2)), Register.getR(2)));
-		}
     	if (this.getLeftOperand().isIdentifier()) {
 	        Identifier x = (Identifier) this.getLeftOperand();
 	        if (x.getExpDefinition().isField()) { // si jamais on a x = ... avec x un field, on est forcement dans une methode..

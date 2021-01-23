@@ -1,0 +1,29 @@
+// Test modification d'un parametre par une sous fonction
+// Resultat: OK
+class Modif{
+    int x;
+    void setX(int y){
+        int[] t = new int[3]; 
+        this.x = y;
+    }
+    boolean seteX(int y){
+        print("OK");
+        this.setX(y);
+        return true;
+    }
+    boolean affx(){
+        int x = this.x;
+        print(x);
+        return true;
+    }
+    
+}
+
+{
+   int i;
+   int x = 2;
+   Modif t = new Modif(); 
+   t.seteX(x);
+   t.affx();
+
+}

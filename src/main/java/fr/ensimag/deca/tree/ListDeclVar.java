@@ -50,6 +50,11 @@ public class ListDeclVar extends TreeList<AbstractDeclVar> {
             d.codeGenDecl(compiler);
         }
     }
-
+    public void codeGenListDeclInMethod(DecacCompiler compiler) {
+        compiler.resetKLB();
+        for (AbstractDeclVar d : getList()) {
+            d.codeGenDeclInMethod(compiler);
+        }
+    }
 
 }

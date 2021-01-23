@@ -33,7 +33,9 @@ public abstract class AbstractOpCmp extends AbstractBinaryExpr {
             // It can be class  or null with operator eq neq
             if ((getOperatorName().equals("==") || getOperatorName().equals("!=")) && ((!type1.isClass() && !type1.isNull())|| (!type2.isClass() && !type2.isNull()))) {
                 // if not it is a context error
-                throw new ContextualError(ContextualError.OP_BINARY_NOT_COMPATIBLE, getLocation());
+                if (!type1.isBoolean() || !type2.isBoolean()) {
+                    throw new ContextualError(ContextualError.OP_BINARY_NOT_COMPATIBLE, getLocation());
+                }
             }
         } else {
             if (type1.isInt() && type2.isFloat()) {

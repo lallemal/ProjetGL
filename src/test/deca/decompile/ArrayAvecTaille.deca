@@ -1,0 +1,16 @@
+// Description :
+//    test décompilation array taille
+//
+// Resultats (en comparaison avec le résultat attendu 
+// disponible dans le fichier *.deca.ok) :
+//    ok
+
+class A{
+    int[] array1= new int[3];
+}
+{
+    
+    int[] array2= new int[52];
+    A a = new A();
+}
+

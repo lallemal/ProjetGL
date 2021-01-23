@@ -22,8 +22,7 @@ public class NewArray extends AbstractExpr{
 		this.type = type;
 		this.memory = memory;
 	}
-
-	@Override
+	
 	protected void codeExp(DecacCompiler compiler, int n) {
 	    //  CAN BE FACTORIZE : NOT ENOUGH TIME
 	    compiler.getLabelError().setErrorTasPlein(true);
@@ -147,7 +146,11 @@ public class NewArray extends AbstractExpr{
 
 	@Override
 	public void decompile(IndentPrintStream s) {
-		// TODO Auto-generated method stub
+                s.print("new ");
+		type.decompile(s);
+                s.print("[");
+                memory.decompile(s);
+                s.print("]");
 		
 	}
 
@@ -160,7 +163,8 @@ public class NewArray extends AbstractExpr{
 
 	@Override
 	protected void iterChildren(TreeFunction f) {
-		// TODO Auto-generated method stub
+		type.iter(f);
+                memory.iterChildren(f);
 		
 	}
 

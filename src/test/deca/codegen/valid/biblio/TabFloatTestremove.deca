@@ -24,8 +24,17 @@
    println();
    print("pas de suppression");
    p = tableau.delete(1000);  
-   /*
-   if (false == true){
-       print("OK");
-   }*/
+   
+   if (p == false){
+       print("ok");
+   }
+   print("nombre negatif");
+   p = tableau.delete(-10);  
+   
+   if (p == false){
+       print("ok");
+   }
+   tableau.affichage();
+
+
 }

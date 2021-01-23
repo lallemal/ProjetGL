@@ -45,6 +45,7 @@ class TabInt extends AbstractTab{
     	int[] tabnew = new int[this.size + 1];
     	this.size = this.size + 1;
         
+        print(indice);
       	if (indice > this.size || indice < 0) {
             return false;
     	}

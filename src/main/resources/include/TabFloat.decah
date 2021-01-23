@@ -23,16 +23,19 @@ class TabFloat extends AbstractTab{
     }
     
     boolean add(float element, int indice) {
-
+        int ind = indice;
     	int i = 0;
-    	float[] tabnew = new float[this.size + 1];
-    	this.size = this.size + 1;
-        
-      	if (indice > this.size || indice < 0) {
-    		return false;
+        float[] tabnew;
+      	if (ind > this.size || ind < 0) {
+    	    return false;
     	}
-    	
-    	while(i < indice) {
+        else{
+
+            tabnew = new float[this.size + 1];
+            this.size = this.size + 1;
+        }
+        	
+    	while(i < ind) {
     		tabnew[i] = (this.tab)[i];
     		i = i + 1;
     	}
@@ -50,7 +53,7 @@ class TabFloat extends AbstractTab{
         
     }
 
-       void addFirst(float valeur){
+    void addFirst(float valeur){
         this.add(valeur, 0);
     }
     
@@ -62,8 +65,15 @@ class TabFloat extends AbstractTab{
     // supprime la case i du tableau
     boolean delete(int indice){
         int i = 0;
-        float[] tabnew = new float[this.size - 1];
-        this.size = this.size - 1;
+        float[] tabnew;
+
+        if (indice >= size || indice < 0){
+            return false;
+        }
+        else{
+            tabnew = new float[this.size - 1];
+            this.size = this.size - 1;
+        }
         if (indice >= size || indice < 0){
             return false;
         }

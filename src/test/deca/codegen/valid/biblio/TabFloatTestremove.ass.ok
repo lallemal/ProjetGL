@@ -1,0 +1,10 @@
+tableau 4 cases
+[1.00000e+00,2.00000e+00,3.00000e+00,4.00000e+00]
+suppression position 1
+[1.00000e+00,3.00000e+00,4.00000e+00]
+suppression tete
+[3.00000e+00,4.00000e+00]
+suppression en queue
+[3.00000e+00]
+pas de suppressionoknombre negatifok[3.00000e+00]
+

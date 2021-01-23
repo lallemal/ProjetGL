@@ -32,23 +32,20 @@ class TabInt extends AbstractTab{
     }
 
     void addFirst(int element){
-        int e = element;
-        this.add(e,0);
+        this.add(element,0);
     } 
 
     boolean add(int element, int indice) {
-        int ind = indice;
+
     	int i = 0;
-        int e = element; 
-    	int[] tabnew = new int[3];
-         
-    	this.size = size + 1;
-         
-    	if (ind > this.size || ind < 0) {
+    	int[] tabnew = new int[this.size + 1];
+    	this.size = this.size + 1;
+        
+      	if (indice > this.size || indice < 0) {
     		return false;
     	}
-        	
-    	while(i < ind) {
+    	
+    	while(i < indice) {
     		tabnew[i] = (this.tab)[i];
     		i = i + 1;
     	}
@@ -60,7 +57,7 @@ class TabInt extends AbstractTab{
     		tabnew[i] = (this.tab)[i - 1];
     		i = i + 1;
     	}
-         
+       
     	this.tab = tabnew;
     	return true;
         

@@ -76,7 +76,7 @@ class F extends E{
     objetF.printClass();
     objetA.printClass();
     objetE.printD();
-    //pas normal, F hérite de tous les fields mais pas de leur initialisation
+    
     if (objetF.fff){
         if (!objetF.eee){
             if (objetF.ddd){

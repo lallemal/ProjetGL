@@ -1,0 +1,8 @@
+// missing IDENT at '='
+// Description:
+//    Matrice sans nom
+//
+
+{
+    int[][][][][][] = new int[2][3][4][5][6][7];
+}

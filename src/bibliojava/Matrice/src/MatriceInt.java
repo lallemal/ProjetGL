@@ -33,33 +33,33 @@ class MatriceInt extends AbstractMatrice{
 	}
 
 	void print() {
-		System.out.print("[");
+		print("[");
 		int l = 0;
 		int c = 0;
 		while(l < this.nbl) {
 			while( c < this.nbc){
 				if (l == 0 && c == 0) {
-					System.out.print("[" + this.matint[l][c]);
+					print("[" + this.matint[l][c]);
 				}
 				else if (l > 0 && c == 0) {
-					System.out.print(" [" + this.matint[l][c]);
+					print(" [" + this.matint[l][c]);
 				}
 				else{
-					System.out.print(" " + this.matint[l][c]);
+					print(" " + this.matint[l][c]);
 				}
 				c = c + 1;
 				if (c < nbc) {
-					System.out.print(",");
+					print(",");
 				}
-				}
-			System.out.print("]");
+			}
+			print("]");
 			if (l < nbl -1) {
-				System.out.println(",");
+				println(",");
 			}
 			c = 0;
 			l = l + 1;
 		}
-		System.out.println("]");
+		println("]");
 	}
 
 	// retourne null si dimension incorrecte
@@ -144,9 +144,5 @@ class MatriceInt extends AbstractMatrice{
 		}
 		return result;
 	}
-
-	
-	
-	
 	
 }

@@ -1,0 +1,12 @@
+//
+//Description: Addition et multiplication de matrice
+//Resultat: OK
+#include "Matrice.decah"
+
+{
+
+    int[][] tab1 = {{1,2}, {3, 4}};
+    //MatriceInt mat1 = new MatriceInt();
+    //mat1 = mat1.transpose();
+    //mat1.print();
+}

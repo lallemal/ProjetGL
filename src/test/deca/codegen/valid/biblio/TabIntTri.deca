@@ -1,0 +1,13 @@
+#include "Tab.decah"
+{
+    int [] t = { 1, 4, 2, 5, 8};
+    TabInt tab = new TabInt();
+    tab.setInit(t, 5);
+    println("tableau non trie");
+    tab.affichage();
+    tab.mergeSortAscending();
+    println();
+    println("tableau trie");
+    tab.affichage();
+}
+

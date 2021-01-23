@@ -1,0 +1,23 @@
+`> [4, 0] Program
+   +> ListDeclClass [List with 1 elements]
+   |  []> [4, 6] DeclClass
+   |      +> [4, 6] Identifier (Thing)
+   |      []> [6, 4] DeclMethod
+   |          +> [6, 4] Identifier (int)
+   |          +> [6, 8] Identifier (getI)
+   |          []> [6, 13] DeclParam
+   |          ||  +> [6, 13] Identifier (int)
+   |          ||  +> [6, 17] Identifier (i)
+   |          []> [6, 20] DeclParam
+   |          ||  +> [6, 20] Identifier (int)
+   |          ||  +> [6, 24] Identifier (j)
+   |          []> [6, 27] DeclParam
+   |          ||  +> [6, 27] Identifier (string)
+   |          ||  +> [6, 34] Identifier (char)
+   |          []> [6, 40] DeclParam
+   |              +> [6, 40] Identifier (float)
+   |              +> [6, 46] Identifier (fifi)
+   |          []> [7, 8] Print
+   |              `> [7, 14] ListExpr [List with 1 elements]
+   |                 []> [7, 14] StringLiteral (cool)
+   `> EmptyMain

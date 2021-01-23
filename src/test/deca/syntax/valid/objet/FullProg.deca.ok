@@ -1,0 +1,115 @@
+`> [4, 0] Program
+   +> ListDeclClass [List with 1 elements]
+   |  []> [4, 6] DeclClass
+   |      +> [4, 6] Identifier (Thing)
+   |      +> [4, 12] Identifier (Objet)
+   |      []> [5, 18] DeclField
+   |      ||  Visibility: PROTECTED
+   |      ||  +> [5, 14] Identifier (int)
+   |      ||  +> [5, 18] Identifier (i)
+   |      ||  `> NoInitialization
+   |      []> [5, 21] DeclField
+   |      ||  Visibility: PROTECTED
+   |      ||  +> [5, 14] Identifier (int)
+   |      ||  +> [5, 21] Identifier (j)
+   |      ||  `> [5, 23] Initialization
+   |      ||     `> [5, 23] Int (0)
+   |      []> [6, 10] DeclField
+   |          Visibility: PUBLIC
+   |          +> [6, 4] Identifier (float)
+   |          +> [6, 10] Identifier (k)
+   |          `> NoInitialization
+   |      []> [8, 4] DeclMethod
+   |      ||  +> [8, 4] Identifier (int)
+   |      ||  +> [8, 8] Identifier (getI)
+   |      ||  []> [9, 8] Print
+   |      ||      `> [9, 14] ListExpr [List with 1 elements]
+   |      ||         []> [9, 14] Identifier (i)
+   |      []> [12, 4] DeclMethod
+   |          +> [12, 4] Identifier (void)
+   |          +> [12, 9] Identifier (setplusK)
+   |          []> [12, 18] DeclParam
+   |          ||  +> [12, 18] Identifier (int)
+   |          ||  +> [12, 22] Identifier (i)
+   |          []> [12, 25] DeclParam
+   |              +> [12, 25] Identifier (int)
+   |              +> [12, 29] Identifier (j)
+   |          []> [13, 8] Assign
+   |          ||  +> [13, 8] Identifier (k)
+   |          ||  `> [13, 12] Plus
+   |          ||     +> [13, 12] Identifier (i)
+   |          ||     `> [13, 16] Identifier (j)
+   |          []> [14, 8] Print
+   |          ||  `> [14, 14] ListExpr [List with 1 elements]
+   |          ||     []> [14, 14] Identifier (k)
+   |          []> [15, 8] Assign
+   |              +> [15, 8] Selection
+   |              |  +> [15, 8] This
+   |              |  `> [15, 13] Identifier (k)
+   |              `> [15, 17] Identifier (k)
+   `> [18, 0] Main
+      +> ListDeclVar [List with 3 elements]
+      |  []> [19, 8] DeclVar
+      |  ||  +> [19, 4] Identifier (int)
+      |  ||  +> [19, 8] Identifier (x)
+      |  ||  `> [19, 12] Initialization
+      |  ||     `> [19, 12] Int (4)
+      |  []> [20, 8] DeclVar
+      |  ||  +> [20, 4] Identifier (int)
+      |  ||  +> [20, 8] Identifier (y)
+      |  ||  `> [20, 12] Initialization
+      |  ||     `> [20, 12] Int (0)
+      |  []> [21, 10] DeclVar
+      |      +> [21, 4] Identifier (Thing)
+      |      +> [21, 10] Identifier (t)
+      |      `> [21, 14] Initialization
+      |         `> [21, 14] New
+      |            `> [21, 18] Identifier (Thing)
+      `> ListInst [List with 4 elements]
+         []> [22, 4] IfThenElse
+         ||  +> [22, 8] Lower
+         ||  |  +> [22, 8] Identifier (x)
+         ||  |  `> [22, 12] Int (5)
+         ||  +> ListInst [List with 1 elements]
+         ||  |  []> [23, 8] While
+         ||  |      +> [23, 15] Greater
+         ||  |      |  +> [23, 15] Identifier (x)
+         ||  |      |  `> [23, 19] Int (0)
+         ||  |      `> ListInst [List with 2 elements]
+         ||  |         []> [24, 12] Assign
+         ||  |         ||  +> [24, 12] Identifier (x)
+         ||  |         ||  `> [24, 16] Minus
+         ||  |         ||     +> [24, 16] Identifier (x)
+         ||  |         ||     `> [24, 20] Int (1)
+         ||  |         []> [25, 12] Print
+         ||  |             `> [25, 18] ListExpr [List with 1 elements]
+         ||  |                []> [25, 18] Identifier (x)
+         ||  `> ListInst [List with 1 elements]
+         ||     []> [28, 4] IfThenElse
+         ||         +> [28, 13] Greater
+         ||         |  +> [28, 13] Identifier (x)
+         ||         |  `> [28, 17] Int (6)
+         ||         +> ListInst [List with 1 elements]
+         ||         |  []> [29, 8] Println
+         ||         |      `> [29, 16] ListExpr [List with 1 elements]
+         ||         |         []> [29, 16] Identifier (x)
+         ||         `> ListInst [List with 1 elements]
+         ||            []> [32, 8] Print
+         ||                `> [32, 14] ListExpr [List with 1 elements]
+         ||                   []> [32, 14] StringLiteral (OUAH)
+         []> [34, 4] Assign
+         ||  +> [34, 4] Selection
+         ||  |  +> [34, 4] Identifier (t)
+         ||  |  `> [34, 6] Identifier (i)
+         ||  `> [34, 10] Int (4)
+         []> [35, 4] MethodCall
+         ||  +> [35, 4] Identifier (t)
+         ||  +> [35, 6] Identifier (setplusK)
+         ||  []> [35, 15] MethodCall
+         ||  ||  +> [35, 15] Identifier (t)
+         ||  ||  +> [35, 17] Identifier (getI)
+         ||  []> [35, 25] Int (3)
+         []> [36, 4] MethodCall
+             +> [36, 5] New
+             |  `> [36, 9] Identifier (Thing)
+             +> [36, 18] Identifier (getI)

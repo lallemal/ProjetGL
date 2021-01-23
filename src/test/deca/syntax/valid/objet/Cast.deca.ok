@@ -1,0 +1,85 @@
+`> [5, 0] Program
+   +> ListDeclClass [List with 1 elements]
+   |  []> [5, 6] DeclClass
+   |      +> [5, 6] Identifier (A)
+   |      []> [6, 10] DeclField
+   |      ||  Visibility: PUBLIC
+   |      ||  +> [6, 4] Identifier (float)
+   |      ||  +> [6, 10] Identifier (a)
+   |      ||  `> [6, 14] Initialization
+   |      ||     `> [6, 14] Float (1.0)
+   |      []> [7, 8] DeclField
+   |      ||  Visibility: PUBLIC
+   |      ||  +> [7, 4] Identifier (int)
+   |      ||  +> [7, 8] Identifier (b)
+   |      ||  `> [7, 12] Initialization
+   |      ||     `> [7, 12] Int (1)
+   |      []> [8, 12] DeclField
+   |          Visibility: PUBLIC
+   |          +> [8, 4] Identifier (boolean)
+   |          +> [8, 12] Identifier (c)
+   |          `> [8, 16] Initialization
+   |             `> [8, 16] BooleanLiteral (true)
+   |      []> [10, 4] DeclMethod
+   |      ||  +> [10, 4] Identifier (boolean)
+   |      ||  +> [10, 12] Identifier (castC)
+   |      ||  []> [11, 8] Return
+   |      ||      `> [11, 15] Cast
+   |      ||         +> [11, 16] Identifier (boolean)
+   |      ||         `> [11, 25] Identifier (c)
+   |      []> [14, 4] DeclMethod
+   |      ||  +> [14, 4] Identifier (int)
+   |      ||  +> [14, 8] Identifier (castB)
+   |      ||  []> [15, 8] Return
+   |      ||      `> [15, 15] Cast
+   |      ||         +> [15, 16] Identifier (int)
+   |      ||         `> [15, 21] Identifier (b)
+   |      []> [18, 4] DeclMethod
+   |          +> [18, 4] Identifier (float)
+   |          +> [18, 10] Identifier (castA)
+   |          []> [19, 8] Return
+   |              `> [19, 15] Cast
+   |                 +> [19, 16] Identifier (float)
+   |                 `> [19, 23] Identifier (a)
+   `> [22, 0] Main
+      +> ListDeclVar [List with 5 elements]
+      |  []> [23, 6] DeclVar
+      |  ||  +> [23, 4] Identifier (A)
+      |  ||  +> [23, 6] Identifier (a)
+      |  ||  `> [23, 10] Initialization
+      |  ||     `> [23, 10] New
+      |  ||        `> [23, 14] Identifier (A)
+      |  []> [24, 8] DeclVar
+      |  ||  +> [24, 4] Identifier (int)
+      |  ||  +> [24, 8] Identifier (a)
+      |  ||  `> [24, 12] Initialization
+      |  ||     `> [24, 12] Int (1)
+      |  []> [25, 10] DeclVar
+      |  ||  +> [25, 4] Identifier (float)
+      |  ||  +> [25, 10] Identifier (b)
+      |  ||  `> [25, 14] Initialization
+      |  ||     `> [25, 14] Cast
+      |  ||        +> [25, 15] Identifier (float)
+      |  ||        `> [25, 22] Identifier (a)
+      |  []> [26, 10] DeclVar
+      |  ||  +> [26, 4] Identifier (float)
+      |  ||  +> [26, 10] Identifier (c)
+      |  ||  `> [26, 14] Initialization
+      |  ||     `> [26, 14] Float (1.1)
+      |  []> [27, 8] DeclVar
+      |      +> [27, 4] Identifier (int)
+      |      +> [27, 8] Identifier (d)
+      |      `> [27, 12] Initialization
+      |         `> [27, 12] Cast
+      |            +> [27, 13] Identifier (int)
+      |            `> [27, 18] Identifier (c)
+      `> ListInst [List with 3 elements]
+         []> [28, 4] MethodCall
+         ||  +> [28, 4] Identifier (a)
+         ||  +> [28, 6] Identifier (castC)
+         []> [29, 4] MethodCall
+         ||  +> [29, 4] Identifier (a)
+         ||  +> [29, 6] Identifier (castB)
+         []> [30, 4] MethodCall
+             +> [30, 4] Identifier (a)
+             +> [30, 6] Identifier (castA)

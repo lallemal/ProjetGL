@@ -1,0 +1,9 @@
+// mismatched input ']' expecting {STRING, '{', '(', 'false', 'true', 'readInt', 'readFloat', 'new', 'this', 'null', '-', '!', FLOAT, INT, IDENT}
+// Description:
+//    Tableau sans new
+//
+
+{
+    int[] a = float[];
+}
+

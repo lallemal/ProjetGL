@@ -1,6 +1,6 @@
 // Description:
 //    Tableau mal assigné
-//
+//  Problème réglé avec la grammaire contextuelle
 
 {
     int[] a = {1, 2, 3};

@@ -1,0 +1,90 @@
+`> [7, 0] Program
+   +> ListDeclClass [List with 1 elements]
+   |  []> [7, 6] DeclClass
+   |      +> [7, 6] Identifier (A)
+   |      |  definition: type defined at [7, 6], type=A
+   |      +> Identifier (Object)
+   |      |  definition: type (builtin), type=Object
+   |      []> [9, 12] DeclField
+   |      ||  Visibility: PUBLIC
+   |      ||  +> [9, 4] Identifier (boolean)
+   |      ||  |  definition: type (builtin), type=boolean
+   |      ||  +> [9, 12] Identifier (i)
+   |      ||  |  definition: field defined at [9, 12], type=boolean
+   |      ||  `> [9, 16] Initialization
+   |      ||     `> [9, 16] BooleanLiteral (true)
+   |      ||        type: boolean
+   |      []> [10, 12] DeclField
+   |          Visibility: PUBLIC
+   |          +> [10, 4] Identifier (boolean)
+   |          |  definition: type (builtin), type=boolean
+   |          +> [10, 12] Identifier (j)
+   |          |  definition: field defined at [10, 12], type=boolean
+   |          `> [10, 16] Initialization
+   |             `> [10, 16] BooleanLiteral (false)
+   |                type: boolean
+   |      []> [12, 4] DeclMethod
+   |      ||  +> [12, 4] Identifier (boolean)
+   |      ||  |  definition: type (builtin), type=boolean
+   |      ||  +> [12, 12] Identifier (and)
+   |      ||  |  definition: method defined at [12, 4], type=boolean
+   |      ||  []> [13, 8] Return
+   |      ||      `> [13, 15] And
+   |      ||         type: boolean
+   |      ||         +> [13, 15] Identifier (i)
+   |      ||         |  definition: field defined at [9, 12], type=boolean
+   |      ||         `> [13, 18] Identifier (j)
+   |      ||            definition: field defined at [10, 12], type=boolean
+   |      []> [16, 4] DeclMethod
+   |          +> [16, 4] Identifier (boolean)
+   |          |  definition: type (builtin), type=boolean
+   |          +> [16, 12] Identifier (or)
+   |          |  definition: method defined at [16, 4], type=boolean
+   |          []> [17, 8] Return
+   |              `> [17, 15] Or
+   |                 type: boolean
+   |                 +> [17, 15] Identifier (i)
+   |                 |  definition: field defined at [9, 12], type=boolean
+   |                 `> [17, 18] Identifier (j)
+   |                    definition: field defined at [10, 12], type=boolean
+   `> [20, 0] Main
+      +> ListDeclVar [List with 1 elements]
+      |  []> [21, 6] DeclVar
+      |      +> [21, 4] Identifier (A)
+      |      |  definition: type defined at [7, 6], type=A
+      |      +> [21, 6] Identifier (a)
+      |      |  definition: variable defined at [21, 6], type=A
+      |      `> [21, 10] Initialization
+      |         `> [21, 10] New
+      |            type: A
+      |            `> [21, 14] Identifier (A)
+      |               definition: type defined at [7, 6], type=A
+      `> ListInst [List with 2 elements]
+         []> [22, 4] IfThenElse
+         ||  +> [22, 8] Not
+         ||  |  type: boolean
+         ||  |  `> [22, 9] MethodCall
+         ||  |     type: boolean
+         ||  |     +> [22, 9] Identifier (a)
+         ||  |     |  definition: variable defined at [21, 6], type=A
+         ||  |     +> [22, 11] Identifier (and)
+         ||  |     |  definition: method defined at [12, 4], type=boolean
+         ||  +> ListInst [List with 1 elements]
+         ||  |  []> [23, 8] Println
+         ||  |      `> [23, 16] ListExpr [List with 1 elements]
+         ||  |         []> [23, 16] StringLiteral (and ok)
+         ||  |             type: string
+         ||  `> ListInst [List with 0 elements]
+         []> [25, 4] IfThenElse
+             +> [25, 8] MethodCall
+             |  type: boolean
+             |  +> [25, 8] Identifier (a)
+             |  |  definition: variable defined at [21, 6], type=A
+             |  +> [25, 10] Identifier (or)
+             |  |  definition: method defined at [16, 4], type=boolean
+             +> ListInst [List with 1 elements]
+             |  []> [26, 8] Println
+             |      `> [26, 16] ListExpr [List with 1 elements]
+             |         []> [26, 16] StringLiteral (or ok)
+             |             type: string
+             `> ListInst [List with 0 elements]

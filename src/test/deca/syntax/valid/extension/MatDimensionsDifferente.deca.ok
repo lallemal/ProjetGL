@@ -1,0 +1,16 @@
+`> [6, 0] Program
+   +> ListDeclClass [List with 0 elements]
+   `> [6, 0] Main
+      +> ListDeclVar [List with 1 elements]
+      |  []> [7, 20] DeclVar
+      |      +> [7, 4] IdentifierArray
+      |      +> [7, 20] Identifier (a)
+      |      `> [7, 24] Initialization
+      |         `> [7, 24] NewArray
+      |            `> [7, 28] Identifier (int)
+      |            +> ListExpr [List with 4 elements]
+      |            |  []> [7, 32] Int (4)
+      |            |  []> [7, 35] Int (5)
+      |            |  []> [7, 38] Int (6)
+      |            |  []> [7, 41] Int (7)
+      `> ListInst [List with 0 elements]

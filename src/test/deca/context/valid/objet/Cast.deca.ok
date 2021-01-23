@@ -1,0 +1,142 @@
+`> [5, 0] Program
+   +> ListDeclClass [List with 1 elements]
+   |  []> [5, 6] DeclClass
+   |      +> [5, 6] Identifier (A)
+   |      |  definition: type defined at [5, 6], type=A
+   |      +> Identifier (Object)
+   |      |  definition: type (builtin), type=Object
+   |      []> [6, 10] DeclField
+   |      ||  Visibility: PUBLIC
+   |      ||  +> [6, 4] Identifier (float)
+   |      ||  |  definition: type (builtin), type=float
+   |      ||  +> [6, 10] Identifier (a)
+   |      ||  |  definition: field defined at [6, 10], type=float
+   |      ||  `> [6, 14] Initialization
+   |      ||     `> [6, 14] Float (1.0)
+   |      ||        type: float
+   |      []> [7, 8] DeclField
+   |      ||  Visibility: PUBLIC
+   |      ||  +> [7, 4] Identifier (int)
+   |      ||  |  definition: type (builtin), type=int
+   |      ||  +> [7, 8] Identifier (b)
+   |      ||  |  definition: field defined at [7, 8], type=int
+   |      ||  `> [7, 12] Initialization
+   |      ||     `> [7, 12] Int (1)
+   |      ||        type: int
+   |      []> [8, 12] DeclField
+   |          Visibility: PUBLIC
+   |          +> [8, 4] Identifier (boolean)
+   |          |  definition: type (builtin), type=boolean
+   |          +> [8, 12] Identifier (c)
+   |          |  definition: field defined at [8, 12], type=boolean
+   |          `> [8, 16] Initialization
+   |             `> [8, 16] BooleanLiteral (true)
+   |                type: boolean
+   |      []> [10, 4] DeclMethod
+   |      ||  +> [10, 4] Identifier (boolean)
+   |      ||  |  definition: type (builtin), type=boolean
+   |      ||  +> [10, 12] Identifier (castC)
+   |      ||  |  definition: method defined at [10, 4], type=boolean
+   |      ||  []> [11, 8] Return
+   |      ||      `> [11, 15] Cast
+   |      ||         type: boolean
+   |      ||         +> [11, 16] Identifier (boolean)
+   |      ||         |  definition: type (builtin), type=boolean
+   |      ||         `> [11, 25] Identifier (c)
+   |      ||            definition: field defined at [8, 12], type=boolean
+   |      []> [14, 4] DeclMethod
+   |      ||  +> [14, 4] Identifier (int)
+   |      ||  |  definition: type (builtin), type=int
+   |      ||  +> [14, 8] Identifier (castB)
+   |      ||  |  definition: method defined at [14, 4], type=int
+   |      ||  []> [15, 8] Return
+   |      ||      `> [15, 15] Cast
+   |      ||         type: int
+   |      ||         +> [15, 16] Identifier (int)
+   |      ||         |  definition: type (builtin), type=int
+   |      ||         `> [15, 21] Identifier (b)
+   |      ||            definition: field defined at [7, 8], type=int
+   |      []> [18, 4] DeclMethod
+   |          +> [18, 4] Identifier (float)
+   |          |  definition: type (builtin), type=float
+   |          +> [18, 10] Identifier (castA)
+   |          |  definition: method defined at [18, 4], type=float
+   |          []> [19, 8] Return
+   |              `> [19, 15] Cast
+   |                 type: float
+   |                 +> [19, 16] Identifier (float)
+   |                 |  definition: type (builtin), type=float
+   |                 `> [19, 23] Identifier (a)
+   |                    definition: field defined at [6, 10], type=float
+   `> [22, 0] Main
+      +> ListDeclVar [List with 5 elements]
+      |  []> [23, 6] DeclVar
+      |  ||  +> [23, 4] Identifier (A)
+      |  ||  |  definition: type defined at [5, 6], type=A
+      |  ||  +> [23, 6] Identifier (a)
+      |  ||  |  definition: variable defined at [23, 6], type=A
+      |  ||  `> [23, 10] Initialization
+      |  ||     `> [23, 10] New
+      |  ||        type: A
+      |  ||        `> [23, 14] Identifier (A)
+      |  ||           definition: type defined at [5, 6], type=A
+      |  []> [24, 8] DeclVar
+      |  ||  +> [24, 4] Identifier (int)
+      |  ||  |  definition: type (builtin), type=int
+      |  ||  +> [24, 8] Identifier (z)
+      |  ||  |  definition: variable defined at [24, 8], type=int
+      |  ||  `> [24, 12] Initialization
+      |  ||     `> [24, 12] Int (1)
+      |  ||        type: int
+      |  []> [25, 10] DeclVar
+      |  ||  +> [25, 4] Identifier (float)
+      |  ||  |  definition: type (builtin), type=float
+      |  ||  +> [25, 10] Identifier (y)
+      |  ||  |  definition: variable defined at [25, 10], type=float
+      |  ||  `> [25, 14] Initialization
+      |  ||     `> [25, 14] Cast
+      |  ||        type: float
+      |  ||        +> [25, 15] Identifier (float)
+      |  ||        |  definition: type (builtin), type=float
+      |  ||        `> [25, 22] Identifier (z)
+      |  ||           definition: variable defined at [24, 8], type=int
+      |  []> [26, 10] DeclVar
+      |  ||  +> [26, 4] Identifier (float)
+      |  ||  |  definition: type (builtin), type=float
+      |  ||  +> [26, 10] Identifier (x)
+      |  ||  |  definition: variable defined at [26, 10], type=float
+      |  ||  `> [26, 14] Initialization
+      |  ||     `> [26, 14] Float (1.1)
+      |  ||        type: float
+      |  []> [27, 8] DeclVar
+      |      +> [27, 4] Identifier (int)
+      |      |  definition: type (builtin), type=int
+      |      +> [27, 8] Identifier (w)
+      |      |  definition: variable defined at [27, 8], type=int
+      |      `> [27, 12] Initialization
+      |         `> [27, 12] Cast
+      |            type: int
+      |            +> [27, 13] Identifier (int)
+      |            |  definition: type (builtin), type=int
+      |            `> [27, 18] Identifier (x)
+      |               definition: variable defined at [26, 10], type=float
+      `> ListInst [List with 3 elements]
+         []> [28, 4] MethodCall
+         ||  type: boolean
+         ||  +> [28, 4] Identifier (a)
+         ||  |  definition: variable defined at [23, 6], type=A
+         ||  +> [28, 6] Identifier (castC)
+         ||  |  definition: method defined at [10, 4], type=boolean
+         []> [29, 4] MethodCall
+         ||  type: int
+         ||  +> [29, 4] Identifier (a)
+         ||  |  definition: variable defined at [23, 6], type=A
+         ||  +> [29, 6] Identifier (castB)
+         ||  |  definition: method defined at [14, 4], type=int
+         []> [30, 4] MethodCall
+             type: float
+             +> [30, 4] Identifier (a)
+             |  definition: variable defined at [23, 6], type=A
+             +> [30, 6] Identifier (castA)
+             |  definition: method defined at [18, 4], type=float
+        

@@ -1,0 +1,9 @@
+// Description:
+//    Tableau mal initialisé (différent types entre déclaration et intilisation)
+//  Problème réglé avec la grammaire contextuelle
+
+{
+    int[] a = {1.1, 2.1, 3.1};
+}
+
+

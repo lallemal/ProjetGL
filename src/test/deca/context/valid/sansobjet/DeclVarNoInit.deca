@@ -1,7 +1,10 @@
 // Description :
-//    test context main, variable sans init
+//    test décompilation main, variable sans init
 //
-// Resultats arbre décoré (.deca.ok)
+// Resultats (en comparaison avec le résultat attendu 
+// disponible dans le fichier *.deca.ok dans le dossier Modeles_OK) :
+//    ok
+
 
 {
     int i;

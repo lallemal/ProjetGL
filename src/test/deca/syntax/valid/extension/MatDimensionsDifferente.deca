@@ -1,0 +1,9 @@
+// missing IDENT at '='
+// Description:
+//    Matrice avec des dimensions différentes entre déclaration et initialisation
+//Problème gérer dans la grammaire contextuelle
+
+{
+    int[][][][][][] a = new int[4][5][6][7];
+}
+

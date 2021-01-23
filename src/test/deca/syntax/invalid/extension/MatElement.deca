@@ -1,0 +1,10 @@
+// no viable alternative at input '{'
+// Description:
+//    Mauvais acces à un element à une matrice 
+//
+
+{
+    int[][] a = new int[3][2];
+    a[3]{2} = 2;
+}
+

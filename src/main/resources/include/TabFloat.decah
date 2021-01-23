@@ -1,11 +1,200 @@
 class TabFloat extends AbstractTab{
-
     float[] tab;
     
-    // modifier TabInt modifie aussi le tableau si declare explicitement
+    // modifier  modifie aussi le tableau si declare explicitement
     void setInit(float[] tab, int size){
     	this.tab = tab;
         this.size = size;
     }
+
+   void setInitCopy(float[] tab, int size){
+        int i = 0;
+        this.tab = new float[size];
+        while(i < size){
+            (this.tab)[i] = tab[i];
+            i = i + 1;
+        }
+        this.size = size;
+    }
+    
+    
+    float getCase(int indice){
+        return (this.tab)[indice];
+    }
+    
+    boolean add(float element, int indice) {
+        int ind = indice;
+    	int i = 0;
+        float[] tabnew;
+      	if (ind > this.size || ind < 0) {
+    	    return false;
+    	}
+        else{
+
+            tabnew = new float[this.size + 1];
+            this.size = this.size + 1;
+        }
+        	
+    	while(i < ind) {
+    		tabnew[i] = (this.tab)[i];
+    		i = i + 1;
+    	}
+    	tabnew[i] = element;
+    	i = i + 1;
+    	
+    	
+    	while(i < this.size) {
+    		tabnew[i] = (this.tab)[i - 1];
+    		i = i + 1;
+    	}
+       
+    	this.tab = tabnew;
+    	return true;
+        
+    }
+
+    void addFirst(float valeur){
+        this.add(valeur, 0);
+    }
+    
+    void addLast(float valeur){
+        this.add(valeur, size);
+    }
+   
+    
+    // supprime la case i du tableau
+    boolean delete(int indice){
+        int i = 0;
+        float[] tabnew;
+
+        if (indice >= size || indice < 0){
+            return false;
+        }
+        else{
+            tabnew = new float[this.size - 1];
+            this.size = this.size - 1;
+        }
+        if (indice >= size || indice < 0){
+            return false;
+        }
+        while (i <indice){
+            tabnew[i] = (this.tab)[i];
+            i = i + 1;
+        }
+        while (i < this.size){
+            tabnew[i] = (this.tab)[i+1];
+            i = i + 1;
+        }
+        this.tab = tabnew;
+        return true;
+    }
+
+    void deleteFirst(){
+        this.delete(0);
+    }
+    void deleteLast(){
+        this.delete(this.size - 1);
+    } 
+    // somme terme a terme
+    boolean sumTab(TabFloat tab){
+        int i = 0;
+        if (this.size !=tab.size){
+            return false;
+        }
+        while (i < size){
+            (this.tab)[i] = (this.tab)[i] + tab.getCase(i);
+            i = i + 1;
+        }
+        return true;
+    }
+ 
+    // multiplie terme a terme
+    boolean multTab(TabInt tab){
+        int i = 0;
+        if (this.size != tab.size){
+            return false;
+        }
+        while (i < size){
+            (this.tab)[i] = (this.tab)[i] * tab.getCase(i);
+            i = i + 1;
+        }
+        return true;
+    }
+    
+    
+    void affichage() {
+    	int i = 0;
+        float valeur;
+    	print("[");
+    	while(i < this.size) {
+    	        valeur = this.getCase(i);
+                print(valeur);
+    		i = i + 1;
+    		if (i != this.size) {
+    			print(",");
+    		}
+    	}
+    	print("]");
+    }
+    
+    void mergeSortAscending(){
+    	triFusion(0, this.size - 1);
+    }
+	
+    void triFusion(int deb, int fin) {
+        int milieu;
+    	if (deb != fin){
+    		milieu=(fin+deb)/2;
+    		triFusion(deb,milieu);
+    		triFusion(milieu+1,fin);
+    		fusion(deb,milieu,fin);
+        }
+    }
+  // tableau = deux tableau trie, modifie le tableau directement pour fusionner evite maximum perte de memoire
+    void fusion(int deb1, int fin1, int fin2) {
+    	int deb2 = fin1 + 1;
+        int i;
+        int compt1;
+        int compt2;
+        int j;
+    	// on fait une copie du tableau1 au gauche 
+    	// car si tout tab1 > tab2, on recopie tab2 et on ecrase donc tab1, au contraire, on ne change pas l'ordre
+    	// d'ou une copie de tab1
+    	float[] copietab1 = new float[fin1 - deb1 + 1];
+    	i = deb1;
+    	
+    	while(i <= fin1) {
+    		copietab1[i - deb1] = (this.tab)[i];
+    		i = i + 1;
+    	}
+    	
+    	compt1 = deb1;
+    	compt2 = deb2;
+    	j = deb1;
+    	// parcours des deux tableaux
+    	while(j <= fin2) {
+    		if(compt1 == deb2) {
+    			// tous les elements de tab1 ont été classe donc tous classe
+    			// on sort de la boucle
+    			j = fin2;
+    		}
+    		// tous les elements de tab2 ont ete classe, on rajoute les element de tab1
+    		else if(compt2 == (fin2 + 1)){
+    			(this.tab)[j] = copietab1[compt1 - deb1];
+    			compt1 = compt1 + 1;
+    		}
+    		// utilise copie car peut etre deja ecrase ici tab1 < tab2, on ajoute tab1 
+    		else if (copietab1[compt1 - deb1] < (this.tab)[compt2]){
+    			(this.tab)[j] = copietab1[compt1 - deb1];
+    			compt1 = compt1 + 1;
+    		}
+    		// ajoute element du second tableau
+    		else {
+    			(this.tab)[j] = (this.tab)[compt2];
+    			compt2 = compt2 + 1;
+    		}
+    		j = j + 1;
+    	}
+    }	
 
 }

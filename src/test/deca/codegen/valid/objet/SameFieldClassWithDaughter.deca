@@ -1,3 +1,5 @@
+// Description : Test with two class, one subclass of the other and the same field between them
+// Result : ima : 3
 class A{
     int x;
 }

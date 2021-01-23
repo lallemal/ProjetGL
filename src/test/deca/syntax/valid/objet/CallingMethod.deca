@@ -1,3 +1,5 @@
+// Description : Declaration of a class with method and field
+// Result : Pass
 class Test{
 	
 	int test;

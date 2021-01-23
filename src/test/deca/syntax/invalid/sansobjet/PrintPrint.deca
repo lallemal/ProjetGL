@@ -1,3 +1,5 @@
+// Description : Test with a print inside a print : impossible.
+// Result : error : mismatched input 'print' expecting
 {
 	print(print("Hello"));
 }

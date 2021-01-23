@@ -1,3 +1,5 @@
+// Description : test with a param and a field of same ident
+// Result : pass
 class A{
     int x;
     void setX(int x){

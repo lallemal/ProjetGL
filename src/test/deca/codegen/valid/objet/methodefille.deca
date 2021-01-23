@@ -1,6 +1,6 @@
 //
-//Descritpion: passage methode fille
-//Restultat: OK
+//Descripion: passage methode fille
+//Resultat: OK
 class A{
         int x;
         void setX(){

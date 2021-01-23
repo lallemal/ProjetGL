@@ -19,15 +19,19 @@ public class Divide extends AbstractOpArith {
     }
     
     protected void mnemo(DecacCompiler compiler, DVal dval, int n) {
-    	compiler.getLabelError().setErrorDiv0(true);
     	if (this.getRightOperand().getType().isFloat()) {
 	    	compiler.addInstruction(new DIV(dval, Register.getR(n)));
+	    	if (!compiler.getCompilerOptions().isNoCheck()) {
+	    		compiler.getLabelError().setErrorCalcFloat(true);
+	    		compiler.addInstruction(new BOV(compiler.getLabelError().getLabelErrorcalcFloat()));
+	        }
     	} else if (this.getRightOperand().getType().isInt()) {
 	    	compiler.addInstruction(new QUO(dval, Register.getR(n)));
+	    	if (!compiler.getCompilerOptions().isNoCheck()) {
+	    		compiler.getLabelError().setErrorDiv0(true);
+	            compiler.addInstruction(new BOV(compiler.getLabelError().getLabelErrorDiv0()));
+	        }
     	}
-    	if (!compiler.getCompilerOptions().isNoCheck()) {
-            compiler.addInstruction(new BOV(compiler.getLabelError().getLabelErrorDiv0()));
-        }
     }
 
     @Override

@@ -16,6 +16,8 @@ import fr.ensimag.ima.pseudocode.instructions.WSTR;
  */
 public class LabelError {
 
+	private boolean errorCalcFloat;
+	private Label calcFloat;
 	private boolean errorDiv0;
 	private Label div0;
 	private boolean errorMod0;
@@ -51,6 +53,15 @@ public class LabelError {
 		this.setErrorReadInt(true);
 		this.setErrorMod0(true);
 		this.setErrorDiv0(true);
+		this.setErrorCalcFloat(true);
+	}
+	
+	public void setErrorCalcFloat(boolean b) {
+		errorCalcFloat = b;
+	}
+	
+	public Label getLabelErrorcalcFloat() {
+		return calcFloat;
 	}
 	
 	public void setErrorDiv0(boolean b) {
@@ -142,6 +153,8 @@ public class LabelError {
 	}
 	
 	public LabelError() {
+		errorCalcFloat = false;
+		calcFloat = new Label("division_par_zero");
 		errorDiv0 = false;
 		div0 = new Label("division_par_zero");
 		errorMod0 = false;
@@ -167,6 +180,9 @@ public class LabelError {
 	}
 	
 	public void codeGenLabelError(DecacCompiler compiler) {
+		if (errorCalcFloat) {
+			addError(compiler, calcFloat, "debordement arithmetique", "Erreur : debordement sur les float");
+		}
 		if (errorDiv0) {
 			addError(compiler, div0, "division par zero", "Erreur : division par zero impossible");
 		}

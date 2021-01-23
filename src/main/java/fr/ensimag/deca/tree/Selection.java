@@ -32,11 +32,13 @@ public class Selection extends AbstractLValue{
 	
 	@Override
 	public void codeExp(DecacCompiler compiler, int n) {
-		compiler.getLabelError().setErrorDereferencementNull(true);
 		expr.codeExp(compiler, n);
 		if (expr.isIdentifier()) {
-			compiler.addInstruction(new CMP(new NullOperand(), Register.getR(n)));
-			compiler.addInstruction(new BEQ(compiler.getLabelError().getLabelDereferencementNull()));
+			if (!compiler.getCompilerOptions().isNoCheck()) {
+				compiler.getLabelError().setErrorDereferencementNull(true);
+				compiler.addInstruction(new CMP(new NullOperand(), Register.getR(n)));
+				compiler.addInstruction(new BEQ(compiler.getLabelError().getLabelDereferencementNull()));
+			}
 		}
 		int offset = ident.getFieldDefinition().getIndex() + 1;
 		compiler.addInstruction(new LOAD(new RegisterOffset(offset, Register.getR(n)), Register.getR(n)));

@@ -60,10 +60,12 @@ public class MethodCall extends AbstractExpr{
 			compiler.addInstruction(new STORE(Register.getR(n), new RegisterOffset(-index, Register.SP)));
 			index++;
 		}
-		compiler.getLabelError().setErrorDereferencementNull(true);
 		compiler.addInstruction(new LOAD(new RegisterOffset(0, Register.SP), Register.getR(n)));
-		compiler.addInstruction(new CMP(new NullOperand(), Register.getR(n)));
-		compiler.addInstruction(new BEQ(compiler.getLabelError().getLabelDereferencementNull()));
+		if (!compiler.getCompilerOptions().isNoCheck()) {
+    		compiler.getLabelError().setErrorDereferencementNull(true);
+    		compiler.addInstruction(new CMP(new NullOperand(), Register.getR(n)));
+    		compiler.addInstruction(new BEQ(compiler.getLabelError().getLabelDereferencementNull()));
+    	}
 		compiler.addInstruction(new LOAD(new RegisterOffset(0, Register.getR(n)), Register.getR(n)));
 		compiler.incrementKSP(2);
 		compiler.addInstruction(new BSR(new RegisterOffset(ident.getMethodDefinition().getIndex()+1, Register.getR(n))));

@@ -1,0 +1,14 @@
+// Erreur : sortie de la methode A.main sans return
+// Description : méthode sans return 
+// Resultat : erreur lors de ima
+
+
+class A{
+     int main(){
+     }
+}
+
+{
+	A a = new A();
+	int x = a.main();
+}

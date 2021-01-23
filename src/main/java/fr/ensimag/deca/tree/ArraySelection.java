@@ -26,9 +26,13 @@ public class ArraySelection extends AbstractLValue{
 	public AbstractExpr getIdent() {
 		return ident;
 	}
-
+	
 	@Override
 	protected void codeExp(DecacCompiler compiler, int n) {
+		this.codeExp(compiler, n, false);
+	}
+
+	protected void codeExp(DecacCompiler compiler, int n, boolean b) {
 		if (n+3 > compiler.getRmax()) {
 			compiler.addInstruction(new TSTO(4));
 			compiler.addInstruction(new BOV(compiler.getLabelError().getLabelPilePleine()));
@@ -68,7 +72,12 @@ public class ArraySelection extends AbstractLValue{
 			compiler.addInstruction(new MUL(new RegisterOffset(i, Register.getR(n)), Register.getR(n+2)));
 		}
 		compiler.addInstruction(new POP(Register.getR(n)));
-		compiler.addInstruction(new LEA(new RegisterOffsetRegister(1, Register.getR(n), Register.getR(n+1)),Register.getR(n)));
+		if (b) {
+			compiler.addInstruction(new LEA(new RegisterOffsetRegister(1, Register.getR(n), Register.getR(n+1)),Register.getR(n)));
+		} else {
+			compiler.addInstruction(new LOAD(new RegisterOffsetRegister(1, Register.getR(n), Register.getR(n+1)),Register.getR(n)));
+		}
+		
 	}
 
 
@@ -76,10 +85,8 @@ public class ArraySelection extends AbstractLValue{
 	protected void codeGenPrint(DecacCompiler compiler, boolean printHex) {
 		codeExp(compiler, 1);
 		if (getType().isInt()) {
-			compiler.addInstruction(new LOAD(new RegisterOffset(0, Register.getR(1)), Register.R1));
 			compiler.addInstruction(new WINT());
 		} else if (getType().isFloat()) {
-			compiler.addInstruction(new LOAD(new RegisterOffset(0, Register.getR(1)), Register.R1));
 			compiler.addInstruction(new WFLOAT());
 		}
 	}

@@ -47,7 +47,7 @@ class TabInt extends AbstractTab{
         
         print(indice);
       	if (indice > this.size || indice < 0) {
-    		return false;
+            return false;
     	}
     	
     	while(i < indice) {
@@ -62,7 +62,6 @@ class TabInt extends AbstractTab{
     		tabnew[i] = (this.tab)[i - 1];
     		i = i + 1;
     	}
-       
     	this.tab = tabnew;
     	return true;
         

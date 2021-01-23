@@ -40,7 +40,7 @@ public class ArraySelection extends AbstractLValue{
 			compiler.addInstruction(new PUSH(Register.getR(2)));
 			compiler.addInstruction(new PUSH(Register.getR(1)));
 			compiler.addInstruction(new PUSH(Register.getR(0)));
-			this.codeExp(compiler, 0);
+			this.codeExp(compiler, 0, b);
 			compiler.addInstruction(new LOAD(Register.R0, Register.getR(n)));
 			int nbPop = 0;
 			for (int i=0; i<Math.min(4, n);i++) {

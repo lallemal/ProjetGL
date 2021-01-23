@@ -105,66 +105,7 @@ decl_var[AbstractIdentifier t] returns[AbstractDeclVar tree]
       	$tree = new DeclVar($t, $i.tree, init);
       	setLocation($tree, $i.start);
         };
-//      | (LHOOK  RHOOK)+ i1=ident {
-//            assert($i1.tree != null);
-//            init = new NoInitialization();
-//        } (EQUALS e2=expr {
-//      		init = new Initialization($e2.tree);
-//      		setLocation(init, $e2.start);
-//        }
-//      )? {
-//      	$tree = new DeclVarArray($t, $i1.tree, init);
-//      	setLocation($tree, );
-//        }
-//      | (LHOOK RHOOK)+ i2=ident EQUALS e3=expr{
-//            assert($e3.tree != null);
-//            assert($i2.tree != null);
-//            init = new Initialization($e3.tree);
-//      		setLocation(init, $e3.start);
-//      		$tree = new DeclVarMatrix($t, $i2.tree, (Initialization)init);
-//      		setLocation($tree, $i2.start);
-//
-//        }
-    
-//decl_var_array[AbstractIdentifier t] returns[AbstractDeclVar tree]
-//	@init   {
-//
-//            AbstractInitialization init;
-//            AbstractInteger intMemory;
-//        }
-//    : i=ident LHOOK{
-//    	//pas de setLocation pour NoInitialization car cest une feuille
-//    	init = new NoInitialization();
-//		intMemory = new NoInteger();
-//        }
-//      (INT {
-//      	intMemory = new HasInteger(Integer.parseInt($INT.text));
-//      }  	
-//      )? RHOOK
-//      (EQUALS e=expr {
-//      	init = new Initialization($e.tree);
-//      	setLocation(init, $e.start);
-//      	
-//        }
-//      )? {
-//      	$tree = new DeclVarArray($t, intMemory,  $i.tree, init);
-//      	setLocation($tree, $i.start);
-//        }
-//	;
-//
-//decl_var_matrix[AbstractIdentifier t] returns[AbstractDeclVar tree] 
-//	@init   {
-//
-//            Initialization init;
-//            AbstractInteger intMemory;
-//        }
-//    : i=ident LHOOK RHOOK LHOOK RHOOK EQUALS e=expr{
-//      	init = new Initialization($e.tree);
-//      	setLocation(init, $e.start);
-//      	$tree = new DeclVarMatrix($t,  $i.tree, init);
-//      	setLocation($tree, $i.start);
-//        }
-//	;
+
 list_inst returns[ListInst tree]
 @init {
 

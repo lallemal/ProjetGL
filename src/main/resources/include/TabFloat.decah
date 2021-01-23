@@ -98,7 +98,7 @@ class TabFloat extends AbstractTab{
     // somme terme a terme
     boolean sumTab(TabFloat tab){
         int i = 0;
-        if (this.size !=tab.size){
+        if (this.size != tab.size){
             return false;
         }
         while (i < size){
@@ -109,7 +109,7 @@ class TabFloat extends AbstractTab{
     }
  
     // multiplie terme a terme
-    boolean multTab(TabInt tab){
+    boolean multTab(TabFloat tab){
         int i = 0;
         if (this.size != tab.size){
             return false;

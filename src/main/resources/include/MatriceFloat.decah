@@ -1,0 +1,11 @@
+class MatriceFloat extends AbstractMatrice{
+	float[][] matfloat;
+
+	// initialise le tableau, le tableau est en référence avec la classe creer
+	void setInit(float[][] mat, int nbl, int nbc) {
+            this.nbl = nbl;
+            this.nbc = nbc;
+            this.matfloat = mat;
+            return;
+	}
+}

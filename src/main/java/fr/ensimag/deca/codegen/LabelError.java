@@ -60,7 +60,7 @@ public class LabelError {
 		errorCalcFloat = b;
 	}
 	
-	public Label getLabelErrorcalcFloat() {
+	public Label getLabelErrorCalcFloat() {
 		return calcFloat;
 	}
 	

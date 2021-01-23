@@ -22,13 +22,13 @@ public class Divide extends AbstractOpArith {
     	if (this.getRightOperand().getType().isFloat()) {
 	    	compiler.addInstruction(new DIV(dval, Register.getR(n)));
 	    	if (!compiler.getCompilerOptions().isNoCheck()) {
-	    		compiler.getLabelError().setErrorDiv0(true);
-	    		compiler.addInstruction(new BOV(compiler.getLabelError().getLabelErrorcalcFloat()));
+	    		compiler.getLabelError().setErrorCalcFloat(true);
+	    		compiler.addInstruction(new BOV(compiler.getLabelError().getLabelErrorCalcFloat()));
 	        }
     	} else if (this.getRightOperand().getType().isInt()) {
 	    	compiler.addInstruction(new QUO(dval, Register.getR(n)));
 	    	if (!compiler.getCompilerOptions().isNoCheck()) {
-	    		compiler.getLabelError().setErrorCalcFloat(true);
+	    		compiler.getLabelError().setErrorDiv0(true);
 	            compiler.addInstruction(new BOV(compiler.getLabelError().getLabelErrorDiv0()));
 	        }
     	}

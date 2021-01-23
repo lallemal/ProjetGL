@@ -1,3 +1,5 @@
+// Description : Test for instance of
+// Result : print "ok"
 class A { }
 class B extends A {
     int y = 2;

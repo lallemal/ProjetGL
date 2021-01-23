@@ -1,3 +1,5 @@
+// Description : Test to print a float given by user.
+// Resultat : Working
 {
     float x;
 

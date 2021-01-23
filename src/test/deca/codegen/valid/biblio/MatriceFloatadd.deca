@@ -1,0 +1,35 @@
+//
+//Objectif: tester ajoute de int sur deca
+//Resultat: OK
+#include "Matrice.decah"
+
+{
+    float [][] tab1 = {{3.0E0,2.0E0}};
+    /*
+    float [][] tab2 = {{3.0E0},{2.0E0}};
+    float [][] tab3 = {{3.0E0,3.0E0},{2.0E0,3.0E0}};
+    float [][] tab4 = {{3.0E0,3.0E0,3.0E0},{2.0E0,3.0E0,2.0E0}};
+    float [][] tab5 = {{3.0E0,3.0E0},{2.0E0,3.0E0},{2.0E0,1.0E0}};
+    MatriceFloat mat1 = new MatriceFloat();
+    MatriceFloat mat2 = new MatriceFloat();
+    MatriceFloat mat3 = new MatriceFloat();
+    MatriceFloat mat4 = new MatriceFloat();
+    MatriceFloat mat5 = new MatriceFloat();
+    */
+    /*
+    mat1.setInit(tab1, 1, 2);
+    mat1.affichage();
+
+    mat2.setInit(tab2, 2, 1);
+    mat2.affichage();
+
+    mat3.setInit(tab3, 2, 2);
+    mat3.affichage();
+
+    mat4.setInit(tab4, 2, 3);
+    mat4.affichage();
+
+    mat5.setInit(tab5, 3, 2);
+    mat5.affichage();
+    */
+}

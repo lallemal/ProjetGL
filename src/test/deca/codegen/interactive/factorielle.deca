@@ -1,3 +1,7 @@
+// Description : User give an integer and the program print
+// Result : work with good values.
+
+
 {
     int input;
     int r = 1;

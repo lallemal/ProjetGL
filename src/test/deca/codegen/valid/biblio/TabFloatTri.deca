@@ -1,0 +1,13 @@
+#include "Tab.decah"
+{
+    float [] t = { 10.0E0, 4.0E0, 2.0E0, 50.0E0,5.0E0, 8.0E0};
+    TabFloat tab = new TabFloat();
+    tab.setInit(t, 6);
+    println("tableau non trie");
+    tab.affichage();
+    tab.mergeSortAscending();
+    println();
+    println("tableau trie");
+    tab.affichage();
+}
+

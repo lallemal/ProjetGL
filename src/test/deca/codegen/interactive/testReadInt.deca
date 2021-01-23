@@ -1,3 +1,5 @@
+// Description : Test to print a int given by user.
+// Resultat : Working
 {
     int x;
 

@@ -55,6 +55,7 @@ public class DecacCompiler implements Callable<Boolean> {
     
     private int kGB = 1;
     private int kSP = 1;
+    private int kLB = 1;
     private int maxSP = 1;
     
     public int getMaxSP() {
@@ -67,7 +68,19 @@ public class DecacCompiler implements Callable<Boolean> {
     		maxSP = kSP;
     	}
     }
-    
+
+    public void incrementKLB() {
+        kLB++;
+    }
+
+    public void resetKLB() {
+        kLB = 1;
+    }
+
+    public int getkLB() {
+        return kLB;
+    }
+
     public void incrementKSP(int n) {
     	kSP = kSP + n;
     	if (kSP > maxSP) {

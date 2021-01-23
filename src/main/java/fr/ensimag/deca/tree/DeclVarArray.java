@@ -1,12 +1,12 @@
 package fr.ensimag.deca.tree;
 
-import java.io.PrintStream;
-
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.tools.IndentPrintStream;
+
+import java.io.PrintStream;
 
 public class DeclVarArray extends AbstractDeclVar{
     final private AbstractIdentifier type;
@@ -32,6 +32,11 @@ public class DeclVarArray extends AbstractDeclVar{
 	protected void codeGenDecl(DecacCompiler compiler) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	protected void codeGenDeclInMethod(DecacCompiler compiler) {
+
 	}
 
 	@Override

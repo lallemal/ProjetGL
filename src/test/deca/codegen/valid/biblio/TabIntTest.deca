@@ -8,6 +8,8 @@
    tab2.setInitCopy(t,3);
    tableau.setInit(t,3);
    tableau.add(1,0);
+   tableau.affichage();
    tableau.addFirst(0);
+   tableau.affichage();
    
 }

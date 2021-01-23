@@ -44,7 +44,7 @@ nb=$(ls -l $VALID_CONTEXT/*.deca | wc -l)
 echo "------ Démarrage des tests valide test_context($nb)"
 for i in "$VALID_CONTEXT"/*.deca
 do
-  if test_context $i 2>&1 | grep -q -e "$i:"
+  if test_context_nodebug $i 2>&1 | grep -q -e "$i:"
   then
     echo "Echec inattendu pour test_context : $i"
     exit 1
@@ -60,7 +60,7 @@ nb=$(ls -l $VALID_CONTEXT/*.deca | wc -l)
 echo "------ Démarrage des tests valide comparaison test_context ($nb)"
 for i in $VALID_CONTEXT/*.deca
 do
-    resultat=$(test_context $i)
+    resultat=$(test_context_nodebug $i)
     if [ "$(less $i.ok)" = "$resultat" ]; then
          echo "OK"
      else
@@ -79,7 +79,7 @@ nb=$(ls -l $VALID_CODEGEN/*.deca | wc -l)
 echo "------ Démarrage des tests valide de codegen test_context($nb)"
 for i in "$VALID_CODEGEN"/*.deca
 do
-  if test_context $i 2>&1 | grep -q -e "$i:"
+  if test_context_nodebug $i 2>&1 | grep -q -e "$i:"
   then
     echo "Echec inattendu pour test_context $i"
     exit 1
@@ -92,7 +92,7 @@ done
 # Test include
 cd src/test/deca/decompile/Test_include || exit 1
 
- if test_context Include.deca 2>&1 | grep -q -e "Include.deca:"
+ if test_context_nodebug Include.deca 2>&1 | grep -q -e "Include.deca:"
   then
     echo "Echec inattendu pour test_context"
   else

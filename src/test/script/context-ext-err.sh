@@ -29,10 +29,10 @@ echo "------- Démarrage des tests invalide test_context ($nb)"
 for i in "$INVALID_CONTEXT"/*.deca
 do
   error=$(head $i -n 1 | sed 's/\/\///')
-  if test_context $i 2>&1 | grep -q -e "$error"
+  if test_context_nodebug $i 2>&1 | grep -q -e "$error"
   then
     echo "Echec attendu pour test_context"
-  elif test_context $i 2>&1 | grep -q -e "$i:"
+  elif test_context_nodebug $i 2>&1 | grep -q -e "$i:"
   then
     echo "Echec inattendu pour test_context : $i"
     exit 1
@@ -48,7 +48,7 @@ nb=$(ls -l $VALID_CONTEXT/*.deca | wc -l)
 echo "------ Démarrage des tests valide test_context ($nb)"
 for i in "$VALID_CONTEXT"/*.deca
 do
-  if test_context $i 2>&1 | grep -q -e "$i:"
+  if test_context_nodebug $i 2>&1 | grep -q -e "$i:"
   then
     echo "Echec inattendu pour test_context : $i"
     exit 1
@@ -64,7 +64,7 @@ nb=$(ls -l $VALID_CONTEXT/*.deca | wc -l)
 echo "------ Démarrage des tests valide comparaison test_context ($nb)"
 for i in $VALID_CONTEXT/*.deca
 do
-    resultat=$(test_context $i)
+    resultat=$(test_context_nodebug $i)
     if [ "$(less $i.ok)" = "$resultat" ]; then
          echo "OK"
      else
@@ -83,7 +83,7 @@ nb=$(ls -l $VALID_CODEGEN/*.deca | wc -l)
 echo "------ Démarrage des tests valide de codegen test_context ($nb)"
 for i in "$VALID_CODEGEN"/*.deca
 do
-  if test_context $i 2>&1 | grep -q -e "$i:"
+  if test_context_nodebug $i 2>&1 | grep -q -e "$i:"
   then
     echo "Echec inattendu pour test_context $i"
     exit 1

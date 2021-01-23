@@ -1,0 +1,8 @@
+// Description:
+//    Tableau sans new
+//
+
+{
+    int[] a = float[];
+}
+

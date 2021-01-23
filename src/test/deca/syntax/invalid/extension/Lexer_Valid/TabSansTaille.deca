@@ -1,0 +1,7 @@
+// Description:
+//    Tableau sans taille lors de la création
+//
+
+{
+    int[] a = new float[];
+}

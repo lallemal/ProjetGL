@@ -6,78 +6,76 @@ class MatriceInt extends AbstractMatrice{
 		this.nbl = nbl;
 		this.nbc = nbc;
 		this.matint = mat;
-		return;
 	}
 
 	int getCase(int i, int j) {
-		return this.matint[i][j];
+		return (this.matint)[i][j];
 	}
 	
-	
 	void setInitCopy(int[][] mat, int nbl, int nbc) {
+		int i = 0;
+		int j = 0;
 		this.matint = new int[nbl][nbc];
 		this.nbl = nbl;
 		this.nbc = nbc;
-		int i = 0;
-		int j = 0;
+
 		while(i < nbl) {
 			while(j < nbc) {
-				this.matint[i][j] = mat[i][j];
+				(this.matint)[i][j] = mat[i][j];
 				j = j + 1;
 			}
 		j = 0;
 		i = i + 1;
-		
 		}
-		return;
 	}
 
 	void print() {
-		System.out.print("[");
 		int l = 0;
 		int c = 0;
+		print("[");
 		while(l < this.nbl) {
 			while( c < this.nbc){
 				if (l == 0 && c == 0) {
-					System.out.print("[" + this.matint[l][c]);
+					print("[" + (this.matin)[l][c]);
 				}
 				else if (l > 0 && c == 0) {
-					System.out.print(" [" + this.matint[l][c]);
+					print(" [" + (this.matin)[l][c]);
 				}
 				else{
-					System.out.print(" " + this.matint[l][c]);
+					print(" " + (this.matin)[l][c]);
 				}
 				c = c + 1;
 				if (c < nbc) {
-					System.out.print(",");
+					print(",");
 				}
 				}
-			System.out.print("]");
+			print("]");
 			if (l < nbl -1) {
-				System.out.println(",");
+				println(",");
 			}
 			c = 0;
 			l = l + 1;
 		}
-		System.out.println("]");
+		println("]");
 	}
 
 	// retourne null si dimension incorrecte
 	MatriceInt prodMat(MatriceInt m) {
-		int [][] tabfinal = new int[this.nbl][m.getNbc()];
+		int [][] tabfinal = new int[nbl][(m.getNbc())];
+		int i = 0;
+		int j = 0;
+		int k = 0;
 		MatriceInt matfinal = new MatriceInt();
 		matfinal.setInit(tabfinal, this.nbl, m.getNbc());
 		if(this.nbc != m.getNbl()) {
 			return null;
 		}
-		int i = 0;
-		int j = 0;
-		int k = 0;
+
 		// lignes
 		while(i < this.nbl) {
 			while( j < m.getNbc()) {
 				while(k < this.nbc) {
-					tabfinal[i][j] = tabfinal[i][j] + this.matint[i][k]* m.getCase(k, j);
+					tabfinal[i][j] = tabfinal[i][j] + (this.matin)[i][k]* m.getCase(k, j);
 					k = k + 1;
 				}
 				k = 0;
@@ -139,7 +137,7 @@ class MatriceInt extends AbstractMatrice{
 		int c = 0;
 		while(l < nbl) {
 			while( c < nbc) {
-				result = result + abs(this.matint[l][c]);
+				result = result + abs((this.matin)[l][c]);
 			}
 		}
 		return result;

@@ -105,9 +105,6 @@ public class DeclMethod extends AbstractDeclMethod {
     	    	}
     		}
     	}
-    	// augmentation du k(GB) pour ne pas ecraser les donnees avec les variables locales
-    	compiler.incrementKGB(3); // SP <- SP + 2
-    	compiler.incrementKGB(n); // nombre de registre à conserver
     	
     	compiler.addComment("instructions");
     	n = body.codeGenBody(compiler, labelFin);

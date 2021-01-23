@@ -28,7 +28,7 @@ class TabInt extends AbstractTab{
                 print(",");
             }
     	}
-    	print("]");
+    	println("]");
     }
 
     void addFirst(int element){

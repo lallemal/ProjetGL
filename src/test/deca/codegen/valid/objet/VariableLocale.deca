@@ -1,0 +1,75 @@
+// Description :
+//    Test génération de code, avec de multiples héritages et multiples variables locales
+//
+// Resultats decac:
+// Resultat ima:
+
+//Héritage:
+// A
+// B C
+//   D 
+
+
+
+class A{
+    int a = 0;
+    float aa = 0.1;
+    boolean aaa = true;
+
+    void printClass(){
+        int x = 1;
+        println("je suis dans A ", x);
+    }
+
+    void printClass2(){
+        float x = 2.0;
+        println("je suis dans A ", x);
+        printClass();
+    }
+}
+class B extends A{
+    int b;
+    float bb;
+    boolean bbb =false;
+}
+class C extends A{
+    int c;
+    float cc;
+    boolean ccc=false;
+
+    void printClassC(){
+        boolean x = true;
+        if (x){ 
+            println("je suis dans C");
+            printClass();
+        }
+        
+    }
+}
+class D extends C{
+    int d;
+    float dd;
+    boolean ddd=true;
+
+    void printClassD(){
+        boolean x;
+        println("je suis dans D");
+        printClassC();
+        printClass2();
+    }
+
+}
+
+{
+    A objetA = new A();
+    B objetB = new B();
+    C objetC = new C();
+    D objetD = new D();
+   
+    objetD.printClassD();
+    objetA.printClass();
+    
+    
+}
+
+

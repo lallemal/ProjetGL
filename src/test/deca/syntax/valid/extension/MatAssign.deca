@@ -1,9 +1,9 @@
 // Description:
-//    Tableau mal assigné
+//    Matrice mal assigné
 //  Problème réglé avec la grammaire contextuelle
 
 {
-    int[] a = {1, 2, 3};
+    int[][][] a = new int[3][3][3];
     a = 2;
 }
 

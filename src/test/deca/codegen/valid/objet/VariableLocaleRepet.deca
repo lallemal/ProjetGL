@@ -1,0 +1,55 @@
+// Description :
+//    Test génération de code, avec  multiples variables locales
+//
+// Resultats decac:
+// Resultat ima:
+
+
+
+class A{
+    
+    void test1(){
+        int a = 1;
+        int b = 1;
+        int c = 1;
+        float d = 1.2;
+        float e = 1.2;
+        float f = 1.2;
+        boolean g = true;
+        boolean h = false;
+        println(a+b+c+d+e+f);
+
+        
+    }
+
+    void test2(){
+        int a = 2;
+        int b = 2;
+        int c = 2;
+        float d = 2.2;
+        float e = 2.2;
+        float f = 2.2;
+        boolean g = false;
+        boolean h = true;   
+        test1();
+        println(a+b+c+d+e+f);
+    }
+    
+    void test3(){
+        int a = 3;
+        int b = 3;
+        int c = 3;
+        float d = 3.2;
+        float e = 3.2;
+        float f = 3.2;
+        boolean g = false;
+        boolean h = true;  
+        test1();
+        test2();
+        println(a+b+c+d+e+f);
+    }
+}
+{
+    A a = new A();
+    a.test3();
+}

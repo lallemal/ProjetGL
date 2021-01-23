@@ -80,7 +80,7 @@ public abstract class AbstractOpCmp extends AbstractBinaryExpr {
         if (opG == null) {
         	compiler.setRegistreUsed(3);
             getLeftOperand().codeExp(compiler, 3);
-            compiler.addInstruction(new CMP(Register.getR(2), Register.getR(3)));
+            compiler.addInstruction(new CMP(Register.getR(3), Register.getR(2)));
         } else {
             compiler.addInstruction(new CMP(opG, Register.getR(2)));
         }

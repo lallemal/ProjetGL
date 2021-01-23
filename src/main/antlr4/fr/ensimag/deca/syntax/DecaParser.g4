@@ -73,8 +73,7 @@ list_decl returns[ListDeclVar tree]
 
 decl_var_set[ListDeclVar l]
     : type 
-//    ( LHOOK (INT) RHOOK // Délcaration d'un tableau
-//    | (LHOOK RHOOK)+)? // Déclaration d'une matrice
+
     list_decl_var[$l,$type.tree] SEMI
     ;
 
@@ -272,14 +271,6 @@ list_expr returns[ListExpr tree]
             $tree.add($e2.tree);
         }
        )* )?
-//     | l1=list_element{ // Definition de array explicite 
-//    	assert($l1.tree != null);
-//    	$tree = $l1.tree;
-//    }
-//    | l2=list_array{ // Definition de matrice explicite
-//    	assert($l2.tree != null);
-//    	$tree = $l2.tree;
-//    }
     ;
     
 list_hook_expr returns[ListExpr tree]
@@ -599,30 +590,6 @@ new_object returns[AbstractExpr tree]
        		$tree = new NewArray($i.tree, $l.tree);
        };
 
-//list_element returns[ListExpr tree]
-//@init   {
-//	$tree = new ListExpr();
-//        }
-//    : OBRACE e=list_expr CBRACE{
-//			$tree = $e.tree;
-//		}
-//    ;
-//
-//
-//list_array returns[ListListExpr tree]
-//@init   {
-//	$tree = new ListListExpr();
-//        }
-//    : OBRACE((
-//    	e=list_element{
-//    		$tree.add($e.tree);
-//    	}
-//	) ( COMMA l=list_element{
-//		$tree.add($l.tree);
-//	}
-//		
-//	)*)?CBRACE
-//    ;
 
 type returns[AbstractIdentifier tree]
 	@init{

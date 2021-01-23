@@ -94,4 +94,6 @@ public abstract class AbstractIdentifier extends AbstractLValue {
      * @throws ContextualError
      */
     public abstract Type verifyMethod(DecacCompiler compiler, EnvironmentExp localEnv) throws ContextualError;
+    
+    
 }

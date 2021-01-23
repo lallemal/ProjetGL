@@ -1,11 +1,29 @@
 class MatriceFloat extends AbstractMatrice{
-	float[][] matfloat;
+    float[][] matfloat;
 
-	// initialise le tableau, le tableau est en référence avec la classe creer
-	void setInit(float[][] mat, int nbl, int nbc) {
-            this.nbl = nbl;
-            this.nbc = nbc;
-            this.matfloat = mat;
-            return;
-	}
+    // initialise le tableau, le tableau est en référence avec la classe creer
+    void setInit(float[][] mat, int nbl, int nbc) {
+        this.nbl = nbl;
+        this.nbc = nbc;
+        this.matfloat = mat;
+    }
+
+    // initialise a partir d'un tableau de int creer une copie
+    void setInitInt(int[][] mat, int nbl, int nbc) {
+        this.nbl = nbl;
+        this.nbc = nbc;
+        int i = 0;
+        int j = 0;
+        this.matfloat = new float[nbl][nbc];
+        while(i < nbl) {
+            while(j < nbc) {
+                this.matfloat[i][j] = mat[i][j];
+                j = j + 1;
+            }
+            j = 0;
+            i = i + 1;
+
+        }
+    }
+
 }

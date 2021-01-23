@@ -1,2 +1,4 @@
 #include "AbstractMatrice.decah"
-#include "MatriceF"
+//#include "MatriceFloat.decah"
+//#include "MatriceInt.decah"
+

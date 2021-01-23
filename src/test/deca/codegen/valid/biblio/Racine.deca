@@ -1,0 +1,13 @@
+#include "Racine.decah"
+{
+    float q ;
+    float init = -1.0E0;
+    Racine r = new Racine();    
+    q = r.absolue(init);
+    println("valeur absolue de ", init);
+    println("est ", q);
+    init = 2.0E1;
+    println("racine carre de ", init);
+    q = r.sqrt(init);
+    println("est ", q);
+}

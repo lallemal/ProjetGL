@@ -233,6 +233,92 @@ class MatriceFloat extends AbstractMatrice{
 
 
 
+    // calcul la matrice inverse
+    MatriceFloat inverse() {
+        int k;
+        int r = -1; // indice dernier pivot
+        int j = 0;
+        int i = 0;
+        // creation de l'inverse copie car algo modifie la matrice
+        MatriceFloat inverse = new MatriceFloat();
+        // creation de l'identite
+        inverse.setIndentite(this.nbl);
+        while(j < this.nbc) {
+            k = indicePivot(j,r);
 
+            // si pivot nul on change de colonne
+            if(this.absolue((this.matfloat)[k][j]) > 0.00000001) {
+                r = r + 1;
+
+                // on effectue les meme operation sur l'identite et la matrice
+                inverse.multScal(k, 1/matfloat[k][j]);
+                this.multScal(k, 1/matfloat[k][j]);
+                if (k != r) {
+                    // on  place le pivot a la ligne r si pas encore le cas
+                    inverse.echange(k, r);
+                    this.echange(k, r);
+                }
+                while(i < this.nbl) {
+                    // simplifie les autres lignes
+                    if (i != r) {
+                        inverse.addMultLine(i, r, (-1)*(this.matfloat)[i][j]);
+                        this.addMultLine(i, r, (-1)*(this.matfloat)[i][j]);
+                    }
+                    i = i + 1;
+                }
+                i = 0;
+            }
+            else {
+                // on a trouve une colonne null => non inversible
+                return null;
+            }
+            j = j + 1;
+        }
+        return inverse;
+    }
+
+    // Calcul du determinant par pivot de gauss
+    float determinant() {
+        int r = -1; // indice dernier pivot
+        int j = 0;
+        int i = 0;
+        int k = 0;
+        float determinant = 1;
+        // copie de matrice on fait calcul dessus
+        MatriceFloat copie = new MatriceFloat();
+        copie.setInitFloat(this.matfloat,this.nbl, this.nbc);
+
+        // trigonalise la matrice
+        while(j < this.nbc) {
+            k = copie.indicePivot(j,r);
+            if(copie.absolue((copie.matfloat)[k][j]) > 0.0000001) {
+                // diviser la ligne par la valeur du pivot
+                r = r + 1;
+                determinant = determinant * (copie.matfloat)[k][j];
+                copie.multScal(k, 1/(copie.matfloat)[k][j]);
+                if (k != r) {
+                    // on  place le pivot a la ligne r si pas encore le cas
+                    copie.echange(k, r);
+                    // permutation => *(-1)
+                    determinant = determinant * (-1);
+                }
+
+                while(i < this.nbl) {
+                    // simplifie les autres lignes
+                    if (i != r) {
+                        copie.addMultLine(i, r, (-1)*(copie.matfloat)[i][j]);
+                    }
+                    i = i + 1;
+                }
+                i = 0;
+            }
+            else {
+                // pivot nul => det = 0
+                return 0;
+            }
+            j = j + 1;
+        }
+        return determinant;
+    }
 }
 

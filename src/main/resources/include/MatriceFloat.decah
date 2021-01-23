@@ -88,38 +88,30 @@ class MatriceFloat extends AbstractMatrice{
         while(l < this.nbl) {
             while( c < this.nbc){
                 if (l == 0 && c == 0) {
-                    //print("["  (this.matfloat)[l][c]);
+                    resultat = (this.matfloat)[l][c];
+                    print("[" , resultat);
                 }
                 else if (l > 0 && c == 0) {
-                    //print(" [", i(this.matfloat)[l][c]);
+                    resultat = (this.matfloat)[l][c];
+                    print(" [", resultat);
                 }
                 else{
-                    //print(" " + (this.matfloat)[l][c]);
+                    resultat = (this.matfloat)[l][c];
+                    print(" " , resultat);
                 }
                 c = c + 1;
                 if (c < nbc) {
-                    //print(",");
+                    print(",");
                 }
             }
             print("]");
             if (l < nbl -1) {
-                //println(",");
+                println(",");
             }
             c = 0;
             l = l + 1;
         }
         println("]");
     }
-
-
-
-
-
-
-
-
-
-
-
-
 }
+

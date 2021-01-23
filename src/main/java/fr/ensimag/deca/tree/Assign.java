@@ -86,7 +86,7 @@ public class Assign extends AbstractBinaryExpr {
 	        }
     	} else if (this.getLeftOperand().isArraySelection()) {
 			ArraySelection selectA = (ArraySelection) this.getLeftOperand();
-			selectA.codeExp(compiler, 3);
+			selectA.codeExp(compiler, 3, true); // true permet de Load l'adresse et non la valeur 
 			compiler.addInstruction(new STORE(Register.getR(2), new RegisterOffset(0, Register.getR(3))));
 		}
     }

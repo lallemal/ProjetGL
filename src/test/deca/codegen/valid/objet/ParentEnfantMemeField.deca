@@ -1,0 +1,28 @@
+// Description :
+//    Test génération de code parent et enfant avec le meme field
+//
+// Resultats decac:
+// Resultat ima: 
+
+
+class A{
+    int x = 1;
+    
+    int getX(){ 
+        return x;
+    }
+}
+class B extends A{
+    float x = 2.5;
+    
+    int getXA(){
+        return getX();
+    }
+}
+{
+    B b = new B();
+    println("champ x de B: ", b.x);
+    println("champ x de A: ", b.getXA());
+    
+}
+

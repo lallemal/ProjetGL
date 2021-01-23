@@ -15,7 +15,7 @@ cd "$(dirname "$0")"/../../.. || exit 1
 
 PATH=./src/test/script/launchers:"$PATH"
 
-INVALID_CODEGEN=./src/test/deca/codegen/invalid/sansObjetPourScript
+INVALID_CODEGEN=./src/test/deca/codegen/invalid/sansObjet
 rm -f $INVALID_CODEGEN/*.ass 2>/dev/null
 
 

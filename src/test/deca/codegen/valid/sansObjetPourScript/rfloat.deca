@@ -1,6 +1,0 @@
-{
-    float x = 2;
-    int y = 1;
-    float z = x + y;
-    println(z);
-}

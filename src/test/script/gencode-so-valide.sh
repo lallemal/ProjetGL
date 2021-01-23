@@ -15,7 +15,7 @@ cd "$(dirname "$0")"/../../.. || exit 1
 
 PATH=./src/test/script/launchers:"$PATH"
 
-VALID_CODEGEN=./src/test/deca/codegen/valid/sansObjetPourScript
+VALID_CODEGEN=./src/test/deca/codegen/valid/sansObjet
 rm -f $VALID_CODEGEN/*.ass 2>/dev/null
 
 # Test valides 
@@ -63,7 +63,7 @@ fi
 decac ./src/test/deca/decompile/Test_include/Include.deca || exit 1
 resultat=$(ima ./src/test/deca/decompile/Test_include/Include.ass)
 
-    if [ "$(cat ./src/test/deca/codegen/valid/sansObjetPourScript/Include.ass.ok)" = "$resultat" ]; then
+    if [ "$(cat ./src/test/deca/codegen/valid/sansObjet/Include.ass.ok)" = "$resultat" ]; then
         echo "OK"
         rm src/test/deca/decompile/Test_include/Include.ass
     else
@@ -71,7 +71,7 @@ resultat=$(ima ./src/test/deca/decompile/Test_include/Include.ass)
         echo "Résultat innatendu, le résultat:"
         echo "$resultat"
         echo "ce qui était attendu:"
-        echo "$(cat ./src/test/deca/codegen/valid/sansObjetPourScript/Include.ass.ok)"
+        echo "$(cat ./src/test/deca/codegen/valid/sansObjet/Include.ass.ok)"
         rm rm src/test/deca/decompile/Test_include/Include.ass
         exit 1
   fi

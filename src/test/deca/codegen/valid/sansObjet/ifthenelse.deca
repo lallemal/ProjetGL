@@ -1,8 +1,136 @@
+// Description :
+//    Test génération de code pour i then else
+//
+// Resultats decac:
+// Resultat ima: 
+// bool est true
+// je suis dans le elseif!!
+// je suis vrai!
+// je suis toujours vrai!
+// 3
+// 3
+// 1
+
+
 {
-    int x = 1;
-    if (x > 0) {
-        println(x);
-    } else {
-        println(5);
+    int a, b, c;
+    float x, y, z;
+    boolean bool = true;
+    
+
+    a = 1;
+    b = 2;
+    c = 3;
+
+    x = 1.0;
+    y = 2.0;
+    z = 3.0;
+
+    
+    if (bool){
+        if (bool){
+            if (bool){
+                if (bool){
+                    if (bool){
+                        if (bool){
+                            println("bool est true");
+                        }
+                        else if (!bool){
+                            println("bool est faux");
+                        }
+                    }
+                }       
+            }
+        }
     }
+    
+    if (bool){
+        if (b == 1){
+            println("je suis dans le if");
+        }
+        else if (bool){
+            if (b == 1){
+                println("je suis dans le if");
+            }
+            else if (bool){
+                if (b == 1){
+                println("je suis dans le if");
+                }
+                else if (bool){
+                    if (b == 1){
+                        println("je suis dans le if");
+                    }
+                    else if (bool){
+                        println("je suis dans le elseif!!");
+                    }
+                }
+            }
+        }
+    }
+    
+    if (!bool){
+        println("je suis faux");
+    }
+    else{
+        if (!bool){
+            println("je suis faux");
+        }
+        else{
+            if (!bool){
+                println("je suis faux");
+            }
+            else{
+                if (!bool){
+                    println("je suis faux");
+                }
+                else{
+                    println("je suis vrai!");
+                }
+            }
+        }
+    }
+
+    if (!bool){
+        
+    }
+    else if (!bool){
+    }
+    else if (!bool){
+    }
+    else if (!bool){
+    }   
+    else if (bool){
+        println("je suis toujours vrai!");
+    }
+    else{
+    }
+
+    if (c < b) {
+        println(b);
+    }
+
+    if (a >= c) {
+        println(a);
+    } else {
+        println(c);
+    }
+
+    if (x > a) {
+        println(a);
+    } else if (z <= y) {
+        println(b);
+    } else {
+        println(c);
+    }
+
+    if (c == 3) {
+        if (3 != b) {
+            println(a);
+        } else {
+            println(c);
+        }
+    } else {
+        println(b);
+    }
+
 }

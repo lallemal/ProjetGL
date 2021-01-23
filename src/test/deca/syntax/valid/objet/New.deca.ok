@@ -1,0 +1,20 @@
+`> [4, 0] Program
+   +> ListDeclClass [List with 1 elements]
+   |  []> [4, 6] DeclClass
+   |      +> [4, 6] Identifier (Thing)
+   |      []> [6, 8] DeclField
+   |          Visibility: PUBLIC
+   |          +> [6, 4] Identifier (int)
+   |          +> [6, 8] Identifier (i)
+   |          `> [6, 12] Initialization
+   |             `> [6, 12] New
+   |                `> [6, 16] Identifier (Objet)
+   `> [9, 0] Main
+      +> ListDeclVar [List with 1 elements]
+      |  []> [10, 10] DeclVar
+      |      +> [10, 4] Identifier (Thing)
+      |      +> [10, 10] Identifier (i)
+      |      `> [10, 14] Initialization
+      |         `> [10, 14] New
+      |            `> [10, 18] Identifier (Thing)
+      `> ListInst [List with 0 elements]

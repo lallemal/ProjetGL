@@ -1,0 +1,84 @@
+`> [5, 0] Program
+   +> ListDeclClass [List with 2 elements]
+   |  []> [5, 6] DeclClass
+   |  ||  +> [5, 6] Identifier (A)
+   |  []> [7, 6] DeclClass
+   |      +> [7, 6] Identifier (B)
+   |      +> [7, 8] Identifier (A)
+   |      []> [8, 6] DeclField
+   |          Visibility: PUBLIC
+   |          +> [8, 4] Identifier (A)
+   |          +> [8, 6] Identifier (a)
+   |          `> [8, 10] Initialization
+   |             `> [8, 10] New
+   |                `> [8, 14] Identifier (A)
+   |      []> [10, 4] DeclMethod
+   |          +> [10, 4] Identifier (A)
+   |          +> [10, 6] Identifier (getA)
+   |          []> [11, 10] DeclVar
+   |              +> [11, 8] Identifier (A)
+   |              +> [11, 10] Identifier (a)
+   |              `> [11, 14] Initialization
+   |                 `> [11, 14] New
+   |                    `> [11, 18] Identifier (A)
+   |          []> [12, 8] Return
+   |              `> [12, 15] Identifier (a)
+   `> [15, 0] Main
+      +> ListDeclVar [List with 1 elements]
+      |  []> [16, 6] DeclVar
+      |      +> [16, 4] Identifier (B)
+      |      +> [16, 6] Identifier (b)
+      |      `> [16, 10] Initialization
+      |         `> [16, 10] New
+      |            `> [16, 14] Identifier (B)
+      `> ListInst [List with 5 elements]
+         []> [17, 4] IfThenElse
+         ||  +> [17, 8] InstanceOf
+         ||  |  +> [17, 8] Selection
+         ||  |  |  +> [17, 8] Identifier (b)
+         ||  |  |  `> [17, 10] Identifier (a)
+         ||  |  `> [17, 23] Identifier (A)
+         ||  +> ListInst [List with 1 elements]
+         ||  |  []> [18, 8] Println
+         ||  |      `> [18, 16] ListExpr [List with 1 elements]
+         ||  |         []> [18, 16] StringLiteral (InstanceOf marche avec selection)
+         ||  `> ListInst [List with 0 elements]
+         []> [20, 4] IfThenElse
+         ||  +> [20, 8] InstanceOf
+         ||  |  +> [20, 8] Null
+         ||  |  `> [20, 24] Identifier (A)
+         ||  +> ListInst [List with 1 elements]
+         ||  |  []> [21, 8] Println
+         ||  |      `> [21, 16] ListExpr [List with 1 elements]
+         ||  |         []> [21, 16] StringLiteral (InstanceOf marche avec null)
+         ||  `> ListInst [List with 0 elements]
+         []> [23, 4] IfThenElse
+         ||  +> [23, 8] InstanceOf
+         ||  |  +> [23, 8] New
+         ||  |  |  `> [23, 12] Identifier (A)
+         ||  |  `> [23, 27] Identifier (A)
+         ||  +> ListInst [List with 1 elements]
+         ||  |  []> [24, 8] Println
+         ||  |      `> [24, 16] ListExpr [List with 1 elements]
+         ||  |         []> [24, 16] StringLiteral (InstanceOf marche avec new)
+         ||  `> ListInst [List with 0 elements]
+         []> [26, 4] IfThenElse
+         ||  +> [26, 8] InstanceOf
+         ||  |  +> [26, 8] MethodCall
+         ||  |  |  +> [26, 8] Identifier (b)
+         ||  |  |  +> [26, 10] Identifier (getA)
+         ||  |  `> [26, 28] Identifier (A)
+         ||  +> ListInst [List with 1 elements]
+         ||  |  []> [27, 8] Println
+         ||  |      `> [27, 16] ListExpr [List with 1 elements]
+         ||  |         []> [27, 16] StringLiteral (InstanceOf marche avec methodcall)
+         ||  `> ListInst [List with 0 elements]
+         []> [29, 4] IfThenElse
+             +> [29, 8] InstanceOf
+             |  +> [29, 8] Identifier (b)
+             |  `> [29, 21] Identifier (B)
+             +> ListInst [List with 1 elements]
+             |  []> [30, 8] Println
+             |      `> [30, 16] ListExpr [List with 1 elements]
+             |         []> [30, 16] StringLiteral (InstanceOf marche avec identifier)
+             `> ListInst [List with 0 elements]

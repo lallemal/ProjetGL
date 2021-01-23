@@ -1,0 +1,12 @@
+// The type of the variable and its assignation are not compatible (int,float)
+// Description :
+//    Test génération de code pour un return mauvais
+//
+// Resultats decac: 
+// Resultat ima: /
+
+class A{
+	int main(){
+		return 2.4;
+	}
+}

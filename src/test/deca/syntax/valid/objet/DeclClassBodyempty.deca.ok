@@ -1,0 +1,8 @@
+`> [4, 0] Program
+   +> ListDeclClass [List with 1 elements]
+   |  []> [4, 6] DeclClass
+   |      +> [4, 6] Identifier (Thing)
+   |      []> [6, 4] DeclMethod
+   |          +> [6, 4] Identifier (int)
+   |          +> [6, 8] Identifier (getI)
+   `> EmptyMain

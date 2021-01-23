@@ -31,6 +31,23 @@ do
 
 done
 
+# Test comparaison du résultat de test_synt avec un modèle
+nb=$(ls -l src/test/deca/syntax/valid/objet/*.deca| wc -l)
+echo "------- Démarrage des tests valide comparaison ($nb)"
+for i in src/test/deca/syntax/valid/objet/*.deca
+do
+    resultat=$(test_synt $i)
+    if [ "$(less $i.ok)" = "$resultat" ]; then
+         echo "OK"
+     else
+        echo "Résultat innatendu pour $i, le résultat:"
+        echo "$resultat"
+        echo "ce qui était attendu:"
+        echo "$(less $i.ok)"
+        exit 1
+    fi
+done
+
 
 # Test l'erreur des tests invalides
 nb=$(ls -l src/test/deca/syntax/invalid/objet/*.deca | wc -l)

@@ -297,6 +297,16 @@
                         </goals>
                     </execution>
                     <execution>
+                        <id>parser-ext</id>
+                        <configuration>
+                            <executable>./src/test/script/parser-ext.sh</executable>
+                        </configuration>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                    </execution>
+                    <execution>
                         <id>decompile</id>
                         <configuration>
                             <executable>./src/test/script/decompile.sh</executable>

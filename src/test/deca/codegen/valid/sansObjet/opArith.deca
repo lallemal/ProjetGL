@@ -1,12 +1,54 @@
+// Description :
+//    Test génération de code pour les opérations arithmétique
+//
+// Resultats decac:
+// Resultat ima: disponible en .ass.ok
+
 {
-    int x;
-    int y = 2;
-    int z;
-	
-    x = 1;
-    z = x + y;
-    z = z + 1;
-    println(z);
-    
-    println((1 + x - 3) * z / y);
+    int a, b, c, d, e, f, g, h, i, j;
+    float r, s, t, u, v, w, x, y, z;
+
+    a = 1;
+    b = 2;
+    c = 3;
+
+    x = 1.1;
+    y = 2.2;
+    z = 3.3;
+
+    d = a + b;
+    println(d);
+
+    e = -d;
+    println(e);
+
+    f = 1 + d - c;
+    println(f);
+
+    g = b*f;
+    println(g);
+
+    h = d%f;
+    println(h);
+
+    i = a*2 + 3 / ((b + f - e * (g-h))%b);
+    println(i);
+
+    r = x + y;
+    println(r);
+
+    s = -z;
+    println(s);
+
+    t = r * s;
+    println(t);
+
+    u = z / x;
+    println(u);
+
+    v = 1+x*(2 - 1.0);
+    println(v);
+
+    w = x*x - (1 + 2.0*y*r/2.0 - 0.0*1 + 0.0/1);
+    println(w);
 }

@@ -1,0 +1,13 @@
+// Erreur : index out of range
+// Description : problème d'index
+// Resultat : erreur lors de ima
+
+
+class A{
+     
+}
+
+{
+	int[] a = {1, 2, 3};
+        println(a[4]);
+}

@@ -1,8 +1,0 @@
-{
-	int denominateur = 0;
-	int numerateur = 1;
-	
-	int result = numerateur / denominateur;
-	println(result);
-	
-}

@@ -1,0 +1,10 @@
+// no viable alternative at input '{'
+// Description:
+//    Tableau mal initialisé
+//
+
+{
+    int[] a = {1, 2, 3};
+    a{3} = 2;
+}
+

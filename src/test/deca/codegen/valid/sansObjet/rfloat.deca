@@ -1,0 +1,11 @@
+// Description : Tests avec calculs int et float
+//
+// Résultat: voir le .ass.ok
+
+
+{
+    float x = 2;
+    int y = 1;
+    float z = x + y;
+    println(z);
+}

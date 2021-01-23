@@ -140,8 +140,9 @@ public class ArrayLiteral extends AbstractExpr{
 
 	@Override
 	public void decompile(IndentPrintStream s) {
-            elements.decompile(s);
-		
+		s.print("{");
+		elements.decompile(s);
+		s.print("}");	
 	}
 
 	@Override

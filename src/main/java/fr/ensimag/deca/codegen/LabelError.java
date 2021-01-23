@@ -154,7 +154,7 @@ public class LabelError {
 	
 	public LabelError() {
 		errorCalcFloat = false;
-		calcFloat = new Label("division_par_zero");
+		calcFloat = new Label("debordement_arith");
 		errorDiv0 = false;
 		div0 = new Label("division_par_zero");
 		errorMod0 = false;

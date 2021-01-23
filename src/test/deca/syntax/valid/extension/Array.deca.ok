@@ -1,112 +1,103 @@
-`> [2, 0] Program
+`> [3, 0] Program
    +> ListDeclClass [List with 1 elements]
-   |  []> [2, 6] DeclClass
-   |      +> [2, 6] Identifier (A)
-   |      []> [3, 10] DeclField
+   |  []> [3, 6] DeclClass
+   |      +> [3, 6] Identifier (A)
+   |      []> [4, 10] DeclField
    |          Visibility: PUBLIC
-   |          +> [3, 4] IdentifierArray
-   |          +> [3, 10] Identifier (x)
+   |          +> [4, 4] IdentifierArray
+   |          +> [4, 10] Identifier (x)
    |          `> NoInitialization
-   |      []> [5, 1] DeclMethod
-   |          +> [5, 1] IdentifierArray
-   |          +> [5, 7] Identifier (mergeSort)
-   |          []> [5, 17] DeclParam
-   |              +> [5, 17] IdentifierArray
-   |              +> [5, 27] Identifier (tab)
-   |          []> [6, 5] Assign
-   |          ||  +> [6, 5] Identifier (x)
-   |          ||  `> [6, 9] NewArray
-   |          ||     `> [6, 13] Identifier (int)
-   |          ||     +> ListExpr [List with 1 elements]
-   |          ||     |  []> [6, 17] Int (4)
+   |      []> [6, 1] DeclMethod
+   |          +> [6, 1] IdentifierArray
+   |          +> [6, 7] Identifier (mergeSort)
+   |          []> [6, 17] DeclParam
+   |              +> [6, 17] IdentifierArray
+   |              +> [6, 27] Identifier (tab)
    |          []> [7, 5] Assign
-   |          ||  +> [7, 5] ArraySelection
-   |          ||  |  +> [7, 5] Identifier (x)
+   |          ||  +> [7, 5] Identifier (x)
+   |          ||  `> [7, 9] NewArray
+   |          ||     `> [7, 13] Identifier (int)
+   |          ||     +> ListExpr [List with 1 elements]
+   |          ||     |  []> [7, 17] Int (4)
+   |          []> [8, 5] Assign
+   |          ||  +> [8, 5] ArraySelection
+   |          ||  |  +> [8, 5] Identifier (x)
    |          ||  |  +> ListExpr [List with 1 elements]
-   |          ||  |  |  []> [7, 7] Int (4)
-   |          ||  `> [7, 12] Int (2)
-   |          []> [8, 5] Return
-   |              `> [8, 12] Identifier (x)
-   `> [12, 0] Main
+   |          ||  |  |  []> [8, 7] Int (4)
+   |          ||  `> [8, 12] Int (2)
+   |          []> [9, 5] Return
+   |              `> [9, 12] Identifier (x)
+   `> [13, 0] Main
       +> ListDeclVar [List with 7 elements]
-      |  []> [13, 14] DeclVar
-      |  ||  +> [13, 8] IdentifierArray
-      |  ||  +> [13, 14] Identifier (x)
-      |  ||  `> [13, 18] Initialization
-      |  ||     `> [13, 18] NewArray
-      |  ||        `> [13, 22] Identifier (int)
-      |  ||        +> ListExpr [List with 1 elements]
-      |  ||        |  []> [13, 26] Int (2)
-      |  []> [14, 16] DeclVar
+      |  []> [14, 14] DeclVar
       |  ||  +> [14, 8] IdentifierArray
-      |  ||  +> [14, 16] Identifier (mat)
-      |  ||  `> [14, 22] Initialization
-      |  ||     `> [14, 22] NewArray
-      |  ||        `> [14, 26] Identifier (int)
-      |  ||        +> ListExpr [List with 2 elements]
-      |  ||        |  []> [14, 30] Int (4)
-      |  ||        |  []> [14, 33] Int (5)
-      |  []> [15, 20] DeclVar
+      |  ||  +> [14, 14] Identifier (x)
+      |  ||  `> [14, 18] Initialization
+      |  ||     `> [14, 18] NewArray
+      |  ||        `> [14, 22] Identifier (int)
+      |  ||        +> ListExpr [List with 1 elements]
+      |  ||        |  []> [14, 26] Int (2)
+      |  []> [15, 16] DeclVar
       |  ||  +> [15, 8] IdentifierArray
-      |  ||  +> [15, 20] Identifier (bigMat)
-      |  ||  `> [15, 29] Initialization
-      |  ||     `> [15, 29] NewArray
-      |  ||        `> [15, 33] Identifier (int)
-      |  ||        +> ListExpr [List with 4 elements]
-      |  ||        |  []> [15, 37] Int (3)
-      |  ||        |  []> [15, 40] Int (2)
-      |  ||        |  []> [15, 43] Int (1)
-      |  ||        |  []> [15, 46] Int (2)
-      |  []> [16, 18] DeclVar
+      |  ||  +> [15, 16] Identifier (mat)
+      |  ||  `> [15, 22] Initialization
+      |  ||     `> [15, 22] NewArray
+      |  ||        `> [15, 26] Identifier (int)
+      |  ||        +> ListExpr [List with 2 elements]
+      |  ||        |  []> [15, 30] Int (4)
+      |  ||        |  []> [15, 33] Int (5)
+      |  []> [16, 20] DeclVar
       |  ||  +> [16, 8] IdentifierArray
-      |  ||  +> [16, 18] Identifier (bigMat2)
-      |  ||  `> [16, 28] Initialization
-      |  ||     `> [16, 28] NewArray
-      |  ||        `> [16, 32] Identifier (int)
-      |  ||        +> ListExpr [List with 3 elements]
-      |  ||        |  []> [16, 36] Int (3)
-      |  ||        |  []> [16, 39] Int (3)
-      |  ||        |  []> [16, 42] Int (2)
-      |  []> [17, 16] DeclVar
+      |  ||  +> [16, 20] Identifier (bigMat)
+      |  ||  `> [16, 29] Initialization
+      |  ||     `> [16, 29] NewArray
+      |  ||        `> [16, 33] Identifier (int)
+      |  ||        +> ListExpr [List with 4 elements]
+      |  ||        |  []> [16, 37] Int (3)
+      |  ||        |  []> [16, 40] Int (2)
+      |  ||        |  []> [16, 43] Int (1)
+      |  ||        |  []> [16, 46] Int (2)
+      |  []> [17, 18] DeclVar
       |  ||  +> [17, 8] IdentifierArray
-      |  ||  +> [17, 16] Identifier (semiEmptyMat)
-      |  ||  `> [17, 31] Initialization
-      |  ||     `> [17, 31] ArrayLiteral
-      |  ||        +> [17, 33] ListExpr [List with 2 elements]
-      |  ||        |  []> [17, 33] ArrayLiteral
-      |  ||        |  ||  +> [17, 34] ListExpr [List with 3 elements]
-      |  ||        |  ||  |  []> [17, 34] Int (1)
-      |  ||        |  ||  |  []> [17, 37] Int (2)
-      |  ||        |  ||  |  []> [17, 40] Int (3)
-      |  ||        |  []> [17, 44] ArrayLiteral
-      |  ||        |      +> [17, 45] ListExpr [List with 3 elements]
-      |  ||        |      |  []> [17, 45] Int (4)
-      |  ||        |      |  []> [17, 48] Int (5)
-      |  ||        |      |  []> [17, 51] Int (6)
-      |  []> [18, 14] DeclVar
+      |  ||  +> [17, 18] Identifier (bigMat2)
+      |  ||  `> [17, 28] Initialization
+      |  ||     `> [17, 28] NewArray
+      |  ||        `> [17, 32] Identifier (int)
+      |  ||        +> ListExpr [List with 3 elements]
+      |  ||        |  []> [17, 36] Int (3)
+      |  ||        |  []> [17, 39] Int (3)
+      |  ||        |  []> [17, 42] Int (2)
+      |  []> [18, 16] DeclVar
       |  ||  +> [18, 8] IdentifierArray
-      |  ||  +> [18, 14] Identifier (copyX)
-      |  ||  `> [18, 22] Initialization
-      |  ||     `> [18, 22] Identifier (x)
-      |  []> [19, 16] DeclVar
-      |      +> [19, 8] IdentifierArray
-      |      +> [19, 16] Identifier (littleMat)
-      |      `> [19, 28] Initialization
-      |         `> [19, 28] ArraySelection
-      |            +> [19, 28] Identifier (bigMat)
+      |  ||  +> [18, 16] Identifier (semiEmptyMat)
+      |  ||  `> [18, 31] Initialization
+      |  ||     `> [18, 31] ArrayLiteral
+      |  ||        +> [18, 33] ListExpr [List with 2 elements]
+      |  ||        |  []> [18, 33] ArrayLiteral
+      |  ||        |  ||  +> [18, 34] ListExpr [List with 3 elements]
+      |  ||        |  ||  |  []> [18, 34] Int (1)
+      |  ||        |  ||  |  []> [18, 37] Int (2)
+      |  ||        |  ||  |  []> [18, 40] Int (3)
+      |  ||        |  []> [18, 44] ArrayLiteral
+      |  ||        |      +> [18, 45] ListExpr [List with 3 elements]
+      |  ||        |      |  []> [18, 45] Int (4)
+      |  ||        |      |  []> [18, 48] Int (5)
+      |  ||        |      |  []> [18, 51] Int (6)
+      |  []> [19, 14] DeclVar
+      |  ||  +> [19, 8] IdentifierArray
+      |  ||  +> [19, 14] Identifier (copyX)
+      |  ||  `> [19, 22] Initialization
+      |  ||     `> [19, 22] Identifier (x)
+      |  []> [20, 16] DeclVar
+      |      +> [20, 8] IdentifierArray
+      |      +> [20, 16] Identifier (littleMat)
+      |      `> [20, 28] Initialization
+      |         `> [20, 28] ArraySelection
+      |            +> [20, 28] Identifier (bigMat)
       |            +> ListExpr [List with 2 elements]
-      |            |  []> [19, 35] Int (1)
-      |            |  []> [19, 38] Int (2)
+      |            |  []> [20, 35] Int (1)
+      |            |  []> [20, 38] Int (2)
       `> ListInst [List with 4 elements]
-         []> [20, 8] Assign
-         ||  +> [20, 8] ArraySelection
-         ||  |  +> [20, 8] Identifier (bigMat)
-         ||  |  +> ListExpr [List with 4 elements]
-         ||  |  |  []> [20, 15] Int (0)
-         ||  |  |  []> [20, 18] Int (0)
-         ||  |  |  []> [20, 21] Int (0)
-         ||  |  |  []> [20, 24] Int (0)
-         ||  `> [20, 29] Int (3)
          []> [21, 8] Assign
          ||  +> [21, 8] ArraySelection
          ||  |  +> [21, 8] Identifier (bigMat)
@@ -114,31 +105,40 @@
          ||  |  |  []> [21, 15] Int (0)
          ||  |  |  []> [21, 18] Int (0)
          ||  |  |  []> [21, 21] Int (0)
-         ||  |  |  []> [21, 24] Int (1)
-         ||  `> [21, 29] Multiply
-         ||     +> [21, 29] Int (2)
-         ||     `> [21, 33] ArraySelection
-         ||        +> [21, 33] Identifier (bigMat)
+         ||  |  |  []> [21, 24] Int (0)
+         ||  `> [21, 29] Int (3)
+         []> [22, 8] Assign
+         ||  +> [22, 8] ArraySelection
+         ||  |  +> [22, 8] Identifier (bigMat)
+         ||  |  +> ListExpr [List with 4 elements]
+         ||  |  |  []> [22, 15] Int (0)
+         ||  |  |  []> [22, 18] Int (0)
+         ||  |  |  []> [22, 21] Int (0)
+         ||  |  |  []> [22, 24] Int (1)
+         ||  `> [22, 29] Multiply
+         ||     +> [22, 29] Int (2)
+         ||     `> [22, 33] ArraySelection
+         ||        +> [22, 33] Identifier (bigMat)
          ||        +> ListExpr [List with 4 elements]
-         ||        |  []> [21, 40] Int (0)
-         ||        |  []> [21, 43] Int (0)
-         ||        |  []> [21, 46] Int (0)
-         ||        |  []> [21, 49] Int (0)
-         []> [22, 8] Println
-         ||  `> [22, 16] ListExpr [List with 1 elements]
-         ||     []> [22, 16] ArraySelection
-         ||         +> [22, 16] Identifier (bigMat)
+         ||        |  []> [22, 40] Int (0)
+         ||        |  []> [22, 43] Int (0)
+         ||        |  []> [22, 46] Int (0)
+         ||        |  []> [22, 49] Int (0)
+         []> [23, 8] Println
+         ||  `> [23, 16] ListExpr [List with 1 elements]
+         ||     []> [23, 16] ArraySelection
+         ||         +> [23, 16] Identifier (bigMat)
          ||         +> ListExpr [List with 4 elements]
-         ||         |  []> [22, 23] Int (0)
-         ||         |  []> [22, 26] Int (0)
-         ||         |  []> [22, 29] Int (0)
-         ||         |  []> [22, 32] Int (1)
-         []> [24, 8] Assign
-             +> [24, 8] Identifier (bigMat)
-             `> [24, 17] NewArray
-                `> [24, 21] Identifier (int)
+         ||         |  []> [23, 23] Int (0)
+         ||         |  []> [23, 26] Int (0)
+         ||         |  []> [23, 29] Int (0)
+         ||         |  []> [23, 32] Int (1)
+         []> [25, 8] Assign
+             +> [25, 8] Identifier (bigMat)
+             `> [25, 17] NewArray
+                `> [25, 21] Identifier (int)
                 +> ListExpr [List with 4 elements]
-                |  []> [24, 25] Int (4)
-                |  []> [24, 28] Int (3)
-                |  []> [24, 31] Int (2)
-                |  []> [24, 34] Int (1)
+                |  []> [25, 25] Int (4)
+                |  []> [25, 28] Int (3)
+                |  []> [25, 31] Int (2)
+                |  []> [25, 34] Int (1)

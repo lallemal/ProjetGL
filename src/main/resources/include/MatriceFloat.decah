@@ -137,6 +137,8 @@ class MatriceFloat extends AbstractMatrice{
     }
 
     MatriceFloat prodMat(MatriceFloat m) {
+        int l = 0;
+        int c = 0;
         int i = 0;
         int j = 0;
         int k = 0;
@@ -146,10 +148,16 @@ class MatriceFloat extends AbstractMatrice{
         if(this.nbc != m.getNbl()) {
             return null;
         }
-
-        
+        // initialisation du tableau a 0
+        while(l < this.nbl){
+            while (c < m.getNbc()){
+                tabfinal[l][c] = 0;
+                c = c + 1;
+            }
+            c = 0;
+            l = l + 1;
+        }
         matfinal.setInit(tabfinal, this.nbl, m.getNbc());
-
         while(i < this.nbl) {
             while( j < m.getNbc()) {
                 while(k < this.nbc) {
@@ -391,15 +399,15 @@ class MatriceFloat extends AbstractMatrice{
     }
 
     float normeVect() {
-        float res;
-        int i;
+        float res = 0;
+        float mult = 0;
+        int i = 0;
         Racine r;
         if (this.nbc != 1) {
-            return 0;
+            return res;
         }
-        res = 0;
-        i = 0;
         r = new Racine();
+        this.affichage();
         // calcul des carre puis racine a la fin
         while (i < this.nbl) {
             res = res + (this.matfloat)[i][0]* (this.matfloat)[i][0];
@@ -418,15 +426,14 @@ class MatriceFloat extends AbstractMatrice{
         int iteration = 200;
         int i = 0;
         float vlpinit = 0;
-        float vlp;
-        float seuil = 0.00001f;
-
+        float vlp = 0;
+        float seuil = 0.1E-4;
         // vecteur initialisation
         MatriceFloat transpose;
         MatriceFloat vecteurx = new MatriceFloat();
         MatriceFloat vecteury = new MatriceFloat();
         vecteurx.setOneVector(this.nbl);
-
+        vecteurx.affichage();
         // vecteur resultat
         vecteury = a.prodMat(vecteurx);
         vecteurx = vecteury.multScalaire(1/vecteury.normeVect());

@@ -1,0 +1,33 @@
+class Morpion {
+	int[][] plateau = {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}};
+	
+	void printPlateau() {
+		int i = 0;
+		int j = 0;
+		int number;
+		while( i < 3) {
+			while(j < 3) {
+				print("|");
+				print(plateau[i][j]);
+				if(plateau[i][j] == 1) {
+					print("x");
+				}
+				j = j +1;
+			}
+			j = 0;
+			i = i + 1;
+			print("|");
+			println(" ");
+		}
+	}
+	
+	
+}
+
+
+
+{
+	Morpion morp = new Morpion();
+	morp.printPlateau();
+}
+

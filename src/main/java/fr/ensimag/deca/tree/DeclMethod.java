@@ -77,7 +77,7 @@ public class DeclMethod extends AbstractDeclMethod {
     		return;
     	}
 
-    	// ----- fake call to determine the number of register used (to push them)
+    	// ----- fake call to determine the number of registers used (to push them)
     	compiler.setAux(true);
     	compiler.cleanProgramAux();
     	int kGB = compiler.getKGB();

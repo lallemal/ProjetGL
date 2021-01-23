@@ -4,6 +4,7 @@
 #include "Tab.decah"
 {
    float[] t = {1.0E0, 2.0E0, 3.0E0};
+   boolean q;
    TabFloat tableau = new TabFloat(); 
    TabFloat tab2 = new TabFloat();
    tableau.setInit(t, 3);
@@ -38,7 +39,13 @@
    println("ajout en position 2 de 5");
    tab2.add(5.0E0,2);
    tab2.affichage();
-
-
+   q = tab2.add(5.0E0,34);
+   if(q == false){
+       print("Pas d'ajout");
+   }
+   q = tab2.add(2.0E0, -10);
+    if(q == false){
+       print("Pas d'ajout");
+   }
 }
 

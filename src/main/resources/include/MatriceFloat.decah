@@ -333,6 +333,7 @@ class MatriceFloat extends AbstractMatrice{
         int j = 0;
         int i = 0;
         int k = 0;
+        float res = 0;
         float determinant = 1;
         // copie de matrice on fait calcul dessus
         MatriceFloat copie = new MatriceFloat();
@@ -364,7 +365,7 @@ class MatriceFloat extends AbstractMatrice{
             }
             else {
                 // pivot nul => det = 0
-                return 0;
+                return res;
             }
             j = j + 1;
         }
@@ -447,21 +448,24 @@ class MatriceFloat extends AbstractMatrice{
 
     }
 
+    float PuissanceInverse(float nu) {
+        return PuissanceInverseWithAcc(nu,1.0E-5);
+    }
+
     // calcul une valeur propre et vecteur propre
     // en rentrant une approximation de la vlp
     // renvoi la vlp et la vcp la plus proche de celle 
     // mise en entree
-    float PuissanceInverse(float nu) {
+    float PuissanceInverseWithAcc(float nu, float seuille){
         // calculer (A-uId)-1
         // identite
-
         MatriceFloat f;
         MatriceFloat id = new MatriceFloat();
         id.setIndentite(this.nbl);
         id.multi(-nu);
         f = id.sumMat(this);
         f = f.inverse();
-        return (1/this.Puissancevp(f)) + nu;
+        return (1/this.PuissancevpWithAcc(f, seuille)) + nu;
     }
 
     float PuissancevpWithAcc(MatriceFloat a, float seuille) {
@@ -490,7 +494,7 @@ class MatriceFloat extends AbstractMatrice{
         println("vecteur propre= ");
         vecteurx.affichage();
         return vlp;
-
     }
+
 }
 

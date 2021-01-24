@@ -1,6 +1,7 @@
 class MatriceFloat extends AbstractMatrice{
     float[][] matfloat;
 
+    // initialise la matrice en passant en reference le tableau
     void setInit(float[][] mat, int nbl, int nbc) {
         this.nbl = nbl;
         this.nbc = nbc;
@@ -23,6 +24,8 @@ class MatriceFloat extends AbstractMatrice{
         }
 
     }
+
+    // initialise a partir d'un tableau de float creer une copie
     void setInitFloat(float[][] mat, int nbl, int nbc) {
         int i = 0;
         int j = 0;
@@ -38,6 +41,7 @@ class MatriceFloat extends AbstractMatrice{
             i = i + 1;
         }
     }
+
     // cree un vecteur de taille (n,1) de 1
     void setOneVector(int n){
         float[][] mat;
@@ -51,6 +55,8 @@ class MatriceFloat extends AbstractMatrice{
         }
         this.matfloat = mat;
     }
+
+    // initialie une matrice identite de taille n
     void setIndentite(int n) {
         float[][] t; 
         int i = 0;
@@ -74,12 +80,13 @@ class MatriceFloat extends AbstractMatrice{
         this.matfloat = t;
     }
 
+    // acces a un element de la matrice
     float getCase(int i, int j) {
         return (this.matfloat)[i][j];
     }
 
 
-
+    // affichage de la matrice
     void affichage() {
         int l = 0;
         int c = 0;
@@ -114,6 +121,9 @@ class MatriceFloat extends AbstractMatrice{
         println("]");
     }
 
+
+    // somme les deux matrices renvoir null si pas possible
+    // renvoi une nouvelle matrice 0(n) en memoire
     MatriceFloat sumMat(MatriceFloat m) {
         float [][] tabfinal;
         MatriceFloat matfinal;
@@ -136,6 +146,7 @@ class MatriceFloat extends AbstractMatrice{
         return matfinal;
     }
 
+    // produit matriciel
     MatriceFloat prodMat(MatriceFloat m) {
         int l = 0;
         int c = 0;
@@ -144,10 +155,11 @@ class MatriceFloat extends AbstractMatrice{
         int k = 0;
         float [][] tabfinal = new float[this.nbl][m.getNbc()];
         MatriceFloat matfinal = new MatriceFloat();
-        // erreur retourne null
+        
         if(this.nbc != m.getNbl()) {
             return null;
         }
+
         // initialisation du tableau a 0
         while(l < this.nbl){
             while (c < m.getNbc()){
@@ -173,6 +185,7 @@ class MatriceFloat extends AbstractMatrice{
         return matfinal;
     }
     
+    // transpose la matrice et en renvoi une nouvelle 0(n2) en memoire
     MatriceFloat transpose() {
         float[][] tab; 
         MatriceFloat transpose;
@@ -362,7 +375,7 @@ class MatriceFloat extends AbstractMatrice{
     /* fonction pour le calcul des vecteurs propres*/
 
 
-    // multiplie par un scalaire les composantes revoi une nouvelle matrice
+    // multiplie par un scalaire les composantes renvoi une nouvelle matrice
     MatriceFloat multScalaire(float scalaire) {
         int i = 0;
         int j = 0;
@@ -380,7 +393,7 @@ class MatriceFloat extends AbstractMatrice{
         return res;
     }
 
-    // multiplie par un scalaire modifie directement
+    // multiplie par un scalaire modifie directement la matrice
     void multi(float scalaire) {
         int i = 0;
         int j = 0;
@@ -394,10 +407,12 @@ class MatriceFloat extends AbstractMatrice{
         }
     }
 
+    // convertie en flottant si tableau de dim (1,1)
     float convertTofloat() {
         return (this.matfloat)[0][0];
     }
 
+    // nomre euclidienne du vecteur
     float normeVect() {
         float res = 0;
         float mult = 0;
@@ -423,7 +438,6 @@ class MatriceFloat extends AbstractMatrice{
     // rayon spectral = plus boule contenant toute les valeur prorpes
     // entree vecteur propre + matrice = sortie valeur propre
     float Puissancevp(MatriceFloat a) {
-        int iteration = 200;
         int i = 0;
         float vlpinit = 0;
         float vlp = 0;
@@ -453,11 +467,16 @@ class MatriceFloat extends AbstractMatrice{
 
     }
 
+    // renvoi la valeur du rayon spcetral (plus grande valeur de la vlp)
     float Puissancevpvectp() {
         return Puissancevp(this);
 
     }
 
+    // calcul une valeur propre et vecteur propre
+    // en rentrant une approximation de la vlp
+    // renvoi la vlp et la vcp la plus proche de celle 
+    // mise en entree
     float PuissanceInverse(float nu) {
         // calculer (A-uId)-1
         // identite

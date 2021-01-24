@@ -1,0 +1,18 @@
+//
+//Description: calcul le determinant matrice inversible et non inversible
+//Resultat: OK
+#include "Matrice.decah"
+{
+    float res;
+    int [][] mat2 = {{2,-1,0},{0,-1,2}, {-1,2,-1}};
+    int [][] mat3 = {{0,0,0},{1,1,1},{2,2,2}};
+    MatriceFloat m2 = new MatriceFloat();
+    MatriceFloat m3 = new MatriceFloat();
+    m2.setInitInt(mat2, 3, 3);
+    m3.setInitInt(mat3,3,3);
+    res = m2.determinant();
+    print(res);
+    res = m3.determinant();
+    print(res);
+}
+

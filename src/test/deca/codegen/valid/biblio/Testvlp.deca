@@ -6,21 +6,27 @@
     Racine r = new Racine();
     float nu = 0;
     float nu2 = -2.5E0;
+    float res;
     float [][] mat2 = {{-3.0E0,0.0E0,0.0E0},{17.0E0,13.0E0,-7.0E0},{16.0E0,14.0E0,-8.0E0}};
     float[][] no = {{1.0E0}, {2.0E0}, {3.0E0}};
     MatriceFloat vectn = new MatriceFloat();
     MatriceFloat m2 = new MatriceFloat();
     // teste le calcul de la norme
+
     vectn.setInit(no,3,1);
     vectn.affichage();
-    vectn.normeVect();
-
+    println("calcul de la norme");
+    res = vectn.normeVect();
+    println(res);
     // Test valeur propre maximal
     m2.setInitFloat(mat2, 3, 3);
     m2.affichage();
-    print(m2.Puissancevpvectp());
-    print(m2.PuissanceInverse(nu));
-    println(m2.PuissanceInverse(nu2));
+    res = m2.Puissancevpvectp();
+    println(" vlp= ",res );
+    res =m2.PuissanceInverse(nu);
+    println(" vlp= ", res);
+    res = m2.PuissanceInverse(nu2);
+    println(" vlp= ",res );
     //println("AX=");
     //m2.prodMat(vect).print();
     //println("lX=");

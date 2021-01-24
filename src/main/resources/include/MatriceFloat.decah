@@ -155,7 +155,7 @@ class MatriceFloat extends AbstractMatrice{
         int k = 0;
         float [][] tabfinal = new float[this.nbl][m.getNbc()];
         MatriceFloat matfinal = new MatriceFloat();
-        
+
         if(this.nbc != m.getNbl()) {
             return null;
         }
@@ -184,7 +184,7 @@ class MatriceFloat extends AbstractMatrice{
         }
         return matfinal;
     }
-    
+
     // transpose la matrice et en renvoi une nouvelle 0(n2) en memoire
     MatriceFloat transpose() {
         float[][] tab; 
@@ -333,6 +333,7 @@ class MatriceFloat extends AbstractMatrice{
         int j = 0;
         int i = 0;
         int k = 0;
+        float res = 0;
         float determinant = 1;
         // copie de matrice on fait calcul dessus
         MatriceFloat copie = new MatriceFloat();
@@ -364,7 +365,7 @@ class MatriceFloat extends AbstractMatrice{
             }
             else {
                 // pivot nul => det = 0
-                return 0;
+                return res;
             }
             j = j + 1;
         }
@@ -422,13 +423,11 @@ class MatriceFloat extends AbstractMatrice{
             return res;
         }
         r = new Racine();
-        this.affichage();
         // calcul des carre puis racine a la fin
         while (i < this.nbl) {
             res = res + (this.matfloat)[i][0]* (this.matfloat)[i][0];
             i = i + 1;
         }
-        println("valeur carre " , res);
         return r.sqrt(res);
     }
 
@@ -437,17 +436,48 @@ class MatriceFloat extends AbstractMatrice{
     // determine valeur propre et vecteur propre
     // rayon spectral = plus boule contenant toute les valeur prorpes
     // entree vecteur propre + matrice = sortie valeur propre
+    // seuil par defaut de 1.0E-5
     float Puissancevp(MatriceFloat a) {
+        return PuissancevpWithAcc( a, 1.0E-5); 
+
+    }
+
+    // renvoi la valeur du rayon spcetral (plus grande valeur de la vlp)
+    float Puissancevpvectp() {
+        return Puissancevp(this);
+
+    }
+
+    float PuissanceInverse(float nu) {
+        return PuissanceInverseWithAcc(nu,1.0E-5);
+    }
+
+    // calcul une valeur propre et vecteur propre
+    // en rentrant une approximation de la vlp
+    // renvoi la vlp et la vcp la plus proche de celle 
+    // mise en entree
+    float PuissanceInverseWithAcc(float nu, float seuille){
+        // calculer (A-uId)-1
+        // identite
+        MatriceFloat f;
+        MatriceFloat id = new MatriceFloat();
+        id.setIndentite(this.nbl);
+        id.multi(-nu);
+        f = id.sumMat(this);
+        f = f.inverse();
+        return (1/this.PuissancevpWithAcc(f, seuille)) + nu;
+    }
+
+    float PuissancevpWithAcc(MatriceFloat a, float seuille) {
         int i = 0;
         float vlpinit = 0;
         float vlp = 0;
-        float seuil = 0.1E-4;
+        float seuil = seuille;
         // vecteur initialisation
         MatriceFloat transpose;
         MatriceFloat vecteurx = new MatriceFloat();
         MatriceFloat vecteury = new MatriceFloat();
         vecteurx.setOneVector(this.nbl);
-        vecteurx.affichage();
         // vecteur resultat
         vecteury = a.prodMat(vecteurx);
         vecteurx = vecteury.multScalaire(1/vecteury.normeVect());
@@ -461,35 +491,9 @@ class MatriceFloat extends AbstractMatrice{
 
             vlp = transpose.prodMat(a.prodMat(vecteurx)).convertTofloat();
         }
-        print("vecteur propre= ");
+        println("vecteur propre= ");
         vecteurx.affichage();
         return vlp;
-
     }
-
-    // renvoi la valeur du rayon spcetral (plus grande valeur de la vlp)
-    float Puissancevpvectp() {
-        return Puissancevp(this);
-
-    }
-
-    // calcul une valeur propre et vecteur propre
-    // en rentrant une approximation de la vlp
-    // renvoi la vlp et la vcp la plus proche de celle 
-    // mise en entree
-    float PuissanceInverse(float nu) {
-        // calculer (A-uId)-1
-        // identite
-
-        MatriceFloat f;
-        MatriceFloat id = new MatriceFloat();
-        id.setIndentite(this.nbl);
-        id.multi(-nu);
-        f = id.sumMat(this);
-        f.affichage();
-        f = f.inverse();
-        return (1/this.Puissancevp(f)) + nu;
-    }
-
 
 }

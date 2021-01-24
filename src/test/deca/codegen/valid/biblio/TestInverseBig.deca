@@ -1,0 +1,15 @@
+//
+//Description: Test l'inverse d'une grosse matrice
+//Resultat: OK
+#include "Matrice.decah"
+{
+int[][]  mat2 = {{1, 0, 2, 4, 1, 0, 2, 4}, {0, 1, 3, 2, 0, 1, 3, 2}, {2, -1, 0, 3, 2, -1, 0, 3}, {4, -1, 3, 9, 4, 1, 3, 9}, {-1, 0, -2, -4, 1, 0, 2, 4}, {0, -1, -3, -2, 0, 1, 3, 2}, {-2, 1, 0, -3, 2, -1, 0, 3}, {-4, 1, -3, -9, 4, -1, 3, 9}};
+    MatriceFloat m2 = new MatriceFloat();
+    m2.setInitInt(mat2, 8,8);
+    println("matrice");
+    m2.affichage();
+    println("inverse");
+    m2.inverse().affichage();
+
+}
+

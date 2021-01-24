@@ -39,9 +39,9 @@ public class LabelClass {
 		compiler.addLabel(labelInit);
 		if (!i.getIdent().getClassDefinition().getIsClassObject() && !i.getIdent().getClassDefinition().getSuperClass().getIsClassObject()) {
 			compiler.addInstruction(new LOAD(new RegisterOffset(-2, Register.LB), Register.R0));
-			compiler.getLabelError().setErrorPilePleine(true);
-	    	compiler.addInstruction(new TSTO(1));
 	    	if (!compiler.getCompilerOptions().isNoCheck()) {
+	    		compiler.addInstruction(new TSTO(1));
+	    		compiler.getLabelError().setErrorPilePleine(true);
 	    		compiler.addInstruction(new BOV(compiler.getLabelError().getLabelPilePleine()));
 	    	}
 	    	compiler.addInstruction(new ADDSP(1));

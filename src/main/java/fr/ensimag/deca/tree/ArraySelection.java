@@ -73,6 +73,8 @@ public class ArraySelection extends AbstractLValue{
 			compiler.setRegistreUsed(n+3);
 			compiler.addInstruction(new CMP(new RegisterOffset(i, Register.getR(n)), Register.getR(n+3)));
 			compiler.addInstruction(new BGE(compiler.getLabelError().getLabelIndexOutOfRange()));
+			compiler.addInstruction(new CMP(0, Register.getR(n+3)));
+			compiler.addInstruction(new BLT(compiler.getLabelError().getLabelIndexOutOfRange()));
 			compiler.addInstruction(new MUL(Register.getR(n+2), Register.getR(n+3)));
 			compiler.addInstruction(new ADD(Register.getR(n+3), Register.getR(n+1)));
 			compiler.addInstruction(new MUL(new RegisterOffset(i, Register.getR(n)), Register.getR(n+2)));

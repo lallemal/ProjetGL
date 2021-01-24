@@ -62,6 +62,20 @@ else
 fi
 
 
+error=$(head $INVALID_CODEGEN/debordementPileStackOverflow/DebordementPileIfThenElse.deca -n 1 | sed 's/\/\///')
+if decac $INVALID_CODEGEN/debordementPileStackOverflow/DebordementPileIfThenElse.deca 2>&1 | grep -q -e "$error"
+then
+    echo "Echec attendu pour decac"
+elif decac $INVALID_CODEGEN/debordementPileStackOverflow/DebordementPileIfThenElse.deca 2>&1 | grep -q -e "$INVALID_CODEGEN/debordementPileStackOverflow/DebordementPileIfThenElse.deca:"
+then     
+    echo "Echec inattendu pour decac"
+    exit 1
+else
+    echo "Succès inattendu pour decac"
+    exit 1
+fi
+
+
 #on met a part le test de nocheck car il necessite une execution de decac -n
 for i in $INVALID_CODEGEN/noCheck/*.deca
 do

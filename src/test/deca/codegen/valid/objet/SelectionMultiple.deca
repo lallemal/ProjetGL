@@ -1,0 +1,49 @@
+// Description : Test with a multiple selection 
+// Result : ima : la séléction multiple est la même, avec ou sans parenthèsage
+class A{
+    int x=1;
+    
+    A get1(){
+        x = x+1;
+        return this;
+    }
+    
+    A get2(){
+        x = x+1;
+        return this;
+    }
+    
+    A get3(){
+        x = x+1;
+        return this;
+    }
+
+    A get4(){
+        x = x+1;
+        return this;
+    }
+    
+    A get5(){
+        x = x+1;
+        return this;
+    }
+
+    A get6(){
+        x = 0;
+        return this;
+    }
+}
+
+
+{
+	A a = new A();
+        int res1, res2;
+        a.get1().get2().get3().get4().get5();
+        res1 = a.x;
+        a.x = 1;
+        (((((a.get1()).get2()).get3()).get4()).get5());
+        res2 = a.x;
+        if (res1 == res2){
+            println("la séléction multiple est la même, avec ou sans parenthèsage");
+        }
+}

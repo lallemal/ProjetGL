@@ -3,7 +3,6 @@
 //Resultat: OK
 
 #include "Tab.decah"
-#include "Matrice.decah"
 {
     float [] t = { 10.0E0, 4.0E0, 2.0E0, 50.0E0,5.0E0, 8.0E0};
     int [] i = { 1, 4, 2, 5, 6, 8};
@@ -13,11 +12,14 @@
     tab.affichage();
     println();
     tab.setCase(3,70.0);
+    tab.setCase(3232,1.0);
     tab.affichage();
     println();
     tab1.setInit(i, 6);
     tab1.affichage();
     tab1.setCase(0,50);
+    tab1.setCase(21212,1);
     tab1.affichage();
+    
 
 }

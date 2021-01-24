@@ -1,0 +1,13 @@
+//
+//Description: Setter Matrice
+//Resultat: OK
+#include "Matrice.decah"
+{
+    float res;
+    int [][] mat2 = {{2,-1,0},{0,-1,2}, {-1,2,-1}};
+    MatriceFloat m2 = new MatriceFloat();
+    m2.setInitInt(mat2, 3, 3);
+    m2.setCase(21.0, 0, 0);
+    m2.setCase(21.0, -11, 0);
+    m2.affichage();
+}

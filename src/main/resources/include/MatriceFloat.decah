@@ -85,6 +85,16 @@ class MatriceFloat extends AbstractMatrice{
         return (this.matfloat)[i][j];
     }
 
+    boolean setCase(float valeur, int i, int j){
+        if(i >= this.nbl || i < 0){
+            return false;
+        }
+        if (j >= this.nbc || j < 0){
+            return false;
+        }
+        (this.matfloat)[i][j] = valeur; 
+        return true;
+    }
 
     // affichage de la matrice
     void affichage() {
@@ -493,6 +503,142 @@ class MatriceFloat extends AbstractMatrice{
         println("vecteur propre= ");
         vecteurx.affichage();
         return vlp;
+    }
+
+    /*algorithme QR pour recherche du spectre d"une matrice carre"*/
+    float signe(float i) {
+        float s = 1;
+        if(i > 0) {
+            s = -1;
+        }
+        return s;
+
+    }
+    void multscalVect(float[][] f, float scalaire, int size) {
+        int c = 0;
+        while(c < size) {
+            // calcul de la racine
+            f[c][0] = f[c][0] * scalaire; 
+            c = c + 1;
+        }
+
+    }
+
+
+    // sert a calculer Qi car les deux matrices pas meme dimension
+    void sommeMat(MatriceFloat id, MatriceFloat vtv) {
+
+        float valeur;
+        int ligne = id.getNbl() - vtv.getNbl();
+        int colonne = id.getNbc() - vtv.getNbc();
+        int  l = ligne;
+        int c = colonne;
+        while(l < id.getNbl()) {
+            while(c < id.getNbc()) {
+                valeur = id.getCase(l, c) + vtv.getCase(l - ligne, c - ligne);
+                id.setCase(valeur, l, c);
+                c = c + 1;
+            }
+            c = colonne;
+            l = l + 1;
+        }
+    }
+
+    // calcul la matrice premiere etape
+    MatriceFloat decompositionQRi(int ic) {
+
+        MatriceFloat transpose;
+        MatriceFloat prod;
+        float racine = 0;
+        int c = 0;
+        int i = 0;
+        float alpha = this.signe(this.getCase(0, ic));
+        MatriceFloat qi = new MatriceFloat();
+        MatriceFloat vect = new MatriceFloat();
+        float[][] res = new float[this.nbl- ic][1];
+        Racine r = new Racine();
+
+        //initialisation de res
+        while(i < this.nbl - ic){
+            res[i][0] = 0.0;
+            i = i + 1;
+        }
+        while(c < this.nbl - ic) {
+
+            res[c][0] = (this.matfloat)[c + ic][ic] ;
+            // calcul de la racine norme du vecteur a l'indice i de la matrice
+            racine = racine + (this.matfloat)[c + ic][ic]* (this.matfloat)[c + ic][ic];
+            c = c + 1;
+        }
+        // norme de alpha = norme de x
+        res[0][0] = res[0][0] + alpha * r.sqrt(racine);
+        // res = vecteur u
+        racine = 0;
+        c = 0;
+        // calcul de la norme de u
+        while(c < this.nbl - ic) {
+            racine = racine + res[c][0] * res[c][0]; 
+            c = c + 1;
+
+        }
+
+        // avec sous matrice
+        // divise par norme de u pour avoir v
+        this.multscalVect(res,1/r.sqrt(racine) , this.nbc - ic);
+
+        // vecteur de taille this.nbl - ic
+        vect.setInit(res, this.nbl - ic, 1);
+        // valeur de u/||u||
+
+        transpose = vect.transpose();
+
+        // vtv
+        prod = vect.prodMat(transpose);
+
+        prod.multi(-2.0);
+        qi.setIndentite(this.nbc);
+        sommeMat(qi,prod);
+
+        return qi;
+    }
+
+
+
+
+
+
+    // renvoi Q de la matrice
+    MatriceFloat calculQt() {
+        int i = 0;
+        MatriceFloat qi = new MatriceFloat();
+        MatriceFloat res = new MatriceFloat();
+        MatriceFloat decompo = this;
+        res.setIndentite(this.nbl);
+        while(i < this.nbc - 1) {
+            //A -> Q1A
+            qi = decompo.decompositionQRi(i);
+            res = qi.prodMat(res);
+            decompo = qi.prodMat(decompo);
+            i = i + 1;
+        }
+        return res;
+    }
+
+    MatriceFloat algorithmeQR(int interation) {
+        int i = 0;
+        MatriceFloat qt;
+        MatriceFloat r; 
+        MatriceFloat a = this;
+        while(i < interation) {
+            // q
+            qt = a.calculQt();
+
+            r = qt.prodMat(a);
+            a = r.prodMat(qt.transpose());
+            i = i + 1;
+        }
+        return a;
+
     }
 
 }

@@ -1,3 +1,6 @@
+// Description : Test with matrix
+// Result : OK. 
+
 class Mat {
     int[][] mat;
     int n;

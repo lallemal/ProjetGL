@@ -1,3 +1,6 @@
+// Description : Test float matrix
+// Result : OK. 
+
 {float[] t = {1.0E0, 2.0E0, 3.0E0};
    float t2 = t[0];
    print(t2);}

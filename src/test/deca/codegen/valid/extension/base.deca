@@ -1,3 +1,6 @@
+// Description : Test the base of array
+// Result : OK. 
+
 {
     int n = 10;
     int e = 1;

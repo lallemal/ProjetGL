@@ -1,4 +1,5 @@
-
+// Description : Test with random array
+// Result : OK. 
 {
     int[][] x = {{1,2}, {1,2}};
 

@@ -187,5 +187,29 @@ fi
 done
 
 
+#on met a part le test de nocheck car il necessite une execution de decac -n
+echo "------- Démarrage des test noCheck"
+for i in src/test/deca/codegen/invalid/objet/noCheck/*.deca
+do
+    decac -n ./$i || exit 1
+done
+
+for i in src/test/deca/codegen/invalid/objet/noCheck/*.ass
+do
+    resultat=$(ima -p 005 ./$i)
+    if [ "$(cat $i.ok)" = "$resultat" ]; then
+        echo "OK"
+        rm $i
+    else
+        echo "$i KO ->"
+        echo "Résultat innatendu, le résultat:"
+        echo "$resultat"
+        echo "ce qui était attendu:"
+        echo "$(cat $i.ok)"
+        rm $i
+        exit 1
+    fi
+done
+
 
 

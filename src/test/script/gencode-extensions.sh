@@ -41,10 +41,145 @@ do
   if ima $i 2>&1 | grep -q -e "$i:"
   then
     echo "Echec inattendu pour decac pour $i"
-    rm $i
   else
     echo "OK"
-    rm $i
   fi
 
 done
+
+# Test comparaison des résultat ima avec les modèles (.decac.ok)
+echo "------ Démarrage des tests valide ima comparaison avec les modèles OK($((nb)))"
+for i in  src/test/deca/codegen/valid/objet/*.ass
+do
+  resultat=$(ima $i)
+    if [ "$(less $i.ok)" = "$resultat" ]; then
+         echo "OK"
+         rm $i
+     else
+        echo "Résultat innatendu pour $i, le résultat:"
+        echo "$resultat"
+        echo "ce qui était attendu:"
+        echo "$(less $i.ok)"    
+        rm $i
+        exit 1
+    fi
+
+done
+
+# Test de registres avec decac
+echo "------ Démarrage des tests valide avec changement du nombre de regsitre decac "
+if decac -r 4 src/test/deca/codegen/valid/objet/Registre/Registre.deca 2>&1 | grep -q -e "$i:"
+then
+  echo "Echec inattendu pour decac pour Registre.deca"
+else
+  echo "OK"
+fi
+
+
+# Test de registres avec ima
+echo "------ Démarrage des tests valide avec changement du nombre de registre ima "
+if ima src/test/deca/codegen/valid/objet/Registre/Registre.ass 2>&1 | grep -q -e "$i:"
+then
+  echo "Echec inattendu pour ima pour Registre.ass"
+else
+  echo "OK"
+fi
+
+# Test de registres comparaison avec ima
+echo "------ Démarrage des tests valide avec changement du nombre de registre ima "
+resultat=$(ima src/test/deca/codegen/valid/objet/Registre/Registre.ass)
+if [ "$(less src/test/deca/codegen/valid/objet/Registre/Registre.ass.ok)" = "$resultat" ]; then
+        echo "OK"
+        rm src/test/deca/codegen/valid/objet/Registre/Registre.ass
+  else
+        echo "Résultat innatendu pour Registre.ass, le résultat:"
+        echo "$(resultat)"
+        echo "ce qui était attendu:"
+        echo "$(less src/test/deca/codegen/valid/objet/Registre/Registre.ass.ok)"
+        rm src/test/deca/codegen/valid/objet/Registre/Registre.ass
+        exit 1
+  fi
+
+
+#On test que l'erreur des fichier invalide soit celle attendu (disponible en première ligne)
+nb=$(ls -l src/test/deca/codegen/invalid/objet/Error/*.deca | wc -l)
+echo "------- Démarrage des tests invalide ima ($((nb)))"
+for i in src/test/deca/codegen/invalid/objet/Error/*.deca
+do
+    decac $i
+done
+for i in src/test/deca/codegen/invalid/objet/Error/*.ass
+do
+  resultat=$(ima $i)
+  if [ "$(less $i.ok)" = "$resultat" ]; then
+        echo "OK"
+        rm $i
+  else
+        echo "Résultat innatendu pour $i, le résultat:"
+        echo "$resultat"
+        echo "ce qui était attendu:"
+        echo "$(less $i.ok)"
+        rm $i
+        exit 1
+  fi
+done
+
+# On fait les tests de débordement de pile
+nb=$(ls -l src/test/deca/codegen/invalid/objet/debordementPile/*.deca | wc -l)
+echo "------- Démarrage des test de débordement de pile decac ($((nb)))"
+for i in src/test/deca/codegen/invalid/objet/debordementPile/*.deca
+do 
+    if decac $i 2>&1 | grep -q -e "$i:"
+  then
+    echo "Echec inattendu pour decac pour $i"
+  else
+    echo "OK"
+  fi
+done 
+
+echo "------- Démarrage des test de débordement de pile ima ($((nb)))"
+for i in src/test/deca/codegen/invalid/extension/debordementPile/*.ass
+do
+    resultat=$(ima -p 003 $i)
+    if [ "$(cat src/test/deca/codegen/invalid/extension/debordementPile/MessageErreur.ok)" = "$resultat" ]; then
+        echo "OK"
+        rm $i
+    else
+        echo "$i KO ->"
+        echo "Résultat innatendu, le résultat:"
+        echo "$resultat"
+        echo "ce qui était attendu:"
+        echo "$(cat src/test/deca/codegen/invalid/extension/debordementPile/MessageErreur.ok)"
+        rm $i
+        exit 1
+fi
+done
+
+#on met a part le test de nocheck car il necessite une execution de decac -n
+for i in src/test/deca/codegen/invalid/extension/noCheck/*.deca
+do
+    decac -n ./$i || exit 1
+done
+
+for i in src/test/deca/codegen/invalid/extension/noCheck/*.ass
+do
+    resultat=$(ima -p 005 ./$i)
+    if [ "$(cat $i.ok)" = "$resultat" ]; then
+        echo "OK"
+        rm $i
+    else
+        echo "$i KO ->"
+        echo "Résultat innatendu, le résultat:"
+        echo "$resultat"
+        echo "ce qui était attendu:"
+        echo "$(cat $i.ok)"
+        rm $i
+        exit 1
+    fi
+done
+
+
+
+
+
+

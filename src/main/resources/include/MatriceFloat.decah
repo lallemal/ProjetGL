@@ -376,7 +376,7 @@ class MatriceFloat extends AbstractMatrice{
     /* fonction pour le calcul des vecteurs propres*/
 
 
-    // multiplie par un scalaire les composantes renvoi une nouvelle matrice
+    // multiplie par un scalaire les composantes, renvoie une nouvelle matrice
     MatriceFloat multScalaire(float scalaire) {
         int i = 0;
         int j = 0;
@@ -497,4 +497,3 @@ class MatriceFloat extends AbstractMatrice{
     }
 
 }
-

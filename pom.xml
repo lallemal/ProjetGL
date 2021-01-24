@@ -366,6 +366,16 @@
                             <goal>exec</goal>
                         </goals>
                     </execution>
+                     <execution>
+                        <id>biblio-valide</id>
+                        <configuration>
+                            <executable>./src/test/script/biblio.sh</executable>
+                        </configuration>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                    </execution>
                     <execution>
                         <id>gencode-so-invalide</id>
                         <configuration>

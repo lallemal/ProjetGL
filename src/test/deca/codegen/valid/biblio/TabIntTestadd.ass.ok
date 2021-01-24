@@ -1,0 +1,23 @@
+tableau 3 cases
+[1,2,3]
+
+ajout en tete
+0[3,1,2,3]
+
+ajout en queue
+4[3,1,2,3,12]
+
+ajout en position 2 de 5
+2[3,1,5,2,3,12]
+tableau 3 cases
+[1,2,3]
+
+ajout en tete
+0[3,1,2,3]
+
+ajout en queue
+4[3,1,2,3,9]
+
+ajout en position 2 de 5
+2[3,1,4,2,3,9]
+34Pas d'ajout-10Pas d'ajout

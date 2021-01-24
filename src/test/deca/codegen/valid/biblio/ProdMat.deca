@@ -12,6 +12,5 @@
     vect1.setInit(vect, 2, 1);
     prodmat = m.prodMat(vect1);
     prodmat.affichage();
-
 }
 

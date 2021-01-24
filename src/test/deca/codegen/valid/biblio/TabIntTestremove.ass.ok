@@ -1,0 +1,15 @@
+tableau 4 cases
+[1,2,3,4]
+
+suppression position 1
+[1,3,4]
+
+suppression tete
+[3,4]
+
+suppression en queue
+[3]
+
+pas de suppressionokNombre negatif:
+ok
+[3

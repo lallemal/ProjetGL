@@ -28,11 +28,11 @@
    if (p == false){
        print("ok");
    }
-   print("nombre negatif");
+   println("Nombre negatif:");
    p = tableau.delete(-10);  
    
    if (p == false){
-       print("ok");
+       println("ok");
    }
    tableau.affichage();
 

@@ -437,19 +437,18 @@ class MatriceFloat extends AbstractMatrice{
     // rayon spectral = plus boule contenant toute les valeur prorpes
     // entree vecteur propre + matrice = sortie valeur propre
     // seuil par defaut de 1.0E-5
-    float Puissancevp(MatriceFloat a) {
-        return PuissancevpWithAcc( a, 1.0E-5); 
-
-    }
 
     // renvoi la valeur du rayon spcetral (plus grande valeur de la vlp)
     float Puissancevpvectp() {
-        return Puissancevp(this);
-
+        return PuissancevpWithAcc(this , 1.0E-5); 
     }
 
     float PuissanceInverse(float nu) {
         return PuissanceInverseWithAcc(nu,1.0E-5);
+    }
+
+    float PuissancevpvectpWithAcc(float seuille){
+        return PuissancevpWithAcc(this,seuille);
     }
 
     // calcul une valeur propre et vecteur propre

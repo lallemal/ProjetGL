@@ -21,6 +21,14 @@ class TabFloat extends AbstractTab{
     float getCase(int indice){
         return (this.tab)[indice];
     }
+    
+    boolean setCase(int indice, float valeur){
+        if (indice < 0 || indice >= this.size){
+            return false;
+        }
+        (this.tab)[indice] = valeur;
+        return true;
+    }
 
     boolean add(float element, int indice) {
         int ind = indice;

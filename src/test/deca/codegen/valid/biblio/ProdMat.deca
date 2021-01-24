@@ -1,0 +1,17 @@
+//Objectifs: test du produit matriciel avec des flottants
+//Resultats: OK
+#include "Matrice.decah"
+
+{
+    float [][] mat1 = {{1.0E0,2.0E0},{1.0E0,2.0E0}};
+    float [][] vect = {{1.0E0},{2.0E0}};
+    MatriceFloat m = new MatriceFloat();
+    MatriceFloat vect1 = new MatriceFloat();
+    MatriceFloat prodmat = new MatriceFloat();
+    m.setInit(mat1, 2, 2);
+    vect1.setInit(vect, 2, 1);
+    prodmat = m.prodMat(vect1);
+    prodmat.affichage();
+
+}
+

@@ -1,0 +1,15 @@
+//
+//Description: inverse une matrice
+//Resultats: OK
+#include "Matrice.decah"
+{
+    float [][] mat2 = {{1.0E0,2.0E0,3.0E0},{0.0E0,1.0E0,4.0E0},{5.0E0,6.0E0,0.0E0}};
+    MatriceFloat m2 = new MatriceFloat();
+    m2.setInit(mat2, 3,3);
+    println("matrice");
+    m2.affichage();
+    println("inverse");
+    m2.inverse().affichage();
+
+}
+

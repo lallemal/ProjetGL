@@ -113,5 +113,365 @@ class MatriceFloat extends AbstractMatrice{
         }
         println("]");
     }
+
+    MatriceFloat sumMat(MatriceFloat m) {
+        float [][] tabfinal;
+        MatriceFloat matfinal;
+        int i = 0;
+        int j = 0;
+        if (this.nbc != m.getNbc() && this.nbl != m.nbl) {
+            return null;
+        }
+        tabfinal = new float[this.nbl][m.getNbc()];
+        matfinal = new MatriceFloat();
+        matfinal.setInit(tabfinal, this.nbl, m.getNbc());
+        while(i < this.nbl) {
+            while (j < this.nbc) {
+                tabfinal[i][j] = (this.matfloat)[i][j] + m.getCase(i, j);
+                j = j + 1;
+            }
+            j = 0;
+            i = i + 1;
+        }
+        return matfinal;
+    }
+
+    MatriceFloat prodMat(MatriceFloat m) {
+        int l = 0;
+        int c = 0;
+        int i = 0;
+        int j = 0;
+        int k = 0;
+        float [][] tabfinal = new float[this.nbl][m.getNbc()];
+        MatriceFloat matfinal = new MatriceFloat();
+        // erreur retourne null
+        if(this.nbc != m.getNbl()) {
+            return null;
+        }
+        // initialisation du tableau a 0
+        while(l < this.nbl){
+            while (c < m.getNbc()){
+                tabfinal[l][c] = 0;
+                c = c + 1;
+            }
+            c = 0;
+            l = l + 1;
+        }
+        matfinal.setInit(tabfinal, this.nbl, m.getNbc());
+        while(i < this.nbl) {
+            while( j < m.getNbc()) {
+                while(k < this.nbc) {
+                    tabfinal[i][j] = tabfinal[i][j] + (this.matfloat)[i][k]* m.getCase(k, j);
+                    k = k + 1;
+                }
+                k = 0;
+                j = j + 1;
+            }
+            j = 0;
+            i = i + 1;
+        }
+        return matfinal;
+    }
+    
+    MatriceFloat transpose() {
+        float[][] tab; 
+        MatriceFloat transpose;
+        int i = 0;
+        int j = 0;
+        tab = new float[this.getNbc()][this.getNbl()];
+        while (i < this.nbc) {
+            while(j < this.nbl) {
+                tab[i][j] = this.getCase(j, i);
+                j = j + 1;
+            }
+            j = 0;
+            i = i + 1;
+        }
+        transpose = new MatriceFloat();
+        transpose.setInit(tab, this.getNbc(), this.getNbl());
+        return transpose;
+    }
+
+
+
+    /* algorithme utilse pivot de Gauss transforme la matrice directement*/
+
+    // echange deux lignes
+    void echange(int li, int  lj) {
+        int i = 0;
+        float[] copieligne = new float[this.getNbc()];
+        while (i < this.nbc) {
+            copieligne[i] = (this.matfloat)[li][i];
+            i = i + 1;
+        }
+        i = 0;
+        // copie de lj dans li
+        while (i < this.nbc) {
+            (this.matfloat)[li][i] = (this.matfloat)[lj][i];
+            i = i + 1;
+        }
+        i = 0;
+        // copie de li dans lj
+        while (i < this.nbc) {
+            (this.matfloat)[lj][i] = copieligne[i];
+            i = i + 1;
+        }
+    }
+
+    // multiplication par un scalaire non nul renvoi false si echoue
+    boolean multScal(int li, float scalaire) {
+        int i = 0;
+        if(scalaire == 0) {
+            return false;
+        }
+        while(i < this.nbc) {
+            (this.matfloat)[li][i] = (this.matfloat)[li][i]* scalaire;
+            i = i + 1;
+        }
+        return true;
+    }
+
+
+    // ajout du multiple par une autre ligne ex: L1 <- L1 + x*L2
+    void addMultLine(int lmodif, int lscal, float scalaire) {
+        int i = 0;
+        while(i < this.nbc) {
+            (this.matfloat)[lmodif][i] = (this.matfloat)[lmodif][i] +(this.matfloat)[lscal][i] * scalaire;
+            i = i + 1;
+        }
+    }
+
+    // retourne la valeur absolue du flottant
+    float absolue (float i) {
+        float res = i;
+        if (i < 0) {
+            res = -i;
+        }
+        return res;
+    }
+
+    // tourve la ligne  dans colonne i avec la valeur aboslue la plus grand 
+    //retourne l'indice de ligne le plus grand
+    int indicePivot(int icolonne, int r) {
+        float compare;
+        int i = r+1;
+        // indice du max
+        int indice = i;
+        float max = this.absolue((this.matfloat)[i][icolonne]);
+        while(i < this.nbl) {
+            compare = this.absolue((this.matfloat)[i][icolonne]);
+            if(max < compare) {
+                indice = i;
+            }
+            i = i + 1;
+        }
+        return indice;
+    }
+
+
+
+    // calcul la matrice inverse
+    MatriceFloat inverse() {
+        int k;
+        int r = -1; // indice dernier pivot
+        int j = 0;
+        int i = 0;
+        // creation de l'inverse copie car algo modifie la matrice
+        MatriceFloat inverse = new MatriceFloat();
+        // creation de l'identite
+        inverse.setIndentite(this.nbl);
+        while(j < this.nbc) {
+            k = indicePivot(j,r);
+
+            // si pivot nul on change de colonne
+            if(this.absolue((this.matfloat)[k][j]) > 0.00000001) {
+                r = r + 1;
+
+                // on effectue les meme operation sur l'identite et la matrice
+                inverse.multScal(k, 1/matfloat[k][j]);
+                this.multScal(k, 1/matfloat[k][j]);
+                if (k != r) {
+                    // on  place le pivot a la ligne r si pas encore le cas
+                    inverse.echange(k, r);
+                    this.echange(k, r);
+                }
+                while(i < this.nbl) {
+                    // simplifie les autres lignes
+                    if (i != r) {
+                        inverse.addMultLine(i, r, (-1)*(this.matfloat)[i][j]);
+                        this.addMultLine(i, r, (-1)*(this.matfloat)[i][j]);
+                    }
+                    i = i + 1;
+                }
+                i = 0;
+            }
+            else {
+                // on a trouve une colonne null => non inversible
+                return null;
+            }
+            j = j + 1;
+        }
+        return inverse;
+    }
+
+    // Calcul du determinant par pivot de gauss
+    float determinant() {
+        int r = -1; // indice dernier pivot
+        int j = 0;
+        int i = 0;
+        int k = 0;
+        float determinant = 1;
+        // copie de matrice on fait calcul dessus
+        MatriceFloat copie = new MatriceFloat();
+        copie.setInitFloat(this.matfloat,this.nbl, this.nbc);
+
+        // trigonalise la matrice
+        while(j < this.nbc) {
+            k = copie.indicePivot(j,r);
+            if(copie.absolue((copie.matfloat)[k][j]) > 0.0000001) {
+                // diviser la ligne par la valeur du pivot
+                r = r + 1;
+                determinant = determinant * (copie.matfloat)[k][j];
+                copie.multScal(k, 1/(copie.matfloat)[k][j]);
+                if (k != r) {
+                    // on  place le pivot a la ligne r si pas encore le cas
+                    copie.echange(k, r);
+                    // permutation => *(-1)
+                    determinant = determinant * (-1);
+                }
+
+                while(i < this.nbl) {
+                    // simplifie les autres lignes
+                    if (i != r) {
+                        copie.addMultLine(i, r, (-1)*(copie.matfloat)[i][j]);
+                    }
+                    i = i + 1;
+                }
+                i = 0;
+            }
+            else {
+                // pivot nul => det = 0
+                return 0;
+            }
+            j = j + 1;
+        }
+        return determinant;
+    }
+
+
+    /* fonction pour le calcul des vecteurs propres*/
+
+
+    // multiplie par un scalaire les composantes revoi une nouvelle matrice
+    MatriceFloat multScalaire(float scalaire) {
+        int i = 0;
+        int j = 0;
+        MatriceFloat res = new MatriceFloat();
+        float[][] f = new float[this.nbl][this.nbc];
+        while(i < this.nbl) {
+            while(j < this.nbc) {
+                f[i][j] = (this.matfloat)[i][j] * scalaire;
+                j = j + 1;
+            }
+            j = 0;
+            i = i + 1;
+        }
+        res.setInit(f,this.nbl,this.nbc);
+        return res;
+    }
+
+    // multiplie par un scalaire modifie directement
+    void multi(float scalaire) {
+        int i = 0;
+        int j = 0;
+        while(i < this.nbl) {
+            while(j < this.nbc) {
+                (this.matfloat)[i][j] = (this.matfloat)[i][j] * scalaire;
+                j = j + 1;
+            }
+            j = 0;
+            i = i + 1;
+        }
+    }
+
+    float convertTofloat() {
+        return (this.matfloat)[0][0];
+    }
+
+    float normeVect() {
+        float res = 0;
+        float mult = 0;
+        int i = 0;
+        Racine r;
+        if (this.nbc != 1) {
+            return res;
+        }
+        r = new Racine();
+        this.affichage();
+        // calcul des carre puis racine a la fin
+        while (i < this.nbl) {
+            res = res + (this.matfloat)[i][0]* (this.matfloat)[i][0];
+            i = i + 1;
+        }
+        println("valeur carre " , res);
+        return r.sqrt(res);
+    }
+
+
+    // calcul du rayon spectral par lam methode des puissances
+    // determine valeur propre et vecteur propre
+    // rayon spectral = plus boule contenant toute les valeur prorpes
+    // entree vecteur propre + matrice = sortie valeur propre
+    float Puissancevp(MatriceFloat a) {
+        int iteration = 200;
+        int i = 0;
+        float vlpinit = 0;
+        float vlp = 0;
+        float seuil = 0.1E-4;
+        // vecteur initialisation
+        MatriceFloat transpose;
+        MatriceFloat vecteurx = new MatriceFloat();
+        MatriceFloat vecteury = new MatriceFloat();
+        vecteurx.setOneVector(this.nbl);
+        vecteurx.affichage();
+        // vecteur resultat
+        vecteury = a.prodMat(vecteurx);
+        vecteurx = vecteury.multScalaire(1/vecteury.normeVect());
+        transpose = vecteurx.transpose();
+        vlp = transpose.prodMat(a.prodMat(vecteurx)).convertTofloat();
+        while(this.absolue(vlp - vlpinit) > seuil) {
+            vlpinit = vlp;
+            vecteury = a.prodMat(vecteurx);
+            vecteurx = vecteury.multScalaire(1/vecteury.normeVect());
+            transpose = vecteurx.transpose();
+
+            vlp = transpose.prodMat(a.prodMat(vecteurx)).convertTofloat();
+        }
+        print("vecteur propre= ");
+        vecteurx.affichage();
+        return vlp;
+
+    }
+
+    float Puissancevpvectp() {
+        return Puissancevp(this);
+
+    }
+
+    float PuissanceInverse(float nu) {
+        // calculer (A-uId)-1
+        // identite
+
+        MatriceFloat f;
+        MatriceFloat id = new MatriceFloat();
+        id.setIndentite(this.nbl);
+        id.multi(-nu);
+        f = id.sumMat(this);
+        f.affichage();
+        f = f.inverse();
+        return (1/this.Puissancevp(f)) + nu;
+    }
+
+
 }
 

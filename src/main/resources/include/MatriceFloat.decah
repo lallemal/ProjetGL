@@ -155,7 +155,7 @@ class MatriceFloat extends AbstractMatrice{
         int k = 0;
         float [][] tabfinal = new float[this.nbl][m.getNbc()];
         MatriceFloat matfinal = new MatriceFloat();
-        
+
         if(this.nbc != m.getNbl()) {
             return null;
         }
@@ -184,7 +184,7 @@ class MatriceFloat extends AbstractMatrice{
         }
         return matfinal;
     }
-    
+
     // transpose la matrice et en renvoi une nouvelle 0(n2) en memoire
     MatriceFloat transpose() {
         float[][] tab; 
@@ -422,13 +422,11 @@ class MatriceFloat extends AbstractMatrice{
             return res;
         }
         r = new Racine();
-        this.affichage();
         // calcul des carre puis racine a la fin
         while (i < this.nbl) {
             res = res + (this.matfloat)[i][0]* (this.matfloat)[i][0];
             i = i + 1;
         }
-        println("valeur carre " , res);
         return r.sqrt(res);
     }
 
@@ -437,33 +435,9 @@ class MatriceFloat extends AbstractMatrice{
     // determine valeur propre et vecteur propre
     // rayon spectral = plus boule contenant toute les valeur prorpes
     // entree vecteur propre + matrice = sortie valeur propre
+    // seuil par defaut de 1.0E-5
     float Puissancevp(MatriceFloat a) {
-        int i = 0;
-        float vlpinit = 0;
-        float vlp = 0;
-        float seuil = 0.1E-4;
-        // vecteur initialisation
-        MatriceFloat transpose;
-        MatriceFloat vecteurx = new MatriceFloat();
-        MatriceFloat vecteury = new MatriceFloat();
-        vecteurx.setOneVector(this.nbl);
-        vecteurx.affichage();
-        // vecteur resultat
-        vecteury = a.prodMat(vecteurx);
-        vecteurx = vecteury.multScalaire(1/vecteury.normeVect());
-        transpose = vecteurx.transpose();
-        vlp = transpose.prodMat(a.prodMat(vecteurx)).convertTofloat();
-        while(this.absolue(vlp - vlpinit) > seuil) {
-            vlpinit = vlp;
-            vecteury = a.prodMat(vecteurx);
-            vecteurx = vecteury.multScalaire(1/vecteury.normeVect());
-            transpose = vecteurx.transpose();
-
-            vlp = transpose.prodMat(a.prodMat(vecteurx)).convertTofloat();
-        }
-        print("vecteur propre= ");
-        vecteurx.affichage();
-        return vlp;
+        return PuissancevpWithAcc( a, 1.0E-5); 
 
     }
 
@@ -486,11 +460,37 @@ class MatriceFloat extends AbstractMatrice{
         id.setIndentite(this.nbl);
         id.multi(-nu);
         f = id.sumMat(this);
-        f.affichage();
         f = f.inverse();
         return (1/this.Puissancevp(f)) + nu;
     }
 
+    float PuissancevpWithAcc(MatriceFloat a, float seuille) {
+        int i = 0;
+        float vlpinit = 0;
+        float vlp = 0;
+        float seuil = seuille;
+        // vecteur initialisation
+        MatriceFloat transpose;
+        MatriceFloat vecteurx = new MatriceFloat();
+        MatriceFloat vecteury = new MatriceFloat();
+        vecteurx.setOneVector(this.nbl);
+        // vecteur resultat
+        vecteury = a.prodMat(vecteurx);
+        vecteurx = vecteury.multScalaire(1/vecteury.normeVect());
+        transpose = vecteurx.transpose();
+        vlp = transpose.prodMat(a.prodMat(vecteurx)).convertTofloat();
+        while(this.absolue(vlp - vlpinit) > seuil) {
+            vlpinit = vlp;
+            vecteury = a.prodMat(vecteurx);
+            vecteurx = vecteury.multScalaire(1/vecteury.normeVect());
+            transpose = vecteurx.transpose();
 
+            vlp = transpose.prodMat(a.prodMat(vecteurx)).convertTofloat();
+        }
+        println("vecteur propre= ");
+        vecteurx.affichage();
+        return vlp;
+
+    }
 }
 

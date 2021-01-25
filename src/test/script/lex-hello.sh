@@ -85,18 +85,18 @@ do
 done
 
 # On test que le résultat est bien celui qu'on attend
-# les modèles sont contenus dans les fichier .deca.resu
+# les modèles sont contenus dans les fichier .deca.lex.ok
 echo "Comparaison de résultat avec test_lex:"
 for i in src/test/deca/syntax/valid/hello/*.deca
 do
     resultat=$(test_lex $i)
-    if [ "$(less $i.resu)" = "$resultat" ]; then
+    if [ "$(less $i.lex.ok)" = "$resultat" ]; then
          echo "OK"
      else
         echo "Résultat innatendu pour $i, le résultat:"
         echo "$resultat"
         echo "ce qui était attendu:"
-        echo "$(less $i.resu)"
+        echo "$(less $i.lex.ok)"
         exit 1
     fi
 

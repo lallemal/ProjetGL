@@ -35,8 +35,7 @@ public class ArrayLiteral extends AbstractExpr{
 		
 	}
 	
-	protected void initValueRec(int n, LinkedList<Integer> coords, LinkedList<Integer> dims, DecacCompiler compiler) {
-		
+	protected void initValueRec(int n, LinkedList<Integer> coords, LinkedList<Integer> dims, DecacCompiler compiler) {	
 		if (elements.isEmpty()) {
 			return;
 		} else if (elements.getList().get(0).getType().isArray()) {

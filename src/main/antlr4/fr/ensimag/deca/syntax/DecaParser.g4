@@ -501,7 +501,7 @@ new_object returns[AbstractExpr tree]
             $tree = new New($ident.tree);
             setLocation($tree, $NEW); 
         }
-       | NEW i=ident  l=list_hook_expr {
+       | NEW i=ident  l=list_hook_expr   {
        		assert($i.tree != null);
        		assert($l.tree != null);
        		$tree = new NewArray($i.tree, $l.tree);

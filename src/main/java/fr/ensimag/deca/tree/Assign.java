@@ -47,6 +47,14 @@ public class Assign extends AbstractBinaryExpr {
     }
     
     @Override
+    public void codeExp(DecacCompiler compiler, int n) {
+    	this.codeGenInst(compiler);
+    	if (n != 2) {
+    		compiler.addInstruction(new LOAD(Register.getR(2), Register.getR(n)));
+    	}
+    }
+    
+    @Override
     protected void codeGenInst(DecacCompiler compiler) {
     	compiler.setRegistreUsed(2);
     	AbstractExpr e = this.getRightOperand(); 

@@ -448,10 +448,6 @@ select_expr returns[AbstractExpr tree]
     ;
 
 primary_expr returns[AbstractExpr tree]
-@init{
-	AbstractIdentifier identifier;
-	AbstractInteger intMemory;
-}
     : ident {
             assert($ident.tree != null);
             $tree = $ident.tree;

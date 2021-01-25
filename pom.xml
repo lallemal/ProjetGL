@@ -406,6 +406,16 @@
                             <goal>exec</goal>
                         </goals>
                     </execution>
+                    <execution>
+                        <id>gencode-extensions</id>
+                        <configuration>
+                            <executable>./src/test/script/gencode-extensions.sh</executable>
+                        </configuration>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                    </execution>
                      <execution>
                         <id>codegen-less-register</id>
                         <configuration>

@@ -276,6 +276,26 @@
                             <goal>exec</goal>
                         </goals>
                     </execution>
+                    <execution>
+                        <id>lexer-o</id>
+                        <configuration>
+                            <executable>./src/test/script/lexer-o.sh</executable>
+                        </configuration>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>parser-hello</id>
+                        <configuration>
+                            <executable>./src/test/script/parser-hello.sh</executable>
+                        </configuration>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                    </execution>
                      <execution>
                         <id>parser-so</id>
                         <configuration>
@@ -366,16 +386,6 @@
                             <goal>exec</goal>
                         </goals>
                     </execution>
-                     <execution>
-                        <id>biblio-valide</id>
-                        <configuration>
-                            <executable>./src/test/script/biblio.sh</executable>
-                        </configuration>
-                        <phase>test</phase>
-                        <goals>
-                            <goal>exec</goal>
-                        </goals>
-                    </execution>
                     <execution>
                         <id>gencode-so-invalide</id>
                         <configuration>
@@ -401,6 +411,16 @@
                         <configuration>
                             <executable>./src/test/script/codegen-less-register.sh</executable>
 						</configuration>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>biblio-valide</id>
+                        <configuration>
+                            <executable>./src/test/script/biblio.sh</executable>
+                        </configuration>
                         <phase>test</phase>
                         <goals>
                             <goal>exec</goal>

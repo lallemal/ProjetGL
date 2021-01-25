@@ -1,4 +1,3 @@
 #include "Racine.decah"
 #include "AbstractMatrice.decah"
 #include "MatriceFloat.decah"
-

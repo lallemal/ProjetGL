@@ -7,6 +7,10 @@ Le compilateur fonctionne comme spécifié dans la documentation [Decac] :
 Il compile les programmes conformes au déca sans limitation autre que l'objet : les classes ne peuvent pas être 
 déclarées ou instanciées, les fonctionnalités de `new` `cast` `instanceof` `return` ne sont pas fournies. 
 
+## Rendu final
+
+Le compilateur fonctionne sur l'entièreté du langage Deca. Nous avons implémenté l'extension TAB. Son utilisation est décrite dans le manuel utilisateur disponible dans le répertoire ./docs. Vous y trouverez aussi d'autres informations utiles (listes des erreurs par exemple). 
+
 ```
 decac [[-p | -v] [-n] [-r X] [-d]* [-P] [-w] <fichier deca>...] | [-b]
 . -b (banner) : affiche une bannière indiquant le nom de l’équipe

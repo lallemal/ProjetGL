@@ -156,6 +156,11 @@ class MatriceFloat extends AbstractMatrice{
         return matfinal;
     }
 
+    
+
+
+
+
     // produit matriciel
     MatriceFloat prodMat(MatriceFloat m) {
         int l = 0;
@@ -194,6 +199,17 @@ class MatriceFloat extends AbstractMatrice{
         }
         return matfinal;
     }
+
+
+
+
+
+
+
+
+
+
+
 
     // transpose la matrice et en renvoi une nouvelle 0(n2) en memoire
     MatriceFloat transpose() {

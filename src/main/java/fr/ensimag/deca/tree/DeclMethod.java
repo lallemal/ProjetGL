@@ -77,39 +77,30 @@ public class DeclMethod extends AbstractDeclMethod {
     		return;
     	}
 
-    	// ----- fake call to determine the number of register used (to push them)
+    	// ----- generation du corps de la methode sur un programme auxiliaire pour pouvoir y ajouter la sauvegarde des registres en tete
     	compiler.setAux(true);
     	compiler.cleanProgramAux();
-    	int kGB = compiler.getKGB();
-    	int kSP = compiler.getKSP();
-    	int maxkSP = compiler.getMaxSP();
     	int n = body.codeGenBody(compiler, labelFin);
-    	compiler.setKGB(kGB);
-    	compiler.setKSP(kSP);
-    	compiler.setMaxSP(maxkSP);
-    	compiler.cleanProgramAux();
-    	compiler.setAux(false);
     	// -----
     	
+    	compiler.addFirst(new Line("instructions"));
     	if (n+body.getVar().size() > 0) {
-    		if (!compiler.getCompilerOptions().isNoCheck()) {
-    			compiler.getLabelError().setErrorPilePleine(true);
-        		compiler.addInstruction(new TSTO(n+body.getVar().size()));
-    			compiler.addInstruction(new BOV(compiler.getLabelError().getLabelPilePleine()));
+    		if (n > 0) {
+    			for (int i=n-1; i>=0; i--) {
+    	    		compiler.addInstructionFirst(new PUSH(Register.getR(i+2)));
+    	    	}
+    			compiler.addFirst(new Line("sauvegarde des registres"));
     		}
     		if (body.getVar().size() > 0) {
-    	    	compiler.addInstruction(new ADDSP(body.getVar().size()));
+    	    	compiler.addInstructionFirst(new ADDSP(body.getVar().size()));
     		}
-    		if (n > 0) {
-    			compiler.addComment("sauvegarde des registres");
-    			for (int i=0; i<n; i++) {
-    	    		compiler.addInstruction(new PUSH(Register.getR(i+2)));
-    	    	}
+    		if (!compiler.getCompilerOptions().isNoCheck()) {
+    			compiler.getLabelError().setErrorPilePleine(true);
+    			compiler.addInstructionFirst(new BOV(compiler.getLabelError().getLabelPilePleine()));
+    			compiler.addInstructionFirst(new TSTO(n+body.getVar().size()));
     		}
     	}
     	
-    	compiler.addComment("instructions");
-    	n = body.codeGenBody(compiler, labelFin);
     	// Fin : on verifie quil y a eu return si ce nest pas une void fonction
     	if (!type.getType().isVoid()) {
     		if (!compiler.getCompilerOptions().isNoCheck()) {
@@ -126,13 +117,15 @@ public class DeclMethod extends AbstractDeclMethod {
         		compiler.addInstruction(new POP(Register.getR(i+2)));
         	}
     	}
-    
-    	compiler.setKGB(kGB); // restauration du kGB
+
     	if (body.getVar().size() > 0) {
     		compiler.addInstruction(new SUBSP(body.getVar().size()));
     	}
     	
     	compiler.addInstruction(new RTS());
+    	compiler.append(compiler.getProgramAux());
+    	compiler.cleanProgramAux();
+    	compiler.setAux(false);
     }
 
     @Override

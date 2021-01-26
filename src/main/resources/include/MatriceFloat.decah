@@ -317,28 +317,34 @@ class MatriceFloat extends AbstractMatrice{
         int i = 0;
         // creation de l'inverse copie car algo modifie la matrice
         MatriceFloat inverse = new MatriceFloat();
+	    int line = 0;
+	    int column = 0;
+
+        MatriceFloat copie = new MatriceFloat();
+       
+        copie.setInitFloat(this.matfloat, this.nbl, this.nbc);
         // creation de l'identite
         inverse.setIndentite(this.nbl);
         while(j < this.nbc) {
             k = indicePivot(j,r);
 
             // si pivot nul on change de colonne
-            if(this.absolue((this.matfloat)[k][j]) > 0.00000001) {
+            if(this.absolue((copie.matfloat)[k][j]) > 0.00000001) {
                 r = r + 1;
 
                 // on effectue les meme operation sur l'identite et la matrice
-                inverse.multScal(k, 1/matfloat[k][j]);
-                this.multScal(k, 1/matfloat[k][j]);
+                inverse.multScal(k, 1/((copie.matfloat)[k][j]));
+                copie.multScal(k, 1/((copie.matfloat)[k][j]));
                 if (k != r) {
                     // on  place le pivot a la ligne r si pas encore le cas
                     inverse.echange(k, r);
-                    this.echange(k, r);
+                    copie.echange(k, r);
                 }
                 while(i < this.nbl) {
                     // simplifie les autres lignes
                     if (i != r) {
-                        inverse.addMultLine(i, r, (-1)*(this.matfloat)[i][j]);
-                        this.addMultLine(i, r, (-1)*(this.matfloat)[i][j]);
+                        inverse.addMultLine(i, r, (-1)*(copie.matfloat)[i][j]);
+                        copie.addMultLine(i, r, (-1)*(copie.matfloat)[i][j]);
                     }
                     i = i + 1;
                 }

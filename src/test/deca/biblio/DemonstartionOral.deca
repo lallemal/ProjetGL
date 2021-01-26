@@ -2,6 +2,8 @@
 {
 	float[][] tab1 = {{1.0, 0.0, 5.0}, {2.0, 1.0, 6.0}, {3.0, 4.0, 0.0}};
 	float[][] tab2 = {{1.2, 2.7, 4.1}, {5.2, 6.3, 7.2}, {8.1, 14.2, 9.0}};
+	float rA;
+	float rB;
 	MatriceFloat mat1 = new MatriceFloat();
 	MatriceFloat mat2 = new MatriceFloat();
 	MatriceFloat inv1 = new MatriceFloat();
@@ -13,26 +15,39 @@
 	
 	println("Transposée de la matrice A:");
 	mat1.transpose().affichage();
-	mat1.affichage();
 	
 	println("Inverse de la matrice A:");
-	inv1 = mat1.inverse();
-	inv1.affichage();
-	mat1.affichage();
+	mat1.inverse().affichage();
+	
 	println("Matrice B:");
 	mat2.affichage();
-	mat1.affichage();
 	
 	println("Somme de A et B:");
 	mat2.sumMat(mat1).affichage();
-	mat1.affichage();
 	
 	println("Multiplication de A par B:");
 	mat2.prodMat(mat1).affichage();
-	mat1.affichage();
 	
 	println("Permuation des lignes 1 et 2 de la matrice A");
 	mat1.echange(0, 1);
 	mat1.affichage();
+	
+	println("Déterminant de la matrice A: ", mat1.determinant());
+	println("Déterminant de la matrice B: ", mat2.determinant());
+	
+	println("Multiplication de la matrice A par le scalaire 2: ");
+	mat1.multScalaire(2.0).affichage();
+	
+	println("Vecteur propre de la matrice A: ");
+	rA = mat1.Puissancevpvectp();
+	
+	println("Rayon spectral de la matrice A: ", rA);
+	
+	println("Décomposition QR de la matrice A avec 25 itérations: ");
+	println("Matrice Q =");
+	mat1.calculQt().affichage();
+	println("Matrice R =");
+	mat1.algorithmeQR(25).affichage();
+
 
 }

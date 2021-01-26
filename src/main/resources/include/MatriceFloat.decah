@@ -450,8 +450,11 @@ class MatriceFloat extends AbstractMatrice{
         float res = 0;
         float mult = 0;
         int i = 0;
+
         Racine r;
+
         if (this.nbc != 1) {
+                print("oui");
             return res;
         }
         r = new Racine();
@@ -522,7 +525,6 @@ class MatriceFloat extends AbstractMatrice{
 
             vlp = transpose.prodMat(a.prodMat(vecteurx)).convertTofloat();
         }
-        println("vecteur propre= ");
         vecteurx.affichage();
         return vlp;
     }

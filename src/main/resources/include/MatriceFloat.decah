@@ -7,6 +7,7 @@ class MatriceFloat extends AbstractMatrice{
         this.nbc = nbc;
         this.matfloat = mat;
     }
+
     // initialise a partir d'un tableau de int creer une copie
     void setInitInt(int[][] mat, int nbl, int nbc) {
         int i = 0;
@@ -67,10 +68,10 @@ class MatriceFloat extends AbstractMatrice{
         while(i < n) {
             while(j < n) {
                 if (i == j) {
-                    t[i][j] = 1;
+                    t[i][j] = 1.0;
                 }
                 else {
-                    t[i][j] = 0;
+                    t[i][j] = 0.0;
                 }
                 j = j + 1;
             }

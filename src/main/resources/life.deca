@@ -1,0 +1,121 @@
+#include "Matrice.decah"
+
+class Life {
+    MatriceFloat plateau;
+    MatriceFloat newPlateau;
+    int taille;
+
+    void init(int n) {
+        plateau = new MatriceFloat();
+        newPlateau = new MatriceFloat();
+        plateau.setIndentite(n);
+        plateau.setCase(1.0, 0, 1);
+        plateau.setCase(1.0, 1, 1);
+        plateau.setCase(1.0, 1, 0);
+        plateau.setCase(0.0, 2, 2);
+        this.taille = n;
+    }
+
+
+    void printJeu() {
+        plateau.affichage();
+    }
+
+    void setLiving(int i, int j) {
+        plateau.setCase(1.0, i, j);
+    }
+
+    void setDead(int i, int j) {
+        plateau.setCase(0.0, i, j);
+    }
+
+    int countNeighbourLiving(int i, int j) {
+        int nb = 0;
+        boolean i_moins = i - 1 >= 0;
+        boolean i_plus = i + 1 < this.taille;
+        boolean j_moins = j - 1 >= 0;
+        boolean j_plus = j + 1 < this.taille;
+        if (i_moins) {
+            if (j_moins && plateau.getCase(i-1, j-1) == 1.0) {
+                nb = nb + 1;
+            }
+            if (j_plus && plateau.getCase(i-1, j+1) == 1.0) {
+                nb = nb + 1;
+            }
+            if (plateau.getCase(i-1, j) == 1.0) {
+                nb = nb + 1;
+            }
+        }
+        if (i_plus) {
+            if (j_moins && plateau.getCase(i+1, j-1) == 1.0) {
+                nb = nb + 1;
+            }
+            if (j_plus && plateau.getCase(i+1, j+1) == 1.0) {
+                nb = nb + 1;
+            }
+            if (plateau.getCase(i+1, j) == 1.0) {
+                nb = nb + 1;
+            }
+        }
+        if (j_moins) {
+            if (plateau.getCase(i, j-1) == 1.0) {
+                nb = nb + 1;
+            }
+        }
+        if (j_plus) {
+            if (plateau.getCase(i, j+1) == 1.0) {
+                nb = nb + 1;
+            }
+        }
+        return nb;
+    }
+
+
+    void newState(int i, int j) {
+        int nb_neighbour = countNeighbourLiving(i,j);
+        if (nb_neighbour == 3) {
+            newPlateau.setCase(1.0, i, j);
+        }
+        if (nb_neighbour < 2 || nb_neighbour > 3) {
+            newPlateau.setCase(0.0, i, j);
+        }
+    }
+
+
+    void tour() {
+        int i = 0;
+        int j = 0;
+        newPlateau.setInitFloat(plateau.matfloat, this.taille, this.taille);
+        while (i < this.taille) {
+            j = 0;
+            while (j < this.taille) {
+                this.newState(i, j);
+                j = j + 1;
+            }
+            i = i + 1;
+        }
+        plateau = newPlateau;
+    }
+}
+
+
+
+{
+    int nb_tour;
+    int taille;
+    int tour = 0;
+    Life jeu;
+    println("Donnez la taille du plateau");
+    taille = readInt();
+    println("Donnez le nombre de tour");
+    nb_tour = readInt();
+    jeu = new Life();
+    jeu.init(taille);
+    jeu.printJeu();
+    while (tour < nb_tour) {
+        println("--- tour ", tour, " ----");
+        jeu.tour();
+        jeu.printJeu();
+        tour = tour + 1;
+    }
+}

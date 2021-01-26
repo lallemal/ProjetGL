@@ -31,9 +31,11 @@
 	println("Permuation des lignes 1 et 2 de la matrice A");
 	mat1.echange(0, 1);
 	mat1.affichage();
-	
+	mat1.echange(1, 0);
 	println("Déterminant de la matrice A: ", mat1.determinant());
+	println("Déterminant de la matrice A via numpy: ", 0.9999999999999967);
 	println("Déterminant de la matrice B: ", mat2.determinant());
+	println("Déterminant de la matrice B via numpy: ", 69.97699999999998);
 	
 	println("Multiplication de la matrice A par le scalaire 2: ");
 	mat1.multScalaire(2.0).affichage();
@@ -41,8 +43,15 @@
 	println("Vecteur propre de la matrice A: ");
 	rA = mat1.Puissancevpvectp();
 	
-	println("Rayon spectral de la matrice A: ", rA);
+	println("Vecteur propre de la matrice B: ");
+	rB = mat2.Puissancevpvectp();
 	
+	println("Rayon spectral de la matrice A: ", rA);
+	println("Rayon spectral de la matrice A via numpy: ", 7.25602242);
+	
+	println("Rayon spectral de la matrice B: ", rB);
+	println("Rayon spectral de la matrice B via numpy: ", 	20.33033523);
+
 	println("Décomposition QR de la matrice A avec 25 itérations: ");
 	println("Matrice Q =");
 	mat1.calculQt().affichage();

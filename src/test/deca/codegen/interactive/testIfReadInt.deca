@@ -1,0 +1,7 @@
+// Description : Test readint in conditon of a if.
+// Resultat : Working
+{
+	if(1){
+		print("Ok");
+	}
+}

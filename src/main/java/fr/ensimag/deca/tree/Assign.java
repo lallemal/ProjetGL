@@ -4,14 +4,12 @@ import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
-import fr.ensimag.ima.pseudocode.instructions.LOAD;
-import fr.ensimag.ima.pseudocode.instructions.STORE;
-import fr.ensimag.ima.pseudocode.instructions.BEQ;
-import fr.ensimag.ima.pseudocode.instructions.CMP;
+import fr.ensimag.deca.context.Type;
+import fr.ensimag.ima.pseudocode.ImmediateInteger;
 import fr.ensimag.ima.pseudocode.NullOperand;
 import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.RegisterOffset;
-import fr.ensimag.deca.context.Type;
+import fr.ensimag.ima.pseudocode.instructions.*;
 
 /**
  * Assignment, i.e. lvalue = expr.
@@ -97,6 +95,22 @@ public class Assign extends AbstractBinaryExpr {
 
 	@Override
 	protected void codeExp(DecacCompiler compiler, int n) {
-        getLeftOperand().codeExp(compiler, n);
+    	if (n > 2) {
+			if (!compiler.getCompilerOptions().isNoCheck()) {
+				compiler.getLabelError().setErrorPilePleine(true);
+				compiler.addInstruction(new TSTO(new ImmediateInteger(n - 2)));
+				compiler.addInstruction(new BOV(compiler.getLabelError().getLabelPilePleine()));
+			}
+			for (int i = 2; i < n; i++) {
+				compiler.addInstruction(new PUSH(Register.getR(i)));
+
+			}
+		}
+		this.codeGenInst(compiler);
+		for (int i = 2; i < n; i++) {
+			compiler.addInstruction(new POP(Register.getR(i)));
+
+		}
+		getLeftOperand().codeExp(compiler, n);
 	}
 }

@@ -22,8 +22,8 @@ class Polyexp {
     float m, fm;
 
     while (d>=(g+0x1.0p-23)) {
-	m = (g+d) / 2.0f;
- 	fm = p.pexp(m);
+	//m = (g+d) / 2.0f;
+ 	//fm = p.pexp(m);
 	if ( (fm = p.pexp(m = (g+d)/2.0)) > 0.0) {
 	    d = m;
 	    fd = fm;

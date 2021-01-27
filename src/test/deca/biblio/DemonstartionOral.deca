@@ -51,7 +51,7 @@
 	
 	println("Rayon spectral de la matrice B: ", rB);
 	println("Rayon spectral de la matrice B via numpy: ", 	20.33033523);
-
+	
 	println("Décomposition QR de la matrice A avec 25 itérations: ");
 	println("Matrice Q =");
 	mat1.calculQt().affichage();

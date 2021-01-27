@@ -5,13 +5,20 @@
 {
     int[][] init = {{12, -51, 4},{6, 167, -68},{-4, 24, -41}};
     MatriceFloat r = new MatriceFloat();
+    MatriceFloat qt = new MatriceFloat();
     MatriceFloat q = new MatriceFloat();
     MatriceFloat A = new MatriceFloat();
     A.setInitInt(init, 3, 3);
     println("matrice A");
     A.affichage();
-    q = A.calculQt();
-    r = q.prodMat(A);
+    qt = A.calculQt();
+    println("matrice Q");
+    q = qt.transpose();
+    q.affichage();
+    r = qt.prodMat(A);
     println("matrice R triangulaire");
     r.affichage();
+    println("produit des deux A = QR");
+    q.prodMat(r).affichage();
+    
 }

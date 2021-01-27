@@ -1,0 +1,54 @@
+#include "Tab.decah"
+{
+
+    int [] t = {1,2,3, 7, 1};
+    int [] t2 = {1,2,3, 7, 1, 21, 53, -1, -4, - 18, 18, 42,1 ,10, 43};
+    int s = 0;
+    TabInt tab = new TabInt();
+    TabInt tab2 = new TabInt();
+    println("affichage du tableau");
+    tab.setInit(t, 5);
+    tab2.setInit(t2, 15);
+    // affichage du tableau
+    tab.affichage();
+    
+    // ajout d'élément dans le tableau
+    readInt();
+    println("Ajout de l'element 4 en tete du tableau");
+    readInt();
+    tab.addFirst(4);
+    tab.affichage(); 
+    println("Ajout de l'element 8 en queue du tableau");
+    readInt();
+    tab.addLast(8);
+    tab.affichage();
+    println("ajout a l'indice 2 de 5");
+    readInt();
+    tab.add(5,2);
+    tab.affichage();
+
+    // Test de Suppression d'un element du tableau
+    println("test de suppression d'un element en tete");
+    readInt(); 
+    tab.deleteFirst();
+    tab.affichage();
+    println("test de suppression d'un element en queue");
+    readInt();
+    tab.deleteLast();
+    tab.affichage();
+    println("test de suppression a l indice 3");
+    readInt();
+    tab.delete(1);
+    tab.affichage();
+
+    // test de tri d'un tableau
+    println("test de tri par ordre croissant d'un tableau");
+    tab2.affichage();
+    readInt(); 
+    tab2.mergeSortAscending();
+    tab2.affichage();
+
+
+
+
+}

@@ -1,0 +1,119 @@
+#include "Matrice.decah"
+{
+    float res;
+    float [][] mat3 = {{-3.0,0.0,0.0},{17.0,13.0,-7.0},{16.0,14.0,-8.0}};
+    float[][] tab1 = {{1.0, 0.0, 5.0}, {2.0, 1.0, 6.0}, {3.0, 4.0, 0.0}};
+    float[][] tab2 = {{1.2, 2.7, 4.1}, {5.2, 6.3, 7.2}, {8.1, 14.2, 9.0}};
+    float rA;
+    float rB;
+    MatriceFloat inv1; 
+    MatriceFloat inv2;
+    MatriceFloat matmult;
+    MatriceFloat matsum;
+    float nu = 0;
+    float nu2 = -2.5;
+    MatriceFloat mat1 = new MatriceFloat();
+    MatriceFloat mat2 = new MatriceFloat();
+    MatriceFloat matcopie = new MatriceFloat();
+    MatriceFloat m3 = new MatriceFloat();
+    mat1.setInitFloat(tab1, 3, 3);
+    mat2.setInitFloat(tab2, 3, 3);
+    matcopie.setInitFloat(tab1, 3, 3);
+
+    println("Matrice A:");
+    readInt();	
+    mat2.affichage();
+
+    print("multiplication par le flottant 2");
+    readInt();
+    matmult = mat2.multScalaire(2.0);
+    matmult.affichage();
+
+    println("Matrice B");
+    readInt();
+    mat1.affichage();
+
+    println("Somme de A et B:");
+    readInt();	
+    mat1.sumMat(mat2).affichage();
+
+    println("produit matriciel de A par B:");
+    readInt();	
+    mat1.prodMat(mat2).affichage();
+
+    println("Matrice B");
+    readInt();
+    mat1.affichage();
+
+
+    println("Transposée de la matrice B:");
+    readInt();	
+    mat1.transpose().affichage();
+
+    println("Inverse de la matrice B:");
+    readInt();	
+    inv1 = mat1.inverse();
+    inv1.affichage();
+
+    println("inversion * matrice B");
+    readInt();	
+    inv1.prodMat(matcopie).affichage();
+
+    println("Matrice A:");
+    readInt();	
+    mat2.affichage();
+
+    // a comparer avec numpy Ok
+    println("calcul du determinant");
+    readInt();
+    println("Déterminant de la matrice B: ", mat2.determinant());
+    println("Déterminant de la matrice B via numpy: ", 69.97699999999998);
+
+    println("Déterminant de la matrice A: ",matcopie.determinant());
+    println("Déterminant de la matrice A via numpy: ", 0.9999999999999967);
+
+    /*
+       println("Recherche des valeurs propres et vecteurs propres de la matrice");
+       println("Par la methode des puissances");
+       println("Vecteur propre de la matrice A: ");
+       rA = matcopie.Puissancevpvectp();
+
+       println("Vecteur propre de la matrice B: ");
+       rB = mat2.Puissancevpvectp();
+
+       println("Rayon spectral de la matrice A: ", rA);
+       println("Rayon spectral de la matrice A via numpy: ", 7.25602242);
+
+       println("Rayon spectral de la matrice B: ", rB);
+       println("Rayon spectral de la matrice B via numpy: ", 	20.33033523);
+
+       println("Décomposition QR de la matrice A avec 25 itérations: ");
+       println("Matrice Q =");
+       matcopie.calculQt().transpose().affichage();
+
+       println("iteration RQ contenant le spectre de lal matrice");
+       matcopie.algorithmeQR(25).affichage();
+       */
+    m3.setInitFloat(mat3, 3, 3);
+    println("affichage de la matrice C");
+    m3.affichage();
+    println("spectre de la matrice est -1, 6, -3");
+    println("affichage du rayon spectrale a partir de la methode des puissances");
+    readInt();
+    res = m3.Puissancevpvectp();
+    println(" vlp= ",res );
+    println("affichage valeur propre vecteur propre inverser estimation ",0 );
+    readInt();
+    res =m3.PuissanceInverse(nu);
+    println(" vlp= ", res);
+    println("affichage valeur propre vecteur propre inverser estimation ",-2.5);
+    readInt();
+    res = m3.PuissanceInverse(nu2);
+    println(" vlp= ",res );
+    println("affichage iteration iQ");
+    readInt();
+    m3 = m3.algorithmeQR(23);
+    m3.affichage();
+
+
+}

@@ -1,0 +1,40 @@
+#include "lifeInt.decah"
+
+{
+    int nb_tour = 0;
+    int tour = 100;
+    Life jeu = new Life();
+    jeu.init(30);
+    jeu.setLiving(4,4);
+    jeu.setLiving(5,5);
+    jeu.setLiving(5,6);
+    jeu.setLiving(6,3);
+    jeu.setLiving(6,4);
+    jeu.setLiving(7,5);
+    jeu.setLiving(5,15);
+    jeu.setLiving(6,15);
+    jeu.setLiving(7,15);
+    jeu.setLiving(6,14);
+    jeu.setLiving(6,16);
+    jeu.setLiving(6,23);
+    jeu.setLiving(7,23);
+    jeu.setLiving(6,24);
+    jeu.setLiving(7,24);
+    jeu.setLiving(4,25);
+    jeu.setLiving(4,26);
+    jeu.setLiving(5,25);
+    jeu.setLiving(5,26);
+    println("------Configuration");
+    jeu.printJeu();
+    while(nb_tour < tour) {
+        println("------ tour ", nb_tour, " ------");
+        jeu.tour();
+        jeu.printJeu();
+        nb_tour = nb_tour + 1;
+    }
+
+
+
+
+
+}

@@ -1,0 +1,9 @@
+
+{
+    boolean a = false ;
+    if (a = false) {
+        println("erreur, c'est une affectation, pas un test");
+    } else {
+        println("ok");
+    }
+}

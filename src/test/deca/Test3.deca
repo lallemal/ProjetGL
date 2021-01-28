@@ -1,0 +1,14 @@
+//Problème de comparaison entre 2 objet de type différent
+
+class A { }
+class B { }
+ 
+{
+    A a ; 
+    B b ; 
+    boolean ok ; 
+ 
+    a = new A() ; 
+    b = new B() ; 
+    ok = a < b ; 
+}

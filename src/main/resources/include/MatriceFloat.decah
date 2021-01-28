@@ -656,13 +656,12 @@ class MatriceFloat extends AbstractMatrice{
         while(i < interation) {
             // q
             qt = a.calculQt();
-
+			
             r = qt.prodMat(a);
             a = r.prodMat(qt.transpose());
             i = i + 1;
         }
         return a;
-
     }
 
 }

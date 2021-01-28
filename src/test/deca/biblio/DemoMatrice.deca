@@ -110,7 +110,7 @@
     readInt();
     res = m3.PuissanceInverse(nu2);
     println(" vlp= ",res );
-    println("affichage iteration iQ");
+    println("affichage iteration RQ");
     readInt();
     m3 = m3.algorithmeQR(23);
     m3.affichage();

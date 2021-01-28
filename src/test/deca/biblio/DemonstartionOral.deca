@@ -7,6 +7,13 @@
 	MatriceFloat mat1 = new MatriceFloat();
 	MatriceFloat mat2 = new MatriceFloat();
 	MatriceFloat inv1 = new MatriceFloat();
+
+    int[][] init = {{4,4,4,1},{3,5,2,1},{1,2,1,2},{1,1,5,5}};
+    MatriceFloat r = new MatriceFloat();
+    MatriceFloat q = new MatriceFloat();
+    MatriceFloat C = new MatriceFloat();
+    
+	
 	mat2.setInit(tab2, 3, 3);
 	mat1.setInit(tab1, 3, 3);
 	
@@ -52,11 +59,32 @@
 	println("Rayon spectral de la matrice B: ", rB);
 	println("Rayon spectral de la matrice B via numpy: ", 	20.33033523);
 	
-	println("Décomposition QR de la matrice A avec 25 itérations: ");
-	println("Matrice Q =");
-	mat1.calculQt().affichage();
-	println("Matrice R =");
-	mat1.algorithmeQR(25).affichage();
+	
+	C.setInitInt(init, 3, 3);
+    println("matrice C");
+    C.affichage();
 
+    println("matrice triangulaire contenant une appox des vlp");
+	println("Décomposition QR de la matrice C avec 25 itérations: ");
+
+	println("Q= ");
+    q = C.calculQt();
+    q.affichage();
+   	println(" Résultat de R avec numpy: ");
+	println("[[-0.76980036,  0.58106795,  0.22548256, -0.13756837],");
+	println(" [-0.57735027, -0.68483009,  0.06230439,  0.44021879],");
+	println(" [-0.19245009, -0.41504854, -0.12460878, -0.88043758],");
+	println(" [-0.19245009,  0.14526699, -0.96423463,  0.1100547 ]]"); 
+    
+     
+    println("Matrice R = ");
+    r = q.prodMat(C);
+    r.affichage();
+    
+	println(" Résultat de R avec numpy: ");
+	println("[[-5.19615242, -6.54330305, -5.38860251, -2.69430126],");
+	println(" [ 0.        , -1.78470871,  1.26589804, -0.20752427],");
+	println(" [ 0.        ,  0.        , -3.91924293, -4.78260378],");
+	println(" [ 0.        ,  0.        ,  0.        , -0.90795125]]");
 
 }

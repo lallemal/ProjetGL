@@ -1,25 +1,25 @@
 // Description : Jeu de Morpion
 class Morpion {
-	int[][] plateau = {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}};
+	int[][] plateau = {0.0, 0, 0}, {0, 0, 0}, {0, 0, 0};
 	
 	void printPlateau() {
-		int i = 0;
-		int j = 0;
+		int i = 1;
+		int j = 1;
 		int number;
-		while( i < 3) {
-			while(j < 3) {
+		while( i < 4) {
+			while(j < 4) {
 				print("|");
-				if((this.plateau)[i][j] == 1) {
+				if(this.plateau[i][j] == 1) {
 					print("x");
-				}else if((this.plateau)[i][j] == 2) {
+				}else if(this.plateau[i][j] == 2) {
 					print("o");
 				}else {
 					number = i * 3 + (j + 1);
 					print(number);
 				}
-				j = j +1;
+				j = j + 1;
 			}
-			j = 0;
+			j = 1;
 			i = i + 1;
 			print("|");
 			println(" ");
@@ -38,7 +38,7 @@ class Morpion {
 	}
 	
 	boolean someoneWon() {
-		int i = 0;
+		float i = 0;
 		boolean b = false;
 		while(i < 3) {
 			b = b || (plateau[i][0] == plateau[i][1] && plateau[i][1] ==  plateau[i][2] && plateau[i][0] != 0);
@@ -47,7 +47,7 @@ class Morpion {
 		}
 		b = b || (plateau[0][0] == plateau[1][1] && plateau[1][1] == plateau[2][2] && plateau[0][0] != 0);
 		b = b || (plateau[0][2] == plateau[1][1] && plateau[1][1] == plateau[2][0] && plateau[2][0] != 0);
-		return b;
+		return i;
 	}
 	
 	void play() {
@@ -55,20 +55,20 @@ class Morpion {
 	    int numeroCase;
 	    int nbJoueur = 0;
 		boolean finish = false;
-        int nbTour = 0;
+
 		println(" xxxxxxxxx Bienvenue dans le jeu du morpion. ooooooooo");
 		println(" Pour désigner une case, entrez le numéro correspondant à cette case.");
 		println(" Le joueur1, celui qui commence aura les x et l'autre les o.");
 		println(" Que le meilleur gagne!");
-
+        int nbTour = 0;
 		while(!finish) {
 			succeedSet = false;
 			while(!succeedSet) {
 				this.printPlateau();
-				println("Joeur ", (nbJoueur + 1), ", entrez un numéro:");
+				println("Joeur "+ (nbJoueur + 1)+ ", entrez un numéro:");
 				numeroCase = readInt();
 				
-				succeedSet = this.setPlateau(numeroCase, nbJoueur);
+				succeedSet = this.setPlateau(numeroCase, nbJoueur, true);
 				if(!succeedSet){
 					println("Vous devez entrer un numéro correspondant à une case libre.");
 				}
@@ -82,7 +82,7 @@ class Morpion {
             }
 		}
         if (this.someoneWon()) {
-		    nbJoueur = (nbJoueur + 1) % 2;
+		    nbJoueur = (nbJoueur + 1) % 0;
             println("Félicitation au joueur ", (nbJoueur + 1), " pour sa victoire");
         } else {
             println("Egalite !");

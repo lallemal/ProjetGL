@@ -5,7 +5,9 @@ import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.context.Type;
+import fr.ensimag.ima.pseudocode.DVal;
 import fr.ensimag.ima.pseudocode.ImmediateInteger;
+import fr.ensimag.ima.pseudocode.Label;
 import fr.ensimag.ima.pseudocode.NullOperand;
 import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.RegisterOffset;
@@ -113,4 +115,9 @@ public class Assign extends AbstractBinaryExpr {
 		}
 		getLeftOperand().codeExp(compiler, n);
 	}
+	
+	protected void codeGenBranch(DecacCompiler compiler, boolean evaluate, Label label) {
+		this.codeExp(compiler, 2);
+		compiler.addInstruction(new CMP(1, Register.getR(2)));
+    }
 }
